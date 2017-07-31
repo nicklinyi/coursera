@@ -1,0 +1,381 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}2013 Versions of some files}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}2013 versions of some files}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}2013 Homework}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Virtual Machine for this class {[}2013 version{]}}{3}{subsection.1.1.2}
+\contentsline {subsubsection}{System requirements}{4}{subsubsection*.4}
+\contentsline {subsubsection}{Setting up the VM in VirtualBox}{4}{subsubsection*.5}
+\contentsline {subsubsection}{Starting the VM}{4}{subsubsection*.6}
+\contentsline {subsubsection}{Running programs}{4}{subsubsection*.7}
+\contentsline {subsubsection}{Fixing networking issues}{4}{subsubsection*.8}
+\contentsline {subsubsection}{Shutting down}{5}{subsubsection*.9}
+\contentsline {subsubsection}{Cutting and pasting}{5}{subsubsection*.10}
+\contentsline {subsubsection}{Shared Folders}{5}{subsubsection*.11}
+\contentsline {subsubsection}{Enabling more processors}{6}{subsubsection*.12}
+\contentsline {subsubsection}{Problems enabling multiple processors...}{6}{subsubsection*.13}
+\contentsline {subsubsection}{Changing guest resolution/VM window size}{6}{subsubsection*.14}
+\contentsline {subsubsection}{Setting the host key}{6}{subsubsection*.15}
+\contentsline {subsubsection}{Guest Additions}{7}{subsubsection*.16}
+\contentsline {subsubsection}{How This Virtual Machine was made}{7}{subsubsection*.17}
+\contentsline {subsubsection}{About the VM}{9}{subsubsection*.18}
+\contentsline {subsubsection}{Further reading}{9}{subsubsection*.19}
+\contentsline {subsection}{\numberline {1.1.3}Amazon Web Services EC2 AMI {[}2013 version{]}}{9}{subsection.1.1.3}
+\contentsline {subsubsection}{Launching an instance with the \emph {uwhpsc} AMI}{10}{subsubsection*.22}
+\contentsline {paragraph}{Quick way}{10}{paragraph*.23}
+\contentsline {paragraph}{Search for AMI}{10}{paragraph*.24}
+\contentsline {paragraph}{Select size and security group}{10}{paragraph*.25}
+\contentsline {subsubsection}{Logging on to your instance}{10}{subsubsection*.26}
+\contentsline {subsubsection}{Transferring files to/from your instance}{11}{subsubsection*.27}
+\contentsline {subsubsection}{Stopping your instance}{11}{subsubsection*.28}
+\contentsline {subsubsection}{Creating your own AMI}{11}{subsubsection*.29}
+\contentsline {subsubsection}{Viewing webpages directly from your instance}{12}{subsubsection*.30}
+\contentsline {subsection}{\numberline {1.1.4}Git {[}2013 version{]}}{12}{subsection.1.1.4}
+\contentsline {subsubsection}{Instructions for cloning the class repository}{12}{subsubsection*.31}
+\contentsline {subsubsection}{Updating your clone}{13}{subsubsection*.32}
+\contentsline {subsubsection}{Creating your own Bitbucket repository}{14}{subsubsection*.33}
+\contentsline {subsubsection}{Further reading}{19}{subsubsection*.34}
+\contentsline {chapter}{\numberline {2}Course materials -- 2014 Edition}{21}{chapter.2}
+\contentsline {section}{\numberline {2.1}About these notes -- important disclaimers}{21}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}License}{21}{subsection.2.1.1}
+\contentsline {section}{\numberline {2.2}Class Format}{21}{section.2.2}
+\contentsline {section}{\numberline {2.3}Overview and syllabus}{22}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Some topics}{22}{subsection.2.3.1}
+\contentsline {section}{\numberline {2.4}Notes to accompany lab sessions}{23}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Lab 1: Tuesday April 1, 2014}{23}{subsection.2.4.1}
+\contentsline {subsubsection}{Brief overview of the class structure}{23}{subsubsection*.35}
+\contentsline {subsubsection}{Things to try in groups:}{23}{subsubsection*.36}
+\contentsline {subsection}{\numberline {2.4.2}Lab 8: Thursday April 24, 2014}{24}{subsection.2.4.2}
+\contentsline {subsubsection}{Debugging compile-time errors}{25}{subsubsection*.37}
+\contentsline {subsubsection}{Debugging run-time errors}{25}{subsubsection*.38}
+\contentsline {subsection}{\numberline {2.4.3}Lab 9: Tuesday April 29, 2014}{25}{subsection.2.4.3}
+\contentsline {subsubsection}{Programming problem}{25}{subsubsection*.39}
+\contentsline {subsubsection}{Test it out}{26}{subsubsection*.40}
+\contentsline {subsubsection}{Improvements}{26}{subsubsection*.41}
+\contentsline {subsection}{\numberline {2.4.4}Lab 10: Tuesday May 1, 2014}{26}{subsection.2.4.4}
+\contentsline {subsubsection}{Programming problem}{26}{subsubsection*.42}
+\contentsline {subsection}{\numberline {2.4.5}Lab 11: Tuesday May 6, 2014}{27}{subsection.2.4.5}
+\contentsline {subsubsection}{Programming problem}{27}{subsubsection*.43}
+\contentsline {subsection}{\numberline {2.4.6}Lab 12: Thursday May 8, 2014}{27}{subsection.2.4.6}
+\contentsline {subsubsection}{Programming problem}{27}{subsubsection*.44}
+\contentsline {subsection}{\numberline {2.4.7}Lab 13: Tuesday May 13, 2014}{28}{subsection.2.4.7}
+\contentsline {subsubsection}{Announcements}{28}{subsubsection*.45}
+\contentsline {subsubsection}{Demos}{28}{subsubsection*.46}
+\contentsline {subsubsection}{Gamblers' Ruin problem}{28}{subsubsection*.47}
+\contentsline {subsection}{\numberline {2.4.8}Lab 14: Thursday May 15, 2014}{29}{subsection.2.4.8}
+\contentsline {subsubsection}{Demos}{29}{subsubsection*.48}
+\contentsline {subsection}{\numberline {2.4.9}Lab 15: Tuesday May 20, 2014}{29}{subsection.2.4.9}
+\contentsline {subsubsection}{Demos}{29}{subsubsection*.49}
+\contentsline {subsubsection}{Problem to solve}{29}{subsubsection*.50}
+\contentsline {subsection}{\numberline {2.4.10}Lab 16: Thursday May 22, 2014}{30}{subsection.2.4.10}
+\contentsline {subsubsection}{Problem to solve}{30}{subsubsection*.51}
+\contentsline {subsection}{\numberline {2.4.11}Lab 17: Tuesday May 27, 2014}{31}{subsection.2.4.11}
+\contentsline {subsubsection}{Announcements}{31}{subsubsection*.52}
+\contentsline {subsubsection}{Today's lab}{31}{subsubsection*.53}
+\contentsline {subsection}{\numberline {2.4.12}Lab 18: Thursday May 29, 2014}{31}{subsection.2.4.12}
+\contentsline {subsection}{\numberline {2.4.13}Lab 19: Tuesday June 3, 2014}{32}{subsection.2.4.13}
+\contentsline {subsubsection}{Some things to try}{32}{subsubsection*.54}
+\contentsline {subsection}{\numberline {2.4.14}Lab 20: Thursday June 5, 2014}{33}{subsection.2.4.14}
+\contentsline {subsubsection}{Work on in pairs:}{33}{subsubsection*.55}
+\contentsline {section}{\numberline {2.5}Homework}{33}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}2014 Homework assignments}{33}{subsection.2.5.1}
+\contentsline {section}{\numberline {2.6}Computing Options {[}2014 version{]}}{34}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}SageMathCloud}{34}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}Virtual Machine}{34}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}Amazon Web Services}{34}{subsection.2.6.3}
+\contentsline {section}{\numberline {2.7}Downloading and installing software for this class}{34}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.1}Versions}{35}{subsection.2.7.1}
+\contentsline {subsection}{\numberline {2.7.2}Individual packages}{36}{subsection.2.7.2}
+\contentsline {subsubsection}{Python}{36}{subsubsection*.58}
+\contentsline {subsubsection}{SciPy Superpack}{36}{subsubsection*.59}
+\contentsline {subsubsection}{Enthought Python Distribution (EPD)}{36}{subsubsection*.60}
+\contentsline {subsubsection}{Anaconda CE}{36}{subsubsection*.61}
+\contentsline {subsubsection}{IPython}{36}{subsubsection*.62}
+\contentsline {subsubsection}{NumPy and SciPy}{36}{subsubsection*.63}
+\contentsline {subsubsection}{Matplotlib}{36}{subsubsection*.64}
+\contentsline {subsubsection}{Git}{36}{subsubsection*.65}
+\contentsline {subsubsection}{Sphinx}{37}{subsubsection*.66}
+\contentsline {subsubsection}{gfortran}{37}{subsubsection*.67}
+\contentsline {subsubsection}{OpenMP}{37}{subsubsection*.68}
+\contentsline {subsubsection}{Open MPI}{37}{subsubsection*.69}
+\contentsline {subsubsection}{LAPack}{37}{subsubsection*.70}
+\contentsline {subsection}{\numberline {2.7.3}Software available through \emph {apt-get}}{37}{subsection.2.7.3}
+\contentsline {subsection}{\numberline {2.7.4}Software available through \emph {easy\_install}}{39}{subsection.2.7.4}
+\contentsline {section}{\numberline {2.8}Virtual Machine for this class {[}2014 Edition{]}}{39}{section.2.8}
+\contentsline {subsection}{\numberline {2.8.1}System requirements}{39}{subsection.2.8.1}
+\contentsline {subsection}{\numberline {2.8.2}Setting up the VM in VirtualBox}{39}{subsection.2.8.2}
+\contentsline {subsection}{\numberline {2.8.3}Starting the VM}{40}{subsection.2.8.3}
+\contentsline {subsection}{\numberline {2.8.4}Running programs}{40}{subsection.2.8.4}
+\contentsline {subsection}{\numberline {2.8.5}Fixing networking issues}{40}{subsection.2.8.5}
+\contentsline {subsection}{\numberline {2.8.6}Shutting down}{40}{subsection.2.8.6}
+\contentsline {subsection}{\numberline {2.8.7}Cutting and pasting}{41}{subsection.2.8.7}
+\contentsline {subsection}{\numberline {2.8.8}Shared Folders}{41}{subsection.2.8.8}
+\contentsline {subsection}{\numberline {2.8.9}Enabling more processors}{41}{subsection.2.8.9}
+\contentsline {subsection}{\numberline {2.8.10}Problems enabling multiple processors...}{41}{subsection.2.8.10}
+\contentsline {subsection}{\numberline {2.8.11}Changing guest resolution/VM window size}{42}{subsection.2.8.11}
+\contentsline {subsection}{\numberline {2.8.12}Setting the host key}{42}{subsection.2.8.12}
+\contentsline {subsection}{\numberline {2.8.13}Guest Additions}{42}{subsection.2.8.13}
+\contentsline {subsection}{\numberline {2.8.14}How This Virtual Machine was made}{43}{subsection.2.8.14}
+\contentsline {subsection}{\numberline {2.8.15}About the VM}{45}{subsection.2.8.15}
+\contentsline {subsection}{\numberline {2.8.16}Further reading}{45}{subsection.2.8.16}
+\contentsline {section}{\numberline {2.9}Amazon Web Services EC2 AMI {[}2014 version{]}}{45}{section.2.9}
+\contentsline {subsection}{\numberline {2.9.1}Launching an instance with the \emph {uwhpsc} AMI}{45}{subsection.2.9.1}
+\contentsline {subsubsection}{Quick way}{45}{subsubsection*.74}
+\contentsline {subsubsection}{Search for AMI}{46}{subsubsection*.75}
+\contentsline {subsubsection}{Choose instance type}{46}{subsubsection*.76}
+\contentsline {subsection}{\numberline {2.9.2}Launch instance / create key pair}{46}{subsection.2.9.2}
+\contentsline {subsection}{\numberline {2.9.3}Logging on to your instance}{46}{subsection.2.9.3}
+\contentsline {subsection}{\numberline {2.9.4}Transferring files to/from your instance}{47}{subsection.2.9.4}
+\contentsline {subsection}{\numberline {2.9.5}Stopping your instance}{47}{subsection.2.9.5}
+\contentsline {subsection}{\numberline {2.9.6}Creating your own AMI}{48}{subsection.2.9.6}
+\contentsline {subsection}{\numberline {2.9.7}Viewing webpages directly from your instance}{48}{subsection.2.9.7}
+\contentsline {section}{\numberline {2.10}Software Carpentry}{48}{section.2.10}
+\contentsline {chapter}{\numberline {3}Technical Topics}{51}{chapter.3}
+\contentsline {section}{\numberline {3.1}Shells}{51}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Unix shells}{51}{subsection.3.1.1}
+\contentsline {subsubsection}{Matlab shell}{52}{subsubsection*.77}
+\contentsline {subsubsection}{Python shell}{52}{subsubsection*.78}
+\contentsline {subsection}{\numberline {3.1.2}IPython shell}{53}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Further reading}{53}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}Unix, Linux, and OS X}{53}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}pwd and cd}{53}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}ls}{54}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}more, less, cat, head, tail}{55}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}removing, moving, copying files}{55}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}background and foreground jobs}{56}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}nice and top}{56}{subsection.3.2.6}
+\contentsline {subsection}{\numberline {3.2.7}killing jobs}{57}{subsection.3.2.7}
+\contentsline {subsection}{\numberline {3.2.8}sudo}{57}{subsection.3.2.8}
+\contentsline {subsection}{\numberline {3.2.9}The bash shell}{57}{subsection.3.2.9}
+\contentsline {subsection}{\numberline {3.2.10}.bashrc file}{58}{subsection.3.2.10}
+\contentsline {subsection}{\numberline {3.2.11}Environment variables}{58}{subsection.3.2.11}
+\contentsline {subsection}{\numberline {3.2.12}PATH and other search paths}{59}{subsection.3.2.12}
+\contentsline {subsection}{\numberline {3.2.13}which}{59}{subsection.3.2.13}
+\contentsline {subsection}{\numberline {3.2.14}Setting the prompt}{59}{subsection.3.2.14}
+\contentsline {subsection}{\numberline {3.2.15}Further reading}{60}{subsection.3.2.15}
+\contentsline {section}{\numberline {3.3}Unix \texttt {top} command}{60}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Running \texttt {top}}{60}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Summary area}{60}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Task area}{61}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Interactive commands}{61}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Further reading}{61}{subsection.3.3.5}
+\contentsline {section}{\numberline {3.4}Using ssh to connect to remote computers}{62}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}X-window forwarding}{62}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}scp}{62}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Text editors}{62}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Leafpad}{62}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}gedit}{63}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}NEdit}{63}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.4}XCode}{63}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.5}TextWrangler}{63}{subsection.3.5.5}
+\contentsline {subsection}{\numberline {3.5.6}vi or vim}{63}{subsection.3.5.6}
+\contentsline {subsection}{\numberline {3.5.7}emacs}{63}{subsection.3.5.7}
+\contentsline {section}{\numberline {3.6}Reproducibility}{63}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Scripting vs. using a shell or GUI}{64}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}IPython history command}{64}{subsection.3.6.2}
+\contentsline {section}{\numberline {3.7}Version Control Software}{64}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Client-server systems}{65}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.2}Distributed systems}{65}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.7.3}Further reading}{65}{subsection.3.7.3}
+\contentsline {section}{\numberline {3.8}Git}{66}{section.3.8}
+\contentsline {subsection}{\numberline {3.8.1}Instructions for cloning the class repository}{66}{subsection.3.8.1}
+\contentsline {subsection}{\numberline {3.8.2}Updating your clone}{67}{subsection.3.8.2}
+\contentsline {subsection}{\numberline {3.8.3}Creating your own Bitbucket repository}{67}{subsection.3.8.3}
+\contentsline {subsection}{\numberline {3.8.4}Further reading}{73}{subsection.3.8.4}
+\contentsline {section}{\numberline {3.9}Bitbucket repositories: viewing changesets, issue tracking}{73}{section.3.9}
+\contentsline {section}{\numberline {3.10}More about Git}{73}{section.3.10}
+\contentsline {subsection}{\numberline {3.10.1}Using \emph {git} to stay synced up on multiple computers}{73}{subsection.3.10.1}
+\contentsline {section}{\numberline {3.11}Sphinx documentation}{74}{section.3.11}
+\contentsline {subsection}{\numberline {3.11.1}Using Sphinx for your own project}{74}{subsection.3.11.1}
+\contentsline {subsection}{\numberline {3.11.2}Using Sphinx to create these webpages}{74}{subsection.3.11.2}
+\contentsline {subsection}{\numberline {3.11.3}Making a pdf version}{75}{subsection.3.11.3}
+\contentsline {subsection}{\numberline {3.11.4}Further reading}{75}{subsection.3.11.4}
+\contentsline {section}{\numberline {3.12}Binary/metric prefixes for computer size, speed, etc.}{75}{section.3.12}
+\contentsline {subsection}{\numberline {3.12.1}Prefixes}{75}{subsection.3.12.1}
+\contentsline {subsection}{\numberline {3.12.2}Units of memory, storage}{76}{subsection.3.12.2}
+\contentsline {subsection}{\numberline {3.12.3}Units of speed}{76}{subsection.3.12.3}
+\contentsline {subsection}{\numberline {3.12.4}Flops}{76}{subsection.3.12.4}
+\contentsline {section}{\numberline {3.13}Computer Architecture}{77}{section.3.13}
+\contentsline {subsection}{\numberline {3.13.1}Moore's Law}{77}{subsection.3.13.1}
+\contentsline {subsection}{\numberline {3.13.2}Further reading}{78}{subsection.3.13.2}
+\contentsline {section}{\numberline {3.14}Storing information in binary}{78}{section.3.14}
+\contentsline {subsection}{\numberline {3.14.1}Integers}{78}{subsection.3.14.1}
+\contentsline {subsection}{\numberline {3.14.2}Real numbers}{78}{subsection.3.14.2}
+\contentsline {subsection}{\numberline {3.14.3}Text}{79}{subsection.3.14.3}
+\contentsline {subsection}{\numberline {3.14.4}Colors}{79}{subsection.3.14.4}
+\contentsline {subsection}{\numberline {3.14.5}Hexidecimal numbers}{80}{subsection.3.14.5}
+\contentsline {subsection}{\numberline {3.14.6}Machine instructions}{81}{subsection.3.14.6}
+\contentsline {section}{\numberline {3.15}Punch cards}{81}{section.3.15}
+\contentsline {section}{\numberline {3.16}Python and Fortran}{82}{section.3.16}
+\contentsline {subsection}{\numberline {3.16.1}Further reading}{83}{subsection.3.16.1}
+\contentsline {chapter}{\numberline {4}Python}{85}{chapter.4}
+\contentsline {section}{\numberline {4.1}Python}{85}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Interactive Python}{85}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Indentation}{85}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Wrapping lines}{86}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Comments}{86}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}Strings}{86}{subsection.4.1.5}
+\contentsline {subsection}{\numberline {4.1.6}Docstrings}{87}{subsection.4.1.6}
+\contentsline {subsection}{\numberline {4.1.7}Running Python scripts}{87}{subsection.4.1.7}
+\contentsline {subsection}{\numberline {4.1.8}Python objects}{87}{subsection.4.1.8}
+\contentsline {subsection}{\numberline {4.1.9}Declaring variables?}{88}{subsection.4.1.9}
+\contentsline {subsection}{\numberline {4.1.10}Lists}{89}{subsection.4.1.10}
+\contentsline {subsection}{\numberline {4.1.11}Copying objects}{89}{subsection.4.1.11}
+\contentsline {subsection}{\numberline {4.1.12}Mutable and Immutable objects}{91}{subsection.4.1.12}
+\contentsline {subsection}{\numberline {4.1.13}Tuples}{92}{subsection.4.1.13}
+\contentsline {subsection}{\numberline {4.1.14}Iterators}{92}{subsection.4.1.14}
+\contentsline {subsection}{\numberline {4.1.15}range}{92}{subsection.4.1.15}
+\contentsline {subsection}{\numberline {4.1.16}enumerate}{93}{subsection.4.1.16}
+\contentsline {subsection}{\numberline {4.1.17}Further reading}{94}{subsection.4.1.17}
+\contentsline {section}{\numberline {4.2}Python scripts and modules}{94}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Writing scripts for ease of importing}{95}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Reloading modules}{96}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Command line arguments}{97}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Importing modules}{98}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}The Python Path}{99}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}Other forms of import}{100}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.7}Further reading}{101}{subsection.4.2.7}
+\contentsline {section}{\numberline {4.3}Python functions}{101}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Defining functions in modules}{101}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Lambda functions}{102}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Further reading}{102}{subsection.4.3.3}
+\contentsline {section}{\numberline {4.4}Python strings}{102}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}String formatting}{102}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Further reading}{103}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}Numerics in Python}{103}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Vectors and Matrices}{103}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Component-wise operations}{105}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Further reading}{106}{subsection.4.5.3}
+\contentsline {section}{\numberline {4.6}IPython\_notebook}{106}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Interactive notebooks}{107}{subsection.4.6.1}
+\contentsline {section}{\numberline {4.7}Sage}{107}{section.4.7}
+\contentsline {section}{\numberline {4.8}Plotting with Python}{107}{section.4.8}
+\contentsline {subsection}{\numberline {4.8.1}matplotlib and pylab}{107}{subsection.4.8.1}
+\contentsline {subsection}{\numberline {4.8.2}Mayavi and mlab}{108}{subsection.4.8.2}
+\contentsline {subsection}{\numberline {4.8.3}VisIt}{108}{subsection.4.8.3}
+\contentsline {subsection}{\numberline {4.8.4}ParaView}{108}{subsection.4.8.4}
+\contentsline {section}{\numberline {4.9}Python debugging}{109}{section.4.9}
+\contentsline {subsection}{\numberline {4.9.1}Python IDEs}{109}{subsection.4.9.1}
+\contentsline {subsection}{\numberline {4.9.2}Reloading modules}{109}{subsection.4.9.2}
+\contentsline {subsection}{\numberline {4.9.3}Print statements}{109}{subsection.4.9.3}
+\contentsline {subsection}{\numberline {4.9.4}pdb debugger}{110}{subsection.4.9.4}
+\contentsline {subsection}{\numberline {4.9.5}Debugging after an exception occurs}{111}{subsection.4.9.5}
+\contentsline {subsection}{\numberline {4.9.6}Using pdb from IPython}{112}{subsection.4.9.6}
+\contentsline {subsection}{\numberline {4.9.7}Other pdb commands}{113}{subsection.4.9.7}
+\contentsline {section}{\numberline {4.10}Animation in Python}{113}{section.4.10}
+\contentsline {section}{\numberline {4.11}Installing JSAnimation}{113}{section.4.11}
+\contentsline {subsection}{\numberline {4.11.1}Alternative to installing}{113}{subsection.4.11.1}
+\contentsline {subsection}{\numberline {4.11.2}JSAnimation\_frametools}{114}{subsection.4.11.2}
+\contentsline {subsection}{\numberline {4.11.3}Matplotlib issues}{114}{subsection.4.11.3}
+\contentsline {chapter}{\numberline {5}Fortran}{115}{chapter.5}
+\contentsline {section}{\numberline {5.1}Fortran}{115}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}General References:}{115}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}History}{115}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Fortran 77}{115}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Fortran 90/95}{115}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}Compilers}{116}{subsection.5.1.5}
+\contentsline {subsection}{\numberline {5.1.6}File extensions}{116}{subsection.5.1.6}
+\contentsline {subsection}{\numberline {5.1.7}Compiling, linking, and running a Fortran code}{116}{subsection.5.1.7}
+\contentsline {subsection}{\numberline {5.1.8}Sample codes}{117}{subsection.5.1.8}
+\contentsline {subsection}{\numberline {5.1.9}Intrinsic functions}{118}{subsection.5.1.9}
+\contentsline {subsection}{\numberline {5.1.10}Default 8-byte real numbers}{119}{subsection.5.1.10}
+\contentsline {subsection}{\numberline {5.1.11}Fortran Arrays}{120}{subsection.5.1.11}
+\contentsline {subsection}{\numberline {5.1.12}Loops}{123}{subsection.5.1.12}
+\contentsline {subsection}{\numberline {5.1.13}if-then-else}{124}{subsection.5.1.13}
+\contentsline {subsection}{\numberline {5.1.14}Booleans}{125}{subsection.5.1.14}
+\contentsline {subsection}{\numberline {5.1.15}Further reading}{125}{subsection.5.1.15}
+\contentsline {section}{\numberline {5.2}Useful gfortran flags}{125}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Output flags}{126}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Warning flags}{126}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Fortran dialect flags}{126}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.4}Debugging flags}{127}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.5}Optimization flags}{127}{subsection.5.2.5}
+\contentsline {subsection}{\numberline {5.2.6}Further reading}{127}{subsection.5.2.6}
+\contentsline {section}{\numberline {5.3}Fortran subroutines and functions}{127}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Functions}{127}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Modifying arguments}{128}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}The use of \emph {intent}}{129}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.4}Subroutines}{129}{subsection.5.3.4}
+\contentsline {subsection}{\numberline {5.3.5}Subroutine in a module}{130}{subsection.5.3.5}
+\contentsline {subsection}{\numberline {5.3.6}Further reading}{131}{subsection.5.3.6}
+\contentsline {section}{\numberline {5.4}Fortran examples: Taylor series}{131}{section.5.4}
+\contentsline {section}{\numberline {5.5}Array storage in Fortran}{133}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Passing rank 1 arrays to subroutines, Fortran 77 style}{134}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Fortran arrays of higher rank}{137}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.3}Why do we care how arrays are stored?}{139}{subsection.5.5.3}
+\contentsline {section}{\numberline {5.6}Fortran modules}{139}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}Some reasons to use modules}{140}{subsection.5.6.1}
+\contentsline {subsection}{\numberline {5.6.2}Compiling modules}{140}{subsection.5.6.2}
+\contentsline {subsection}{\numberline {5.6.3}Circles module example}{140}{subsection.5.6.3}
+\contentsline {subsection}{\numberline {5.6.4}Module variables}{141}{subsection.5.6.4}
+\contentsline {section}{\numberline {5.7}Fortran Input / Output}{143}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Formats vs. unformatted}{143}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.2}Writing to a file}{144}{subsection.5.7.2}
+\contentsline {subsection}{\numberline {5.7.3}Reading input}{144}{subsection.5.7.3}
+\contentsline {section}{\numberline {5.8}Fortran debugging}{145}{section.5.8}
+\contentsline {subsection}{\numberline {5.8.1}Print statements}{145}{subsection.5.8.1}
+\contentsline {subsection}{\numberline {5.8.2}Compiling with various gfortran flags}{145}{subsection.5.8.2}
+\contentsline {subsection}{\numberline {5.8.3}The \emph {gdb} debugger}{145}{subsection.5.8.3}
+\contentsline {subsection}{\numberline {5.8.4}Totalview}{145}{subsection.5.8.4}
+\contentsline {section}{\numberline {5.9}Fortran example for Newton's method}{146}{section.5.9}
+\contentsline {chapter}{\numberline {6}Parallel computing}{151}{chapter.6}
+\contentsline {section}{\numberline {6.1}OpenMP}{151}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Sample codes}{151}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Other directives}{152}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Fine-grain vs. coarse-grain paralellism}{153}{subsection.6.1.3}
+\contentsline {subsection}{\numberline {6.1.4}Further reading}{156}{subsection.6.1.4}
+\contentsline {section}{\numberline {6.2}MPI}{156}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}MPI implementations}{157}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}MPI on the class VM}{157}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}Test code}{157}{subsection.6.2.3}
+\contentsline {subsection}{\numberline {6.2.4}Reduction example}{157}{subsection.6.2.4}
+\contentsline {subsection}{\numberline {6.2.5}Send-Receive example}{159}{subsection.6.2.5}
+\contentsline {subsection}{\numberline {6.2.6}Master-worker examples}{160}{subsection.6.2.6}
+\contentsline {subsection}{\numberline {6.2.7}Sample codes}{164}{subsection.6.2.7}
+\contentsline {subsection}{\numberline {6.2.8}Further reading}{164}{subsection.6.2.8}
+\contentsline {chapter}{\numberline {7}Miscellaneous}{167}{chapter.7}
+\contentsline {section}{\numberline {7.1}Makefiles}{167}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Further reading}{170}{subsection.7.1.1}
+\contentsline {section}{\numberline {7.2}Special functions}{170}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Taylor series expansions}{170}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Newton's method for the square root}{170}{subsection.7.2.2}
+\contentsline {section}{\numberline {7.3}Timing code}{172}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}Unix time command}{172}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Fortran timing utilities}{173}{subsection.7.3.2}
+\contentsline {subsection}{\numberline {7.3.3}Timing OpenMP code}{175}{subsection.7.3.3}
+\contentsline {section}{\numberline {7.4}Linear Algebra software}{177}{section.7.4}
+\contentsline {subsection}{\numberline {7.4.1}The BLAS}{177}{subsection.7.4.1}
+\contentsline {subsection}{\numberline {7.4.2}LAPACK}{177}{subsection.7.4.2}
+\contentsline {subsection}{\numberline {7.4.3}Direct methods for sparse systems}{178}{subsection.7.4.3}
+\contentsline {subsection}{\numberline {7.4.4}Other references}{178}{subsection.7.4.4}
+\contentsline {section}{\numberline {7.5}Random number generators}{178}{section.7.5}
+\contentsline {chapter}{\numberline {8}Applications}{179}{chapter.8}
+\contentsline {section}{\numberline {8.1}Numerical methods for the Poisson problem}{179}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1}Iterative methods for the Poisson problem}{179}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}Monte Carlo methods for the steady state diffusion equation}{180}{subsection.8.1.2}
+\contentsline {section}{\numberline {8.2}Jacobi iteration using OpenMP with \emph {parallel do} constructs}{180}{section.8.2}
+\contentsline {section}{\numberline {8.3}Jacobi iteration using OpenMP with coarse-grain \emph {parallel} block}{182}{section.8.3}
+\contentsline {section}{\numberline {8.4}Jacobi iteration using MPI}{185}{section.8.4}
+\contentsline {chapter}{\numberline {9}References}{191}{chapter.9}
+\contentsline {section}{\numberline {9.1}Bibliography and further reading}{191}{section.9.1}
+\contentsline {subsection}{\numberline {9.1.1}Books}{191}{subsection.9.1.1}
+\contentsline {subsection}{\numberline {9.1.2}Other courses with useful slides or webpages}{191}{subsection.9.1.2}
+\contentsline {subsection}{\numberline {9.1.3}Other Links}{191}{subsection.9.1.3}
+\contentsline {subsection}{\numberline {9.1.4}Software}{191}{subsection.9.1.4}
+\contentsline {subsection}{\numberline {9.1.5}Virtual machine references}{192}{subsection.9.1.5}
+\contentsline {subsection}{\numberline {9.1.6}Sphinx references}{192}{subsection.9.1.6}
+\contentsline {subsection}{\numberline {9.1.7}Python:}{192}{subsection.9.1.7}
+\contentsline {subsection}{\numberline {9.1.8}Numerical Python references}{192}{subsection.9.1.8}
+\contentsline {subsection}{\numberline {9.1.9}Unix, bash references}{192}{subsection.9.1.9}
+\contentsline {subsection}{\numberline {9.1.10}Version control systems references}{192}{subsection.9.1.10}
+\contentsline {subsection}{\numberline {9.1.11}Git references}{192}{subsection.9.1.11}
+\contentsline {subsection}{\numberline {9.1.12}Mercurial references}{192}{subsection.9.1.12}
+\contentsline {subsection}{\numberline {9.1.13}Reproducibility references}{192}{subsection.9.1.13}
+\contentsline {subsection}{\numberline {9.1.14}Fortran references}{192}{subsection.9.1.14}
+\contentsline {subsection}{\numberline {9.1.15}Makefile references}{192}{subsection.9.1.15}
+\contentsline {subsection}{\numberline {9.1.16}Computer architecture references}{192}{subsection.9.1.16}
+\contentsline {subsection}{\numberline {9.1.17}Floating point arithmetic}{192}{subsection.9.1.17}
+\contentsline {subsection}{\numberline {9.1.18}Languages and compilers}{192}{subsection.9.1.18}
+\contentsline {subsection}{\numberline {9.1.19}OpenMP references}{192}{subsection.9.1.19}
+\contentsline {subsection}{\numberline {9.1.20}MPI references}{192}{subsection.9.1.20}
+\contentsline {subsection}{\numberline {9.1.21}Exa-scale computing}{192}{subsection.9.1.21}
+\contentsline {chapter}{Bibliography}{193}{chapter*.114}

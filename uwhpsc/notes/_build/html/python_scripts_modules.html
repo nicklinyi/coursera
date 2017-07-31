@@ -1,0 +1,671 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python scripts and modules &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Python functions" href="python_functions.html" />
+    <link rel="prev" title="Python" href="python.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="python_functions.html" title="Python functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="python.html" title="Python"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python scripts and modules</a><ul>
+<li><a class="reference internal" href="#writing-scripts-for-ease-of-importing">Writing scripts for ease of importing</a></li>
+<li><a class="reference internal" href="#reloading-modules">Reloading modules</a></li>
+<li><a class="reference internal" href="#command-line-arguments">Command line arguments</a></li>
+<li><a class="reference internal" href="#importing-modules">Importing modules</a></li>
+<li><a class="reference internal" href="#the-python-path">The Python Path</a></li>
+<li><a class="reference internal" href="#other-forms-of-import">Other forms of import</a></li>
+<li><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="python.html"
+                        title="previous chapter">Python</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="python_functions.html"
+                        title="next chapter">Python functions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/python_scripts_modules.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python-scripts-and-modules">
+<span id="python-scripts-modules"></span><h1>Python scripts and modules<a class="headerlink" href="#python-scripts-and-modules" title="Permalink to this headline">¶</a></h1>
+<p>A Python script is a collection of commands in a file designed to be
+executed like a program.  The file can of course contain functions and
+import various modules, but the idea is that it will be run or executed
+from the command line or from within a Python interactive shell to perform a
+specific task.  Often a script first contains a set of function definitions
+and then has the <em>main program</em> that might call the functions.</p>
+<p>Consider this script,  found in $UWHPSC/python/script1.py:</p>
+<p><strong>script1.py</strong></p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">$UWHPSC/codes/python/script1.py</span>
+
+<span class="sd">Sample script to print values of a function at a few points.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A quadratic function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">1.</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="k">print</span> <span class="s">&quot;     x        f(x)&quot;</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&quot;</span><span class="si">%8.3f</span><span class="s">  </span><span class="si">%8.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+</pre></div>
+</td></tr></table></div>
+<p>The <em>main program</em> starts with the print statement.</p>
+<p>There are several ways to run a script contained in a file.</p>
+<p>At the Unix prompt:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ python script1.py
+    x        f(x)
+  0.000     1.000
+  2.000     5.000
+  4.000    17.000
+</pre></div>
+</div>
+<p>From within Python:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">execfile</span><span class="p">(</span><span class="s">&quot;script1.py&quot;</span><span class="p">)</span>
+<span class="go">[same output as above]</span>
+</pre></div>
+</div>
+<p>From within IPython, using either <cite>execfile</cite> as above, or <cite>run</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">48</span><span class="p">]:</span> <span class="n">run</span> <span class="n">script1</span><span class="o">.</span><span class="n">py</span>
+<span class="p">[</span><span class="n">same</span> <span class="n">output</span> <span class="k">as</span> <span class="n">above</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Or, you can <cite>import</cite> the file as a module (see <a class="reference internal" href="#importing-modules"><span class="std std-ref">Importing modules</span></a>
+below for more about this):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">script1</span>
+<span class="go">     x        f(x)</span>
+<span class="go">   0.000     1.000</span>
+<span class="go">   2.000     5.000</span>
+<span class="go">   4.000    17.000</span>
+</pre></div>
+</div>
+<p>Note that this also gives the same output.  Whenever a module is imported,
+any statements that are in the main body of the module are executed when it
+is imported.  In addition, any variables or functions defined in the file
+are available as attributes of the module, e.g.,</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">script1</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">17.0</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script1</span><span class="o">.</span><span class="n">np</span>
+<span class="go">&lt;module &#39;numpy&#39; from</span>
+<span class="go">&#39;/Library/Python/2.5/site-packages/numpy-1.4.0.dev7064-py2.5-macosx-10.3-fat.egg/numpy/__init__.pyc&#39;&gt;</span>
+</pre></div>
+</div>
+<p>Note there are some differences between executing the script and importing
+it.  When it is executed as a script,
+it is as if the commands were typed at the command line.  Hence:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">execfile</span><span class="p">(</span><span class="s">&#39;script1.py&#39;</span><span class="p">)</span>
+<span class="go">     x        f(x)</span>
+<span class="go">   0.000     1.000</span>
+<span class="go">   2.000     5.000</span>
+<span class="go">   4.000    17.000</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span>
+<span class="go">&lt;function f at 0x1c0430&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span>
+<span class="go">&lt;module &#39;numpy&#39; from</span>
+<span class="go">&#39;/Library/Python/2.5/site-packages/numpy-1.4.0.dev7064-py2.5-macosx-10.3-fat.egg/numpy/__init__.pyc&#39;&gt;</span>
+</pre></div>
+</div>
+<p>In this case <cite>f</cite> and <cite>np</cite> are in the namespace of the interactive session as
+if we had defined them at the prompt.</p>
+<div class="section" id="writing-scripts-for-ease-of-importing">
+<span id="python-name-main"></span><h2>Writing scripts for ease of importing<a class="headerlink" href="#writing-scripts-for-ease-of-importing" title="Permalink to this headline">¶</a></h2>
+<p>The script used above as an example contains a function <cite>f(x)</cite> that we might
+want to be able to import without necessarily running the <em>main program</em>.
+This can be arranged by modifying the script as follows:</p>
+<p><strong>script2.py</strong></p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">$UWHPSC/codes/python/script2.py</span>
+
+<span class="sd">Sample script to print values of a function at a few points.</span>
+<span class="sd">The printing is only done if the file is executed as a script, not if it is</span>
+<span class="sd">imported as a module.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A quadratic function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">1.</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">print_table</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;     x        f(x)&quot;</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;</span><span class="si">%8.3f</span><span class="s">  </span><span class="si">%8.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">print_table</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>When a file is imported or executed, an attribute <cite>__name__</cite> is
+automatically set, and has the value <cite>__main__</cite> only if the file is executed
+as a script, not if it is imported as a module.  So we see the following
+behavior:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ python script2.py
+    x        f(x)
+  0.000     1.000
+  2.000     5.000
+  4.000    17.000
+</pre></div>
+</div>
+<p>as with <cite>script1.py</cite>, but:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">script2</span>           <span class="c"># does not print table</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script2</span><span class="o">.</span><span class="n">__name__</span>
+<span class="go">&#39;script2&#39;                    # not &#39;__main__&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script2</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">17.0</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script2</span><span class="o">.</span><span class="n">print_table</span><span class="p">()</span>
+<span class="go">     x        f(x)</span>
+<span class="go">   0.000     1.000</span>
+<span class="go">   2.000     5.000</span>
+<span class="go">   4.000    17.000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reloading-modules">
+<span id="python-reload"></span><h2>Reloading modules<a class="headerlink" href="#reloading-modules" title="Permalink to this headline">¶</a></h2>
+<p>When you import a module, Python keeps track of the fact that it is imported
+and if it encounters another statement to import the same module will not
+bother to do so again (the list of modules already import is in
+<cite>sys.modules</cite>).  This is convenient since loading a module can be
+time consuming.  So if you&#8217;re debugging a script using <cite>execfile</cite> or <cite>run</cite>
+from an IPython shell, each time you change it and then re-execute it will
+not reload <cite>numpy</cite>, for example.</p>
+<p>Sometimes, however, you want to force reloading of a module, in particular
+if it has changed (e.g. when we are debugging it).</p>
+<p>Suppose, for example, that we modify <cite>script2.py</cite> so
+that the quadratic function is changed from <cite>y = x**2 + 1 ` to
+`y = x**2 + 10</cite>.
+If we make this change and then try the following (in the same Python
+session as above, where <cite>script2</cite> was already imported as a module):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">script2</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script2</span><span class="o">.</span><span class="n">print_table</span><span class="p">()</span>
+<span class="go">     x        f(x)</span>
+<span class="go">   0.000     1.000</span>
+<span class="go">   2.000     5.000</span>
+<span class="go">   4.000    17.000</span>
+</pre></div>
+</div>
+<p>we get the same results as above, even though we changed <cite>script2.py</cite>.</p>
+<p>We have to use the <cite>reload</cite> command to see the change we want:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">reload</span><span class="p">(</span><span class="n">script2</span><span class="p">)</span>
+<span class="go">&lt;module &#39;script2&#39; from &#39;script2.py&#39;&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script2</span><span class="o">.</span><span class="n">print_table</span><span class="p">()</span>
+<span class="go">     x        f(x)</span>
+<span class="go">   0.000    10.000</span>
+<span class="go">   2.000    14.000</span>
+<span class="go">   4.000    26.000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="command-line-arguments">
+<span id="python-argv"></span><h2>Command line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h2>
+<p>We might want to make this script a bit fancier by adding an optional argument
+to the <cite>print_table</cite> function to print a different number of points, rather
+than the 3 points shown above.</p>
+<p>The next version has this change, and also has a modified version of the
+main program that allows the user to specify this value <cite>n</cite> as a command
+line argument:</p>
+<p><strong>script3.py</strong></p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre></div></td><td class="code"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">$UWHPSC/codes/python/script3.py</span>
+
+<span class="sd">Modification of script2.py that allows a command line argument telling how</span>
+<span class="sd">many points to plot in the table.</span>
+
+<span class="sd">Usage example: To print table with 5 values:</span>
+<span class="sd">   python script3 5</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A quadratic function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">1.</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">print_table</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&quot;     x        f(x)&quot;</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;</span><span class="si">%8.3f</span><span class="s">  </span><span class="si">%8.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    What to do if the script is executed at command line.</span>
+<span class="sd">    Note that sys.argv is a list of the tokens typed at the command line.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="k">print</span> <span class="s">&quot;sys.argv is &quot;</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">print_table</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;*** Error: expect an integer n as the argument&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">print_table</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Note that:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The function <cite>sys.argv</cite> from the <cite>sys</cite> module returns the arguments that
+were present if the script is executed from the command line.  It is a
+list of strings, with <cite>sys.argv[0]</cite> being the name of the script itself,
+<cite>sys.argv[1]</cite> being the next thing on the line, etc. (if there were more
+than one command line argument, separated by spaces).</li>
+<li>We use <cite>int(sys.argv[1])</cite> to convert the argument, if present, from a
+string to an integer.</li>
+<li>We put this conversion in a try-except block in case the user gives an
+invalid argument.</li>
+</ul>
+</div></blockquote>
+<p>Sample output:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ python script3.py
+     x        f(x)
+   0.000     1.000
+   2.000     5.000
+   4.000    17.000
+
+$ python script3.py 5
+     x        f(x)
+   0.000     1.000
+   1.000     2.000
+   2.000     5.000
+   3.000    10.000
+   4.000    17.000
+
+$ python script3.py 5.2
+*** Error: expect an integer n as the argument
+</pre></div>
+</div>
+</div>
+<div class="section" id="importing-modules">
+<span id="id1"></span><h2>Importing modules<a class="headerlink" href="#importing-modules" title="Permalink to this headline">¶</a></h2>
+<p>When Python starts up there are a certain number of basic commands defined
+along with the general syntax of the language, but most useful things needed
+for specific purposes (such as working with webpages, or solving linear
+systems) are in <em>modules</em> that do not load by default.  Otherwise it would
+take forever to start up Python, loading lots of things you don&#8217;t plan to
+use.  So when you start using Python, either interactively or at the top of
+a script, often the  first thing you do is <em>import</em> one or more modules.</p>
+<p>A Python module is often defined simply by grouping a set of parameters and
+functions together in a single .py file.
+See <a class="reference internal" href="#python-scripts-modules"><span class="std std-ref">Python scripts and modules</span></a> for some examples.</p>
+<p>Two useful modules are <em>os</em> and <em>sys</em> that help you interact with the
+operating system and the Python system that is running.  These are standard
+modules that should be available with any Python implementation, so you
+should be able to import them at the Python prompt:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+</pre></div>
+</div>
+<p>Each module contains many different functions and parameters which are the
+<em>methods</em> and <em>attributes</em> of the module.   Here we will only use a couple
+of these.  The
+<em>getcwd</em> method of the os module is called to return the &#8220;current working
+directory&#8221;  (the same thing <em>pwd</em> prints in Unix), e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="go">/home/uwhpsc/uwhpsc/codes/python</span>
+</pre></div>
+</div>
+<p>Note that this function is called with no arguments, but you need the open
+and close parens.  If you type &#8220;os.getcwd&#8221; without these, Python will
+instead print what type of object this function is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span>
+<span class="go">&lt;built-in function getcwd&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-python-path">
+<h2>The Python Path<a class="headerlink" href="#the-python-path" title="Permalink to this headline">¶</a></h2>
+<p>The <em>sys</em> module has an attribute <em>sys.path</em>, a variable that is set by
+default to the search path for modules.  Whenever you perform an <em>import</em>,
+this is the set of directories that Python searches through looking for a
+file by that name (with a .py extension).  If you print this, you will see a
+list of strings, each one of which is the full path to some directory.
+Sometimes the first thing in this list is the empty string, which means &#8220;the
+current directory&#8221;, so it looks for a module in your working directory first
+and if it doesn&#8217;t find it, searches through the other directories in order:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+<span class="go">[&#39;&#39;, &#39;/usr/lib/python2.7&#39;, ....]</span>
+</pre></div>
+</div>
+<p>If you try to import a module and it doesn&#8217;t find a file with this name on
+the path, then you will get an import error:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">junkname</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ImportError</span>: <span class="n">No module named junkname</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ImportError</span>: <span class="n">No module named junkname</span>
+</pre></div>
+</div>
+<p>When new Python software such as NumPy or SciPy is installed, the
+installation script should modify the path appropriately so it can be found.
+You can also add to the path if you have your own directory that you want
+Python to look in, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;/home/uwhpsc/mypython&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will append the directory indicated to the path.  To avoid having to do this
+each time you start Python, you can set a Unix environment variable that
+is used to modify the path every time Python is started.  First print out
+the current value of this variable:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ echo $PYTHONPATH
+</pre></div>
+</div>
+<p>It will probably be blank unless you&#8217;ve set this before or have installed
+software that sets this automatically.
+To append the above example directory to this path:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ export PYTHONPATH=$PYTHONPATH:/home/uwhpsc/mypython
+</pre></div>
+</div>
+<p>This appends another directory to the search path already specified (if any).
+You can repeat this multiple times to add more directories, or put something
+like:</p>
+<div class="highlight-default"><div class="highlight"><pre>export PYTHONPATH=$PYTHONPATH:dir1:dir2:dir3
+</pre></div>
+</div>
+<p>in your <em>.bashrc</em> file if there are the only 3 personal
+directories you always want to search.</p>
+</div>
+<div class="section" id="other-forms-of-import">
+<h2>Other forms of import<a class="headerlink" href="#other-forms-of-import" title="Permalink to this headline">¶</a></h2>
+<p>If all we want to use from the <em>os</em> module is <em>getcwd</em>, then another option
+is to do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">getcwd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">getcwd</span><span class="p">()</span>
+<span class="go">&#39;/Users/rjl/uwhpsc/codes/python&#39;</span>
+</pre></div>
+</div>
+<p>In this case we only imported one method from the module, not the whole
+thing.  Note that now <em>getcwd</em> is called by just giving the name of the
+method, not <em>module.method</em>.  The name <em>getcwd</em> is
+now in our <em>namespace</em>.  If we only imported <em>getcwd</em> and tried typing
+&#8220;os.getcwd()&#8221; we&#8217;d get an error, since it wouldn&#8217;t find <em>os</em> in our
+namespace.</p>
+<p>You can rename things when you import them, which is sometimes useful if
+different modules contain different objects with the same name.
+For example, to compare how the <cite>sqrt</cite> function in the standard Python math
+module compares to the numpy version:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span> <span class="k">as</span> <span class="n">sqrtm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">sqrt</span> <span class="k">as</span> <span class="n">sqrtn</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sqrtm</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">math domain error</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sqrtn</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">)</span>
+<span class="go">nan</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">math domain error</span>
+</pre></div>
+</div>
+<p>The standard function gives an error whereas the <em>numpy</em> version returns
+<em>nan</em>, a special <em>numpy</em> object representing &#8220;Not a Number&#8221;.</p>
+<p>You can also import a module and give it a different name locally.  This is
+particularly useful if you import a module with a long name, but even for
+<em>numpy</em> many examples you&#8217;ll find on the web abbreviate this as <em>np</em>
+(see <a class="reference internal" href="numerical_python.html#numerical-python"><span class="std std-ref">Numerics in Python</span></a>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span>
+<span class="go">array([ 0.        ,  1.57079633,  3.14159265,  4.71238898,  6.28318531])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="go">array([  1.00000000e+00,   6.12323400e-17,  -1.00000000e+00, -1.83697020e-16,   1.00000000e+00])</span>
+</pre></div>
+</div>
+<p>If you don&#8217;t like having to type the module name repeatedly you can import
+just the things you need into your namespace:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">linspace</span><span class="p">,</span> <span class="n">cos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span>
+<span class="go">array([ 0.        ,  1.57079633,  3.14159265,  4.71238898,  6.28318531])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="go">array([  1.00000000e+00,   6.12323400e-17,  -1.00000000e+00, -1.83697020e-16,   1.00000000e+00])</span>
+</pre></div>
+</div>
+<p>If you&#8217;re going to be using lots of things form <em>numpy</em> you might want to
+import everything into your namespace:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>Then <em>linspace</em>, <em>pi</em>, <em>cos</em>, and several hundred other things will be available
+without the prefix.</p>
+<p>When writing code it is often best to not do this, however, since then it is
+not clear to the reader (or even to the programmer sometimes)
+what methods or attributes are coming from which module if several
+different modules are being used. (They may define methods with the same
+names but that do very different things, for example.)</p>
+<p>When using IPython, it is often convenient to start it with:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ ipython --pylab
+</pre></div>
+</div>
+<p>This automatically imports everything from <em>numpy</em> into the namespace, and
+also all of the plotting tools from <em>matplotlib</em>.</p>
+</div>
+<div class="section" id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://docs.python.org/2/tutorial/modules.html">Modules section of Python documentation</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="python_functions.html" title="Python functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="python.html" title="Python"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

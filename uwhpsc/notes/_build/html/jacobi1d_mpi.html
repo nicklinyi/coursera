@@ -1,0 +1,624 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Jacobi iteration using MPI &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Bibliography and further reading" href="biblio.html" />
+    <link rel="prev" title="Jacobi iteration using OpenMP with coarse-grain parallel block" href="jacobi1d_omp2.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="biblio.html" title="Bibliography and further reading"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jacobi1d_omp2.html" title="Jacobi iteration using OpenMP with coarse-grain parallel block"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="jacobi1d_omp2.html"
+                        title="previous chapter">Jacobi iteration using OpenMP with coarse-grain <cite>parallel</cite> block</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="biblio.html"
+                        title="next chapter">Bibliography and further reading</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/jacobi1d_mpi.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jacobi-iteration-using-mpi">
+<span id="jacobi1d-mpi"></span><h1>Jacobi iteration using MPI<a class="headerlink" href="#jacobi-iteration-using-mpi" title="Permalink to this headline">¶</a></h1>
+<p>The code below implements Jacobi iteration for solving the linear system
+arising from the steady state heat equation
+using MPI.  Note that in this code each process, or task, has only a portion
+of the arrays and must exchange boundary data using message passing.</p>
+<p>Compare to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="jacobi1d_omp1.html#jacobi1d-omp1"><span class="std std-ref">Jacobi iteration using OpenMP with parallel do constructs</span></a></li>
+<li><a class="reference internal" href="jacobi1d_omp2.html#jacobi1d-omp2"><span class="std std-ref">Jacobi iteration using OpenMP with coarse-grain parallel block</span></a></li>
+</ul>
+</div></blockquote>
+<p>The code:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHSPC/codes/mpi/jacobi1d_mpi.f90</span>
+<span class="c">!</span>
+<span class="c">! Domain decomposition version of Jacobi iteration illustrating</span>
+<span class="c">! coarse grain parallelism with MPI.</span>
+<span class="c">!</span>
+<span class="c">! The one-dimensional Poisson problem is solved, u&#39;&#39;(x) = -f(x)</span>
+<span class="c">! with u(0) = alpha and u(1) = beta.</span>
+<span class="c">!</span>
+<span class="c">! The grid points are split up into ntasks disjoint sets and each task</span>
+<span class="c">! is assigned one set that it updates for all iterations.  The tasks </span>
+<span class="c">! correspond to processes.</span>
+<span class="c">!</span>
+<span class="c">! The task (or process) number is called &quot;me&quot; in this code for brevity</span>
+<span class="c">! rather than proc_num.</span>
+<span class="c">!</span>
+<span class="c">! Note that each task allocates only as much storage as needed for its </span>
+<span class="c">! portion of the arrays.</span>
+<span class="c">!</span>
+<span class="c">! Each iteration, boundary values at the edge of each grid must be</span>
+<span class="c">! exchanged with the neighbors.</span>
+
+
+<span class="k">program </span><span class="n">jacobi1d_mpi</span>
+    <span class="k">use </span><span class="n">mpi</span>
+
+    <span class="k">implicit none</span>
+
+<span class="k">    </span><span class="kt">integer</span><span class="p">,</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">maxiter</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">,</span> <span class="n">nprint</span> <span class="o">=</span> <span class="mi">5000</span>
+    <span class="kt">real</span> <span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">2</span><span class="mf">0.</span><span class="n">d0</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="mi">6</span><span class="mf">0.</span><span class="n">d0</span>
+
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span> <span class="n">iter</span><span class="p">,</span> <span class="n">istart</span><span class="p">,</span> <span class="n">iend</span><span class="p">,</span> <span class="n">points_per_task</span><span class="p">,</span> <span class="n">itask</span><span class="p">,</span> <span class="n">n</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">ierr</span><span class="p">,</span> <span class="n">ntasks</span><span class="p">,</span> <span class="n">me</span><span class="p">,</span> <span class="n">req1</span><span class="p">,</span> <span class="n">req2</span>
+    <span class="kt">integer</span><span class="p">,</span> <span class="k">dimension</span><span class="p">(</span><span class="n">MPI_STATUS_SIZE</span><span class="p">)</span> <span class="kd">::</span> <span class="n">mpistatus</span>
+    <span class="kt">real</span> <span class="p">(</span><span class="nb">kind</span> <span class="o">=</span> <span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(:),</span> <span class="k">allocatable</span> <span class="kd">::</span> <span class="n">f</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">uold</span>
+    <span class="kt">real</span> <span class="p">(</span><span class="nb">kind</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span> <span class="n">dumax_task</span><span class="p">,</span> <span class="n">dumax_global</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">tol</span>
+
+    <span class="c">! Initialize MPI; get total number of tasks and ID of this task</span>
+    <span class="k">call </span><span class="n">mpi_init</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">mpi_comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ntasks</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">mpi_comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">me</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="c">! Ask the user for the number of points</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Input n ... &quot;</span>
+        <span class="k">read</span> <span class="o">*</span><span class="p">,</span> <span class="n">n</span>
+    <span class="k">end if</span>
+    <span class="c">! Broadcast to all tasks; everybody gets the value of n from task 0</span>
+    <span class="k">call </span><span class="n">mpi_bcast</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_INTEGER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="n">dx</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">d0</span><span class="o">/</span><span class="kt">real</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">0.1</span><span class="n">d0</span><span class="o">*</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="c">! Determine how many points to handle with each task</span>
+    <span class="n">points_per_task</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">ntasks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">ntasks</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>   <span class="c">! Only one task should print to avoid clutter</span>
+        <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;points_per_task = &quot;</span><span class="p">,</span> <span class="n">points_per_task</span>
+    <span class="k">end if</span>
+
+    <span class="c">! Determine start and end index for this task&#39;s points</span>
+    <span class="n">istart</span> <span class="o">=</span> <span class="n">me</span> <span class="o">*</span> <span class="n">points_per_task</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">iend</span> <span class="o">=</span> <span class="nb">min</span><span class="p">((</span><span class="n">me</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">points_per_task</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="c">! Diagnostic: tell the user which points will be handled by which task</span>
+    <span class="k">print</span> <span class="s1">&#39;(&quot;Task &quot;,i2,&quot; will take i = &quot;,i6,&quot; through i = &quot;,i6)&#39;</span><span class="p">,</span> <span class="p">&amp;</span>
+        <span class="n">me</span><span class="p">,</span> <span class="n">istart</span><span class="p">,</span> <span class="n">iend</span>
+
+
+    <span class="c">! Initialize:</span>
+    <span class="c">! -----------</span>
+
+    <span class="c">! This makes the indices run from istart-1 to iend+1</span>
+    <span class="c">! This is more or less cosmetic, but makes things easier to think about</span>
+    <span class="k">allocate</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">istart</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">iend</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">u</span><span class="p">(</span><span class="n">istart</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">iend</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">uold</span><span class="p">(</span><span class="n">istart</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">iend</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="c">! Each task sets its own, independent array</span>
+    <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">istart</span><span class="p">,</span> <span class="n">iend</span>
+        <span class="c">! Each task is a single thread with all its variables private</span>
+        <span class="c">! so re-using the scalar variable x from one loop iteration to</span>
+        <span class="c">! the next does not produce a race condition.</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">dx</span><span class="o">*</span><span class="kt">real</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mi">10</span><span class="mf">0.</span><span class="n">d0</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>               <span class="c">! Source term</span>
+        <span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">beta</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span>    <span class="c">! Initial guess</span>
+    <span class="k">end do</span>
+    
+    <span class="c">! Set boundary conditions if this task is keeping track of a boundary</span>
+    <span class="c">! point</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>        <span class="n">u</span><span class="p">(</span><span class="n">istart</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">alpha</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">==</span> <span class="n">ntasks</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">u</span><span class="p">(</span><span class="n">iend</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>   <span class="o">=</span> <span class="n">beta</span>
+
+
+    <span class="c">! Jacobi iteratation:</span>
+    <span class="c">! -------------------</span>
+
+    <span class="k">do </span><span class="n">iter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxiter</span>
+        <span class="n">uold</span> <span class="o">=</span> <span class="n">u</span>
+
+        <span class="c">! Send endpoint values to tasks handling neighboring sections</span>
+        <span class="c">! of the array.  Note that non-blocking sends are used; note</span>
+        <span class="c">! also that this sends from uold, so the buffer we&#39;re sending</span>
+        <span class="c">! from won&#39;t be modified while it&#39;s being sent.</span>
+        <span class="c">!</span>
+        <span class="c">! tag=1 is used for messages sent to the left</span>
+        <span class="c">! tag=2 is used for messages sent to the right</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+            <span class="c">! Send left endpoint value to process to the &quot;left&quot;</span>
+            <span class="k">call </span><span class="n">mpi_isend</span><span class="p">(</span><span class="n">uold</span><span class="p">(</span><span class="n">istart</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="n">me</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">&amp;</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">req1</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="k">end if</span>
+<span class="k">        if</span> <span class="p">(</span><span class="n">me</span> <span class="o">&lt;</span> <span class="n">ntasks</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+            <span class="c">! Send right endpoint value to process on the &quot;right&quot;</span>
+            <span class="k">call </span><span class="n">mpi_isend</span><span class="p">(</span><span class="n">uold</span><span class="p">(</span><span class="n">iend</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="n">me</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">&amp;</span>
+                <span class="mi">2</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">req2</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="k">end if</span>
+
+        <span class="c">! Accept incoming endpoint values from other tasks.  Note that</span>
+        <span class="c">! these are blocking receives, because we can&#39;t run the next step</span>
+        <span class="c">! of the Jacobi iteration until we&#39;ve received all the</span>
+        <span class="c">! incoming data.</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">&lt;</span> <span class="n">ntasks</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+            <span class="c">! Receive right endpoint value</span>
+            <span class="k">call </span><span class="n">mpi_recv</span><span class="p">(</span><span class="n">uold</span><span class="p">(</span><span class="n">iend</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="n">me</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">&amp;</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">mpistatus</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="k">end if</span>
+<span class="k">        if</span> <span class="p">(</span><span class="n">me</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+            <span class="c">! Receive left endpoint value</span>
+            <span class="k">call </span><span class="n">mpi_recv</span><span class="p">(</span><span class="n">uold</span><span class="p">(</span><span class="n">istart</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="n">me</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">&amp;</span>
+                <span class="mi">2</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">mpistatus</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="k">end if</span>
+
+<span class="k">        </span><span class="n">dumax_task</span> <span class="o">=</span> <span class="mf">0.</span><span class="n">d0</span>   <span class="c">! Max seen by this task</span>
+
+        <span class="c">! Apply Jacobi iteration on this task&#39;s section of the array</span>
+        <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">istart</span><span class="p">,</span> <span class="n">iend</span>
+            <span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.5</span><span class="n">d0</span><span class="o">*</span><span class="p">(</span><span class="n">uold</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">uold</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="n">dumax_task</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dumax_task</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="n">uold</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+        <span class="k">end do</span>
+
+        <span class="c">! Take global maximum of dumax values</span>
+        <span class="k">call </span><span class="n">mpi_allreduce</span><span class="p">(</span><span class="n">dumax_task</span><span class="p">,</span> <span class="n">dumax_global</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="p">&amp;</span>
+            <span class="n">MPI_MAX</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="c">! Note that this MPI_ALLREDUCE call acts as an implicit barrier,</span>
+        <span class="c">! since no process can return from it until all processes</span>
+        <span class="c">! have called it.  Because of this, after this call we know</span>
+        <span class="c">! that all the send and receive operations initiated at the</span>
+        <span class="c">! top of the loop have finished -- all the MPI_RECV calls have</span>
+        <span class="c">! finished in order for each process to get here, and if the</span>
+        <span class="c">! MPI_RECV calls have finished, the corresponding MPI_ISEND</span>
+        <span class="c">! calls have also finished.  Thus we can safely modify uold</span>
+        <span class="c">! again.</span>
+
+        <span class="c">! Also periodically report progress to the user</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">            if</span> <span class="p">(</span><span class="nb">mod</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="n">nprint</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">                print</span> <span class="s1">&#39;(&quot;After &quot;,i8,&quot; iterations, dumax = &quot;,d16.6,/)&#39;</span><span class="p">,</span> <span class="p">&amp;</span>
+                    <span class="n">iter</span><span class="p">,</span> <span class="n">dumax_global</span>
+            <span class="k">end if</span>
+<span class="k">        end if</span>
+
+        <span class="c">! All tasks now have dumax_global, and can check for convergence</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dumax_global</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="k">exit</span>
+<span class="k">    end do</span>
+
+<span class="k">    print</span> <span class="s1">&#39;(&quot;Task number &quot;,i2,&quot; finished after &quot;,i9,&quot; iterations, dumax = &quot;,&amp;</span>
+<span class="s1">            e16.6)&#39;</span><span class="p">,</span> <span class="n">me</span><span class="p">,</span> <span class="n">iter</span><span class="p">,</span> <span class="n">dumax_global</span>
+
+
+    <span class="c">! Output result:</span>
+    <span class="c">! --------------</span>
+
+    <span class="c">! Note: this only works if all processes share a file system</span>
+    <span class="c">! and can all open and write to the same file!</span>
+
+    <span class="c">! Synchronize to keep the next part from being non-deterministic</span>
+    <span class="k">call </span><span class="n">mpi_barrier</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="c">! Have each task output to a file in sequence, using messages to</span>
+    <span class="c">! coordinate</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>    <span class="c">! Task 0 goes first</span>
+        <span class="c">! Open file for writing, replacing any previous version:</span>
+        <span class="k">open</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="k">file</span><span class="o">=</span><span class="s2">&quot;heatsoln.txt&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">)</span>
+        <span class="k">write</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="s2">&quot;          x                  u&quot;</span>
+        <span class="k">write</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;(2e20.10)&#39;</span><span class="p">)</span> <span class="mf">0.</span><span class="n">d0</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>    <span class="c">! Boundary value at left end</span>
+
+        <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">istart</span><span class="p">,</span> <span class="n">iend</span>
+            <span class="k">write</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;(2e20.10)&#39;</span><span class="p">)</span> <span class="n">i</span><span class="o">*</span><span class="n">dx</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">end do</span>
+
+<span class="k">        close</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="c">! Closing the file should guarantee that all the ouput </span>
+        <span class="c">! will be written to disk.</span>
+        <span class="c">! If the file isn&#39;t closed before the next process starts writing,</span>
+        <span class="c">! output may be jumbled or missing.</span>
+
+        <span class="c">! Send go-ahead message to next task</span>
+        <span class="c">! Only the fact that the message was sent is important, not its contents</span>
+        <span class="c">! so we send the special address MPI_BOTTOM and length 0.</span>
+        <span class="c">! tag=4 is used for this message.</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">ntasks</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">            call </span><span class="n">mpi_send</span><span class="p">(</span><span class="n">MPI_BOTTOM</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_INTEGER</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">&amp;</span>
+                          <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+            <span class="n">endif</span>
+
+    <span class="k">else</span>
+        <span class="c">! Wait for go-ahead message from previous task</span>
+        <span class="k">call </span><span class="n">mpi_recv</span><span class="p">(</span><span class="n">MPI_BOTTOM</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_INTEGER</span><span class="p">,</span> <span class="n">me</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">&amp;</span>
+                          <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">mpistatus</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="c">! Open file for appending; do not destroy previous contents</span>
+        <span class="k">open</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="k">file</span><span class="o">=</span><span class="s2">&quot;heatsoln.txt&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">&quot;old&quot;</span><span class="p">,</span> <span class="nb">access</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">)</span>
+        <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">istart</span><span class="p">,</span> <span class="n">iend</span>
+            <span class="k">write</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;(2e20.10)&#39;</span><span class="p">)</span> <span class="n">i</span><span class="o">*</span><span class="n">dx</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">end do</span>
+
+        <span class="c">! Boundary value at right end:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">==</span> <span class="n">ntasks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">write</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;(2e20.10)&#39;</span><span class="p">)</span> <span class="mf">1.</span><span class="n">d0</span><span class="p">,</span> <span class="n">u</span><span class="p">(</span><span class="n">iend</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>    
+
+        <span class="c">! Flush all pending writes to disk</span>
+        <span class="k">close</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">&lt;</span> <span class="n">ntasks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+            <span class="c">! Send go-ahead message to next task</span>
+            <span class="k">call </span><span class="n">mpi_send</span><span class="p">(</span><span class="n">MPI_BOTTOM</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_INTEGER</span><span class="p">,</span> <span class="n">me</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">&amp;</span>
+                          <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="k">end if</span>
+<span class="k">    end if</span>
+
+    <span class="c">! Notify the user when all tasks have finished writing</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">me</span> <span class="o">==</span> <span class="n">ntasks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Solution is in heatsoln.txt&quot;</span>
+
+    <span class="c">! Close out MPI</span>
+    <span class="k">call </span><span class="n">mpi_finalize</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+
+<span class="k">end program </span><span class="n">jacobi1d_mpi</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="biblio.html" title="Bibliography and further reading"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jacobi1d_omp2.html" title="Jacobi iteration using OpenMP with coarse-grain parallel block"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

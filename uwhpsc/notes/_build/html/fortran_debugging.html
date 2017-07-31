@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fortran debugging &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Fortran example for Newton’s method" href="fortran_newton.html" />
+    <link rel="prev" title="Fortran Input / Output" href="fortran_io.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fortran_newton.html" title="Fortran example for Newton’s method"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fortran_io.html" title="Fortran Input / Output"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fortran debugging</a><ul>
+<li><a class="reference internal" href="#print-statements">Print statements</a></li>
+<li><a class="reference internal" href="#compiling-with-various-gfortran-flags">Compiling with various gfortran flags</a></li>
+<li><a class="reference internal" href="#the-gdb-debugger">The <cite>gdb</cite> debugger</a></li>
+<li><a class="reference internal" href="#totalview">Totalview</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fortran_io.html"
+                        title="previous chapter">Fortran Input / Output</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fortran_newton.html"
+                        title="next chapter">Fortran example for Newton&#8217;s method</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/fortran_debugging.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fortran-debugging">
+<span id="id1"></span><h1>Fortran debugging<a class="headerlink" href="#fortran-debugging" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="print-statements">
+<h2>Print statements<a class="headerlink" href="#print-statements" title="Permalink to this headline">¶</a></h2>
+<p>Adding print statements to a program is a tried and true method of
+debugging, and the only method that many programmers use.
+Not because it&#8217;s the best method, but it&#8217;s sometimes the simplest way to
+examine what&#8217;s going on at a particular point in a program.</p>
+<p>Print statements can be added almost anywhere in a Fortran code to print
+things out to the terminal window as it goes along.</p>
+<p>You might want to put some special symbols in debugging statements to flag
+them as such, which makes it easier to see what output is your debug output,
+and also makes it easier to find them again later to remove from the code,
+e.g. you might use &#8220;+++&#8221; or &#8220;DEBUG&#8221;.</p>
+</div>
+<div class="section" id="compiling-with-various-gfortran-flags">
+<h2>Compiling with various gfortran flags<a class="headerlink" href="#compiling-with-various-gfortran-flags" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of flags you can use when compiling your code that will
+make it easier to debug.</p>
+<p>Here&#8217;s a generic set of options you might try:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran -g -W -Wall -fbounds-check -pedantic-errors \
+      -ffpe-trap=zero,invalid,overflow,underflow  program.f90
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="gfortran_flags.html#gfortran-flags"><span class="std std-ref">Useful gfortran flags</span></a> or the
+<cite>gfortran man page &lt;http://linux.die.net/man/1/gfortran&gt;</cite>
+for more information.  Most of these options
+indicate that the program should give warnings or die if certain bad things
+happen.</p>
+<p>Compiling with the <cite>-g</cite> flag indicates that information should be
+generated and saved during compilation that can be used to help debug the
+code using a debugger such as <cite>gdb</cite> or <cite>totalview</cite>.  You generally have to
+compile with this option to use a debugger.</p>
+</div>
+<div class="section" id="the-gdb-debugger">
+<h2>The <cite>gdb</cite> debugger<a class="headerlink" href="#the-gdb-debugger" title="Permalink to this headline">¶</a></h2>
+<p>This is the Gnu open source debugger for Gnu compilers such as gfortran.
+Unfortunately it often works very poorly for Fortran.</p>
+<p>You can install it on the VM using:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ sudo apt-get install gdb
+</pre></div>
+</div>
+<p>And then use via, e.g.:</p>
+<blockquote>
+<div><p>$ cd $UWHPSC/codes/fortran
+$ gfortran -g segfault1.f90
+$ gdb a.out
+(gdb) run</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>.... runs for a while and then prints</dt>
+<dd>Program received signal EXC_BAD_ACCESS, Could not access memory.
+Tells what line it died in.</dd>
+</dl>
+</div></blockquote>
+<p>(gdb) p i
+$1 = 241
+(gdb) q</p>
+</div></blockquote>
+<p>This at least reveals where the error happened and allows printing the value
+of <cite>i</cite> when it died.</p>
+</div>
+<div class="section" id="totalview">
+<h2>Totalview<a class="headerlink" href="#totalview" title="Permalink to this headline">¶</a></h2>
+<p>Totalview is a commercial debugger that works quite well on Fortran codes
+together with various compilers, including gfortran.  It also works with
+other languages, and for parallel computing.</p>
+<p>See <a class="reference external" href="http://www.roguewave.com/products/totalview-family.aspx">Rogue Wave Softare &#8211; totalview family</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fortran_newton.html" title="Fortran example for Newton’s method"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fortran_io.html" title="Fortran Input / Output"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

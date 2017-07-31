@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lab 18: Thursday May 29, 2014 &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Notes to accompany lab sessions" href="index.html" />
+    <link rel="next" title="Lab 19: Tuesday June 3, 2014" href="lab19.html" />
+    <link rel="prev" title="Lab 17: Tuesday May 27, 2014" href="lab17.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="../_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="lab19.html" title="Lab 19: Tuesday June 3, 2014"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lab17.html" title="Lab 17: Tuesday May 27, 2014"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Notes to accompany lab sessions</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lab17.html"
+                        title="previous chapter">Lab 17: Tuesday May 27, 2014</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lab19.html"
+                        title="next chapter">Lab 19: Tuesday June 3, 2014</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/labs/lab18.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lab-18-thursday-may-29-2014">
+<span id="lab18"></span><h1>Lab 18: Thursday May 29, 2014<a class="headerlink" href="#lab-18-thursday-may-29-2014" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first">We will go through the notebook <cite>$UWHPSC/homeworks/project/BVP.ipynb</cite>, also
+visible at
+<a class="reference external" href="http://nbviewer.ipython.org/url/faculty.washington.edu/rjl/notebooks/BVP.ipynb">http://nbviewer.ipython.org/url/faculty.washington.edu/rjl/notebooks/BVP.ipynb</a>.
+This outlines a recursive <a class="reference external" href="https://www.google.com/search?q=domain+decomposition&amp;rlz=1C5CHFA_enUS534US534&amp;espv=2&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ei=R4GHU4uFKI-XyAT4t4Bo&amp;ved=0CAYQ_AUoAQ&amp;biw=1440&amp;bih=779">domain decomposition</a>  approach to solving a
+boundary value problem.  Part 1 of the project is to convert this into
+Fortran with OpenMP.</p>
+</li>
+<li><p class="first">Working in pairs, copy this notebook to <cite>BVP2.ipynb</cite> and modify it to solve
+a <a class="reference external" href="http://en.wikipedia.org/wiki/Helmholtz_equation">Helmholtz equation</a>
+(in one dimension) of the form:</p>
+<blockquote>
+<div><p><span class="math">\(u''(x) + k^2 u(x) = -f(x)\)</span></p>
+</div></blockquote>
+<p>on the interval <span class="math">\(0&lt;x&lt;1\)</span> with specified boundary conditions.</p>
+<p>As an exact solution, consider the case <span class="math">\(f(x)=0\)</span> in which case
+the general solution to <span class="math">\(u''(x) = -k^2 u(x)\)</span> is
+<span class="math">\(u(x) = c_1 \cos(kx) + c_2 \sin(kx)\)</span>.</p>
+<p>The boundary value problem has a unique exact solution for any boundary
+values <span class="math">\(u(0)\)</span> and <span class="math">\(u(1)\)</span> provided that <span class="math">\(k\)</span> is not an
+integer multiple of <span class="math">\(\pi\)</span>.  (Insert <span class="math">\(x=0\)</span> and <span class="math">\(x=1\)</span> into
+the general solution and determine <span class="math">\(c_1\)</span> and <span class="math">\(c_2\)</span> so that the
+boundary conditions are satisfied.)</p>
+<p>You might try values such as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">k</span> <span class="o">=</span> <span class="mf">15.</span>
+<span class="n">u_left</span> <span class="o">=</span> <span class="mf">2.</span>
+<span class="n">u_right</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span>
+</pre></div>
+</div>
+<p>You will need to use at least 40 or 50 grid points to get a solution that
+looks at all reasonable.
+If you make <span class="math">\(k\)</span> larger, the solution will be more oscillatory and
+you will need even more grid points to get a reasonable approximation.</p>
+</li>
+<li><p class="first">Work through as much of the notebook as you can, adjusting things to
+solve the Helmholtz equation.  The main objective is to work through the
+notebook and understand what is being done.</p>
+<p>Some tips:</p>
+<ul>
+<li><p class="first">Add another parameter <cite>k</cite> to the <cite>solve_BVP_*</cite> functions.</p>
+</li>
+<li><p class="first">In setting up the tridiagonal matrix in <cite>solve_BVP_direct</cite>, you will need
+to modify the diagonal terms for the difference equation that
+approximates the Helmholtz equation,</p>
+<p><span class="math">\(\frac{U_{i-1} - 2U_i + U_{i+1}}{\Delta x^2} + k^2 U_i = -f(x_i)\)</span></p>
+<p>This gives the linear system to be solved:</p>
+<p><span class="math">\(U_{i-1} + (k^2\Delta x^2 - 2) U_i + U_{i+1} = -\Delta x^2 f(x_i)\)</span></p>
+<p>along with the boundary conditions.</p>
+</li>
+<li><p class="first">If you get to the divide-and-conquer approach, you will have to modify
+the equation for the mismatch to take into account the modification to
+the linear system being solved.</p>
+</li>
+</ul>
+</li>
+<li><p class="first">There is now a sample solution in the repository, visible at
+<a class="reference external" href="http://nbviewer.ipython.org/url/faculty.washington.edu/rjl/notebooks/BVP_helmholtz.ipynb">http://nbviewer.ipython.org/url/faculty.washington.edu/rjl/notebooks/BVP_helmholtz.ipynb</a>.</p>
+</li>
+<li><p class="first"><strong>There is quiz for Lab 18</strong></p>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="lab19.html" title="Lab 19: Tuesday June 3, 2014"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lab17.html" title="Lab 17: Tuesday May 27, 2014"
+             >previous</a> |</li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Notes to accompany lab sessions</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

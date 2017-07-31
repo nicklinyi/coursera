@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lab 20: Thursday June 5, 2014 &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Notes to accompany lab sessions" href="index.html" />
+    <link rel="next" title="Homework" href="../homeworks.html" />
+    <link rel="prev" title="Lab 19: Tuesday June 3, 2014" href="lab19.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="../_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../homeworks.html" title="Homework"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lab19.html" title="Lab 19: Tuesday June 3, 2014"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Notes to accompany lab sessions</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Lab 20: Thursday June 5, 2014</a><ul>
+<li><a class="reference internal" href="#work-on-in-pairs">Work on in pairs:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lab19.html"
+                        title="previous chapter">Lab 19: Tuesday June 3, 2014</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../homeworks.html"
+                        title="next chapter">Homework</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/labs/lab20.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lab-20-thursday-june-5-2014">
+<span id="lab20"></span><h1>Lab 20: Thursday June 5, 2014<a class="headerlink" href="#lab-20-thursday-june-5-2014" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first">The directory <cite>$UWHPSC/labs/lab20</cite> contains a Fortran code
+<cite>fourier_sum.f90</cite> that computes terms in the Fourier sine series
+for the function <span class="math">\(f(x) = e^x\)</span> and prints them out to the file
+<cite>frames.txt</cite> along with partial sums of the series.
+It also creates a second file <cite>xf.txt</cite> that contains the values of <cite>x</cite>
+and <cite>f(x)</cite> on the finite grid where the terms and sum are computed.</p>
+<p>The Python script <cite>animate.py</cite> reads in these two files and produces
+an animation, which can be viewed at
+<a class="reference external" href="http://faculty.washington.edu/rjl/FourierSum.html">http://faculty.washington.edu/rjl/FourierSum.html</a>.</p>
+<p>We will go through these codes.</p>
+</li>
+<li><p class="first">You may have to install JSAnimation on your SMC project, see
+<a class="reference internal" href="../animation.html#animation"><span class="std std-ref">Animation in Python</span></a>.</p>
+</li>
+</ul>
+<div class="section" id="work-on-in-pairs">
+<h2>Work on in pairs:<a class="headerlink" href="#work-on-in-pairs" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The subdirectory <cite>$UWHPSC/labs/lab20/gamblers_ruin</cite> contains a modified
+version of the solution to Homework 4, part 2,  and does a single random
+walk.  The <cite>gamblers.f90</cite> code has been modified to print <cite>n1, n2</cite> each
+step to the file <cite>walk.txt</cite>.</p>
+<p>Produce a script <cite>animate.py</cite> and modify <cite>Makefile1</cite> so that you can do:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make movie -f Makefile1 n1=10 n2=10 seed=1234
+</pre></div>
+</div>
+<p>and generate a movie like the one shown at
+<a class="reference external" href="http://faculty.washington.edu/rjl/RandomWalk.html">http://faculty.washington.edu/rjl/RandomWalk.html</a>.</p>
+</li>
+<li><p class="first">Don&#8217;t worry about the Makefile at first, get <cite>animate.py</cite> working.</p>
+</li>
+<li><p class="first">For testing, you might want to use smaller <cite>n1</cite> and <cite>n2</cite> so there are
+fewer <cite>png</cite> files to generate.</p>
+</li>
+</ul>
+<p><strong>There is quiz for Lab 20</strong></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../homeworks.html" title="Homework"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lab19.html" title="Lab 19: Tuesday June 3, 2014"
+             >previous</a> |</li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Notes to accompany lab sessions</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

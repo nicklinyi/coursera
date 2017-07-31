@@ -1,0 +1,735 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Python scripts and modules" href="python_scripts_modules.html" />
+    <link rel="prev" title="Python and Fortran" href="python_and_fortran.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="python_scripts_modules.html" title="Python scripts and modules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="python_and_fortran.html" title="Python and Fortran"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python</a><ul>
+<li><a class="reference internal" href="#interactive-python">Interactive Python</a></li>
+<li><a class="reference internal" href="#indentation">Indentation</a></li>
+<li><a class="reference internal" href="#wrapping-lines">Wrapping lines</a></li>
+<li><a class="reference internal" href="#comments">Comments</a></li>
+<li><a class="reference internal" href="#strings">Strings</a></li>
+<li><a class="reference internal" href="#docstrings">Docstrings</a></li>
+<li><a class="reference internal" href="#running-python-scripts">Running Python scripts</a></li>
+<li><a class="reference internal" href="#python-objects">Python objects</a></li>
+<li><a class="reference internal" href="#declaring-variables">Declaring variables?</a></li>
+<li><a class="reference internal" href="#lists">Lists</a></li>
+<li><a class="reference internal" href="#copying-objects">Copying objects</a></li>
+<li><a class="reference internal" href="#mutable-and-immutable-objects">Mutable and Immutable objects</a></li>
+<li><a class="reference internal" href="#tuples">Tuples</a></li>
+<li><a class="reference internal" href="#iterators">Iterators</a></li>
+<li><a class="reference internal" href="#range">range</a></li>
+<li><a class="reference internal" href="#enumerate">enumerate</a></li>
+<li><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="python_and_fortran.html"
+                        title="previous chapter">Python and Fortran</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="python_scripts_modules.html"
+                        title="next chapter">Python scripts and modules</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/python.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python">
+<span id="id1"></span><h1>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<p>These notes only scratch the surface of Python, with discussion of a few
+features of the language that are most important to getting started and to
+appreciating how Python can be used in computational science.</p>
+<p>See the references below or the <a class="reference internal" href="biblio.html#biblio-python"><span class="std std-ref">Python:</span></a> section of the
+<a class="reference internal" href="biblio.html#biblio"><span class="std std-ref">Bibliography and further reading</span></a> for more detailed references.</p>
+<p>See also the slides from lectures.</p>
+<div class="section" id="interactive-python">
+<h2>Interactive Python<a class="headerlink" href="#interactive-python" title="Permalink to this headline">¶</a></h2>
+<p>The IPython shell is generally recommended for interactive work in Python
+(see <a class="reference external" href="http://ipython.org/documentation.html">http://ipython.org/documentation.html</a>), but for most examples we&#8217;ll display the &gt;&gt;&gt; prompt of the
+standard Python shell.</p>
+<p>Normally multiline Python statements are best written in a text file rather
+than typing them at the prompt, but some of the short examples below are
+done at the prompt.  If type a line that Python recognizes as an unfinished
+block, it will give a line starting with three dots, like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="mi">1</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="nb">print</span> <span class="s">&quot;oops!&quot;</span>
+<span class="gp">... </span><span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="nb">print</span> <span class="s">&quot;this is what we expect&quot;</span>
+<span class="gp">...</span>
+<span class="go">this is what we expect</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Once done with the full command, typing &lt;return&gt; alone at the ... prompt
+tells Python we are done and it executes the command.</p>
+</div>
+<div class="section" id="indentation">
+<h2>Indentation<a class="headerlink" href="#indentation" title="Permalink to this headline">¶</a></h2>
+<p>Most computer languages have some form of begin-end structure, or
+opening and closing braces, or some such thing to clearly delinieate
+what piece of code is in a loop, or in different parts of an
+if-then-else structure like what&#8217;s shown above.  Good programmers
+generally also indent their code so it is easier for a reader to
+see what is inside a loop, particularly if there are multiple nested
+loops.  But in most languages this is indentation is just a matter
+of style and the begin-end structure of the language determines how it is
+actually interpreted by the computer.</p>
+<p><strong>In Python, indentation is everything</strong>.  There are no begin-end&#8217;s, only
+indentation.  Everything that is supposed to be at one level of a loop must
+be indented to that level.  Once the loop is done the indentation must go
+back out to the previous level.  There are some other rules you need to
+learn, such as that the &#8220;else&#8221; in and if-else block like the above has to be
+indented exactly the same as as the &#8220;if&#8221;.  See <span class="xref std std-ref">if_else</span> for more about
+this.</p>
+<p>How many spaces to indent each level is a matter of style, but you must be
+consistent within a single code.  The standard is often 4 spaces.</p>
+</div>
+<div class="section" id="wrapping-lines">
+<h2>Wrapping lines<a class="headerlink" href="#wrapping-lines" title="Permalink to this headline">¶</a></h2>
+<p>In Python normally each statement is one line, and there is no need to use
+separators such as the semicolon used in some languages to end a line.  One
+the other hand you can use a semicolon to put several short statements on a
+single line, such as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="nb">print</span> <span class="n">x</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<p>It is easiest to read codes if you avoid this in most cases.</p>
+<p>If a line of code is too long to fit on a single line, you can break it into
+multiple lines by putting a backslash at the end of a line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> \
+<span class="gp">... </span>    <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<p>Anything following a # in a line is ignored as a comment (unless of course
+the # appears in a string):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;This # is part of the string&quot;</span>  <span class="c"># this is a comment</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">&#39;This # is part of the string&#39;</span>
+</pre></div>
+</div>
+<p>There is another form of comment, the <em>docstring</em>, discussed below following
+an introduction to strings.</p>
+</div>
+<div class="section" id="strings">
+<h2>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h2>
+<p>Strings are specified using either single or double quotes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;some text&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;some text&quot;</span>
+</pre></div>
+</div>
+<p>are the same.  This is useful if you want strings that themselves contain
+quotes of a different type.</p>
+<p>You can also use triple double quotes, which have the advantage that they
+such strings can span multiple lines:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Note that a &#39; doesn&#39;t end</span>
+<span class="gp">... </span><span class="s">this string and that it spans two lines&quot;&quot;&quot;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">&quot;Note that a &#39; doesn&#39;t end\nthis string and that it spans two lines&quot;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">s</span>
+<span class="go">Note that a &#39; doesn&#39;t end</span>
+<span class="go">this string and that it spans two lines</span>
+</pre></div>
+</div>
+<p>When it prints, the carriage return at the end of the line show up as &#8220;n&#8221;.
+This is what is actually stored. When we &#8220;print s&#8221; it gets printed as a
+carriage return again.</p>
+<p>You can put &#8220;n&#8221; in your strings as another way to break lines:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s">&quot;This spans </span><span class="se">\n</span><span class="s"> two lines&quot;</span>
+<span class="go">This spans</span>
+<span class="go"> two lines</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="python_strings.html#python-strings"><span class="std std-ref">Python strings</span></a> for more about strings.</p>
+</div>
+<div class="section" id="docstrings">
+<h2>Docstrings<a class="headerlink" href="#docstrings" title="Permalink to this headline">¶</a></h2>
+<p>Often the first thing you will see in a Python script or module, or in a
+function or class defined in a module, is a brief description that is
+enclosed in triple quotes.   Although ordinarily this would just be a
+string, in this special position it is interpreted by Python as a comment
+and is not part of the code.  It is called the <em>docstring</em> because it is
+part of the documentation and some Python tools automatically use the
+docstring in various ways.  See <span class="xref std std-ref">ipython</span> for one example.  Also the
+documentation formatting program Sphinx that is used to create these class
+notes can automatically take a Python module and create html or latex
+documentation for it by using the docstrings, the original purpose for which
+Sphinx was developed. See <a class="reference internal" href="sphinx.html#sphinx"><span class="std std-ref">Sphinx documentation</span></a> for more about this.</p>
+<p>It&#8217;s a good idea to get in the habit of putting a docstring at the top of
+every Python file and function you write.</p>
+</div>
+<div class="section" id="running-python-scripts">
+<h2>Running Python scripts<a class="headerlink" href="#running-python-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Most Python programs are written in text files ending with the .py
+extension.
+Some of these are simple <em>scripts</em> that are just a set of Python
+instructions to be executed, the same things you might type at the &gt;&gt;&gt;
+prompt but collected in a file (which makes it much easier to modify or
+reuse later).  Such a script can be run at the Unix command
+line simply by typing &#8220;python&#8221; followed by the file name.</p>
+<p>See <a class="reference internal" href="python_scripts_modules.html#python-scripts-modules"><span class="std std-ref">Python scripts and modules</span></a> for some examples.
+The section <a class="reference internal" href="python_scripts_modules.html#importing-modules"><span class="std std-ref">Importing modules</span></a>
+also contains important information on how to &#8220;import&#8221; modules,
+and how to set the path of directories that are searched for modules when
+you try to import a module.</p>
+</div>
+<div class="section" id="python-objects">
+<span id="id2"></span><h2>Python objects<a class="headerlink" href="#python-objects" title="Permalink to this headline">¶</a></h2>
+<p>Python is an object-oriented language, which just means that virtually
+everything you encounter in Python (variables, functions, modules, etc.) is
+an <em>object</em> of some <em>class</em>.  There are many classes of objects built into
+Python and in this course we will primarily be using these pre-defined
+classes.  For large-scale programming projects you would probably define
+some new classes, which is easy to do.  (Maybe an example to come...)</p>
+<p>The <em>type</em> command can be used to reveal the type of an object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>
+<span class="go">&lt;type &#39;module&#39;&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="go">&lt;type &#39;float&#39;&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">)</span>
+<span class="go">&lt;type &#39;numpy.ufunc&#39;&gt;</span>
+</pre></div>
+</div>
+<p>We see that <em>np</em> is a module, <em>np.pi</em> is a floating point real number, and
+<em>np.cos</em> is of a special class that&#8217;s defined in the numpy module.</p>
+<p>The <em>linspace</em> command creates a numerical array that is also a special
+numpy class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([ 0.,  1.,  2.,  3.,  4.,  5.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&lt;type &#39;numpy.ndarray&#39;&gt;</span>
+</pre></div>
+</div>
+<p>Objects of a particular class generally have certain operations that are
+defined on them as part of the class definition.  For example, NumPy
+numerical arrays have a <em>max</em> method defined, which we can use on <em>x</em> in one
+of two ways:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+<p>The first way applies the method <em>max</em> defined in the <em>numpy</em> module to <em>x</em>.
+The second way uses the fact that <em>x</em>, by virtue of being of type
+<em>numpy.ndarray</em>, automatically has a <em>max</em> method which can be invoked (on
+itself) by calling the function <em>x.max()</em> with no argument.  Which way is
+better depends in part on what you&#8217;re doing.</p>
+<p>Here&#8217;s another example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="go">&lt;type &#39;list&#39;&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span>
+<span class="go">[0, 1, 2, 4]</span>
+</pre></div>
+</div>
+<p><em>L</em> is a list (a standard Python class) and so has a method <em>append</em> that
+can be used to append an item to the end of the list.</p>
+</div>
+<div class="section" id="declaring-variables">
+<h2>Declaring variables?<a class="headerlink" href="#declaring-variables" title="Permalink to this headline">¶</a></h2>
+<p>In many languages, such as Fortran, you must generally declare variables before
+you can use them and once you&#8217;ve specified that <em>x</em> is a real number, say,
+that is the only type of things you can store in <em>x</em>, and a statement like
+<em>x = &#8216;string&#8217;</em> would not be allowed.</p>
+<p>In Python you don&#8217;t declare variables, you can just type, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mf">3.4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+<span class="go">6.7999999999999998</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="s">&#39;string&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+<span class="go">&#39;stringstring&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+<span class="go">[4, 5, 6, 4, 5, 6]</span>
+</pre></div>
+</div>
+<p>Here <em>x</em> is first used for a real number, then for a character string, then
+for a list.  Note, by the way,
+that multiplication behaves differently for objects of
+different type (which has been specified as part of the definition of each
+class of objects).</p>
+<p>In Fortran if you declare <em>x</em> to be a real variable then it sets aside a
+particular 8 bytes of memory for <em>x</em>, enough to hold one floating point
+number.  There&#8217;s no way to store 6 characters or a list of 3 integers in
+these 8 bytes.</p>
+<p>In Python it is often better to think of <em>x</em> as simply being a pointer
+that points to some object.  When you type &#8220;x = 3.4&#8221; Python creates an
+object of type <em>float</em> holding one real number and points <em>x</em> to that.  When
+you type <em>x = &#8216;string&#8217;</em> it creates a new object of type <em>str</em> and now points <em>x</em>
+to that, and so on.</p>
+</div>
+<div class="section" id="lists">
+<span id="id3"></span><h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<p>We have already seen lists in the example above.</p>
+<p>Note that indexing in Python always starts at 0:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<p>Elements of a list need not all have the same type.  For example, here&#8217;s a
+list with 5 elements:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="s">&#39;abc&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here&#8217;s a way to see what each element of the list is, and its type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s">&#39;L[%s] is %16s     %s&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">L[0] is                5     &lt;type &#39;int&#39;&gt;</span>
+<span class="go">L[1] is              2.3     &lt;type &#39;float&#39;&gt;</span>
+<span class="go">L[2] is              abc     &lt;type &#39;str&#39;&gt;</span>
+<span class="go">L[3] is         [4, &#39;b&#39;]     &lt;type &#39;list&#39;&gt;</span>
+<span class="go">L[4] is    &lt;ufunc &#39;cos&#39;&gt;     &lt;type &#39;numpy.ufunc&#39;&gt;</span>
+</pre></div>
+</div>
+<p>Note that <em>L[3]</em> is itself a list containing an integer and a string and
+that <em>L[4]</em> is a function.</p>
+<p>One nice feature of Python is that you can also index backwards from the
+end:  since <em>L[0]</em> is the first item, <em>L[-1]</em> is what you get going one to
+the left of this, and wrapping around (periodic boundary conditions in math
+terms):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s">&#39;L[%s] is %16s&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">L</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="go">L[-1] is    &lt;ufunc &#39;cos&#39;&gt;</span>
+<span class="go">L[-2] is         [4, &#39;b&#39;]</span>
+<span class="go">L[-3] is              abc</span>
+<span class="go">L[-4] is              2.3</span>
+<span class="go">L[-5] is                5</span>
+</pre></div>
+</div>
+<p>In particular, <em>L[-1]</em> always refers to the <em>last</em> item in list <em>L</em>.</p>
+</div>
+<div class="section" id="copying-objects">
+<h2>Copying objects<a class="headerlink" href="#copying-objects" title="Permalink to this headline">¶</a></h2>
+<p>One implication of the fact that variables are just pointers to
+objects is that two names can point to the same object, which can sometimes
+cause confusion.  Consider this example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">[4, 5, 6]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">[4, 5, 6, 9]</span>
+</pre></div>
+</div>
+<p>So far nothing too surprising.  We initialized <em>y</em> to be <em>x</em> and then we
+appended another list element to <em>y</em>.  But take a look at <em>x</em>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">[4, 5, 6, 9]</span>
+</pre></div>
+</div>
+<p>We didn&#8217;t really append 9 to <em>y</em>, we appended it to the object <em>y</em> points
+to, which is the same object <em>x</em> points to!</p>
+<p>Failing to pay attention to this sort of thing can lead to programming
+nightmares.</p>
+<p>What if we really want <em>y</em> to be a different object that happens to be
+initialized by copying <em>x</em>?  We can do this by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">[4, 5, 6]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">[4, 5, 6, 9]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">[4, 5, 6]</span>
+</pre></div>
+</div>
+<p>This is what we want.  Here <em>list(x)</em> creates a new object, that is a list,
+using the elements of the list <em>x</em> to initialize it, and <em>y</em> points to this
+new object.  Changing this object doesn&#8217;t change the one <em>x</em> pointed to.</p>
+<p>You could also use the <em>copy</em> module, which works in general for any
+objects:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sometimes it is more complicated, if the list <em>x</em>
+itself contains other objects.  See
+<a class="reference external" href="http://docs.python.org/library/copy.html">http://docs.python.org/library/copy.html</a> for more information.</p>
+<p>There are some objects that cannot be changed once created (<em>immutable
+objects</em>, as described further below).
+In particular, for  <em>floats</em> and <em>integers</em>, you can do things like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mf">3.4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">4.4000000000000004</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">3.3999999999999999</span>
+</pre></div>
+</div>
+<p>Here changing <em>y</em> did not change <em>x</em>, luckily.
+We don&#8217;t have to explicitly make a copy of <em>x</em> for <em>y</em> in this case.  If we
+did, writing any sort of numerical code in Python would be a nightmare.</p>
+<p>We didn&#8217;t because the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>above is not changing the object <em>y</em> points to, instead it is creating a new
+object that <em>y</em> now points to, while <em>x</em> still points to the old object.</p>
+<p>For more about built-in data types in Python, see
+<a class="reference external" href="http://docs.python.org/release/2.5.2/ref/types.html">http://docs.python.org/release/2.5.2/ref/types.html</a>.</p>
+</div>
+<div class="section" id="mutable-and-immutable-objects">
+<h2>Mutable and Immutable objects<a class="headerlink" href="#mutable-and-immutable-objects" title="Permalink to this headline">¶</a></h2>
+<p>Some objects can be changed after they have been created and others cannot
+be.  Understanding the difference is key to understanding why the examples
+above concerning copying objects behave as they do.</p>
+<p>A list is a <em>mutable</em> object.  The statement:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ x = [4,5,6]
+</pre></div>
+</div>
+<p>above created an object that <em>x</em> points to, and the data held in this object
+can be changed without having to create a new object.   The statement</p>
+<blockquote>
+<div>$ y = x</div></blockquote>
+<p>points <em>y</em> at the same object, and since it can be changed, any change will
+affect the object itself and be seen whether we access it using the pointer
+<em>x</em> or <em>y</em>.</p>
+<p>We can check this by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">1823768</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">1823768</span>
+</pre></div>
+</div>
+<p>The <em>id</em> function just returns the location in memory where the object is
+stored.  If you do something like <cite>x[0] = 1</cite>, you will find that the
+objects&#8217; id&#8217;s have not changed, they both point to the same object, but the
+data stored in the object has changed.</p>
+<p>Some data types correspond to <em>immutable</em> objects that, once created,
+cannot be changed.  Integers, floats, and strings are immutable:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;This is a string&quot;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&#39;T&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;b&#39;</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">&#39;str&#39; object does not support item assignment</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">&#39;str&#39; object does not support item assignment</span>
+</pre></div>
+</div>
+<p>You can index into a string, but you can&#8217;t change a character in the string.
+The only way to change <em>s</em> is to redefine it as a new string (which will be
+stored in a <strong>new object</strong>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">1850368</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;New string&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">1850128</span>
+</pre></div>
+</div>
+<p>What happened to the old object?  It depends on whether any other variable
+was pointing to it.  If not, as in the example above, then Python&#8217;s <em>garbage
+collection</em> would recognize it&#8217;s no longer needed and free up the memory for
+other uses.  But if any other variable is still pointing to it, the object
+will still exist, e.g.</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">s</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>                     <span class="c"># same object as s above</span>
+<span class="go">1850128</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s">&quot;Yet another string&quot;</span>   <span class="c"># creates a new object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>                      <span class="c"># s now points to new object</span>
+<span class="go">1813104</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>                     <span class="c"># s2 still points to the old one</span>
+<span class="go">1850128</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span>
+<span class="go">&#39;New string&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tuples">
+<span id="id4"></span><h2>Tuples<a class="headerlink" href="#tuples" title="Permalink to this headline">¶</a></h2>
+<p>We have seen that lists are mutable.  For some purposes we need something
+like a list but that is immuatable (e.g. for dictionary keys, see below).  A
+tuple is like a list but defined with parentheses <cite>(..)</cite> rather than square
+brackets <cite>[..]</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">4</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">&#39;tuple&#39; object does not support item assignment</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">&#39;tuple&#39; object does not support item assignment</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="iterators">
+<h2>Iterators<a class="headerlink" href="#iterators" title="Permalink to this headline">¶</a></h2>
+<p>We often want to iterate over a set of things.  In Python there are many
+ways to do this, and it often takes the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">B</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="c"># do something, probably involving the current A</span>
+</pre></div>
+</div>
+<p>In this construct <em>B</em> is any Python object that is <em>iterable</em>, meaning it
+has a built-in way (when B&#8217;s class was defined) of starting with one thing
+in <em>B</em> and progressing through the contents of <em>B</em> in some hopefully logical
+order.</p>
+<p>Lists and tuples are
+iterable in the obvious way: we step through it one element at a
+time starting at the beginning:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s">&quot;i is now &quot;</span><span class="p">,</span> <span class="n">i</span>
+<span class="gp">...</span>
+<span class="go">i is now  3</span>
+<span class="go">i is now  7</span>
+<span class="go">i is now  b</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="range">
+<span id="id5"></span><h2>range<a class="headerlink" href="#range" title="Permalink to this headline">¶</a></h2>
+<p>In numerical work we often want to have i start at 0 and go up to some
+number N, stepping by one.  We obviously don&#8217;t want to have to construct the
+list [0, 1, 2, 3, ..., N] by typing all the numbers
+when <em>N</em> is large, so Python has a way of doing this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6]</span>
+</pre></div>
+</div>
+<p>NOTE:  The last element is 6, not 7.  The list has 7 elements but starts by
+default at 0, just as Python indexing does.  This makes it convenient for
+doing things like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s">&quot;i = &quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s">&quot;  L[i] = &quot;</span><span class="p">,</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="gp">...</span>
+<span class="go">i =  0   L[i] =  a</span>
+<span class="go">i =  1   L[i] =  8</span>
+<span class="go">i =  2   L[i] =  12</span>
+</pre></div>
+</div>
+<p>Note that <em>len(L)</em> returns the length of the list, so <em>range(len(L))</em> is
+always a list of all the valid indices for the list <em>L</em>.</p>
+</div>
+<div class="section" id="enumerate">
+<span id="id6"></span><h2>enumerate<a class="headerlink" href="#enumerate" title="Permalink to this headline">¶</a></h2>
+<p>Another way to do this is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s">&quot;i = &quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span> <span class="s">&quot;  L[i] = &quot;</span><span class="p">,</span><span class="n">value</span>
+<span class="gp">...</span>
+<span class="go">i =  0   L[i] =  a</span>
+<span class="go">i =  1   L[i] =  8</span>
+<span class="go">i =  2   L[i] =  12</span>
+</pre></div>
+</div>
+<p><em>range</em> can be used with more arguments, for example if
+you want to start at 2 and step by 3 up to 20:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[2, 5, 8, 11, 14, 17]</span>
+</pre></div>
+</div>
+<p>Note that this doesn&#8217;t go up to 20.  Just like <em>range(7)</em> stops at 6, this
+list stops one item short of what you might expect.</p>
+<p>NumPy has a <em>linspace</em> command that behaves like Matlab&#8217;s, which is
+sometimes more useful in numerical work, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">array([  2.,   5.,   8.,  11.,  14.,  17.,  20.])</span>
+</pre></div>
+</div>
+<p>This returns a NumPy array with 7 equally spaced points between 2 and 20,
+including the endpoints.  Note that the elements are floats, not integers.
+You could use this as an iterator too.</p>
+<p>If you plan to iterate over a lot of values, say 1 million, it may
+be inefficient to generate a list object with 1 million elements using
+<em>range</em>.  So there is another option called <em>xrange</em>, that does the
+iteration you want without explicitly creating and storing the list:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">1000000</span><span class="p">):</span>
+    <span class="c"># do something</span>
+</pre></div>
+</div>
+<p>does what we want.</p>
+<p>Note that the elements in a list you&#8217;re iterating on need not be numbers.
+For example, the sample module <em>myfcns</em> in $UWHPSC/codes/python defines two
+functions <em>f1</em> and <em>f2</em>.  If we want to evaluate each of them at x=3., we
+could do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">myfcns</span> <span class="k">import</span> <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+<span class="go">&lt;type &#39;function&#39;&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">f</span><span class="p">(</span><span class="mf">3.</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">5.0</span>
+<span class="go">162754.791419</span>
+</pre></div>
+</div>
+<p>This can be very handy if you want to perform some tests for a set of test
+functions.</p>
+</div>
+<div class="section" id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference internal" href="biblio.html#biblio-python"><span class="std std-ref">Python:</span></a> section of the <a class="reference internal" href="biblio.html#biblio"><span class="std std-ref">Bibliography and further reading</span></a>.</p>
+<p>In particular,
+see the <a class="reference internal" href="biblio.html#python-2-5-tutorial" id="id7">[Python-2.5-tutorial]</a>  or <a class="reference internal" href="biblio.html#python-2-7-tutorial" id="id8">[Python-2.7-tutorial]</a> for good overviews
+(these two versions of Python are very similar).</p>
+<p>There are several introductory Python pages at the <a class="reference internal" href="biblio.html#software-carpentry" id="id9">[software-carpentry]</a>
+site.</p>
+<p>For more on basic data structures:
+<a class="reference external" href="http://docs.python.org/2/tutorial/datastructures.html">http://docs.python.org/2/tutorial/datastructures.html</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="python_scripts_modules.html" title="Python scripts and modules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="python_and_fortran.html" title="Python and Fortran"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

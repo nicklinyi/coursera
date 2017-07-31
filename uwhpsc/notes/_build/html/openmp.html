@@ -1,0 +1,699 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OpenMP &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="MPI" href="mpi.html" />
+    <link rel="prev" title="Fortran example for Newton’s method" href="fortran_newton.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mpi.html" title="MPI"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fortran_newton.html" title="Fortran example for Newton’s method"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OpenMP</a><ul>
+<li><a class="reference internal" href="#sample-codes">Sample codes</a></li>
+<li><a class="reference internal" href="#other-directives">Other directives</a></li>
+<li><a class="reference internal" href="#fine-grain-vs-coarse-grain-paralellism">Fine-grain vs. coarse-grain paralellism</a></li>
+<li><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fortran_newton.html"
+                        title="previous chapter">Fortran example for Newton&#8217;s method</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mpi.html"
+                        title="next chapter">MPI</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/openmp.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="openmp">
+<span id="id1"></span><h1>OpenMP<a class="headerlink" href="#openmp" title="Permalink to this headline">¶</a></h1>
+<p>OpenMP is discussed in <span class="xref std std-ref">slides</span> starting with Lecture 13.</p>
+<div class="section" id="sample-codes">
+<h2>Sample codes<a class="headerlink" href="#sample-codes" title="Permalink to this headline">¶</a></h2>
+<p>There are a few sample codes in the <cite>$UWHPSC/codes/openmp</cite> directory.
+See the <cite>README.txt</cite> file for instructions on compiling and executing.</p>
+<p>Here is a very simple code, that simply evaluates a costly function at many
+points:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/openmp/yeval.f90</span>
+
+<span class="c">! If this code gives a Segmentation Fault when compiled and run with -fopenmp </span>
+<span class="c">! Then you could try:</span>
+<span class="c">!   $ ulimit -s unlimited</span>
+<span class="c">! to increase the allowed stack size.</span>
+<span class="c">! This may not work on all computers.  On a Mac the best you can do is</span>
+<span class="c">!   $ ulimit -s hard</span>
+<span class="c">! Correction... you can do the following on a Mac:</span>
+<span class="c">!   $ gfortran -fopenmp -Wl,-stack_size,2faf2000 yeval.f90 </span>
+<span class="c">! here 2faf2000 is a hexadecimal number slightly larger than 8e8, the </span>
+<span class="c">! number of bytes needed for the value of n used in this program.</span>
+
+
+<span class="k">program </span><span class="n">yeval</span>
+   
+   <span class="k">use </span><span class="n">omp_lib</span>
+   <span class="k">implicit none</span>
+<span class="k">   </span><span class="kt">integer</span><span class="p">,</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">100000000</span>
+   <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span> <span class="n">nthreads</span>
+   <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="kd">::</span> <span class="n">y</span>
+   <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">dx</span><span class="p">,</span> <span class="n">x</span>
+
+   <span class="c">! Specify number of threads to use:</span>
+   <span class="c">!$ print *, &quot;How many threads to use? &quot;</span>
+   <span class="c">!$ read *, nthreads</span>
+   <span class="c">!$ call omp_set_num_threads(nthreads)</span>
+   <span class="c">!$ print &quot;(&#39;Using OpenMP with &#39;,i3,&#39; threads&#39;)&quot;, nthreads</span>
+
+   <span class="n">dx</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">d0</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mf">1.</span><span class="n">d0</span><span class="p">)</span>
+
+   <span class="c">!$omp parallel do private(x) </span>
+   <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">dx</span>
+      <span class="n">y</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="nb">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="nb">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="nb">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mf">6.</span><span class="n">d0</span><span class="p">)</span>
+   <span class="n">enddo</span>
+
+   <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Filled vector y of length&quot;</span><span class="p">,</span> <span class="n">n</span>
+
+<span class="k">end program </span><span class="n">yeval</span>
+</pre></div>
+</td></tr></table></div>
+<p>Note the following:</p>
+<ul>
+<li><p class="first">Lines starting with <cite>!$</cite> are only executed if the code is compiled and run
+with the flag <cite>-fopenmp</cite>, otherwise they are comments.</p>
+</li>
+<li><p class="first"><cite>x</cite> must be declared a <cite>private</cite> variable in the <cite>omp parallel do</cite> loop,
+so that each thread has its own version.  Otherwise another thread might
+reset <cite>x</cite> between the time its assigned a value and the time this value is
+used to set <cite>y(i)</cite>.</p>
+</li>
+<li><p class="first">The loop iterator <cite>i</cite> is private by default, but all other varaibles
+are shared by default.</p>
+</li>
+<li><p class="first">If you try to run this and get a &#8220;segmentation fault&#8221;, it is probably
+because the stack size limit is too small.  You can see the limit with:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ ulimit -s
+</pre></div>
+</div>
+<p>On linux you can do:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ ulimit -s unlimited
+</pre></div>
+</div>
+<p>But on a Mac there is a hard limit and the best you can do is:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ ulimit -s hard
+</pre></div>
+</div>
+<p>If you still get a segmentation fault you will have to decrease <cite>n</cite> for
+this example.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="other-directives">
+<h2>Other directives<a class="headerlink" href="#other-directives" title="Permalink to this headline">¶</a></h2>
+<p>This example illustrates some directives beyond the <em>parallel do</em>:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/openmp/demo2</span>
+
+<span class="k">program </span><span class="n">demo2</span>
+   
+   <span class="k">use </span><span class="n">omp_lib</span>
+   <span class="k">implicit none</span>
+<span class="k">   </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span>
+   <span class="kt">integer</span><span class="p">,</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
+   <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span>
+   
+   <span class="c">! Specify number of threads to use:</span>
+   <span class="c">!$ call omp_set_num_threads(2)</span>
+
+   <span class="c">!$omp parallel  ! spawn two threads</span>
+   <span class="c">!$omp sections  ! split up work between them</span>
+
+     <span class="c">!$omp section</span>
+     <span class="n">x</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">d0</span>   <span class="c">! one thread initializes x array</span>
+
+     <span class="c">!$omp section</span>
+     <span class="n">y</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">d0</span>   <span class="c">! another thread initializes y array</span>
+
+   <span class="c">!$omp end sections</span>
+   <span class="c">!$omp barrier   ! not needed, implied at end of sections</span>
+
+   <span class="c">!$omp single    ! only want to print once:</span>
+   <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Done initializing x and y&quot;</span>
+   <span class="c">!$omp end single nowait  ! ok for other thread to continue</span>
+
+   <span class="c">!$omp do   ! split work between threads:</span>
+   <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span>
+       <span class="n">z</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+       <span class="n">enddo</span>
+
+   <span class="c">!$omp end parallel</span>
+   <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;max value of z is &quot;</span><span class="p">,</span><span class="nb">maxval</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    
+
+<span class="k">end program </span><span class="n">demo2</span>
+</pre></div>
+</td></tr></table></div>
+<p>Notes:</p>
+<ul class="simple">
+<li><cite>!$omp sections</cite> is used to split up work between threads</li>
+<li>There is an implicit barrier after <cite>!$omp end sections</cite>, so the
+explicit barrier here is optional.</li>
+<li>The print statement is only done once since it is in <cite>!$omp single</cite>.
+The <cite>nowait</cite> clause indicates that the other thread can proceed without
+waiting for this print to be executed.</li>
+</ul>
+</div>
+<div class="section" id="fine-grain-vs-coarse-grain-paralellism">
+<h2>Fine-grain vs. coarse-grain paralellism<a class="headerlink" href="#fine-grain-vs-coarse-grain-paralellism" title="Permalink to this headline">¶</a></h2>
+<p>Consider the problem of normalizing a vector by dividing each element by the
+1-norm of the vector, defined by <span class="math">\(\|x\|_1 = \sum_{i=1}^n |x_i|\)</span>.</p>
+<p>We must first loop over all points to compute the norm.  Then we must loop
+over all points and set <span class="math">\(y_i = x_i / \|x\|_1\)</span>.  Note that we cannot
+combine these two loops into a single loop!</p>
+<p>Here is an example with <em>fine-grain paralellism</em>, where we use the OpenMP
+<cite>omp parallel do</cite> directive or the <cite>omp do</cite> directive within a <cite>omp
+parallel</cite> block.</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/openmp/normalize1.f90</span>
+
+<span class="c">! Example of normalizing a vector using fine-grain parallelism.</span>
+
+<span class="k">program </span><span class="n">main</span>
+   
+    <span class="k">use </span><span class="n">omp_lib</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span> <span class="n">thread_num</span>
+    <span class="kt">integer</span><span class="p">,</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+ 
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">norm</span><span class="p">,</span><span class="n">ynorm</span>
+ 
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">nthreads</span>
+    
+    <span class="c">! Specify number of threads to use:</span>
+    <span class="n">nthreads</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c">! need this value in serial mode</span>
+    <span class="c">!$ nthreads = 4    </span>
+    <span class="c">!$ call omp_set_num_threads(nthreads)</span>
+    <span class="c">!$ print &quot;(&#39;Using OpenMP with &#39;,i3,&#39; threads&#39;)&quot;, nthreads</span>
+
+    <span class="c">! Specify number of threads to use:</span>
+    <span class="c">!$ call omp_set_num_threads(4)</span>
+ 
+    <span class="c">! initialize x:</span>
+    <span class="c">!$omp parallel do </span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span>
+        <span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="nb">dble</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c">! convert to double float</span>
+    <span class="n">enddo</span>
+
+    <span class="n">norm</span> <span class="o">=</span> <span class="mf">0.</span><span class="n">d0</span>
+    <span class="n">ynorm</span> <span class="o">=</span> <span class="mf">0.</span><span class="n">d0</span>
+
+    <span class="c">!$omp parallel private(i)</span>
+
+    <span class="c">!$omp do reduction(+ : norm)</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span>
+        <span class="n">norm</span> <span class="o">=</span> <span class="n">norm</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">enddo</span>
+
+     <span class="c">!$omp barrier   ! not needed (implicit)</span>
+
+    <span class="c">!$omp do reduction(+ : ynorm)</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span>
+        <span class="n">y</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span>
+        <span class="n">ynorm</span> <span class="o">=</span> <span class="n">ynorm</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">enddo</span>
+
+    <span class="c">!$omp end parallel</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;norm of x = &quot;</span><span class="p">,</span><span class="n">norm</span><span class="p">,</span> <span class="s2">&quot;  n(n+1)/2 = &quot;</span><span class="p">,</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s1">&#39;ynorm should be 1.0:   ynorm = &#39;</span><span class="p">,</span> <span class="n">ynorm</span>
+
+<span class="k">end program </span><span class="n">main</span>
+</pre></div>
+</td></tr></table></div>
+<p>Note the following:</p>
+<ul class="simple">
+<li>We initialize <span class="math">\(x_i=i\)</span> as a test, so <span class="math">\(\|x\|_1 = n(n+1)/2\)</span>.</li>
+<li>The compiler decides how to split the loop between threads.
+The loop starting on line 38 might be split differently than the
+loop starting on line 45.</li>
+<li>Because of this, all threads must have access to all of memory.</li>
+</ul>
+<p>Next is a version with <em>coarse-grain parallelism</em>, were we decide how to
+split up the array between threads and then execute the same code on each
+thread, but each thread will compute its own version of <cite>istart</cite> and <cite>iend</cite>
+for its portion of the array.  With this code we are guaranteed that
+thread 0 always handles <cite>x(1)</cite>, for example, so in principle the data could
+be distributed.  When using OpenMP on a shared memory computer this doesn&#8217;t
+matter, but this version is more easily generalized to MPI.</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/openmp/normalize2.f90</span>
+
+<span class="c">! Example of normalizing a vector using coarse-grain parallelism.</span>
+
+<span class="k">program </span><span class="n">main</span>
+    
+    <span class="k">use </span><span class="n">omp_lib</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">integer</span><span class="p">,</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">norm</span><span class="p">,</span><span class="n">norm_thread</span><span class="p">,</span><span class="n">ynorm</span><span class="p">,</span><span class="n">ynorm_thread</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">nthreads</span><span class="p">,</span> <span class="n">points_per_thread</span><span class="p">,</span><span class="n">thread_num</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">istart</span><span class="p">,</span><span class="n">iend</span>
+
+    <span class="c">! Specify number of threads to use:</span>
+    <span class="n">nthreads</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c">! need this value in serial mode</span>
+    <span class="c">!$ nthreads = 4    </span>
+    <span class="c">!$ call omp_set_num_threads(nthreads)</span>
+    <span class="c">!$ print &quot;(&#39;Using OpenMP with &#39;,i3,&#39; threads&#39;)&quot;, nthreads</span>
+
+    <span class="c">! Determine how many points to handle with each thread.</span>
+    <span class="c">! Note that dividing two integers and assigning to an integer will</span>
+    <span class="c">! round down if the result is not an integer.  </span>
+    <span class="c">! This, together with the min(...) in the definition of iend below,</span>
+    <span class="c">! insures that all points will get distributed to some thread.</span>
+    <span class="n">points_per_thread</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">nthreads</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">nthreads</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;points_per_thread = &quot;</span><span class="p">,</span><span class="n">points_per_thread</span>
+
+    <span class="c">! initialize x:</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span>
+        <span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="nb">dble</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c">! convert to double float</span>
+        <span class="n">enddo</span>
+
+    <span class="n">norm</span> <span class="o">=</span> <span class="mf">0.</span><span class="n">d0</span>
+    <span class="n">ynorm</span> <span class="o">=</span> <span class="mf">0.</span><span class="n">d0</span>
+
+    <span class="c">!$omp parallel private(i,norm_thread, &amp;</span>
+    <span class="c">!$omp                  istart,iend,thread_num,ynorm_thread) </span>
+
+    <span class="n">thread_num</span> <span class="o">=</span> <span class="mi">0</span>     <span class="c">! needed in serial mode</span>
+    <span class="c">!$ thread_num = omp_get_thread_num()    ! unique for each thread</span>
+
+    <span class="c">! Determine start and end index for the set of points to be </span>
+    <span class="c">! handled by this thread:</span>
+    <span class="n">istart</span> <span class="o">=</span> <span class="n">thread_num</span> <span class="o">*</span> <span class="n">points_per_thread</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">iend</span> <span class="o">=</span> <span class="nb">min</span><span class="p">((</span><span class="n">thread_num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">points_per_thread</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="c">!$omp critical</span>
+    <span class="k">print </span><span class="mi">201</span><span class="p">,</span> <span class="n">thread_num</span><span class="p">,</span> <span class="n">istart</span><span class="p">,</span> <span class="n">iend</span>
+    <span class="c">!$omp end critical</span>
+<span class="mi">201</span> <span class="k">format</span><span class="p">(</span><span class="s2">&quot;Thread &quot;</span><span class="p">,</span><span class="n">i2</span><span class="p">,</span><span class="s2">&quot; will take i = &quot;</span><span class="p">,</span><span class="n">i6</span><span class="p">,</span><span class="s2">&quot; through i = &quot;</span><span class="p">,</span><span class="n">i6</span><span class="p">)</span>
+
+    <span class="n">norm_thread</span> <span class="o">=</span> <span class="mf">0.</span><span class="n">d0</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="n">istart</span><span class="p">,</span><span class="n">iend</span>
+        <span class="n">norm_thread</span> <span class="o">=</span> <span class="n">norm_thread</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">enddo</span>
+
+    <span class="c">! update global norm with value from each thread:</span>
+    <span class="c">!$omp critical</span>
+      <span class="n">norm</span> <span class="o">=</span> <span class="n">norm</span> <span class="o">+</span> <span class="n">norm_thread</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;norm updated to: &quot;</span><span class="p">,</span><span class="n">norm</span>
+    <span class="c">!$omp end critical</span>
+
+    <span class="c">! make sure all have updated norm before proceeding:</span>
+    <span class="c">!$omp barrier</span>
+
+    <span class="n">ynorm_thread</span> <span class="o">=</span> <span class="mf">0.</span><span class="n">d0</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="n">istart</span><span class="p">,</span><span class="n">iend</span>
+        <span class="n">y</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span>
+        <span class="n">ynorm_thread</span> <span class="o">=</span> <span class="n">ynorm_thread</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">enddo</span>
+
+    <span class="c">! update global ynorm with value from each thread:</span>
+    <span class="c">!$omp critical</span>
+      <span class="n">ynorm</span> <span class="o">=</span> <span class="n">ynorm</span> <span class="o">+</span> <span class="n">ynorm_thread</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;ynorm updated to: &quot;</span><span class="p">,</span><span class="n">ynorm</span>
+    <span class="c">!$omp end critical</span>
+    <span class="c">!$omp barrier</span>
+
+    <span class="c">!$omp end parallel </span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;norm of x = &quot;</span><span class="p">,</span><span class="n">norm</span><span class="p">,</span> <span class="s2">&quot;  n(n+1)/2 = &quot;</span><span class="p">,</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s1">&#39;ynorm should be 1.0:   ynorm = &#39;</span><span class="p">,</span> <span class="n">ynorm</span>
+
+<span class="k">end program </span><span class="n">main</span>
+</pre></div>
+</td></tr></table></div>
+<p>Note the following:</p>
+<ul class="simple">
+<li><cite>istart</cite> and <cite>iend</cite>, the starting and ending values of <cite>i</cite>
+taken by each thread, are explicitly computed in terms of the thread
+number.  We must be careful to handle the case when the number of
+threads does not evenly divide <cite>n</cite>.</li>
+<li>Various variables must be declared <cite>private</cite> in lines 37-38.</li>
+<li><cite>norm</cite> must be initialized to 0 before the <cite>omp parallel</cite> block.
+Otherwise some thread might set it to 0 after another thread has already
+updated it by its <cite>norm_thread</cite>.</li>
+<li>The update to <cite>norm</cite>  on line 60
+must be in a <cite>omp critical</cite> block, so two threads
+don&#8217;t try to update it simultaneously (data race).</li>
+<li>There must be an <cite>omp barrier</cite> on line 65
+between updating <cite>norm</cite> by each thread and
+using <cite>norm</cite> to compute each <cite>y(i)</cite>.   We must make sure all threads have
+updated <cite>norm</cite> or it won&#8217;t have the correct value when we use it.</li>
+</ul>
+<p>For comparison of fine-grain and
+coarse-grain parallelism on Jacobi iteration, see</p>
+<ul class="simple">
+<li><a class="reference internal" href="jacobi1d_omp1.html#jacobi1d-omp1"><span class="std std-ref">Jacobi iteration using OpenMP with parallel do constructs</span></a></li>
+<li><a class="reference internal" href="jacobi1d_omp2.html#jacobi1d-omp2"><span class="std std-ref">Jacobi iteration using OpenMP with coarse-grain parallel block</span></a></li>
+</ul>
+</div>
+<div class="section" id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="biblio.html#biblio-openmp"><span class="std std-ref">OpenMP references</span></a> in bibliography</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mpi.html" title="MPI"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fortran_newton.html" title="Fortran example for Newton’s method"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

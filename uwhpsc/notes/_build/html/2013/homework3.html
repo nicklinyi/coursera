@@ -1,0 +1,425 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2013 Homework 3 &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="../_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2013 Homework 3</a><ul>
+<li><a class="reference internal" href="#to-submit">To submit</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/2013/homework3.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="homework-3">
+<span id="homework3"></span><h1>2013 Homework 3<a class="headerlink" href="#homework-3" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is a 2013 homework assignment.</p>
+</div>
+<p>Due Wednesday, May 1, 2013, by 11:00pm PDT.</p>
+<p>The goals of this homework are to:</p>
+<ul class="simple">
+<li>Learn more about &#8220;best practices in scientific computing&#8221;.</li>
+<li>Get more experience writing Python code and tests.</li>
+<li>Get some experience with Fortran code.</li>
+</ul>
+<ol class="arabic">
+<li><p class="first"><strong>Reading assignment</strong></p>
+<p>Download and read the paper <a class="reference external" href="http://arxiv.org/abs/1210.0530">Best Practices for Scientific Computing</a> by
+G. Wilson, D. A. Aruliah, C. T. Brown, et. al.
+There is a link to the pdf or postscript versions on the right hand side
+of the arXiv page.</p>
+<p>You should be pleased to find that you are now starting to follow many
+of these best practices, but there are many good tips in the paper that
+have not been covered in lectures.</p>
+<p>There will be a quiz on this paper to complete as part of the homework
+assignment.  This quiz can be found on the Canvas page
+<a class="reference external" href="https://canvas.uw.edu/courses/812916/quizzes/739901">Homework 3 quiz</a>.</p>
+<p>Note: If you are not familiar with the <a class="reference external" href="http://arxiv.org/">arXiv</a> you
+might want to explore the wide range of preprints and publications that
+authors have posted to make them freely available.</p>
+</li>
+<li><p class="first"><strong>Programming assignments</strong>
+You should create a new subdirectory <cite>homework3</cite> (of the same private
+repository you have used for submitting previous  homeworks).
+Develop your code for the problems below in this directory
+and feel free to commit as
+often as you like, it will help you recover from blunders.</p>
+</li>
+<li><p class="first">Recall that Newton&#8217;s method for finding the root of a nonlinear function
+<span class="math">\(f(x)\)</span> consists of choosing an initial guess <span class="math">\(x_0\)</span> and then
+iterating via:</p>
+<div class="math">
+\[x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}\]</div>
+<p>The module <cite>mysqrt.py</cite> developed in lectures and found in
+<cite>$UWHPSC/lectures/lecture6</cite>  was a special case of this
+for the function <span class="math">\(f(x) = x^2 - a\)</span> for some <span class="math">\(a\)</span>, in which
+case it converges to <span class="math">\(\sqrt{a}\)</span>.  (Slightly different notation was
+used there.)</p>
+<p>The section <a class="reference internal" href="../special_functions.html#special-newton"><span class="std std-ref">Newton&#8217;s method for the square root</span></a> shows a graphical description of how
+Newton&#8217;s method works.</p>
+<p>The section <a class="reference internal" href="../fortran_newton.html#fortran-newton"><span class="std std-ref">Fortran example for Newton&#8217;s method</span></a> shows the Fortran code for
+implementing something that is very similar to what you are first asked to
+do in Python, so you might first look at the main Newton iteration loop
+in that code if you are not sure how to proceed with this programming.</p>
+<p>Write a Python module <cite>newton.py</cite> that contains
+a function <cite>solve</cite> that takes the following inputs:</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>fvals</cite>, a function that returns the values of <span class="math">\(f(x)\)</span> and
+<span class="math">\(f'(x)\)</span> for any input <span class="math">\(x\)</span> (see the example below),</li>
+<li><cite>x0</cite>, the initial guess,</li>
+<li><cite>debug</cite>, an optional argument with default <cite>False</cite>.</li>
+</ul>
+</div></blockquote>
+<p>The function should return a tuple consisting of the final iterate
+(the approximation to the root determined) and the number of iterations
+taken.</p>
+<p>The module should also contain the following test:</p>
+<p>Note that the definition of <cite>fvals_sqrt</cite> illustrates how to return a
+tuple of values <cite>(f,fp)</cite>  The parentheses are optional in defining this
+tuple and are not used in the code above, but line 10 could also say
+<cite>return (f,fp)</cite>.  Similarly, line 22 could say <cite>(fx,fpx) = ...</cite>.</p>
+<p><strong>Convergence test.</strong> The example in <cite>mysqrt.py</cite> checked the magnitude
+of the change between one iteration and the next to test for
+convergence.  In your version, instead check the value of <span class="math">\(f(x_k)\)</span>
+and stop iterating when <span class="math">\(|f(x_k)| &lt; 10^{-14}\)</span>.</p>
+<p>This does not always guarantee that the value of <span class="math">\(x_k\)</span> is within
+<cite>1e-14</cite> of the true root of the function, but works well unless
+<span class="math">\(f'(x)\)</span> is very small at the root.</p>
+<p>Do your iteration in a loop that takes at most <cite>maxiter = 20</cite>
+iterations.</p>
+<p><strong>Sample output.</strong>
+If your code is written properly, running this test should give the
+following output:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">newton</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="n">newton</span><span class="o">.</span><span class="n">test1</span><span class="p">()</span>
+
+<span class="n">solve</span> <span class="n">returns</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000000000002e+00</span> <span class="n">after</span> <span class="mi">5</span> <span class="n">iterations</span>
+<span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">is</span>  <span class="mf">8.881784197001252e-15</span>
+
+<span class="n">solve</span> <span class="n">returns</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000000000000e+00</span> <span class="n">after</span> <span class="mi">0</span> <span class="n">iterations</span>
+<span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">is</span>  <span class="mf">0.000000000000000e+00</span>
+
+<span class="n">solve</span> <span class="n">returns</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000000000000e+00</span> <span class="n">after</span> <span class="mi">10</span> <span class="n">iterations</span>
+<span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">is</span>  <span class="mf">0.000000000000000e+00</span>
+</pre></div>
+</div>
+<p>With the debug option turned on it should print:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">newton</span><span class="o">.</span><span class="n">test1</span><span class="p">(</span><span class="n">debug_solve</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+
+<span class="n">Initial</span> <span class="n">guess</span><span class="p">:</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">1.000000000000000e+00</span>
+<span class="n">After</span> <span class="mi">1</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.500000000000000e+00</span>
+<span class="n">After</span> <span class="mi">2</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.050000000000000e+00</span>
+<span class="n">After</span> <span class="mi">3</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000609756097561e+00</span>
+<span class="n">After</span> <span class="mi">4</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000092922295e+00</span>
+<span class="n">After</span> <span class="mi">5</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000000000002e+00</span>
+<span class="n">solve</span> <span class="n">returns</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000000000002e+00</span> <span class="n">after</span> <span class="mi">5</span> <span class="n">iterations</span>
+<span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">is</span>  <span class="mf">8.881784197001252e-15</span>
+
+<span class="n">Initial</span> <span class="n">guess</span><span class="p">:</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000000000000e+00</span>
+<span class="n">solve</span> <span class="n">returns</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000000000000e+00</span> <span class="n">after</span> <span class="mi">0</span> <span class="n">iterations</span>
+<span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">is</span>  <span class="mf">0.000000000000000e+00</span>
+
+<span class="n">Initial</span> <span class="n">guess</span><span class="p">:</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">1.000000000000000e+02</span>
+<span class="n">After</span> <span class="mi">1</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">5.002000000000000e+01</span>
+<span class="n">After</span> <span class="mi">2</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.504998400639744e+01</span>
+<span class="n">After</span> <span class="mi">3</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">1.260483237353546e+01</span>
+<span class="n">After</span> <span class="mi">4</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">6.461085492374608e+00</span>
+<span class="n">After</span> <span class="mi">5</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">3.540088255585130e+00</span>
+<span class="n">After</span> <span class="mi">6</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.335001794270128e+00</span>
+<span class="n">After</span> <span class="mi">7</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.024031288207058e+00</span>
+<span class="n">After</span> <span class="mi">8</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000142661533015e+00</span>
+<span class="n">After</span> <span class="mi">9</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000005087716e+00</span>
+<span class="n">After</span> <span class="mi">10</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000000000000e+00</span>
+<span class="n">solve</span> <span class="n">returns</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">2.000000000000000e+00</span> <span class="n">after</span> <span class="mi">10</span> <span class="n">iterations</span>
+<span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">is</span>  <span class="mf">0.000000000000000e+00</span>
+</pre></div>
+</div>
+<p>Note that the statements printed are somewhat different than in the
+example <cite>mysqrt.py</cite> and printed at different points so you will need to
+think about how to implement this properly.</p>
+<p>The formatting used for the floats is <cite>%22.15e</cite>.</p>
+</li>
+<li><p class="first">The plot below shows two functions <span class="math">\(g_1(x) = \sin(x)\)</span>
+and <span class="math">\(g_2(x) = 1 - x^2\)</span>.  These two functions intersect at only two
+points as indicated by the black dots.</p>
+<a class="reference internal image-reference" href="../_images/intersections1.png"><img alt="../_images/intersections1.png" src="../_images/intersections1.png" style="width: 10cm;" /></a>
+<p>Finding the intersections
+requires solving <span class="math">\(\sin(x) = 1 - x^2\)</span>, or equivalently solving for
+zeros of the function <span class="math">\(f(x) = g_1(x) - g_2(x).\)</span>
+This can be done using Newton&#8217;s method.  Which zero is found depends on
+the starting guess <span class="math">\(x_0\)</span>.  For some starting guesses the method
+might not converge at all, but if we start close enough to one of the
+zeros, the method will converge to that zero.</p>
+<p>A program written to do this might produce the following output:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">With</span> <span class="n">initial</span> <span class="n">guess</span> <span class="n">x0</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.000000000000000e-01</span><span class="p">,</span>
+      <span class="n">solve</span> <span class="n">returns</span> <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.409624004002596e+00</span> <span class="n">after</span> <span class="mi">9</span> <span class="n">iterations</span>
+
+<span class="n">With</span> <span class="n">initial</span> <span class="n">guess</span> <span class="n">x0</span> <span class="o">=</span>  <span class="mf">5.000000000000000e-01</span><span class="p">,</span>
+      <span class="n">solve</span> <span class="n">returns</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">6.367326508052821e-01</span> <span class="n">after</span> <span class="mi">4</span> <span class="n">iterations</span>
+</pre></div>
+</div>
+<p>The goal of this problem is to produce such a program in Python and
+to produce similar output and plot for a different set of functions:
+<span class="math">\(g_1(x) = x\cos(\pi x)\)</span> and <span class="math">\(g_2(x) = 1 - 0.6 x^2\)</span>.</p>
+<p>Start by plotting these functions over the interval <span class="math">\(-10 \leq x
+\leq 10\)</span> from an interactive IPython session and then use the zoom feature
+on the plot to get initial guess for each intersection.  Note: you
+should see that there are 4 intersections to be found.</p>
+<p>Then write a Python script to set up this problem and solve using
+the <cite>newton.solve</cite> function you wrote earlier.  Your script should
+be named <cite>intersections.py</cite> and should
+import the <cite>newton</cite> module or at least:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">newton</span> <span class="k">import</span> <span class="n">solve</span>
+</pre></div>
+</div>
+<p>The output of your script
+should have the same form as the example shown above, with the <cite>x0</cite> and
+<cite>x</cite> values formatted as <cite>%22.15e</cite>.  Of course there should be 4 sets of
+output instead of two, finding the 4 distinct intersections.</p>
+<p>The script should also produce a plot of the two functions over the
+interval <span class="math">\(-5 \leq x \leq 5\)</span> with the 4 intersections marked with
+black dots, and save this plot as <cite>intersections.png</cite>.
+<strong>You do not need to commit `intersections.png` to your git repository,
+but the code should create it when run.</strong></p>
+<p>Plotting hints:</p>
+<ul class="simple">
+<li><cite>plot(x,y,&#8217;ko&#8217;)</cite> plots black dots at points specified by the arrays
+<cite>x,y</cite>.</li>
+<li>The matplotlib <cite>legend</cite> command can be used to add the legend
+indicating which curve is <cite>g1</cite> and which is <cite>g2</cite>.</li>
+</ul>
+</li>
+<li><p class="first">Starting with the Fortran code in <cite>$UWHPSC/codes/fortran/newton</cite> (see
+also <a class="reference internal" href="../fortran_newton.html#fortran-newton"><span class="std std-ref">Fortran example for Newton&#8217;s method</span></a>), modify this code to solve the intersection
+problem described above to compute the four intersection points, with
+output format the same as from the Python version.</p>
+<p>You do <strong>not</strong> have to produce plots for this part, which is not
+possible to do directly from Fortran.</p>
+<p>Create a new program <cite>intersections.f90</cite> with the main program.</p>
+<p>Put the new functions you need to define in the <cite>functions.f90</cite> module.
+Leave the existing functions <cite>f_sqrt</cite> and <cite>fprime_sqrt</cite> in this module
+(so the new ones will need different names).</p>
+</li>
+<li><p class="first">Modify the <cite>Makefile</cite> from <cite>$UWHPSC/codes/fortran/Makefile</cite> so that typing:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make intersections
+</pre></div>
+</div>
+<p>runs the code that prints out the four intersection points.
+Typing:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test1
+</pre></div>
+</div>
+<p>should still work too.  Note that this means you may want to define
+a new macro such as <cite>OBJECTS2</cite> that is the list of object files needed
+to create <cite>intersections.exe</cite></p>
+</li>
+<li><p class="first"><strong>583 students only need to turn this in.</strong>  Others might want to at read this and try to
+understand the point being made even if you don&#8217;t write the code...</p>
+<p>Create subdirectory <cite>homework3/am583</cite> with modified files for this part of the assignment.</p>
+<p>In the original version of <cite>newton.f90</cite>, the module parameter   <cite>maxiter</cite> was set to 20.
+Change it to 40 in this version since convergence will be slower for the problem below.</p>
+<p>In the original version of <cite>newton.f90</cite>, the module parameter   <cite>tol</cite> is used for the
+convergence test.  Turn this into a module <strong>variable</strong> that can be set in the calling program.
+You will want the lines:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">real</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="p">::</span> <span class="n">tol</span>
+<span class="n">save</span>
+</pre></div>
+</div>
+<p>in the <cite>newton.f90</cite> module and then experiment with one of your test
+programs to make sure you can adjust it in a main program.</p>
+<p>Add a new function <cite>f_quartic</cite> and derivative <cite>fprime_quartic</cite> to the
+<cite>functions.f90</cite> file that can be used to solve for a zero of the quartic
+polynomial <span class="math">\(f(x) = (x-1)^4 - \epsilon\)</span>.  This has two real zeros
+<span class="math">\(1 \pm \epsilon^{1/4}\)</span>.</p>
+<p>Make <cite>epsilon</cite> a module variable that can
+be set in the calling program  to store the desired value of
+<span class="math">\(epsilon\)</span>.</p>
+<p>Write a test program <cite>test_quartic.f90</cite> that uses these modules and
+tests the converge for different values of <cite>epsilon</cite> and <cite>tol</cite> by use of a double loop.
+For each value of <cite>epsilon</cite> test three different convergence tolerances, in order to
+produce a table that looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">Starting</span> <span class="k">with</span> <span class="n">initial</span> <span class="n">guess</span>  <span class="mf">0.400000000000000</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>
+
+     <span class="n">epsilon</span>        <span class="n">tol</span>    <span class="n">iters</span>          <span class="n">x</span>                 <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>        <span class="n">x</span><span class="o">-</span><span class="n">xstar</span>
+    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">03</span>    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">04</span>  <span class="mi">13</span>   <span class="mf">0.110149887252771</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>    <span class="mf">0.613</span><span class="n">D</span><span class="o">-</span><span class="mi">05</span>    <span class="mf">0.150</span><span class="n">D</span><span class="o">-</span><span class="mi">02</span>
+    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">03</span>    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">09</span>  <span class="mi">15</span>   <span class="mf">0.110000001620356</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>    <span class="mf">0.648</span><span class="n">D</span><span class="o">-</span><span class="mi">10</span>    <span class="mf">0.162</span><span class="n">D</span><span class="o">-</span><span class="mi">07</span>
+    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">03</span>    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">13</span>  <span class="mi">16</span>   <span class="mf">0.110000000000000</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>    <span class="mf">0.154</span><span class="n">D</span><span class="o">-</span><span class="mi">16</span>    <span class="mf">0.377</span><span class="n">D</span><span class="o">-</span><span class="mi">14</span>
+
+    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">07</span>    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">04</span>  <span class="mi">14</span>   <span class="mf">0.105346394423359</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>    <span class="mf">0.816</span><span class="n">D</span><span class="o">-</span><span class="mi">05</span>    <span class="mf">0.435</span><span class="n">D</span><span class="o">-</span><span class="mi">01</span>
+    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">07</span>    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">09</span>  <span class="mi">22</span>   <span class="mf">0.101000335631520</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>    <span class="mf">0.134</span><span class="n">D</span><span class="o">-</span><span class="mi">10</span>    <span class="mf">0.336</span><span class="n">D</span><span class="o">-</span><span class="mi">05</span>
+    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">07</span>    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">13</span>  <span class="mi">23</span>   <span class="mf">0.101000000168878</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>    <span class="mf">0.676</span><span class="n">D</span><span class="o">-</span><span class="mi">14</span>    <span class="mf">0.169</span><span class="n">D</span><span class="o">-</span><span class="mi">08</span>
+
+    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">11</span>    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">04</span>  <span class="mi">14</span>   <span class="mf">0.105345384505079</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>    <span class="mf">0.816</span><span class="n">D</span><span class="o">-</span><span class="mi">05</span>    <span class="mf">0.525</span><span class="n">D</span><span class="o">-</span><span class="mi">01</span>
+    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">11</span>    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">09</span>  <span class="mi">24</span>   <span class="mf">0.100301582272124</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>    <span class="mf">0.817</span><span class="n">D</span><span class="o">-</span><span class="mi">10</span>    <span class="mf">0.202</span><span class="n">D</span><span class="o">-</span><span class="mi">02</span>
+    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">11</span>    <span class="mf">0.100</span><span class="n">D</span><span class="o">-</span><span class="mi">13</span>  <span class="mi">30</span>   <span class="mf">0.100100034262656</span><span class="n">D</span><span class="o">+</span><span class="mi">01</span>    <span class="mf">0.137</span><span class="n">D</span><span class="o">-</span><span class="mi">14</span>    <span class="mf">0.343</span><span class="n">D</span><span class="o">-</span><span class="mi">06</span>
+</pre></div>
+</div>
+<p>Note that in addition to printing out <cite>x</cite> and <cite>f(x)</cite> it prints out the error <cite>x-xstar</cite>
+where <cite>xstar</cite> is the true solution it is converging towards.  You can use the print statements
+below to get the same output format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">print</span> <span class="o">*</span><span class="p">,</span> <span class="s">&#39;    epsilon        tol    iters          x                 f(x)        x-xstar&#39;</span>
+</pre></div>
+</div>
+<p>for the header before your loops and then for each <cite>epsilon, tol</cite> combination:</p>
+<div class="highlight-default"><div class="highlight"><pre>   <span class="nb">print</span> <span class="mi">11</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">iters</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">x</span><span class="o">-</span><span class="n">xstar</span>
+<span class="mi">11</span> <span class="nb">format</span><span class="p">(</span><span class="mi">2</span><span class="n">d13</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="n">i4</span><span class="p">,</span> <span class="n">d24</span><span class="o">.</span><span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="n">d13</span><span class="o">.</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that <cite>f(x)</cite> being small does not necessarily guarantee that the error is equally small!
+As a result in most lines in this table the error is larger than <cite>tol</cite>.</p>
+<p>This function has very small slope near the zero, especially when <cite>epsilon</cite> is small.
+In this case using a convergence criterion that is based on the size of the Newton step
+taken would be a better test for the degree of convergence.  You may want to experiment with
+this if you wish, but this is not required.  You might also want to plot this function near the
+root if you are having a hard time visualizing this.</p>
+<p>Make a modified version of the <cite>Makefile</cite> in this directory so that:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test_quartic
+</pre></div>
+</div>
+<p>will compile and run this code to produce a table like the one above.</p>
+</li>
+</ol>
+<div class="section" id="to-submit">
+<h2>To submit<a class="headerlink" href="#to-submit" title="Permalink to this headline">¶</a></h2>
+<p>Your homework3 directory should contain:</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>newton.py</cite> with your Newton code and tests</li>
+<li><cite>intersections.py</cite> with the code to solve the intersection problem and
+create plots</li>
+<li><cite>newton.f90</cite></li>
+<li><cite>functions.f90</cite></li>
+<li><cite>intersections.f90</cite></li>
+<li><cite>test1.f90</cite>  (unchanged, but &#8220;make test1&#8221; should still work)</li>
+<li><cite>Makefile</cite>  (modified to add &#8220;make intersections&#8221; option)</li>
+</ul>
+</div></blockquote>
+<p>For 583 students, you should also have a subdirectory <cite>homework3/am583</cite> that contains:</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>newton.f90</cite></li>
+<li><cite>functions.f90</cite></li>
+<li><cite>test_quartic.f90</cite></li>
+<li><cite>Makefile</cite>  (modified to add a &#8220;make test_quartic&#8221; option that produces the desired output)</li>
+</ul>
+</div></blockquote>
+<p>As usual, commit your results, push to bitbucket, and see the Canvas
+course page for the link to submit the SHA-1 hash code.  These should be
+submitted by the due date/time to receive full credit.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

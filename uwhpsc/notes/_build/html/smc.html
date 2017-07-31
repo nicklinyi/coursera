@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using SageMathCloud &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using SageMathCloud</a><ul>
+<li><a class="reference internal" href="#making-a-plot-in-ipython">Making a plot in IPython</a></li>
+<li><a class="reference internal" href="#viewing-a-png-file">Viewing a png file</a></li>
+<li><a class="reference internal" href="#viewing-an-html-file">Viewing an html file</a></li>
+<li><a class="reference internal" href="#editing-files">Editing files</a></li>
+<li><a class="reference internal" href="#collaborating">Collaborating</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/smc.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="using-sagemathcloud">
+<span id="smc"></span><h1>Using SageMathCloud<a class="headerlink" href="#using-sagemathcloud" title="Permalink to this headline">¶</a></h1>
+<p>First create an account at <a class="reference external" href="https://cloud.sagemath.com/">SageMathCloud</a>.
+You should create an account using your UW email address <cite>netid&#64;uw.edu</cite>.
+This will make it easiest for us to add you as a collaborator on projects.</p>
+<p>When you log into your account, click on the &#8220;New Project&#8221; button.  It will
+take a few minutes to launch the project.</p>
+<p>Within this project, click on &#8220;New&#8221; and you will see several options.  In
+particular you could create a ...</p>
+<ul>
+<li><p class="first"><em>Terminal:</em> this will give you a linux terminal window.  You can type
+commands here as you would in any other linux terminal.  See <a class="reference internal" href="unix.html#unix"><span class="std std-ref">Unix, Linux, and OS X</span></a>.</p>
+<p>You might start by cloning the class repository into your project by
+following the instructions at</p>
+</li>
+<li><p class="first"><em>IPython Notebook:</em> If you are familiar with Python, you can type Python
+commands into the first input cell and hit Shift-Enter to evaluate a cell.</p>
+</li>
+<li><p class="first"><em>Latex editor:</em> This is a nice WYSIWYG editor for the mathematical
+typesetting program latex, which is widely used for scientific writing,
+particularly in the mathematical sciences.</p>
+</li>
+</ul>
+<div class="section" id="making-a-plot-in-ipython">
+<h2>Making a plot in IPython<a class="headerlink" href="#making-a-plot-in-ipython" title="Permalink to this headline">¶</a></h2>
+<p>Open an IPython Notebook and type these commands in the first cell:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1001</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sin</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Then hit Shift-Enter to evaluate, which should produce a plot in the
+notebook.</p>
+<p>Now in the next cell type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sin</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">savefig</span><span class="p">(</span><span class="s">&#39;myplot.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and Shift-Enter, to recreate the plot and save this as a png file.
+(Note that it only saves a figure created in the same cell, not the one from
+the previous cell!)</p>
+</div>
+<div class="section" id="viewing-a-png-file">
+<h2>Viewing a png file<a class="headerlink" href="#viewing-a-png-file" title="Permalink to this headline">¶</a></h2>
+<p>To view this png file (from outside the notebook) there are several options:</p>
+<ul>
+<li><p class="first">Click on the Files tab at the top of the page and then click on
+<cite>myplot.png</cite>.</p>
+</li>
+<li><p class="first">Open a terminal and do <cite>ls</cite> to list the files.  Assuming you&#8217;re in the
+home directory you should see <cite>myplot.png</cite> listed as one of the files.
+Type:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ open myplot.png
+</pre></div>
+</div>
+<p>in the terminal.</p>
+</li>
+<li><p class="first">View it on the web from a web browser (even on a different computer) at
+the URL
+<cite>https://cloud.sagemath.com/PROJECT-ID/raw/myplot.png</cite>
+where <cite>PROJECT-ID</cite> is replaced by the long string of numbers that appears
+in the address bar when you&#8217;re working on your project, e.g.
+<cite>0c7b8079-70bb-45ef-8554-53178fd7e447</cite>.</p>
+</li>
+<li><p class="first">Download the file to your own computer to view it locally, or to
+incorporate in a paper you are writing, for example.</p>
+<p>One simple way to transfer files in general is to clone your own git
+repository on the SMC project and then add and commit
+the file you want to transfer.</p>
+<p>Or if you open the <em>Files</em> tab on the SMC project page and navigate to the
+directory containing the desired file, there is a set of buttons to the
+left of each file name that includes a download button.</p>
+<p>You can also use <cite>scp</cite> to copy a file <em>from</em> the SMC to your account on
+some other machine, e.g. a UW computer.  In a terminal window on the SMC
+project, type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">scp</span> <span class="n">myplot</span><span class="o">.</span><span class="n">png</span> <span class="n">NETID</span><span class="nd">@COMPUTER</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">washington</span><span class="o">.</span><span class="n">edu</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>This will copy the file to your account on a UW computer (replace NETID with
+yours and COMPUTER with the appropriate computer name).
+You can put a directory path after the : in this command if you want to
+put it somewhere other than the home directory.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="viewing-an-html-file">
+<span id="smc-view-html"></span><h2>Viewing an html file<a class="headerlink" href="#viewing-an-html-file" title="Permalink to this headline">¶</a></h2>
+<p>If you create an html file on your computer (e.g. the animation <cite>FourierSum.html</cite>
+created by the code in <cite>$UWHPSC/labs/lab20</cite>) then if you simply use <cite>open</cite> at the
+command line or click on it in the File selector, the editor will open to the raw
+html text file.</p>
+<p>To view it instead as a webpage in your browser, there are three options:</p>
+<ul>
+<li><p class="first">Download it to your computer and open it with a browser.  You can download
+using one of the methods suggested above for <cite>png</cite> files.</p>
+</li>
+<li><p class="first">View it in a browser window by navigating to the page
+<cite>https://cloud.sagemath.com/PROJECT-ID/raw/file.html</cite>
+where <cite>PROJECT-ID</cite> is replaced by the long string of numbers that appears
+in the address bar when you&#8217;re working on your project, e.g.
+<cite>0c7b8079-70bb-45ef-8554-53178fd7e447</cite> and <cite>file.html</cite> is the
+filename of the <cite>html</cite> file.  If the file is not in the top level of your
+project directory structure, the full path must be used, .e.g. something like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cloud</span><span class="o">.</span><span class="n">sagemath</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="mi">0</span><span class="n">c7b8079</span><span class="o">-</span><span class="mi">70</span><span class="n">bb</span><span class="o">-</span><span class="mi">45</span><span class="n">ef</span><span class="o">-</span><span class="mi">8554</span><span class="o">-</span><span class="mi">53178</span><span class="n">fd7e447</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">uwhpsc</span><span class="o">/</span><span class="n">labs</span><span class="o">/</span><span class="n">lab20</span><span class="o">/</span><span class="n">FourierSum</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Transfer it by <cite>scp</cite> or some other means to a webserver, e.g. if you maintain
+your own webpages and want to add this <cite>html</cite> file so that others can view it.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="editing-files">
+<h2>Editing files<a class="headerlink" href="#editing-files" title="Permalink to this headline">¶</a></h2>
+<p>Several editors are available from a SMC terminal window, e.g.</p>
+<ul class="simple">
+<li>nano</li>
+<li>emacs</li>
+<li>vi</li>
+</ul>
+<p>For example, in a terminal window you can type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">nano</span> <span class="n">filename</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>to edit a file.</p>
+<p>For a simple point-and-click editor, simply type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">open</span> <span class="n">filename</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>This opens it in a separate window.  This is the best way to edit a file if
+you are working collaboratively with others, e.g. during the lab sessions.
+Other editors sometimes behave strangely if more than one person is viewing
+the terminal window of the project simultaneously.</p>
+</div>
+<div class="section" id="collaborating">
+<h2>Collaborating<a class="headerlink" href="#collaborating" title="Permalink to this headline">¶</a></h2>
+<p>Multiple people can open the same project and see the same set of files,
+even take turns typing into the same terminal window or IPython Notebook. To
+give someone else access to a project, open the project and then click on
+the wrench icon at the top of the page. Then just type in the netid or name
+of the person you want to add.</p>
+<p>The collaborator should then see this project appear in the list of projects
+of their own account.</p>
+</div>
+<div class="section" id="other-resources">
+<h2>Other resources<a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference external" href="https://github.com/sagemath/cloud/wiki/FAQ">FAQ</a> for more tips.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

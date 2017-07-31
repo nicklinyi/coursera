@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Special functions &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Timing code" href="timing.html" />
+    <link rel="prev" title="Makefiles" href="makefiles.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="timing.html" title="Timing code"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="makefiles.html" title="Makefiles"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Special functions</a><ul>
+<li><a class="reference internal" href="#taylor-series-expansions">Taylor series expansions</a></li>
+<li><a class="reference internal" href="#newton-s-method-for-the-square-root">Newton&#8217;s method for the square root</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="makefiles.html"
+                        title="previous chapter">Makefiles</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="timing.html"
+                        title="next chapter">Timing code</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/special_functions.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="special-functions">
+<span id="id1"></span><h1>Special functions<a class="headerlink" href="#special-functions" title="Permalink to this headline">¶</a></h1>
+<p>There are many functions that are used so frequently that they are given
+special names. Familiar examples are sin, cos, sqrt, exp, log, etc.</p>
+<p>Most programming languages have build-in (intrinsic) functions with these
+same names that can be called to compute the value of the function for
+arbitrary arguments.</p>
+<p>But &#8220;under the hood&#8221; these functions must be evaluated somehow.  The basic
+arithmetic units of a computer are only capable of doing very basic
+arithmetic in hardware: addition, subtraction, multiplication, and division.
+Every other function must be <em>approximated</em> by applying some sequence of
+arithmetic operations.</p>
+<p>There are several ways this might be done....</p>
+<div class="section" id="taylor-series-expansions">
+<h2>Taylor series expansions<a class="headerlink" href="#taylor-series-expansions" title="Permalink to this headline">¶</a></h2>
+<p>A finite number of terms in the Taylor series expansion of a function gives
+a polynomial that approximates the desired function.  Polynomials can be
+evaluated at any point using basic arithmetic.</p>
+<p>For example, the section on <a class="reference internal" href="fortran_taylor.html#fortran-taylor"><span class="std std-ref">Fortran examples: Taylor series</span></a> discusses an
+implementation of the Taylor series approximation to the exponential
+function,</p>
+<blockquote>
+<div><span class="math">\(exp(x) = 1 + x + \frac 1 2 x ^2 + \frac 1 6 x^3 + \cdots\)</span></div></blockquote>
+<p>If this is truncated after the 4 terms shown, for example, we obtain a
+polynomial of degree 3 that is easily evaluated at any point.</p>
+<p>Some other Taylor series that can be used to approximate functions:</p>
+<blockquote>
+<div><p><span class="math">\(sin(x) = x - \frac{1}{3!} x^3 + \frac 1 {5!} x^5 - \frac{1}{7!} x^7 + \cdots\)</span></p>
+<p><span class="math">\(cos(x) = 1 - \frac 1 2 x^2 + \frac{1}{4!} x^4 - \frac{1}{6!} x^6 + \cdots\)</span></p>
+</div></blockquote>
+</div>
+<div class="section" id="newton-s-method-for-the-square-root">
+<span id="special-newton"></span><h2>Newton&#8217;s method for the square root<a class="headerlink" href="#newton-s-method-for-the-square-root" title="Permalink to this headline">¶</a></h2>
+<p>One way to evaluate the square root function is to use <em>Newton&#8217;s method</em>, a
+general procedure for estimating a <em>zero</em> of a function <span class="math">\(f(x)\)</span>, i.e. a
+value <span class="math">\(x^*\)</span> for which <span class="math">\(f(x^*) = 0\)</span>.</p>
+<p>The square root of any value <span class="math">\(a&gt;0\)</span> is a zero of the function <span class="math">\(f(x)
+= x^2 - a\)</span>.  (This function has two zeros, at <span class="math">\(\pm\sqrt{a}\)</span>.</p>
+<p>Newton&#8217;s method is based on taking a current estimate <span class="math">\(x_k\)</span> to
+<span class="math">\(x^*\)</span> and (hopefully) improving it by setting</p>
+<blockquote>
+<div><span class="math">\(x_{k+1} = x_k - \delta_k\)</span></div></blockquote>
+<p>The increment <span class="math">\(\delta_k\)</span> is determined by <em>linearizing</em> the function
+<span class="math">\(f(x)\)</span> about the current esimate <span class="math">\(x_k\)</span> using only the linear
+term in the Taylor series expansion.  This linear function <span class="math">\(G_k(x)\)</span> is</p>
+<blockquote>
+<div><span class="math">\(G_k(x) = f(x_k) + f'(x_k)(x-x_k)\)</span>.</div></blockquote>
+<p>The next point <span class="math">\(x_{k+1}\)</span> is set to be the zero of this linear
+function, which is trivial to find, and so</p>
+<blockquote>
+<div><span class="math">\(\delta_k = f(x_k) / f'(x_k)\)</span>.</div></blockquote>
+<p>Geometrically, this means that we move along the tangent line to
+<span class="math">\(f(x)\)</span> from the point <span class="math">\((x_k,f(x_k))\)</span> to the point where this
+line hits the x-axis, at <span class="math">\((x_{k+1}, 0)\)</span>.  See the figures below.</p>
+<p>There are several potential difficulties with this approach, e.g.</p>
+<blockquote>
+<div><ul class="simple">
+<li>To get started we require an <em>initial guess</em> <span class="math">\(x_0\)</span>.</li>
+<li>The method may converge to a zero from some starting points but not
+converge at all from others, or may converge to different zeros depending
+on where we start.</li>
+</ul>
+</div></blockquote>
+<p>For example, applying Newton&#8217;s method to find a zero of <span class="math">\(f(x) = x^2-2\)</span>
+coverges to <span class="math">\(\sqrt{2} \approx 1.414\)</span> if we start at <span class="math">\(x_0=0.5\)</span>,
+but convergest o <span class="math">\(-\sqrt{2} \approx -1.414\)</span> if we start at
+<span class="math">\(x_0=-0.5\)</span> as illustrated in the figures below.</p>
+<a class="reference internal image-reference" href="_images/newtonsqrt2m.png"><img alt="_images/newtonsqrt2m.png" src="_images/newtonsqrt2m.png" style="width: 10cm;" /></a>
+<a class="reference internal image-reference" href="_images/newtonsqrt2.png"><img alt="_images/newtonsqrt2.png" src="_images/newtonsqrt2.png" style="width: 10cm;" /></a>
+<p>An advantage of Newton&#8217;s method is that it is guaranteed to converge to a
+root provided the function <span class="math">\(f(x)\)</span> is smooth enough and the starting
+guess <span class="math">\(x_0\)</span> is sufficiently close to the zero.  Moreover, in general
+one usually observes <em>quadratic convergence</em>.  This means that once we get
+close to the zero, the error roughly satisfies</p>
+<blockquote>
+<div><span class="math">\(|x_{k+1} - x^*| \approx C|x_k-x^*|^2\)</span></div></blockquote>
+<p>The error is roughly squared in each step.  In practice this means that once
+you have 2 correct digits in the solution, the next few steps will produce
+approximations with roughly 4, 8, and 16 correct digits (doubling each
+time), and so it rapidly converges to full machine precision.</p>
+<p>For example, the approximations to <span class="math">\(\sqrt{2}\)</span> generated by Newton&#8217;s
+method starting at <span class="math">\(x_0=0.5\)</span> are:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>   <span class="mi">1</span>    <span class="mf">0.500000000000000E+00</span>   <span class="o">-</span><span class="mf">0.175000E+01</span>
+<span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>   <span class="mi">2</span>    <span class="mf">0.225000000000000E+01</span>    <span class="mf">0.306250E+01</span>
+<span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>   <span class="mi">3</span>    <span class="mf">0.156944444444444E+01</span>    <span class="mf">0.463156E+00</span>
+<span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>   <span class="mi">4</span>    <span class="mf">0.142189036381514E+01</span>    <span class="mf">0.217722E-01</span>
+<span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>   <span class="mi">5</span>    <span class="mf">0.141423428594007E+01</span>    <span class="mf">0.586155E-04</span>
+<span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>   <span class="mi">6</span>    <span class="mf">0.141421356252493E+01</span>    <span class="mf">0.429460E-09</span>
+<span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>   <span class="mi">7</span>    <span class="mf">0.141421356237310E+01</span>    <span class="mf">0.444089E-15</span>
+</pre></div>
+</div>
+<p>The last value is correct to all digits.</p>
+<p>There are many other methods that have been developed for finding zeros of
+functions, and a number of software packages that are designed to be more
+robust than Newton&#8217;s method (less likely to fail to converge) while still
+converging very rapidly.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="timing.html" title="Timing code"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="makefiles.html" title="Makefiles"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

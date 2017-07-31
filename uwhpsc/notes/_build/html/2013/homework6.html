@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2013 Homework 6 &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="../_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2013 Homework 6</a><ul>
+<li><a class="reference internal" href="#to-submit">To submit</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/2013/homework6.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="homework-6">
+<span id="homework6"></span><h1>2013 Homework 6<a class="headerlink" href="#homework-6" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is a 2013 homework assignment.</p>
+</div>
+<p>Due Friday, May 31, 2013, by 11:00pm PDT.
+<strong>Note change in due date</strong></p>
+<p>The goals of this homework are to:</p>
+<ul class="simple">
+<li>Get some experience with MPI.</li>
+<li>Study some of the sample codes in more detail in order to modify them.</li>
+</ul>
+<p>First make sure MPI works by trying out the sample programs
+in the directory <cite>$UWHPSC/codes/mpi</cite>.</p>
+<p>Create a new subdirectory <cite>homework6</cite> in your repository for the codes you
+create.</p>
+<ol class="arabic">
+<li><p class="first">The sample program <cite>$UWHPSC/codes/mpi/copyvalue.f90</cite> sets a value of <cite>i</cite>
+in Process 0 and passes this through a chain of processes up to Process
+<cite>num_procs - 1</cite>.  There are print statements in this codes so that running
+it should give, for example with 4 processes specified:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ mpif90 copyvalue.f90
+$ mpiexec -n 4 a.out
+
+Process   0 setting      i =  55
+Process   1 receives     i =  55
+Process   1 sends        i =  55
+Process   2 receives     i =  55
+Process   2 sends        i =  55
+Process   3 ends up with i =  55
+</pre></div>
+</div>
+<p>Create a modified code <cite>copyvalue2.f90</cite>
+that instead sets the value <cite>i = 55</cite> in Process
+<cite>num_procs - 1</cite> and passes the value backwards to Process 0.</p>
+<p>Also change your version to subtract 1 from the value of <cite>i</cite> by each Process
+along the way.  So the output should now look like:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ mpif90 copyvalue2.f90
+$ mpiexec -n 4 a.out
+
+Process   3 setting      i =  55
+Process   2 receives     i =  55
+Process   2 sends        i =  54
+Process   1 receives     i =  54
+Process   1 sends        i =  53
+Process   0 ends up with i =  53
+</pre></div>
+</div>
+</li>
+<li><p class="first">The directory <cite>$UWHPSC/codes/homework6</cite> contains an MPI version of the
+quadrature codes, which simply uses the Trapezoid Rule to calculate an
+approximation to a single integral.
+Copy these files into your repository and then fix the file <cite>test.f90</cite>
+so that it properly prints out the total number of <cite>f</cite> evaluations at the end.
+The sample version simply prints 0 and to do the right thing you will have
+to use <cite>MPI_REDUCE</cite> to sum up the values of <cite>feval_proc</cite> that each process
+computes.</p>
+<p>There is a Makefile that can be used to run with different values of
+<cite>num_procs</cite>, and when working properly you code should give results
+similar to this:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test
+mpif90  -c  functions.f90
+mpif90  -c  quadrature.f90
+mpif90  -c  test.f90
+mpif90  functions.o quadrature.o test.o -o test.exe
+
+mpiexec -n 4    test.exe
+Using   4 processes
+true integral:   6.00136745954910E+00
+
+Process   0 with n =     1000 computes int_approx =   6.00088098873994E+00
+Process   3 with n =     1000 computes int_approx =   6.00088098873994E+00
+Process   1 with n =     1000 computes int_approx =   6.00088098873994E+00
+Process   2 with n =     1000 computes int_approx =   6.00088098873994E+00
+fevals by Process  3:          1000
+fevals by Process  0:          1000
+fevals by Process  1:          1000
+fevals by Process  2:          1000
+Total number of fevals:       4000
+</pre></div>
+</div>
+<p>The default number of processes is 4, but you can change this, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test NUM_PROCS=6
+mpiexec -n 6 test.exe
+Using   6 processes
+true integral:   6.00136745954910E+00
+
+Process   0 with n =     1000 computes int_approx =   6.00088098873994E+00
+Process   4 with n =     1000 computes int_approx =   6.00088098873994E+00
+Process   5 with n =     1000 computes int_approx =   6.00088098873994E+00
+fevals by Process  5:          1000
+Process   1 with n =     1000 computes int_approx =   6.00088098873994E+00
+fevals by Process  1:          1000
+Process   2 with n =     1000 computes int_approx =   6.00088098873994E+00
+fevals by Process  2:          1000
+Process   3 with n =     1000 computes int_approx =   6.00088098873994E+00
+fevals by Process  3:          1000
+fevals by Process  0:          1000
+fevals by Process  4:          1000
+Total number of fevals:       6000
+</pre></div>
+</div>
+<p><strong>Note:</strong> In spite of the <cite>MPI_BARRIER</cite> calls in between blocks of print
+statements, the statements may appear in somewhat the wrong order as
+above because of the way print buffers work.
+Having multiple processes print to the screen (or to the same
+file) in an MPI code is generally a bad idea (and doesn&#8217;t even make
+sense if you&#8217;re running on a cluster of computers that don&#8217;t share the same
+file system or have access to the terminal).  But it&#8217;s useful for our
+purposes in better understanding what&#8217;s being done.</p>
+<p>The way <cite>test.f90</cite> is written it is not using multiple processors in a
+sensible way.  Each process is independently computing exactly the
+same thing &#8211; an approximation to the integral using the same
+number of points <cite>n</cite> across the full interval from <cite>a</cite> to <cite>b</cite>.</p>
+<p>Create a new version <cite>test2.f90</cite> that instead does the following:</p>
+<ul>
+<li><p class="first">When run with <cite>num_procs</cite> processors, split the interval from <cite>a</cite> to <cite>b</cite>
+up into <cite>num_procs - 1</cite> pieces.  Process 0 should act as the <em>master</em>
+process that splits up the interval and sends the subintervals out to each
+worker process 1, 2, ..., <cite>num_procs - 1</cite>.  Process 0 should then receive
+a value <cite>int_sub</cite> from each worker process that is the Trapezoidal
+approximation the the integral over this subinterval computed with <cite>n</cite>
+points.  Process 0 adds these up and prints out the resulting
+approximation to the integral over the full interval <cite>a</cite> to <cite>b</cite>.</p>
+</li>
+<li><p class="first">Use this master-worker paradigm and a similar framework to the
+sample code <cite>$UWHPSC/codes/mpi/matrix1norm1.f90</cite>.  Note that
+Process 0 does not compute an approximation on any subinterval,
+it just acts as the master.</p>
+</li>
+<li><p class="first">For this problem it would be both easier and perhaps more
+sensible to instead have each process compute an approximation
+on a subinterval and then use MPI_REDUCE to combine these
+into the final full approximation.  But the point of this
+exercise is to get some experience with the master-worker
+paradigm.</p>
+</li>
+<li><p class="first">The master process should compute the left and right edge of
+the j&#8217;th subinterval and send these to Process <cite>j</cite>.  These should be
+sent with a single call to <cite>MPI_SEND</cite>, e.g. in the code for the master
+process you might have lines like:</p>
+<div class="highlight-default"><div class="highlight"><pre>if (proc_num == 0) then
+
+    dx_sub = (b-a) / nsub
+
+    do j=1,nsub
+      ab_sub(1) = a + (j-1)*dx_sub
+      ab_sub(2) = a + j*dx_sub
+      call MPI_SEND(ab_sub, 2, MPI_DOUBLE_PRECISION, j, j, &amp;
+                    MPI_COMM_WORLD, ierr)
+      enddo
+
+   ! followed by a loop to receive back each result.
+</pre></div>
+</div>
+<p>Here <cite>ab_sub</cite> is an array of length 2 that holds the left and right
+edges of the j&#8217;th subinterval.</p>
+<p>The code for each worker process should receive this information and
+then have a call of the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">int_sub</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">ab_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">ab_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to compute the Trapezoid approximation on this subinterval with <cite>n</cite>
+points, and then send the result back to Process 0.</p>
+</li>
+</ul>
+<p>Sample results might look like the following:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test2
+mpif90  -c  functions.f90
+mpif90  -c  quadrature.f90
+mpif90  -c  test2.f90
+mpif90  functions.o quadrature.o test2.o -o test2.exe
+mpiexec -n 4    test2.exe
+
+Using   4 processes
+true integral:   6.00136745954910E+00
+
+fevals by Process  0:             0
+fevals by Process  1:          1000
+fevals by Process  2:          1000
+fevals by Process  3:          1000
+Trapezoid approximation with     3000 total points:   6.00131677608477E+00
+Total number of fevals:       3000
+</pre></div>
+</div>
+<p>Note that Process 0 does no function evaluations and each of the others
+use <cite>n = 1000</cite> points for their subinterval.</p>
+<p>With this version of the code, increasing the number of processes
+should improve the approximation to the integral.</p>
+<p>The final two lines of the output shown above were printed with these
+statements:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="n">then</span>
+    <span class="nb">print</span> <span class="s">&#39;(&quot;Trapezoid approximation with &quot;,i8,&quot; total points: &quot;,es22.14)&#39;</span><span class="p">,</span><span class="o">&amp;</span>
+            <span class="n">nsub</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">int_approx</span>
+    <span class="nb">print</span> <span class="s">&#39;(&quot;Total number of fevals: &quot;,i10)&#39;</span><span class="p">,</span> <span class="n">fevals_total</span>
+    <span class="n">endif</span>
+</pre></div>
+</div>
+<p>(Note that the format statement can be directly included in the print
+statement by enclosing it in quotes of a different sort than used in
+specifying the format.)</p>
+</li>
+</ol>
+<p><strong>There is no additional 583 problem on this assignment.</strong></p>
+<div class="section" id="to-submit">
+<h2>To submit<a class="headerlink" href="#to-submit" title="Permalink to this headline">¶</a></h2>
+<p>Your homework6 directory should contain:</p>
+<ul class="simple">
+<li>copyvalue2.f90</li>
+<li>quadrature.f90 (unchanged)</li>
+<li>functions.f90 (unchanged)</li>
+<li>test.f90 (modified to properly print <cite>fevals_total</cite>)</li>
+<li>test2.f90 (modified for master-worker version)</li>
+<li>Makefile (modified so <cite>make test2</cite> works)</li>
+</ul>
+<p>As usual, commit your results, push to bitbucket, and see the Canvas
+course page for the link to submit the SHA-1 hash code.  These should be
+submitted by the due date/time to receive full credit.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

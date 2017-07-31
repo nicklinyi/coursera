@@ -1,0 +1,69 @@
+\BOOKMARK [0][-]{chapter.1}{2013 Versions of some files}{}% 1
+\BOOKMARK [1][-]{section.1.1}{2013 versions of some files}{chapter.1}% 2
+\BOOKMARK [0][-]{chapter.2}{Course materials \205 2014 Edition}{}% 3
+\BOOKMARK [1][-]{section.2.1}{About these notes \205 important disclaimers}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.2}{Class Format}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.3}{Overview and syllabus}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.4}{Notes to accompany lab sessions}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.5}{Homework}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.6}{Computing Options [2014 version]}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.7}{Downloading and installing software for this class}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.8}{Virtual Machine for this class [2014 Edition]}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.9}{Amazon Web Services EC2 AMI [2014 version]}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.10}{Software Carpentry}{chapter.2}% 13
+\BOOKMARK [0][-]{chapter.3}{Technical Topics}{}% 14
+\BOOKMARK [1][-]{section.3.1}{Shells}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.2}{Unix, Linux, and OS X}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.3}{Unix top command}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.4}{Using ssh to connect to remote computers}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.5}{Text editors}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.6}{Reproducibility}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.7}{Version Control Software}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.8}{Git}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.9}{Bitbucket repositories: viewing changesets, issue tracking}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.10}{More about Git}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.11}{Sphinx documentation}{chapter.3}% 25
+\BOOKMARK [1][-]{section.3.12}{Binary/metric prefixes for computer size, speed, etc.}{chapter.3}% 26
+\BOOKMARK [1][-]{section.3.13}{Computer Architecture}{chapter.3}% 27
+\BOOKMARK [1][-]{section.3.14}{Storing information in binary}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.15}{Punch cards}{chapter.3}% 29
+\BOOKMARK [1][-]{section.3.16}{Python and Fortran}{chapter.3}% 30
+\BOOKMARK [0][-]{chapter.4}{Python}{}% 31
+\BOOKMARK [1][-]{section.4.1}{Python}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.2}{Python scripts and modules}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.3}{Python functions}{chapter.4}% 34
+\BOOKMARK [1][-]{section.4.4}{Python strings}{chapter.4}% 35
+\BOOKMARK [1][-]{section.4.5}{Numerics in Python}{chapter.4}% 36
+\BOOKMARK [1][-]{section.4.6}{IPython\137notebook}{chapter.4}% 37
+\BOOKMARK [1][-]{section.4.7}{Sage}{chapter.4}% 38
+\BOOKMARK [1][-]{section.4.8}{Plotting with Python}{chapter.4}% 39
+\BOOKMARK [1][-]{section.4.9}{Python debugging}{chapter.4}% 40
+\BOOKMARK [1][-]{section.4.10}{Animation in Python}{chapter.4}% 41
+\BOOKMARK [1][-]{section.4.11}{Installing JSAnimation}{chapter.4}% 42
+\BOOKMARK [0][-]{chapter.5}{Fortran}{}% 43
+\BOOKMARK [1][-]{section.5.1}{Fortran}{chapter.5}% 44
+\BOOKMARK [1][-]{section.5.2}{Useful gfortran flags}{chapter.5}% 45
+\BOOKMARK [1][-]{section.5.3}{Fortran subroutines and functions}{chapter.5}% 46
+\BOOKMARK [1][-]{section.5.4}{Fortran examples: Taylor series}{chapter.5}% 47
+\BOOKMARK [1][-]{section.5.5}{Array storage in Fortran}{chapter.5}% 48
+\BOOKMARK [1][-]{section.5.6}{Fortran modules}{chapter.5}% 49
+\BOOKMARK [1][-]{section.5.7}{Fortran Input / Output}{chapter.5}% 50
+\BOOKMARK [1][-]{section.5.8}{Fortran debugging}{chapter.5}% 51
+\BOOKMARK [1][-]{section.5.9}{Fortran example for Newton's method}{chapter.5}% 52
+\BOOKMARK [0][-]{chapter.6}{Parallel computing}{}% 53
+\BOOKMARK [1][-]{section.6.1}{OpenMP}{chapter.6}% 54
+\BOOKMARK [1][-]{section.6.2}{MPI}{chapter.6}% 55
+\BOOKMARK [0][-]{chapter.7}{Miscellaneous}{}% 56
+\BOOKMARK [1][-]{section.7.1}{Makefiles}{chapter.7}% 57
+\BOOKMARK [1][-]{section.7.2}{Special functions}{chapter.7}% 58
+\BOOKMARK [1][-]{section.7.3}{Timing code}{chapter.7}% 59
+\BOOKMARK [1][-]{section.7.4}{Linear Algebra software}{chapter.7}% 60
+\BOOKMARK [1][-]{section.7.5}{Random number generators}{chapter.7}% 61
+\BOOKMARK [0][-]{chapter.8}{Applications}{}% 62
+\BOOKMARK [1][-]{section.8.1}{Numerical methods for the Poisson problem}{chapter.8}% 63
+\BOOKMARK [1][-]{section.8.2}{Jacobi iteration using OpenMP with parallel do constructs}{chapter.8}% 64
+\BOOKMARK [1][-]{section.8.3}{Jacobi iteration using OpenMP with coarse-grain parallel block}{chapter.8}% 65
+\BOOKMARK [1][-]{section.8.4}{Jacobi iteration using MPI}{chapter.8}% 66
+\BOOKMARK [0][-]{chapter.9}{References}{}% 67
+\BOOKMARK [1][-]{section.9.1}{Bibliography and further reading}{chapter.9}% 68
+\BOOKMARK [0][-]{chapter*.114}{Bibliography}{}% 69

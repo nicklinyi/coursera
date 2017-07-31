@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fortran Input / Output &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Fortran debugging" href="fortran_debugging.html" />
+    <link rel="prev" title="Fortran modules" href="fortran_modules.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fortran_debugging.html" title="Fortran debugging"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fortran_modules.html" title="Fortran modules"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fortran Input / Output</a><ul>
+<li><a class="reference internal" href="#formats-vs-unformatted">Formats vs. unformatted</a></li>
+<li><a class="reference internal" href="#writing-to-a-file">Writing to a file</a></li>
+<li><a class="reference internal" href="#reading-input">Reading input</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fortran_modules.html"
+                        title="previous chapter">Fortran modules</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fortran_debugging.html"
+                        title="next chapter">Fortran debugging</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/fortran_io.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fortran-input-output">
+<span id="fortran-io"></span><h1>Fortran Input / Output<a class="headerlink" href="#fortran-input-output" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="formats-vs-unformatted">
+<h2>Formats vs. unformatted<a class="headerlink" href="#formats-vs-unformatted" title="Permalink to this headline">¶</a></h2>
+<p><cite>print</cite> or <cite>write</cite> statements for output and <cite>read</cite> statements for input can
+specify a <em>format</em> or can be <em>unformatted</em>.</p>
+<p>For example,</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">print</span> <span class="o">*</span><span class="p">,</span> <span class="s">&#39;x = &#39;</span><span class="p">,</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>is an <em>unformatted</em> print statement that prints a character string followed
+by the value of a variable <cite>x</cite>.  The format used to print <cite>x</cite> (e.g. the
+number of digits shown, the number of spaces in front) will be chosen
+by the compiler based on what type of variable <cite>x</cite> is.</p>
+<p>The statements:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">i</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">2.</span><span class="n">d0</span> <span class="o">/</span> <span class="mf">3.</span><span class="n">d0</span>
+<span class="nb">print</span> <span class="o">*</span><span class="p">,</span> <span class="s">&#39;i = &#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s">&#39; and x = &#39;</span><span class="p">,</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>yield:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">i</span> <span class="o">=</span>            <span class="mi">4</span>  <span class="ow">and</span> <span class="n">x</span> <span class="o">=</span>   <span class="mf">0.666666666666667</span>
+</pre></div>
+</div>
+<p>The * in the print statement tells the compiler to choose the format.</p>
+<p>To have more control over the format, a <em>formatted print</em> statement can be
+used.  A format can be placed directly in the statement in place of the * ,
+or can be
+written separately with a label, and the label number used in the <cite>print</cite>
+statement.</p>
+<p>For example, if we wish to display the integer <cite>i</cite> in a <em>field</em> of
+3 spaces and
+print <cite>x</cite> in scientific notation with 12 digits of the mantissa displayed,
+in a <em>field</em> that is 18 digits wide, we could do</p>
+<div class="highlight-default"><div class="highlight"><pre>    <span class="nb">print</span> <span class="mi">600</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span>
+<span class="mi">600</span> <span class="nb">format</span><span class="p">(</span><span class="s">&#39;i = &#39;</span><span class="p">,</span><span class="n">i3</span><span class="p">,</span><span class="s">&#39; and x = &#39;</span><span class="p">,</span> <span class="n">e17</span><span class="o">.</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This yields:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">i</span> <span class="o">=</span>   <span class="mi">4</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">0.6666666667E+00</span>
+</pre></div>
+</div>
+<p>The 4 is right-justified in a field of 3 characters after the &#8216;i = &#8216;
+string.</p>
+<p>Note that if the number doesn&#8217;t fit in the field, asterisks will be printed
+instead!</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">i</span> <span class="o">=</span> <span class="mi">4000</span>
+<span class="nb">print</span> <span class="mi">600</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>gives:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">i</span> <span class="o">=</span> <span class="o">***</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">=</span>  <span class="mf">0.6666666667E+00</span>
+</pre></div>
+</div>
+<p>Instead of using a label and writing the format on a separate line, it can
+be put directly in the print statement, though this is often hard to read.
+The above print statement can be written as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">print</span> <span class="s">&quot;(&#39;i = &#39;,i3,&#39; and x = &#39;, e17.10)&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-to-a-file">
+<h2>Writing to a file<a class="headerlink" href="#writing-to-a-file" title="Permalink to this headline">¶</a></h2>
+<p>Instead of printing directly to the terminal, we often want to write results
+out to a file.  This can be done using the <cite>open</cite> statement to open a file
+and attach it to a particular unit number, and then use the <cite>write</cite>
+statement to write to this unit:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">open</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s">&#39;output.txt&#39;</span><span class="p">)</span>
+<span class="n">write</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span>
+<span class="n">close</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This would do an <em>unformatted</em> write to the file &#8216;output.txt&#8217; instead of
+writing to the terminal.  The * in the write statement can be replaced by a
+format, or a format label, as in the <cite>print</cite> statement.</p>
+<p>There are many other optional arguments to the <cite>open</cite> command.</p>
+<p>Unit numbers should generally be larger than 6.  By default, unit 6 refers
+to the terminal for output, so</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">write</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>is the same as</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-input">
+<h2>Reading input<a class="headerlink" href="#reading-input" title="Permalink to this headline">¶</a></h2>
+<p>Unformatted read:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">print</span> <span class="o">*</span><span class="p">,</span> <span class="s">&quot;Please input n... &quot;</span>
+<span class="n">read</span> <span class="o">*</span><span class="p">,</span> <span class="n">n</span>
+</pre></div>
+</div>
+<p>Reading from a file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">open</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s">&quot;infile.txt&quot;</span><span class="p">)</span>
+<span class="n">read</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="o">*</span><span class="p">)</span> <span class="n">n</span>
+<span class="n">close</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fortran_debugging.html" title="Fortran debugging"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fortran_modules.html" title="Fortran modules"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

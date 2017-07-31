@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Linear Algebra software &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Random number generators" href="random.html" />
+    <link rel="prev" title="Timing code" href="timing.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="random.html" title="Random number generators"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="timing.html" title="Timing code"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Linear Algebra software</a><ul>
+<li><a class="reference internal" href="#the-blas">The BLAS</a></li>
+<li><a class="reference internal" href="#lapack">LAPACK</a></li>
+<li><a class="reference internal" href="#direct-methods-for-sparse-systems">Direct methods for sparse systems</a></li>
+<li><a class="reference internal" href="#other-references">Other references</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="timing.html"
+                        title="previous chapter">Timing code</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="random.html"
+                        title="next chapter">Random number generators</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/linalg.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="linear-algebra-software">
+<span id="linalg"></span><h1>Linear Algebra software<a class="headerlink" href="#linear-algebra-software" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-blas">
+<span id="blas"></span><h2>The BLAS<a class="headerlink" href="#the-blas" title="Permalink to this headline">¶</a></h2>
+<p>The Basic Linear Algebra Subroutines are extensively used in LAPACK, in
+other linear algebra packages, and elsewhere.</p>
+<p>There are three levels of BLAS:</p>
+<ul class="simple">
+<li>Level 1: Scalar and vector operations</li>
+<li>Level 2: Matrix-vector operations</li>
+<li>Level 3: Matrix-matrix operations</li>
+</ul>
+<p>For general information about BLAS see
+<a class="reference external" href="http://www.netlib.org/blas/faq.html">http://www.netlib.org/blas/faq.html</a>.</p>
+<p>Optimized versions of the BLAS are available for many computer
+architectures.  See</p>
+<ul class="simple">
+<li><a class="reference external" href="http://xianyi.github.io/OpenBLAS/">OpenBLAS</a></li>
+<li><a class="reference external" href="http://www.tacc.utexas.edu/tacc-projects/gotoblas2">GotoBLAS</a></li>
+</ul>
+<p>See also:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://math-atlas.sourceforge.net/">Automatically Tuned Linear Algebra Software (ATLAS)</a></li>
+<li><a class="reference external" href="http://www.netlib.org/blacs/">BLACS</a> Basic Linear Algebra Communication
+Subprograms with message passing.</li>
+<li><a class="reference external" href="http://www.ce.uniroma2.it/psblas/">PSBLAS</a> &#8211; Parallel sparse BLAS.</li>
+</ul>
+</div>
+<div class="section" id="lapack">
+<span id="linalg-lapack"></span><h2>LAPACK<a class="headerlink" href="#lapack" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.netlib.org/lapack/">LAPACK</a></li>
+<li><a class="reference external" href="http://www.netlib.org/lapack/lug/">LAPACK User&#8217;s Guide</a></li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/LAPACK">http://en.wikipedia.org/wiki/LAPACK</a></li>
+<li><a class="reference external" href="http://www.netlib.org/scalapack/">ScaLAPACK</a> for parallel distributed memory
+machines</li>
+</ul>
+<p>To install BLAS and LAPACK to work with gfortran, see:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://gcc.gnu.org/wiki/GfortranBuild">http://gcc.gnu.org/wiki/GfortranBuild</a></li>
+</ul>
+<p>On some linux systems, including the VM for the class, you can install both
+BLAS and LAPACK via:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ sudo apt-get install liblapack-dev
+</pre></div>
+</div>
+</div>
+<div class="section" id="direct-methods-for-sparse-systems">
+<span id="linalg-spdirect"></span><h2>Direct methods for sparse systems<a class="headerlink" href="#direct-methods-for-sparse-systems" title="Permalink to this headline">¶</a></h2>
+<p>Although iterative methods are often used for sparse systems, there are also
+excellent software packages for direct methods (such as Gaussian
+elimination):</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.cise.ufl.edu/research/sparse/umfpack/">UMFPACK</a></li>
+<li><a class="reference external" href="http://crd-legacy.lbl.gov/~xiaoye/SuperLU/">SuperLU</a></li>
+<li><a class="reference external" href="http://graal.ens-lyon.fr/MUMPS/">MUMPS</a></li>
+<li><a class="reference external" href="http://www.pardiso-project.org/">Pardiso</a></li>
+</ul>
+</div>
+<div class="section" id="other-references">
+<h2>Other references<a class="headerlink" href="#other-references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="lapack_examples.html#lapack-examples"><span class="std std-ref">LAPACK examples</span></a> for some examples.</li>
+<li><a class="reference external" href="http://www.netlib.org/utk/people/JackDongarra/la-sw.html">Recent list of freely available linear algebra software</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="random.html" title="Random number generators"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="timing.html" title="Timing code"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

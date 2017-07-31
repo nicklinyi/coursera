@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>IPython_notebook &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Sage" href="sage.html" />
+    <link rel="prev" title="Numerics in Python" href="numerical_python.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sage.html" title="Sage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="numerical_python.html" title="Numerics in Python"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">IPython_notebook</a><ul>
+<li><a class="reference internal" href="#interactive-notebooks">Interactive notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="numerical_python.html"
+                        title="previous chapter">Numerics in Python</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sage.html"
+                        title="next chapter">Sage</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ipython_notebook.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ipython-notebook">
+<span id="id1"></span><h1>IPython_notebook<a class="headerlink" href="#ipython-notebook" title="Permalink to this headline">¶</a></h1>
+<p>The IPython notebook is fairly new and changing rapidly.  The version
+originally installed in the class VM is version 0.10.  To get the latest
+development version, which has some nicer features, do the following:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ cd
+$ git clone https://github.com/ipython/ipython.git
+$ cd ipython
+$ sudo python setup.py install
+</pre></div>
+</div>
+<p>Then start the notebook via:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ ipython notebook --pylab inline
+</pre></div>
+</div>
+<p>in order to have the plots appear inline.  If you leave off this argument, a
+new window will be opened for each plot.</p>
+<p>Read more about the notebook in the <a class="reference external" href="http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html">documentation</a></p>
+<p>See some cool examples in the <a class="reference external" href="http://nbviewer.ipython.org/">IPython notebook viewer</a>.</p>
+<p>See also <a class="reference internal" href="sage.html#sagemath"><span class="std std-ref">Sage</span></a>.</p>
+<div class="section" id="interactive-notebooks">
+<h2>Interactive notebooks<a class="headerlink" href="#interactive-notebooks" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://ipython.org/ipython-doc/dev/whatsnew/version2.0.html">IPython 2.0</a>
+(released April 1, 2014) includes <a class="reference external" href="http://nbviewer.ipython.org/github/ipython/ipython/blob/2.x/examples/Interactive%20Widgets/Index.ipynb">interactive widgets</a></p>
+<p>See these <a class="reference external" href="http://ipython.org/install.html">Tips for installing IPython 2.0</a>
+on your own computer.</p>
+<p>SageMathCloud does not yet have IPython 2.0 and for various technical
+reasons will not have it for a while.</p>
+<p>SageMathCloud does now have <a class="reference external" href="https://github.com/jakevdp/mpld3">mpld3</a>, which
+allows zooming in on plots.  For a demo, see <a class="reference internal" href="labs/lab13.html#lab13"><span class="std std-ref">Lab 13: Tuesday May 13, 2014</span></a> or
+<a class="reference external" href="http://jakevdp.github.io/blog/2013/12/19/a-d3-viewer-for-matplotlib/">Jake&#8217;s blog post on mpld3</a></p>
+<p>In addition to <cite>mpld3</cite>, Jake Vanderplass has also developed:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/jakevdp/ipywidgets">ipywidgets</a> similar to the 2.0
+widgets in some ways but persistent also if the &#8220;static&#8221; notebook is
+viewed via <a class="reference external" href="http://nbviewer.ipython.org">nbviewer</a>.
+See <a class="reference external" href="http://jakevdp.github.io/blog/2013/12/05/static-interactive-widgets/">Jake&#8217;s blog post on ipywidgets</a>.</li>
+<li><a class="reference external" href="https://github.com/jakevdp/JSAnimation">JSAnimation</a> for persistent
+animations.  This is used for example for all the animations in the
+<a class="reference external" href="http://clawpack.github.io/doc/galleries.html">Clawpack galleries</a>.
+(<a class="reference external" href="http://www.clawpack.org">Clawpack</a> is an open source software
+package developed by Randy LeVeque and many others for solving
+hyperbolic partial differential equations.)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sage.html" title="Sage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="numerical_python.html" title="Numerics in Python"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

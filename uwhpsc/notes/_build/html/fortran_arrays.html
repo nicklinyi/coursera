@@ -1,0 +1,642 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Array storage in Fortran &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Fortran modules" href="fortran_modules.html" />
+    <link rel="prev" title="Fortran examples: Taylor series" href="fortran_taylor.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fortran_modules.html" title="Fortran modules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fortran_taylor.html" title="Fortran examples: Taylor series"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Array storage in Fortran</a><ul>
+<li><a class="reference internal" href="#passing-rank-1-arrays-to-subroutines-fortran-77-style">Passing rank 1 arrays to subroutines, Fortran 77 style</a></li>
+<li><a class="reference internal" href="#fortran-arrays-of-higher-rank">Fortran arrays of higher rank</a></li>
+<li><a class="reference internal" href="#why-do-we-care-how-arrays-are-stored">Why do we care how arrays are stored?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fortran_taylor.html"
+                        title="previous chapter">Fortran examples: Taylor series</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fortran_modules.html"
+                        title="next chapter">Fortran modules</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/fortran_arrays.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="array-storage-in-fortran">
+<span id="fortran-arrays"></span><h1>Array storage in Fortran<a class="headerlink" href="#array-storage-in-fortran" title="Permalink to this headline">¶</a></h1>
+<p>When an array is declared in Fortran, a set of storage locations in memory
+are set aside for the storage of all the values in the array.  How many
+bytes of memory this requires depends on how large the array is and what
+data type each element has. If the array is declared <em>allocatable</em> then the
+declaration only determines the <em>rank</em> of the array (the number of
+indices it will have), and memory is not actually allocated until the
+<cite>allocate</cite> statement is encountered.</p>
+<p>By default, arrays in Fortran are indexed starting at 1. So if you declare:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">real</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="p">::</span> <span class="n">x</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or equivalently:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">real</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="n">dimension</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">::</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>for example, then the elements should be referred to as <cite>x(1), x(2),</cite> and
+<cite>x(3)</cite>.</p>
+<p>You can also specify a different starting index, for example here are
+several arrays of length 3 with different starting indices:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">real</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="p">::</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">),</span> <span class="n">z</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A statement like</p>
+<blockquote>
+<div>x(0) = z(-1)</div></blockquote>
+<p>would then be valid.</p>
+<p>Arrays in Fortran occupy successive memory locations starting at some
+address in memory, say <cite>istart</cite>, and increasing by some constant number for
+each element of the array.  For example, for an array of <cite>real (kind=8)</cite> values
+the byte-address would increase by 8 for each successive element.  As
+programmers we don&#8217;t need to worry much about the actual addresses, but it
+is important to understand how arrays are laid out in memory, particularly
+if the rank of the array (number of indices) is larger than 1, as discussed
+below in Section <a class="reference internal" href="#fortran-arrays-hirank"><span class="std std-ref">Fortran arrays of higher rank</span></a>.</p>
+<div class="section" id="passing-rank-1-arrays-to-subroutines-fortran-77-style">
+<h2>Passing rank 1 arrays to subroutines, Fortran 77 style<a class="headerlink" href="#passing-rank-1-arrays-to-subroutines-fortran-77-style" title="Permalink to this headline">¶</a></h2>
+<p>Even for arrays of rank 1, it is sometimes useful to remember that to a
+Fortran compiler an array is often specified simply the the memory address
+of the first component.  This helps explain the strange behavior of the
+following program:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/arraypassing1.f90</span>
+
+<span class="k">program </span><span class="n">arraypassing1</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mf">2.</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">call </span><span class="n">setvals</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span><span class="p">,</span><span class="n">x</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;y = &quot;</span><span class="p">,</span><span class="n">y</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;i = &quot;</span><span class="p">,</span><span class="n">i</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;j = &quot;</span><span class="p">,</span><span class="n">j</span>
+
+<span class="k">end program </span><span class="n">arraypassing1</span>
+
+<span class="k">subroutine </span><span class="n">setvals</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="c">! subroutine that sets values in an array a of length 3.</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="kt">integer </span><span class="n">i</span>
+    <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">3</span>
+        <span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mf">5.</span>
+        <span class="n">enddo</span>
+<span class="k">end subroutine </span><span class="n">setvals</span>
+</pre></div>
+</td></tr></table></div>
+<p>which produces the output:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span>    <span class="mf">5.00000000000000</span>
+<span class="n">y</span> <span class="o">=</span>    <span class="mf">5.00000000000000</span>
+<span class="n">i</span> <span class="o">=</span>   <span class="mi">1075052544</span>
+<span class="n">j</span> <span class="o">=</span>            <span class="mi">0</span>
+</pre></div>
+</div>
+<p>The address of <cite>x</cite> is passed to the subroutine, which interprets it as the
+address of the starting point of an array of length 3.  The subroutine sets
+the value of <cite>x</cite> to 5 and also sets the values of the next 2 memory
+locations (based on 8-byte real numbers) to 5.  Because <cite>y</cite>, <cite>i</cite>, and <cite>j</cite>
+were declared after <cite>x</cite> and hence happen to occupy memory after <cite>x</cite>,
+these values are corrupted by the subroutine.</p>
+<p>Note that integers are stored in 4 bytes so both <cite>i</cite> and <cite>j</cite> are covered by
+the single 8-bytes interpreted as <cite>a(3)</cite>.  Storing a value as
+an 8-byte float and then interpreting  the two halfs as
+integers (when <cite>i</cite> and <cite>j</cite> are
+printed) is likely to give nonsense.</p>
+<p>It is also possible to make the code crash by improperly accessing memory.
+(This is actually be better than just producing nonsense with no
+warning, but figuring out <em>why</em> the code crashed may be difficult.)</p>
+<p>If you change the dimension of <cite>a</cite> from 3 to 1000 in the subroutine above:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/arraypassing2.f90</span>
+
+<span class="k">program </span><span class="n">arraypassing2</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mf">2.</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">call </span><span class="n">setvals</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span><span class="p">,</span><span class="n">x</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;y = &quot;</span><span class="p">,</span><span class="n">y</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;i = &quot;</span><span class="p">,</span><span class="n">i</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;j = &quot;</span><span class="p">,</span><span class="n">j</span>
+
+<span class="k">end program </span><span class="n">arraypassing2</span>
+
+<span class="k">subroutine </span><span class="n">setvals</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="c">! subroutine that sets values in an array a of length 1000.</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="kt">integer </span><span class="n">i</span>
+    <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1000</span>
+        <span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mf">5.</span>
+        <span class="n">enddo</span>
+<span class="k">end subroutine </span><span class="n">setvals</span>
+</pre></div>
+</td></tr></table></div>
+<p>then the code produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">Segmentation</span> <span class="n">fault</span>
+</pre></div>
+</div>
+<p>This means that the subroutine attempted to write into a memory location
+that it should not have access to.  A small number of memory locations were
+reserved for data when the variables <cite>x,y,i,j</cite> were declared.  No new memory
+is allocated in the subroutine &#8211; the statement</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">real</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="n">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span> <span class="p">::</span> <span class="n">a</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>simply declares a <cite>dummy argument</cite> of rank 1.  This statement could be
+replaced by</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">real</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="n">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span> <span class="p">::</span> <span class="n">a</span><span class="p">(:)</span>
+</pre></div>
+</div>
+<p>and the code would still compile and give the same results.  The starting
+address of a set of storage locations is passed into the subroutine and the
+location of any element in the array is computed from this, whether or not
+it actually lies in the array as it was declared in the calling program!</p>
+<p>The programs above are written in Fortran 77 style.
+In Fortran 77, every subroutine or function is compiled independently of
+others with no way to check that the arguments passed into a subroutine
+actually agree in type with the dummy arguments used in the subroutine.
+This is a limitation that often leads to debugging nightmares.</p>
+<p>Luckily Fortran 90 can help reduce these problems, since it is possible to
+create an <cite>interface</cite> that provides more information about the arguments
+expected.  Here&#8217;s one simple way to do this for the code above:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/arraypassing3.f90</span>
+
+<span class="k">program </span><span class="n">arraypassing3</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mf">2.</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">call </span><span class="n">setvals</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span><span class="p">,</span><span class="n">x</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;y = &quot;</span><span class="p">,</span><span class="n">y</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;i = &quot;</span><span class="p">,</span><span class="n">i</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;j = &quot;</span><span class="p">,</span><span class="n">j</span>
+
+<span class="k">contains</span>
+
+<span class="k">subroutine </span><span class="n">setvals</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="c">! subroutine that sets values in an array a of length 3.</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="kt">integer </span><span class="n">i</span>
+    <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">3</span>
+        <span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mf">5.</span>
+        <span class="n">enddo</span>
+<span class="k">end subroutine </span><span class="n">setvals</span>
+
+<span class="k">end program </span><span class="n">arraypassing3</span>
+</pre></div>
+</td></tr></table></div>
+<p>Trying to compile this code produces an error message:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran arraypassing3.f90
+arraypassing3.f90:14.17:
+
+    call setvals(x)
+                1
+Error: Type/rank mismatch in argument &#39;a&#39; at (1)
+</pre></div>
+</div>
+<p>Now at least the compiler recognizes that an array is expected
+rather than a single
+value.  But it is still possible to write a code that compiles and produces
+nonsense by declaring <cite>x</cite> and <cite>y</cite> to be rank 1 arrays of length 1:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/arraypassing4.f90</span>
+
+<span class="k">program </span><span class="n">arraypassing4</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span>
+
+    <span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">2.</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">call </span><span class="n">setvals</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span><span class="p">,</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;y = &quot;</span><span class="p">,</span><span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;i = &quot;</span><span class="p">,</span><span class="n">i</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;j = &quot;</span><span class="p">,</span><span class="n">j</span>
+
+<span class="k">contains</span>
+
+<span class="k">subroutine </span><span class="n">setvals</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="c">! subroutine that sets values in an array a of length 3.</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="kt">integer </span><span class="n">i</span>
+    <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">3</span>
+        <span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mf">5.</span>
+        <span class="n">enddo</span>
+<span class="k">end subroutine </span><span class="n">setvals</span>
+
+<span class="k">end program </span><span class="n">arraypassing4</span>
+</pre></div>
+</td></tr></table></div>
+<p>The compiler sees that an object of the correct type (a rank 1 array) is
+being passed and does not give an error.  Running the code gives</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span>    <span class="mf">5.00000000000000</span>
+<span class="n">y</span> <span class="o">=</span>    <span class="mf">5.00000000000000</span>
+<span class="n">i</span> <span class="o">=</span>   <span class="mi">1075052544</span>
+<span class="n">j</span> <span class="o">=</span>            <span class="mi">0</span>
+</pre></div>
+</div>
+<p>You might hope that using the gfortran flag <cite>-fbounds-check</cite> (see
+<a class="reference internal" href="gfortran_flags.html#gfortran-flags"><span class="std std-ref">Useful gfortran flags</span></a>) would catch such bugs.  Unfortunately it does not.  It
+will catch it if you refer to <cite>x(2)</cite> in the main program of the code just
+given, where it knows the length of <cite>x</cite> that was declared, but not in the
+subroutine.</p>
+</div>
+<div class="section" id="fortran-arrays-of-higher-rank">
+<span id="fortran-arrays-hirank"></span><h2>Fortran arrays of higher rank<a class="headerlink" href="#fortran-arrays-of-higher-rank" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we declare <cite>A</cite> to be a rank 2 array with 3 rows and 4 columns,
+which we might want to do to store a 3 by 4 matrix.</p>
+<blockquote>
+<div>real(kind=8) :: A(3,4)</div></blockquote>
+<p>Since memory is laid out linearly (each location has a single address, not a
+set of indices), the compiler must decide how to map the 12
+array elements to memory locations.</p>
+<p>Unfortunately different languages use different conventions.  In Fortran
+arrays are stored <em>by column</em> in memory, so the 12 consecutive memory
+locations would correspond to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To illustrate this, consider the following program.  It declares an array
+<cite>A</cite> of shape (3,4) and a rank-1 array <cite>B</cite> of length 12.  It also uses the
+Fortran <cite>equivalence</cite> statement to tell the compiler that these two arrays
+should point to the <em>same</em> locations in memory.  This program shows that
+<cite>A(i,j)</cite> is the same as <cite>B(3*(j-1) + i)</cite>:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/rank2.f90</span>
+
+<span class="k">program </span><span class="n">rank2</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">A</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">B</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="k">equivalence</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="nb">reshape</span><span class="p">((</span><span class="o">/</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span><span class="o">/</span><span class="p">),</span> <span class="p">(</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">/</span><span class="p">))</span>
+
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span>
+        <span class="k">print </span><span class="mi">20</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+ <span class="mi">20</span>     <span class="k">format</span><span class="p">(</span><span class="s2">&quot;Row &quot;</span><span class="p">,</span><span class="n">i1</span><span class="p">,</span><span class="s2">&quot; of A contains: &quot;</span><span class="p">,</span> <span class="mi">11</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="n">f6</span><span class="p">.</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">print </span><span class="mi">21</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+ <span class="mi">21</span>     <span class="k">format</span><span class="p">(</span><span class="s2">&quot;Row &quot;</span><span class="p">,</span><span class="n">i1</span><span class="p">,</span><span class="s2">&quot; is in locations&quot;</span><span class="p">,</span><span class="mi">4</span><span class="n">i3</span><span class="p">)</span>
+        <span class="k">print </span><span class="mi">22</span><span class="p">,</span> <span class="p">(</span><span class="n">B</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">i</span><span class="p">),</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+ <span class="mi">22</span>     <span class="k">format</span><span class="p">(</span><span class="s2">&quot;These elements of B contain:&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="n">f6</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span>
+        <span class="n">enddo</span>
+
+<span class="k">end program </span><span class="n">rank2</span>
+</pre></div>
+</td></tr></table></div>
+<p>This program produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">Row</span> <span class="mi">1</span> <span class="n">of</span> <span class="n">A</span> <span class="n">contains</span><span class="p">:</span>              <span class="mf">10.0</span>  <span class="mf">40.0</span>  <span class="mf">70.0</span> <span class="mf">100.0</span>
+<span class="n">Row</span> <span class="mi">1</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">locations</span>  <span class="mi">1</span>  <span class="mi">4</span>  <span class="mi">7</span> <span class="mi">10</span>
+<span class="n">These</span> <span class="n">elements</span> <span class="n">of</span> <span class="n">B</span> <span class="n">contain</span><span class="p">:</span>      <span class="mf">10.0</span>  <span class="mf">40.0</span>  <span class="mf">70.0</span> <span class="mf">100.0</span>
+
+<span class="n">Row</span> <span class="mi">2</span> <span class="n">of</span> <span class="n">A</span> <span class="n">contains</span><span class="p">:</span>              <span class="mf">20.0</span>  <span class="mf">50.0</span>  <span class="mf">80.0</span> <span class="mf">110.0</span>
+<span class="n">Row</span> <span class="mi">2</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">locations</span>  <span class="mi">2</span>  <span class="mi">5</span>  <span class="mi">8</span> <span class="mi">11</span>
+<span class="n">These</span> <span class="n">elements</span> <span class="n">of</span> <span class="n">B</span> <span class="n">contain</span><span class="p">:</span>      <span class="mf">20.0</span>  <span class="mf">50.0</span>  <span class="mf">80.0</span> <span class="mf">110.0</span>
+
+<span class="n">Row</span> <span class="mi">3</span> <span class="n">of</span> <span class="n">A</span> <span class="n">contains</span><span class="p">:</span>              <span class="mf">30.0</span>  <span class="mf">60.0</span>  <span class="mf">90.0</span> <span class="mf">120.0</span>
+<span class="n">Row</span> <span class="mi">3</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">locations</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="mi">9</span> <span class="mi">12</span>
+<span class="n">These</span> <span class="n">elements</span> <span class="n">of</span> <span class="n">B</span> <span class="n">contain</span><span class="p">:</span>      <span class="mf">30.0</span>  <span class="mf">60.0</span>  <span class="mf">90.0</span> <span class="mf">120.0</span>
+</pre></div>
+</div>
+<p>Note also that the <cite>reshape</cite> command used in Line 10 of this program takes
+the set of values and assigns them to elements of the array <em>by columns</em>.
+Actually it just puts these values into the 12 memory elements used for the
+matrix one after another, but because of the way arrays are interpreted,
+this corresponds to filling the array by columns.</p>
+<p>Note some other things about this program:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Lines 10, 13, 15, and 17 use an <cite>implied do</cite> construct, in which <cite>i</cite> or <cite>j</cite>
+loops over the values specified.</li>
+<li>Lines 14, 16, and 18 are <em>format statements</em> and these formats are used
+in the lines preceding them instead of the default format <cite>*</cite>.
+For more about formatted I/O see <a class="reference internal" href="fortran_io.html#fortran-io"><span class="std std-ref">Fortran Input / Output</span></a>.</li>
+</ul>
+</div></blockquote>
+<p>In C or Python, storage is <em>by rows</em> instead, so the 12 consecutive
+memorylocations would correspond to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">etc</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="why-do-we-care-how-arrays-are-stored">
+<h2>Why do we care how arrays are stored?<a class="headerlink" href="#why-do-we-care-how-arrays-are-stored" title="Permalink to this headline">¶</a></h2>
+<p>The layout of arrays in memory
+is often important to know when doing high-performance computing, as we
+will see when we discuss cache properties.</p>
+<p>It is also important to know this in order to understand older Fortran
+programs.  When an array of rank 2 is passed to a subroutine, the subroutine
+needs to know not only that the array has rank 2, but also what the <em>leading
+dimension</em> of the array is, the number of rows.  In older codes this value
+is often passed in to a subroutine along with the array.  In Fortran 90 this
+can be avoided if there is a suitable interface, for example if the
+subroutine is in a module.</p>
+<p>As we saw above, the <cite>(i,j)</cite> element of the 3 by 4 array <cite>A</cite> is in location
+<cite>(3*(j-1) + i)</cite>.  The same would be true for a 3 by 5 array or a 3 by 1000
+array.  More generally, if the array is <cite>nrows</cite> by <cite>ncols</cite>, then the <cite>(i,j)</cite>
+element is in location <cite>nrows*(j-1) + i</cite> and so the value of <cite>nrows</cite> must be
+known by the compiler in order to translate the indices <cite>(i,j)</cite> into the
+propoer storage location.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fortran_modules.html" title="Fortran modules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fortran_taylor.html" title="Fortran examples: Taylor series"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

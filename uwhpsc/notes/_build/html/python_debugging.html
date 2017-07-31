@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python debugging &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Animation in Python" href="animation.html" />
+    <link rel="prev" title="Plotting with Python" href="python_plotting.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="animation.html" title="Animation in Python"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="python_plotting.html" title="Plotting with Python"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python debugging</a><ul>
+<li><a class="reference internal" href="#python-ides">Python IDEs</a></li>
+<li><a class="reference internal" href="#reloading-modules">Reloading modules</a></li>
+<li><a class="reference internal" href="#print-statements">Print statements</a></li>
+<li><a class="reference internal" href="#pdb-debugger">pdb debugger</a></li>
+<li><a class="reference internal" href="#debugging-after-an-exception-occurs">Debugging after an exception occurs</a></li>
+<li><a class="reference internal" href="#using-pdb-from-ipython">Using pdb from IPython</a></li>
+<li><a class="reference internal" href="#other-pdb-commands">Other pdb commands</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="python_plotting.html"
+                        title="previous chapter">Plotting with Python</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="animation.html"
+                        title="next chapter">Animation in Python</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/python_debugging.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="python-debugging">
+<span id="id1"></span><h1>Python debugging<a class="headerlink" href="#python-debugging" title="Permalink to this headline">¶</a></h1>
+<p>For some general tips on writing and debugging programs in any language, see
+<span class="xref std std-ref">debugging</span>.</p>
+<div class="section" id="python-ides">
+<h2>Python IDEs<a class="headerlink" href="#python-ides" title="Permalink to this headline">¶</a></h2>
+<p>An IDE (Integrated Development Environment) generally provides an editor and
+debugger that are linked directly to the language.   See</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Integrated_development_environment">http://en.wikipedia.org/wiki/Integrated_development_environment</a>.</li>
+</ul>
+</div></blockquote>
+<p>Python has a IDE called IDLE that
+provides an editor that has some debugger features.  You might want to
+explore this, see</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://docs.python.org/library/idle.html">http://docs.python.org/library/idle.html</a>.</li>
+</ul>
+</div></blockquote>
+<p>Other IDEs also provided Python interfaces, such as Eclipse.
+See, e.g.,</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Eclipse_(software)">http://en.wikipedia.org/wiki/Eclipse_(software)</a></li>
+<li><a class="reference external" href="http://www.vogella.de/articles/Python/article.html">http://www.vogella.de/articles/Python/article.html</a></li>
+<li><a class="reference external" href="http://heather.cs.ucdavis.edu/~matloff/eclipse.html">http://heather.cs.ucdavis.edu/~matloff/eclipse.html</a></li>
+</ul>
+</div></blockquote>
+<p>These environments generally provide an interface to <cite>pdb</cite>, the Python
+debugger described below.</p>
+</div>
+<div class="section" id="reloading-modules">
+<h2>Reloading modules<a class="headerlink" href="#reloading-modules" title="Permalink to this headline">¶</a></h2>
+<p>Note that if you are debugging a Python code by running it repeatedly in an
+interactive shell, you need to make sure it is seeing the most recent
+version of the code after you make editing changes.  If you run it using
+<cite>execfile</cite> (or <cite>run</cite> in IPython), it should find the most recent version.</p>
+<p>If you import it as a module, then you need to make sure you do a <cite>reload</cite>
+as described at <a class="reference internal" href="python_scripts_modules.html#python-reload"><span class="std std-ref">Reloading modules</span></a>.</p>
+</div>
+<div class="section" id="print-statements">
+<h2>Print statements<a class="headerlink" href="#print-statements" title="Permalink to this headline">¶</a></h2>
+<p>Print statements can be added almost anywhere in a Python code to print
+things out to the terminal window as it goes along.</p>
+<p>You might want to put some special symbols in debugging statements to flag
+them as such, which makes it easier to see what output is your debug output
+and also makes it easier to find them again later to remove from the code,
+e.g. you might use &#8220;+++&#8221; or &#8220;DEBUG&#8221;.</p>
+<p>As an example, suppose you are trying to better understand Python namespaces
+and the difference between local and global variables.  Then this code might
+be useful:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">$UWHPSC/codes/python/debugdemo1a.py</span>
+
+<span class="sd">Debugging demo using print statements</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mf">3.</span>
+<span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">22.</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">z</span><span class="o">+</span><span class="mi">10</span>
+    <span class="k">print</span> <span class="s">&quot;+++ in function f: x = </span><span class="si">%s</span><span class="s">, y = </span><span class="si">%s</span><span class="s">, z = </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">print</span> <span class="s">&quot;+++ before calling f: x = </span><span class="si">%s</span><span class="s">, y = </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;+++ after calling f: x = </span><span class="si">%s</span><span class="s">, y = </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+</pre></div>
+</td></tr></table></div>
+<p>Here the print function in the definition of <cite>f(x)</cite> is being used for
+debugging purposes.
+Executing this code gives:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">execfile</span><span class="p">(</span><span class="s">&quot;debugdemo1a.py&quot;</span><span class="p">)</span>
+<span class="go">+++ before calling f: x = 3.0, y = -22.0</span>
+<span class="go">+++ in function f: x = 13.0, y = -22.0, z = 3.0</span>
+<span class="go">+++ after calling f: x = 3.0, y = 13.0</span>
+</pre></div>
+</div>
+<p>If you are printing large amounts you might want to write to a file rather
+than to the terminal, see <span class="xref std std-ref">python_io</span>.</p>
+</div>
+<div class="section" id="pdb-debugger">
+<span id="pdb"></span><h2>pdb debugger<a class="headerlink" href="#pdb-debugger" title="Permalink to this headline">¶</a></h2>
+<p>Inserting print statements may work best in some situations, but it is often
+better to use a <em>debugger</em>.  The Python debugger pdb is very easy to use,
+often even easier than inserting print statements and well worth learning.
+See the <a class="reference external" href="http://docs.python.org/2/library/pdb.html">pdb documentation</a>
+for more information.</p>
+<p>You can insert <em>breakpoints</em> in your code where control should pass back to
+the user, at which point you can query the value of any variable, or step
+through the program line by line from this point on.   For the above example
+we might do this as below:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">$UWHPSC/codes/python/debugdemo1b.py</span>
+
+<span class="sd">Debugging demo using pdb.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mf">3.</span>
+<span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">22.</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">z</span><span class="o">+</span><span class="mi">10</span>
+    <span class="kn">import</span> <span class="nn">pdb</span><span class="p">;</span> <span class="n">pdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&quot;x = &quot;</span><span class="p">,</span><span class="n">x</span>
+<span class="k">print</span> <span class="s">&quot;y = &quot;</span><span class="p">,</span><span class="n">y</span>
+
+</pre></div>
+</td></tr></table></div>
+<p>Of course one could set multiple breakpoints with other <cite>pdb.set_trace()</cite>
+commands.</p>
+<p>Now we get the prompt for the <cite>pdb</cite> shell when we hit the breakpoint:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">execfile</span><span class="p">(</span><span class="s">&quot;debugdemo1b.py&quot;</span><span class="p">)</span>
+
+<span class="go">&gt; /Users/rjl/uwhpsc/codes/python/debugdemo1b.py(11)f()</span>
+<span class="go">-&gt; return x</span>
+
+<span class="go">(Pdb) p x</span>
+<span class="go">13.0</span>
+<span class="go">(Pdb) p y</span>
+<span class="go">-22.0</span>
+<span class="go">(Pdb) p z</span>
+<span class="go">3.0</span>
+</pre></div>
+</div>
+<p>Note that <cite>p</cite> is short for <cite>print</cite>.  You could also type <cite>print x</cite> but this
+would then execute the Python print command instead of the debugger command
+(though in this case it would print the same thing).</p>
+<p>There are many other <cite>pdb</cite> commands,
+such as <cite>next</cite> to execute the next line, <cite>continue</cite> to continue executing
+until the next breakpoint, etc.  See the documentation for more details.</p>
+<p>For example, lets execute the next two statements and then print <cite>x</cite> and <cite>y</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">n</span>
+<span class="o">--</span><span class="n">Return</span><span class="o">--</span>
+<span class="o">&gt;</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">rjl</span><span class="o">/</span><span class="n">uwhpsc</span><span class="o">/</span><span class="n">codes</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">debugdemo1b</span><span class="o">.</span><span class="n">py</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="n">f</span><span class="p">()</span><span class="o">-&gt;</span><span class="mf">13.0</span>
+<span class="o">-&gt;</span> <span class="k">return</span> <span class="n">x</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">n</span>
+<span class="o">&gt;</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">rjl</span><span class="o">/</span><span class="n">uwhpsc</span><span class="o">/</span><span class="n">codes</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">debugdemo1b</span><span class="o">.</span><span class="n">py</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">-&gt;</span> <span class="nb">print</span> <span class="s">&quot;x = &quot;</span><span class="p">,</span><span class="n">x</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+<span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">13.0</span><span class="p">)</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">z</span>
+<span class="o">***</span> <span class="ne">NameError</span><span class="p">:</span> <span class="ne">NameError</span><span class="p">(</span><span class="s">&quot;name &#39;z&#39; is not defined&quot;</span><span class="p">,)</span>
+
+<span class="p">(</span><span class="n">Pdb</span><span class="p">)</span> <span class="n">quit</span>
+<span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>You can also run the code as a script from the Unix prompt and again you
+will be put into the pdb shell when the breakpoint is reached:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ python debugdemo1b.py
+&gt; /Users/rjl/uwhpsc/codes/python/debugdemo1b.py(11)f()
+-&gt; return x
+(Pdb) p z
+3.0
+(Pdb) continue
+x =  3.0
+y =  13.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging-after-an-exception-occurs">
+<h2>Debugging after an exception occurs<a class="headerlink" href="#debugging-after-an-exception-occurs" title="Permalink to this headline">¶</a></h2>
+<p>Often code has bugs that cause an exception to be raised that causes the
+program to halt execution. Consider the following file:</p>
+<p>If you change N to 20 it will run fine, but with <cite>N = 40</cite> we find:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">execfile</span><span class="p">(</span><span class="s">&quot;debugdemo2.py&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;debugdemo2.py&quot;</span>, line <span class="m">14</span>, in <span class="n">&lt;module&gt;</span>
+    <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">eps2</span>
+<span class="gr">ZeroDivisionError</span>: <span class="n">float division</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;debugdemo2.py&quot;</span>, line <span class="m">14</span>, in <span class="n">&lt;module&gt;</span>
+    <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">eps2</span>
+<span class="gr">ZeroDivisionError</span>: <span class="n">float division</span>
+</pre></div>
+</div>
+<p>At some point <cite>eps2</cite> apparently has the value 0.  To figure out when this
+happens, we could insert a <cite>pdb.set_trace()</cite> command in the loop and step
+through it until the error occurs and then look at <cite>i</cite>, but we can do so
+even more easily using a <em>post-mortem</em> analysis after it dies, using
+<cite>pdb.pm()</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pdb</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pdb</span><span class="o">.</span><span class="n">pm</span><span class="p">()</span>
+<span class="go">&gt; /Users/rjl/uwhpsc/codes/python/debugdemo2.py(14)&lt;module&gt;()-&gt;None</span>
+<span class="go">-&gt; w[i] = 1/eps2</span>
+<span class="go">(Pdb) p i</span>
+<span class="go">34</span>
+<span class="go">(Pdb) p eps2</span>
+<span class="go">0.0</span>
+<span class="go">(Pdb) p epsilon</span>
+<span class="go">5.9962169748381002e-17</span>
+</pre></div>
+</div>
+<p>This starts up <cite>pdb</cite> at exactly the point where the exception is about to
+occur.  We see that the divide by zero happens when <cite>i = 34</cite> (because
+<cite>epsilon</cite> is so small that <cite>1. + epsilon</cite> is rounded off to <cite>1.</cite> in the
+computer, see <span class="xref std std-ref">floats</span>).</p>
+</div>
+<div class="section" id="using-pdb-from-ipython">
+<h2>Using pdb from IPython<a class="headerlink" href="#using-pdb-from-ipython" title="Permalink to this headline">¶</a></h2>
+<p>In IPython it&#8217;s even easier to do this post-mortem analysis.  Just type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">50</span><span class="p">]:</span> <span class="n">pdb</span>
+<span class="n">Automatic</span> <span class="n">pdb</span> <span class="n">calling</span> <span class="n">has</span> <span class="n">been</span> <span class="n">turned</span> <span class="n">ON</span>
+</pre></div>
+</div>
+<p>and then <cite>pdb</cite> will be automatically invoked if an exception occurs:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">51</span><span class="p">]:</span> <span class="n">run</span> <span class="n">debugdemo2</span><span class="o">.</span><span class="n">py</span>
+<span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">ZeroDivisionError</span><span class="p">:</span> <span class="nb">float</span> <span class="n">division</span>
+<span class="o">&gt;</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">rjl</span><span class="o">/</span><span class="n">uwhpsc</span><span class="o">/</span><span class="n">codes</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">debugdemo2</span><span class="o">.</span><span class="n">py</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+     <span class="mi">13</span>     <span class="n">eps2</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="mf">1.</span>         <span class="c"># expect eps2 == epsilon?</span>
+<span class="o">---&gt;</span> <span class="mi">14</span>     <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">eps2</span>
+     <span class="mi">15</span>
+
+<span class="n">ipdb</span><span class="o">&gt;</span> <span class="n">p</span> <span class="n">i</span>
+<span class="mi">34</span>
+<span class="n">ipdb</span><span class="o">&gt;</span> <span class="n">q</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">52</span><span class="p">]:</span>
+</pre></div>
+</div>
+<p>Type <cite>pdb</cite> again to turn it off.</p>
+<p>Note: <cite>pdb</cite>, like <cite>run</cite> is a <cite>magic function</cite> in IPython, an extension of
+the language itself, type <cite>magic</cite> at the IPython prompt for more info.</p>
+<p>If these commands don&#8217;t work, type <cite>%magic</cite> and read this documentation.</p>
+</div>
+<div class="section" id="other-pdb-commands">
+<h2>Other pdb commands<a class="headerlink" href="#other-pdb-commands" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of other commands, see the references above.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="animation.html" title="Animation in Python"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="python_plotting.html" title="Plotting with Python"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

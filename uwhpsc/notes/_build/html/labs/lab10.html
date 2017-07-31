@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lab 10: Tuesday May 1, 2014 &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Notes to accompany lab sessions" href="index.html" />
+    <link rel="next" title="Lab 11: Tuesday May 6, 2014" href="lab11.html" />
+    <link rel="prev" title="Lab 9: Tuesday April 29, 2014" href="lab9.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="../_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="lab11.html" title="Lab 11: Tuesday May 6, 2014"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lab9.html" title="Lab 9: Tuesday April 29, 2014"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Notes to accompany lab sessions</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Lab 10: Tuesday May 1, 2014</a><ul>
+<li><a class="reference internal" href="#programming-problem">Programming problem</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lab9.html"
+                        title="previous chapter">Lab 9: Tuesday April 29, 2014</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lab11.html"
+                        title="next chapter">Lab 11: Tuesday May 6, 2014</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/labs/lab10.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lab-10-tuesday-may-1-2014">
+<span id="lab10"></span><h1>Lab 10: Tuesday May 1, 2014<a class="headerlink" href="#lab-10-tuesday-may-1-2014" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="programming-problem">
+<h2>Programming problem<a class="headerlink" href="#programming-problem" title="Permalink to this headline">¶</a></h2>
+<p>Work on this in groups!</p>
+<ol class="arabic">
+<li><p class="first">The OpenMP code <cite>$UWHPSC/labs/lab10/array_omp.f90</cite> contains some bugs.
+Find the bugs and fix them so that it runs and gives output like this:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran -fopenmp array_omp.f90
+$ ./a.out
+ nthreads =            6
+ b and bt should be equal
+ b=
+    0.270000D+02
+    0.330000D+02
+    0.390000D+02
+    0.450000D+02
+    0.510000D+02
+ bt=
+    0.270000D+02
+    0.330000D+02
+    0.390000D+02
+    0.450000D+02
+    0.510000D+02
+</pre></div>
+</div>
+</li>
+<li><p class="first">If <span class="math">\(A\)</span> is an <span class="math">\(n \times n\)</span> matrix and <span class="math">\(x\)</span> is a vector of
+length <span class="math">\(n\)</span>, then <span class="math">\(x^TAx\)</span> is a scalar, a &#8220;quadratic form&#8221;
+since it is the sum of terms of the form <span class="math">\(a_{ij}x_ix_j\)</span> that are
+quadratic in the elements of <span class="math">\(x\)</span> .</p>
+<p>Write an OpenMP code to compute this for a given matrix and vector.  Write
+out the matrix-vector multiplies as loops and use &#8220;omp parallel do&#8221; loops to
+compute first the vector <span class="math">\(Ax\)</span> and then the inner product of this with
+the vector <cite>x</cite>.  Test your code using the <span class="math">\(10 \times 10\)</span> identity matrix
+for <span class="math">\(A\)</span> and <span class="math">\(x_i = i\)</span>, in which case the correct answer can be
+determined to be 385 from the formula</p>
+<blockquote>
+<div><p><span class="math">\(\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}6.\)</span></p>
+</div></blockquote>
+</li>
+<li><p class="first">There is a quiz for this lab.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="lab11.html" title="Lab 11: Tuesday May 6, 2014"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lab9.html" title="Lab 9: Tuesday April 29, 2014"
+             >previous</a> |</li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Notes to accompany lab sessions</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

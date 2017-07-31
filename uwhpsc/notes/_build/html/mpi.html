@@ -1,0 +1,1003 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MPI &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Makefiles" href="makefiles.html" />
+    <link rel="prev" title="OpenMP" href="openmp.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="makefiles.html" title="Makefiles"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="openmp.html" title="OpenMP"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">MPI</a><ul>
+<li><a class="reference internal" href="#mpi-implementations">MPI implementations</a></li>
+<li><a class="reference internal" href="#mpi-on-the-class-vm">MPI on the class VM</a></li>
+<li><a class="reference internal" href="#test-code">Test code</a></li>
+<li><a class="reference internal" href="#reduction-example">Reduction example</a></li>
+<li><a class="reference internal" href="#send-receive-example">Send-Receive example</a></li>
+<li><a class="reference internal" href="#master-worker-examples">Master-worker examples</a></li>
+<li><a class="reference internal" href="#sample-codes">Sample codes</a></li>
+<li><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="openmp.html"
+                        title="previous chapter">OpenMP</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="makefiles.html"
+                        title="next chapter">Makefiles</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/mpi.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="mpi">
+<span id="id1"></span><h1>MPI<a class="headerlink" href="#mpi" title="Permalink to this headline">¶</a></h1>
+<p>MPI stands for <em>Message Passing Interface</em> and is a standard approach for
+programming distributed memory machines such as clusters, supercomputers, or
+heterogeneous networks of computers.  It can also be used on a single
+shared memory computer, although it is often more cumbersome to program in
+MPI than in OpenMP.</p>
+<div class="section" id="mpi-implementations">
+<h2>MPI implementations<a class="headerlink" href="#mpi-implementations" title="Permalink to this headline">¶</a></h2>
+<p>A number of different implementations are available (open source and vendor
+supplied for specific machines).   See
+<a class="reference external" href="http://www.mcs.anl.gov/research/projects/mpi/implementations.html">this list</a>, for
+example.</p>
+</div>
+<div class="section" id="mpi-on-the-class-vm">
+<h2>MPI on the class VM<a class="headerlink" href="#mpi-on-the-class-vm" title="Permalink to this headline">¶</a></h2>
+<p>The VM has <a class="reference external" href="http://www.open-mpi.org/">open-mpi</a>  partially installed.</p>
+<p>You will need to do the following:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ sudo apt-get update
+$ sudo apt-get install openmpi-dev
+</pre></div>
+</div>
+<p>On other Ubuntu installations you will also have to do:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ sudo apt-get install openmpi-bin          # Already on the VM
+</pre></div>
+</div>
+<p>You should then be able to do the following:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ cd $UWHPSC/codes/mpi
+$ mpif90 test1.f90
+$ mpiexec -n 4 a.out
+</pre></div>
+</div>
+<p>and see output like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">Hello</span> <span class="kn">from</span> <span class="nn">Process</span> <span class="n">number</span>           <span class="mi">1</span>  <span class="n">of</span>            <span class="mi">4</span>  <span class="n">processes</span>
+<span class="n">Hello</span> <span class="kn">from</span> <span class="nn">Process</span> <span class="n">number</span>           <span class="mi">3</span>  <span class="n">of</span>            <span class="mi">4</span>  <span class="n">processes</span>
+<span class="n">Hello</span> <span class="kn">from</span> <span class="nn">Process</span> <span class="n">number</span>           <span class="mi">0</span>  <span class="n">of</span>            <span class="mi">4</span>  <span class="n">processes</span>
+<span class="n">Hello</span> <span class="kn">from</span> <span class="nn">Process</span> <span class="n">number</span>           <span class="mi">2</span>  <span class="n">of</span>            <span class="mi">4</span>  <span class="n">processes</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-code">
+<h2>Test code<a class="headerlink" href="#test-code" title="Permalink to this headline">¶</a></h2>
+<p>The simple test code used above illustrates use of some of the basic MPI
+subroutines.</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/mpi/test1.f90</span>
+
+<span class="k">program </span><span class="n">test1</span>
+    <span class="k">use </span><span class="n">mpi</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">ierr</span><span class="p">,</span> <span class="n">numprocs</span><span class="p">,</span> <span class="n">proc_num</span>
+
+    <span class="k">call </span><span class="n">mpi_init</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">mpi_comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">numprocs</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">mpi_comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s1">&#39;Hello from Process number&#39;</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="p">&amp;</span>
+             <span class="s1">&#39; of &#39;</span><span class="p">,</span> <span class="n">numprocs</span><span class="p">,</span> <span class="s1">&#39; processes&#39;</span>
+
+    <span class="k">call </span><span class="n">mpi_finalize</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+
+<span class="k">end program </span><span class="n">test1</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="reduction-example">
+<h2>Reduction example<a class="headerlink" href="#reduction-example" title="Permalink to this headline">¶</a></h2>
+<p>The next example uses <cite>MPI_REDUCE</cite> to add up partial sums computed by
+independent processes.</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/mpi/pisum1.f90</span>
+
+<span class="c">! Computes pi using MPI.  </span>
+<span class="c">! Compare to $UWHPSC/codes/openmp/pisum2.f90 </span>
+
+<span class="k">program </span><span class="n">pisum1</span>
+    <span class="k">use </span><span class="n">mpi</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">ierr</span><span class="p">,</span> <span class="n">numprocs</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">points_per_proc</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="p">&amp;</span>
+               <span class="n">i</span><span class="p">,</span> <span class="n">istart</span><span class="p">,</span> <span class="n">iend</span>
+    <span class="kt">real</span> <span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">pisum</span><span class="p">,</span> <span class="n">pisum_proc</span><span class="p">,</span> <span class="n">pi</span>
+
+    <span class="k">call </span><span class="n">mpi_init</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">mpi_comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">numprocs</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">mpi_comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="c">! Ask the user for the number of points</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Using &quot;</span><span class="p">,</span><span class="n">numprocs</span><span class="p">,</span><span class="s2">&quot; processors&quot;</span>
+        <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Input n ... &quot;</span>
+        <span class="k">read</span> <span class="o">*</span><span class="p">,</span> <span class="n">n</span>
+    <span class="k">end if</span>
+
+    <span class="c">! Broadcast to all procs; everybody gets the value of n from proc 0</span>
+    <span class="k">call </span><span class="n">mpi_bcast</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_INTEGER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="n">dx</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">d0</span><span class="o">/</span><span class="n">n</span>
+
+    <span class="c">! Determine how many points to handle with each proc</span>
+    <span class="n">points_per_proc</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">numprocs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">numprocs</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>   <span class="c">! Only one proc should print to avoid clutter</span>
+        <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;points_per_proc = &quot;</span><span class="p">,</span> <span class="n">points_per_proc</span>
+    <span class="k">end if</span>
+
+    <span class="c">! Determine start and end index for this proc&#39;s points</span>
+    <span class="n">istart</span> <span class="o">=</span> <span class="n">proc_num</span> <span class="o">*</span> <span class="n">points_per_proc</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">iend</span> <span class="o">=</span> <span class="nb">min</span><span class="p">((</span><span class="n">proc_num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">points_per_proc</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="c">! Diagnostic: tell the user which points will be handled by which proc</span>
+    <span class="k">print</span> <span class="s1">&#39;(&quot;Process &quot;,i2,&quot; will take i = &quot;,i6,&quot; through i = &quot;,i6)&#39;</span><span class="p">,</span> <span class="p">&amp;</span>
+          <span class="n">proc_num</span><span class="p">,</span> <span class="n">istart</span><span class="p">,</span> <span class="n">iend</span>
+
+    <span class="n">pisum_proc</span> <span class="o">=</span> <span class="mf">0.</span><span class="n">d0</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="n">istart</span><span class="p">,</span><span class="n">iend</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mf">0.5</span><span class="n">d0</span><span class="p">)</span><span class="o">*</span><span class="n">dx</span>
+        <span class="n">pisum_proc</span> <span class="o">=</span> <span class="n">pisum_proc</span> <span class="o">+</span> <span class="mf">1.</span><span class="n">d0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.</span><span class="n">d0</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">enddo</span>
+
+    <span class="k">call </span><span class="n">MPI_REDUCE</span><span class="p">(</span><span class="n">pisum_proc</span><span class="p">,</span><span class="n">pisum</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span><span class="n">MPI_SUM</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="p">&amp;</span>
+                        <span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="n">ierr</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        </span><span class="n">pi</span> <span class="o">=</span> <span class="mf">4.</span><span class="n">d0</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">pisum</span> 
+        <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;The approximation to pi is &quot;</span><span class="p">,</span><span class="n">pi</span>
+        <span class="n">endif</span>
+
+    <span class="k">call </span><span class="n">mpi_finalize</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+
+<span class="k">end program </span><span class="n">pisum1</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="send-receive-example">
+<h2>Send-Receive example<a class="headerlink" href="#send-receive-example" title="Permalink to this headline">¶</a></h2>
+<p>In this example, a value is set in Process 0 and then passed to Process 1
+and on to Process 2, etc. until it reaches the last process, where it is
+printed out.</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/mpi/copyvalue.f90</span>
+<span class="c">!</span>
+<span class="c">! Set value in Process 0 and copy this through a chain of processes</span>
+<span class="c">! and finally print result from Process numprocs-1.</span>
+<span class="c">!</span>
+
+<span class="k">program </span><span class="n">copyvalue</span>
+
+    <span class="k">use </span><span class="n">mpi</span>
+
+    <span class="k">implicit none</span>
+
+<span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">num_procs</span><span class="p">,</span><span class="n">ierr</span>
+    <span class="kt">integer</span><span class="p">,</span> <span class="k">dimension</span><span class="p">(</span><span class="n">MPI_STATUS_SIZE</span><span class="p">)</span> <span class="kd">::</span> <span class="n">status</span>
+
+    <span class="k">call </span><span class="n">MPI_INIT</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">MPI_COMM_SIZE</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">num_procs</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">MPI_COMM_RANK</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">num_procs</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Only one process, cannot do anything&quot;</span>
+        <span class="k">call </span><span class="n">MPI_FINALIZE</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+        <span class="k">stop</span>
+<span class="k">        </span><span class="n">endif</span>
+
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        </span><span class="n">i</span> <span class="o">=</span> <span class="mi">55</span>
+        <span class="k">print</span> <span class="s1">&#39;(&quot;Process &quot;,i3,&quot; setting      i = &quot;,i3)&#39;</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">i</span>
+
+        <span class="k">call </span><span class="n">MPI_SEND</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_INTEGER</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="p">&amp;</span>
+                      <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+      <span class="k">else if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">&lt;</span> <span class="n">num_procs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+
+<span class="k">        call </span><span class="n">MPI_RECV</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_INTEGER</span><span class="p">,</span> <span class="n">proc_num</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="p">&amp;</span>
+                      <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+        <span class="k">print</span> <span class="s1">&#39;(&quot;Process &quot;,i3,&quot; receives     i = &quot;,i3)&#39;</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">i</span>
+        <span class="k">print</span> <span class="s1">&#39;(&quot;Process &quot;,i3,&quot; sends        i = &quot;,i3)&#39;</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">i</span>
+
+        <span class="k">call </span><span class="n">MPI_SEND</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_INTEGER</span><span class="p">,</span> <span class="n">proc_num</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="p">&amp;</span>
+                      <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+
+      <span class="k">else if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">==</span> <span class="n">num_procs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+
+<span class="k">        call </span><span class="n">MPI_RECV</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_INTEGER</span><span class="p">,</span> <span class="n">proc_num</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="p">&amp;</span>
+                      <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+        <span class="k">print</span> <span class="s1">&#39;(&quot;Process &quot;,i3,&quot; ends up with i = &quot;,i3)&#39;</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">i</span>
+      <span class="n">endif</span>
+
+    <span class="k">call </span><span class="n">MPI_FINALIZE</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+
+<span class="k">end program </span><span class="n">copyvalue</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="master-worker-examples">
+<h2>Master-worker examples<a class="headerlink" href="#master-worker-examples" title="Permalink to this headline">¶</a></h2>
+<p>The next two examples illustrate using Process 0 as a <em>master</em> process to
+farm work out to the other processes.  In both cases the 1-norm of a matrix
+is computed, which is the maximum over <cite>j</cite> of the 1-norm of the <a href="#id2"><span class="problematic" id="id3">`</span></a>j`th column
+of the matrix.</p>
+<p>In the first case we assume there are the same number of worker processes as
+columns in the matrix:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/mpi/matrix1norm1.f90</span>
+<span class="c">!</span>
+<span class="c">! Compute 1-norm of a matrix using mpi.</span>
+<span class="c">! Process 0 is the master that sets things up and then sends a column</span>
+<span class="c">! to each worker (Processes 1, 2, ..., num_procs - 1).</span>
+<span class="c">!</span>
+<span class="c">! This version assumes there are at least as many workers as columns.</span>
+
+<span class="k">program </span><span class="n">matrix1norm1</span>
+
+    <span class="k">use </span><span class="n">mpi</span>
+
+    <span class="k">implicit none</span>
+
+<span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">jj</span><span class="p">,</span><span class="n">nrows</span><span class="p">,</span><span class="n">ncols</span><span class="p">,</span><span class="n">proc_num</span><span class="p">,</span> <span class="n">num_procs</span><span class="p">,</span><span class="n">ierr</span><span class="p">,</span><span class="n">nerr</span>
+    <span class="kt">integer</span><span class="p">,</span> <span class="k">dimension</span><span class="p">(</span><span class="n">MPI_STATUS_SIZE</span><span class="p">)</span> <span class="kd">::</span> <span class="n">status</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">colnorm</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">dimension</span><span class="p">(:,:)</span> <span class="kd">::</span> <span class="n">a</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">dimension</span><span class="p">(:)</span> <span class="kd">::</span> <span class="n">anorm</span><span class="p">,</span> <span class="n">colvect</span>
+
+    <span class="k">call </span><span class="n">MPI_INIT</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">MPI_COMM_SIZE</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">num_procs</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">MPI_COMM_RANK</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="n">nerr</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Input nrows, ncols&quot;</span>
+        <span class="k">read</span> <span class="o">*</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ncols</span> <span class="o">&gt;</span> <span class="n">num_procs</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">            print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;*** Error, this version requires ncols &lt; num_procs = &quot;</span><span class="p">,&amp;</span>
+                  <span class="n">num_procs</span>
+            <span class="n">nerr</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">endif</span>
+        <span class="k">allocate</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span><span class="n">ncols</span><span class="p">))</span>  <span class="c">! only master process 0 needs the matrix</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">d0</span>  <span class="c">! initialize to all 1&#39;s for this test</span>
+        <span class="k">allocate</span><span class="p">(</span><span class="n">anorm</span><span class="p">(</span><span class="n">ncols</span><span class="p">))</span>    <span class="c">! to hold norm of each column in MPI_RECV</span>
+        <span class="n">endif</span>
+
+    <span class="c">! if nerr == 1 then all processes must stop:</span>
+    <span class="k">call </span><span class="n">MPI_BCAST</span><span class="p">(</span><span class="n">nerr</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">nerr</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+        <span class="c">! Note that error message already printed by Process 0</span>
+        <span class="c">! All processes must execute the MPI_FINALIZE </span>
+        <span class="c">! (Could also just have &quot;go to 99&quot; here.)</span>
+        <span class="k">call </span><span class="n">MPI_FINALIZE</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+        <span class="k">stop</span>
+<span class="k">        </span><span class="n">endif</span>
+        
+    <span class="k">call </span><span class="n">MPI_BCAST</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">MPI_BCAST</span><span class="p">(</span><span class="n">ncols</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        allocate</span><span class="p">(</span><span class="n">colvect</span><span class="p">(</span><span class="n">nrows</span><span class="p">))</span>   <span class="c">! to hold a column vector sent from master</span>
+        <span class="n">endif</span> 
+
+
+    
+    <span class="c">! -----------------------------------------</span>
+    <span class="c">! code for Master (Processor 0):</span>
+    <span class="c">! -----------------------------------------</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+
+<span class="k">      do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncols</span>
+        <span class="k">call </span><span class="n">MPI_SEND</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,&amp;</span>
+                        <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="n">enddo</span>
+
+      <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncols</span>
+        <span class="k">call </span><span class="n">MPI_RECV</span><span class="p">(</span><span class="n">colnorm</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="p">&amp;</span>
+                        <span class="n">MPI_ANY_SOURCE</span><span class="p">,</span> <span class="n">MPI_ANY_TAG</span><span class="p">,</span> <span class="p">&amp;</span>
+                        <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="n">jj</span> <span class="o">=</span> <span class="n">status</span><span class="p">(</span><span class="n">MPI_TAG</span><span class="p">)</span>
+        <span class="n">anorm</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span> <span class="o">=</span> <span class="n">colnorm</span>
+        <span class="n">enddo</span>
+
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Finished filling anorm with values... &quot;</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">anorm</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;1-norm of matrix a = &quot;</span><span class="p">,</span> <span class="nb">maxval</span><span class="p">(</span><span class="n">anorm</span><span class="p">)</span>
+      <span class="n">endif</span>
+
+
+    <span class="c">! -----------------------------------------</span>
+    <span class="c">! code for Workers (Processors 1, 2, ...):</span>
+    <span class="c">! -----------------------------------------</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">/=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+
+<span class="k">        if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">&gt;</span> <span class="n">ncols</span><span class="p">)</span> <span class="n">go</span> <span class="n">to</span> <span class="mi">99</span>   <span class="c">! no work expected</span>
+
+        <span class="k">call </span><span class="n">MPI_RECV</span><span class="p">(</span><span class="n">colvect</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,&amp;</span>
+                      <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_ANY_TAG</span><span class="p">,</span> <span class="p">&amp;</span>
+                      <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+        <span class="n">j</span> <span class="o">=</span> <span class="n">status</span><span class="p">(</span><span class="n">MPI_TAG</span><span class="p">)</span>   <span class="c">! this is the column number</span>
+                              <span class="c">! (should agree with proc_num)</span>
+
+        <span class="n">colnorm</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">colvect</span><span class="p">))</span>
+
+        <span class="k">call </span><span class="n">MPI_SEND</span><span class="p">(</span><span class="n">colnorm</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="p">&amp;</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+        <span class="n">endif</span>
+
+<span class="mi">99</span>  <span class="k">continue</span>   <span class="c">! might jump to here if finished early</span>
+    <span class="k">call </span><span class="n">MPI_FINALIZE</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+
+<span class="k">end program </span><span class="n">matrix1norm1</span>
+
+
+            
+</pre></div>
+</td></tr></table></div>
+<p>In the next case we consider the more realistic situation where there may be
+many more columns in the matrix than worker processes.  In this case the
+<em>master</em> process must do more work to keep track of how which columns have
+already been handled and farm out work as worker processes become free.</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/mpi/matrix1norm2.f90</span>
+<span class="c">!</span>
+<span class="c">! Compute 1-norm of a matrix using mpi.</span>
+<span class="c">! Process 0 is the master that sets things up and then sends a column</span>
+<span class="c">! to each worker (Processes 1, 2, ..., num_procs - 1).</span>
+<span class="c">!</span>
+<span class="c">! This version allows more columns than workers.</span>
+
+<span class="k">program </span><span class="n">matrix1norm2</span>
+
+    <span class="k">use </span><span class="n">mpi</span>
+
+    <span class="k">implicit none</span>
+
+<span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">jj</span><span class="p">,</span><span class="n">nrows</span><span class="p">,</span><span class="n">ncols</span><span class="p">,</span><span class="n">proc_num</span><span class="p">,</span> <span class="n">num_procs</span><span class="p">,</span><span class="n">ierr</span><span class="p">,</span><span class="n">nerr</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">numsent</span><span class="p">,</span> <span class="n">sender</span><span class="p">,</span> <span class="n">nextcol</span>
+    <span class="kt">integer</span><span class="p">,</span> <span class="k">dimension</span><span class="p">(</span><span class="n">MPI_STATUS_SIZE</span><span class="p">)</span> <span class="kd">::</span> <span class="n">status</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">colnorm</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">dimension</span><span class="p">(:,:)</span> <span class="kd">::</span> <span class="n">a</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">dimension</span><span class="p">(:)</span> <span class="kd">::</span> <span class="n">anorm</span><span class="p">,</span> <span class="n">colvect</span>
+
+    <span class="kt">logical</span> <span class="kd">::</span> <span class="n">debug</span>
+
+    <span class="n">debug</span> <span class="o">=</span> <span class="p">.</span><span class="n">true</span><span class="p">.</span>
+
+    <span class="k">call </span><span class="n">MPI_INIT</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">MPI_COMM_SIZE</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">num_procs</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">MPI_COMM_RANK</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">proc_num</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Input nrows, ncols&quot;</span>
+        <span class="k">read</span> <span class="o">*</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span>
+        <span class="k">allocate</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span><span class="n">ncols</span><span class="p">))</span>  <span class="c">! only master process 0 needs the matrix</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">d0</span>  <span class="c">! initialize to all 1&#39;s for this test</span>
+        <span class="k">allocate</span><span class="p">(</span><span class="n">anorm</span><span class="p">(</span><span class="n">ncols</span><span class="p">))</span>    <span class="c">! to hold norm of each column in MPI_RECV</span>
+        <span class="n">endif</span>
+
+        
+    <span class="k">call </span><span class="n">MPI_BCAST</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">MPI_BCAST</span><span class="p">(</span><span class="n">ncols</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        allocate</span><span class="p">(</span><span class="n">colvect</span><span class="p">(</span><span class="n">nrows</span><span class="p">))</span>   <span class="c">! to hold a column vector sent from master</span>
+        <span class="n">endif</span> 
+
+
+    
+    <span class="c">! -----------------------------------------</span>
+    <span class="c">! code for Master (Processor 0):</span>
+    <span class="c">! -----------------------------------------</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+
+<span class="k">      </span><span class="n">numsent</span> <span class="o">=</span> <span class="mi">0</span> <span class="c">! keep track of how many columns sent</span>
+
+      <span class="c">! send the first batch to get all workers working:</span>
+      <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="nb">min</span><span class="p">(</span><span class="n">num_procs</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="p">)</span>
+        <span class="k">call </span><span class="n">MPI_SEND</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,&amp;</span>
+                        <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="n">numsent</span> <span class="o">=</span> <span class="n">numsent</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">enddo</span>
+
+      <span class="c">! as results come back, send out more work...</span>
+      <span class="c">! the variable sender tells who sent back a result and ready for more</span>
+      <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncols</span>
+        <span class="k">call </span><span class="n">MPI_RECV</span><span class="p">(</span><span class="n">colnorm</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="p">&amp;</span>
+                        <span class="n">MPI_ANY_SOURCE</span><span class="p">,</span> <span class="n">MPI_ANY_TAG</span><span class="p">,</span> <span class="p">&amp;</span>
+                        <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+        <span class="n">sender</span> <span class="o">=</span> <span class="n">status</span><span class="p">(</span><span class="n">MPI_SOURCE</span><span class="p">)</span>
+        <span class="n">jj</span> <span class="o">=</span> <span class="n">status</span><span class="p">(</span><span class="n">MPI_TAG</span><span class="p">)</span>
+        <span class="n">anorm</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span> <span class="o">=</span> <span class="n">colnorm</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">numsent</span> <span class="o">&lt;</span> <span class="n">ncols</span><span class="p">)</span> <span class="k">then</span>
+            <span class="c">! still more work to do, the next column will be sent and</span>
+            <span class="c">! this index also used as the tag:</span>
+            <span class="n">nextcol</span> <span class="o">=</span> <span class="n">numsent</span> <span class="o">+</span> <span class="mi">1</span> 
+            <span class="k">call </span><span class="n">MPI_SEND</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nextcol</span><span class="p">),</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,&amp;</span>
+                            <span class="n">sender</span><span class="p">,</span> <span class="n">nextcol</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+            <span class="n">numsent</span> <span class="o">=</span> <span class="n">numsent</span> <span class="o">+</span> <span class="mi">1</span>
+          <span class="k">else</span>
+            <span class="c">! send an empty message with tag=0 to indicate this worker</span>
+            <span class="c">! is done:</span>
+            <span class="k">call </span><span class="n">MPI_SEND</span><span class="p">(</span><span class="n">MPI_BOTTOM</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,&amp;</span>
+                            <span class="n">sender</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+          <span class="n">endif</span>
+            
+        <span class="n">enddo</span>
+
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Finished filling anorm with values... &quot;</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">anorm</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;1-norm of matrix a = &quot;</span><span class="p">,</span> <span class="nb">maxval</span><span class="p">(</span><span class="n">anorm</span><span class="p">)</span>
+      <span class="n">endif</span>
+
+
+    <span class="c">! -----------------------------------------</span>
+    <span class="c">! code for Workers (Processors 1, 2, ...):</span>
+    <span class="c">! -----------------------------------------</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">/=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+
+<span class="k">        if</span> <span class="p">(</span><span class="n">proc_num</span> <span class="o">&gt;</span> <span class="n">ncols</span><span class="p">)</span> <span class="n">go</span> <span class="n">to</span> <span class="mi">99</span>   <span class="c">! no work expected</span>
+
+        <span class="k">do while</span> <span class="p">(.</span><span class="n">true</span><span class="p">.)</span>
+            <span class="c">! repeat until message with tag==0 received...</span>
+
+            <span class="k">call </span><span class="n">MPI_RECV</span><span class="p">(</span><span class="n">colvect</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,&amp;</span>
+                          <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_ANY_TAG</span><span class="p">,</span> <span class="p">&amp;</span>
+                          <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+            <span class="n">j</span> <span class="o">=</span> <span class="n">status</span><span class="p">(</span><span class="n">MPI_TAG</span><span class="p">)</span>   <span class="c">! this is the column number</span>
+                                  <span class="c">! may not be proc_num in general</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">debug</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">                print</span> <span class="s1">&#39;(&quot;+++ Process &quot;,i4,&quot;  received message with tag &quot;,i6)&#39;</span><span class="p">,</span> <span class="p">&amp;</span>
+                    <span class="n">proc_num</span><span class="p">,</span> <span class="n">j</span>       
+                <span class="n">endif</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="n">go</span> <span class="n">to</span> <span class="mi">99</span>    <span class="c">! received &quot;done&quot; message</span>
+
+            <span class="n">colnorm</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">colvect</span><span class="p">))</span>
+
+            <span class="k">call </span><span class="n">MPI_SEND</span><span class="p">(</span><span class="n">colnorm</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_DOUBLE_PRECISION</span><span class="p">,</span> <span class="p">&amp;</span>
+                        <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">ierr</span><span class="p">)</span>
+
+            <span class="n">enddo</span>
+        <span class="n">endif</span>
+
+<span class="mi">99</span>  <span class="k">continue</span>   <span class="c">! might jump to here if finished early</span>
+    <span class="k">call </span><span class="n">MPI_FINALIZE</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span>
+
+<span class="k">end program </span><span class="n">matrix1norm2</span>
+
+
+            
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="sample-codes">
+<h2>Sample codes<a class="headerlink" href="#sample-codes" title="Permalink to this headline">¶</a></h2>
+<p>Some other sample codes can also be found in the <cite>$UWHPSC/codes/mpi</cite> directory.</p>
+<ul class="simple">
+<li><a class="reference internal" href="jacobi1d_mpi.html#jacobi1d-mpi"><span class="std std-ref">Jacobi iteration using MPI</span></a></li>
+</ul>
+<p>See also the samples in the list below.</p>
+</div>
+<div class="section" id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="biblio.html#biblio-mpi"><span class="std std-ref">MPI references</span></a> section of the bibliography lists some books.</li>
+<li><a class="reference external" href="http://www.mcs.anl.gov/research/projects/mpi/tutorial/">Argonne tutorials</a></li>
+<li><a class="reference external" href="http://www.mcs.anl.gov/research/projects/mpi/tutorial/gropp/talk.html">Tutorial slides by Bill Gropp</a></li>
+<li><a class="reference external" href="https://computing.llnl.gov/tutorials/mpi/">Livermore tutorials</a></li>
+<li><a class="reference external" href="http://www.open-mpi.org/">Open MPI</a></li>
+<li><a class="reference external" href="http://www.mcs.anl.gov/research/projects/mpi/">The MPI Standard</a></li>
+<li><a class="reference external" href="http://www.mcs.anl.gov/research/projects/mpi/usingmpi/examples/simplempi/main.htm">Some sample codes</a></li>
+<li><a class="reference external" href="http://www.lam-mpi.org/tutorials/">LAM MPI tutorials</a></li>
+<li>Google &#8220;MPI tutorial&#8221; to find more.</li>
+<li><a class="reference external" href="http://www.mcs.anl.gov/research/projects/mpi/www/www3/">Documentation on MPI subroutines</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="makefiles.html" title="Makefiles"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="openmp.html" title="OpenMP"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

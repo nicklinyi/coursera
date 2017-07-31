@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Homework 1 [2014] &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/homework1.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="homework-1-2014">
+<span id="homework1"></span><h1>Homework 1 [2014]<a class="headerlink" href="#homework-1-2014" title="Permalink to this headline">¶</a></h1>
+<p>Due Wednesday, April 9, 2014, by 11:00pm PDT.
+See below for how to submit.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Part 10 was recently added.  The assignment is now complete.</p>
+</div>
+<p>The goals of this homework are to:</p>
+<ul class="simple">
+<li>Make sure you are familiar with basic Unix commands (see <a class="reference internal" href="unix.html#unix"><span class="std std-ref">Unix, Linux, and OS X</span></a>)
+and an editor, (see <a class="reference internal" href="editors.html#editors"><span class="std std-ref">Text editors</span></a>),</li>
+<li>Start using <em>git</em> (<a class="reference internal" href="git.html#git"><span class="std std-ref">Git</span></a>) to download course materials,</li>
+<li>Create your own bitbucket repository to keep your coursework and post homeworks
+to be graded.</li>
+<li>Make sure you have some necessary software installed.  (If you use SageMathCloud,
+you should have everything needed.)</li>
+</ul>
+<p>Start early on this assignment so that you can get help from the TAs and/or
+discussion board if you have trouble with software or with using <em>git</em>.</p>
+<p>Before tackling this homework, you should read some of the class notes and
+links they point to.  In particular, the following sections are relevant:</p>
+<ul class="simple">
+<li><a class="reference internal" href="unix.html#unix"><span class="std std-ref">Unix, Linux, and OS X</span></a></li>
+<li><a class="reference internal" href="smc.html#smc"><span class="std std-ref">Using SageMathCloud</span></a> (and <a class="reference internal" href="computing_options.html#computing-options"><span class="std std-ref">Computing Options [2014 version]</span></a> if you plan to compute elsewhere)</li>
+<li><a class="reference internal" href="editors.html#editors"><span class="std std-ref">Text editors</span></a></li>
+<li><a class="reference internal" href="git.html#git"><span class="std std-ref">Git</span></a></li>
+<li><a class="reference internal" href="bitbucket.html#bitbucket"><span class="std std-ref">Bitbucket repositories: viewing changesets, issue tracking</span></a></li>
+<li><a class="reference internal" href="biblio.html#biblio"><span class="std std-ref">Bibliography and further reading</span></a></li>
+</ul>
+<p>By doing this homework you create a bitbucket repository containing
+some files that we can view to grade.</p>
+<p>See also the <a class="reference external" href="https://confluence.atlassian.com/display/BITBUCKET/Bitbucket+101">Bitbucket 101 instructions</a>
+for more tips on setting up bitbucket accounts and using git.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Make sure you have access to <em>git</em> on the computer you plan to use.
+Typing</p>
+<div class="highlight-default"><div class="highlight"><pre>$ which git
+</pre></div>
+</div>
+<p>in a terminal window should return a path to the git command.
+Read the section <a class="reference internal" href="git.html#git"><span class="std std-ref">Git</span></a> and the
+documentation linked from there in order to get a sense of how it works.</p>
+</li>
+<li><p class="first">Clone the class repository following the
+<a class="reference internal" href="git.html#classgit"><span class="std std-ref">Instructions for cloning the class repository</span></a>.</p>
+<p>Make sure you have set the environment variable <em>UWHPSC</em>
+since this is used below.</p>
+</li>
+<li><p class="first">Set up your own personal repository on Bitbucket, by carefully following
+all of the instructions at <a class="reference internal" href="git.html#mygit"><span class="std std-ref">Creating your own Bitbucket repository</span></a>.
+By following these instructions you will also create a clone of the
+repository and add some files to it.</p>
+<p>Make sure you have set the environment variable <em>MYHPSC</em>
+since this is used below.</p>
+</li>
+<li><p class="first">In the clone of your repository, create a subdirectory <em>homework1</em>:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ cd $MYHPSC
+$ mkdir homework1
+</pre></div>
+</div>
+<p>You should now be able to <em>cd</em> into this directory:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ cd homework1
+</pre></div>
+</div>
+<p>or later you can get there from anywhere via:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ cd $MYHPSC/homework1
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy some files from the class repository to your own repository by:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ cp $UWHPSC/homeworks/homework1/*  $MYHPSC/homework1
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>This should create the files</dt>
+<dd><ul class="first last simple">
+<li><cite>test1.py</cite></li>
+<li><cite>test2.sh</cite></li>
+<li><cite>test3.f90</cite></li>
+</ul>
+</dd>
+</dl>
+<p>in the directory <em>$MYHPSC/homework1</em>.</p>
+</li>
+<li><p class="first">Use <cite>git add</cite> and <cite>git commit</cite> to add these three files and commit
+a snapshot.</p>
+</li>
+<li><p class="first">Modify <cite>test1.py</cite> as instructed in the <em>docstring</em> at the top of the
+file.  Try running it via:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ python test1.py
+</pre></div>
+</div>
+<p>It should give results like the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">Code</span> <span class="n">run</span> <span class="n">by</span> <span class="n">Your</span> <span class="n">Name</span>
+<span class="n">Environment</span> <span class="n">variable</span> <span class="n">UWHPSC</span> <span class="ow">is</span> <span class="o">/</span><span class="n">somepath</span><span class="o">/</span><span class="n">uwhpsc</span>
+<span class="n">Environment</span> <span class="n">variable</span> <span class="n">MYHPSC</span> <span class="ow">is</span> <span class="o">/</span><span class="n">somepath</span><span class="o">/</span><span class="n">myhpsc</span>
+<span class="n">Imported</span> <span class="n">numpy</span> <span class="n">ok</span>
+<span class="n">Imported</span> <span class="n">matplotlib</span> <span class="n">ok</span>
+<span class="n">Imported</span> <span class="n">pylab</span> <span class="n">ok</span>
+</pre></div>
+</div>
+<p>Following the instructions, you will add and commit to files, a modified
+version of <cite>test1.py</cite> and the output file <cite>test1output.txt</cite>.</p>
+</li>
+<li><p class="first">Modify <cite>test2.sh</cite> as instructed in the comments at the top of the file.</p>
+</li>
+<li><p class="first">Run this bash shell script via:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ bash test2.sh
+</pre></div>
+</div>
+<p>This should give output something like the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">Environment</span> <span class="n">variable</span> <span class="n">UWHPSC</span> <span class="ow">is</span> <span class="o">/</span><span class="n">somepath</span><span class="o">/</span><span class="n">uwhpsc</span>
+<span class="n">Environment</span> <span class="n">variable</span> <span class="n">MYHPSC</span> <span class="ow">is</span> <span class="o">/</span><span class="n">somepath</span><span class="o">/</span><span class="n">myhpsc</span>
+
+<span class="n">which</span> <span class="n">ipython</span> <span class="n">returns</span><span class="o">...</span>
+<span class="o">/</span><span class="n">somepath</span><span class="o">/</span><span class="n">ipython</span>
+
+<span class="n">which</span> <span class="n">gfortran</span> <span class="n">returns</span><span class="o">...</span>
+<span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">gfortran</span>
+
+<span class="n">gfortran</span> <span class="o">--</span><span class="n">version</span> <span class="n">returns</span><span class="o">...</span>
+<span class="n">GNU</span> <span class="n">Fortran</span> <span class="p">(</span><span class="n">Ubuntu</span><span class="o">/</span><span class="n">Linaro</span> <span class="mf">4.6</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="n">ubuntu5</span><span class="p">)</span> <span class="mf">4.6</span><span class="o">.</span><span class="mi">3</span>
+
+<span class="p">[</span><span class="n">more</span> <span class="n">stuff</span><span class="p">]</span>
+
+<span class="n">Compiling</span> <span class="ow">and</span> <span class="n">running</span> <span class="n">a</span> <span class="n">Fortran</span> <span class="n">code</span><span class="o">...</span>
+ <span class="n">Code</span> <span class="n">run</span> <span class="n">by</span> <span class="n">Your</span> <span class="n">Name</span>
+ <span class="n">Successfully</span> <span class="n">ran</span> <span class="n">Fortran</span> <span class="mi">90</span> <span class="n">program</span>
+</pre></div>
+</div>
+<p>Now run it again and redirect the output to a file:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ bash test2.sh &gt; test2output.txt
+</pre></div>
+</div>
+<p>Add and commit the modified <cite>test2.sh</cite> and the output files to your repository.</p>
+<p><strong>Note:</strong> At the end you should have the following files committed
+to your repository:</p>
+<blockquote>
+<div><ul class="simple">
+<li>$MYHPSC/testfile.txt</li>
+<li>$MYHPSC/homework1/test1.py</li>
+<li>$MYHPSC/homework1/test1output.txt</li>
+<li>$MYHPSC/homework1/test2.sh</li>
+<li>$MYHPSC/homework1/test2output.txt</li>
+<li>$MYHPSC/homework1/test3.f90</li>
+</ul>
+</div></blockquote>
+<p>Do <strong>not</strong> check in the file <em>a.out</em>, which was created when the Fortran
+code was compiled.</p>
+</li>
+<li><p class="first">For this part you might want to use an IPython notebook to experiment
+with the code, but please turn in the modified <cite>hw1.py</cite> file as
+described below.</p>
+<p>The file <cite>$UWHPSC/homeworks/homework1/hw1.py</cite> contains modified
+versions of the Python functions <cite>qroots</cite> and <cite>plotq</cite> discussed in
+Lab 2.  Copy this file to your directory <cite>$MYHPSC/homework1/hw1.py</cite>
+and modify it as described.</p>
+<p>Also copy the script <cite>$UWHPSC/homeworks/homework1/run_hw1.py</cite>
+that can be used to print out the roots and
+create the plot.  Set the desired values of <cite>a,b,c</cite> in this file and then
+type:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ python run_hw1.py
+</pre></div>
+</div>
+<p>In particular, <cite>qroots</cite> has been modified to work also if the
+roots are complex.  The function <cite>plotq</cite> has been modified slightly so
+that it plots the quadratic function as a function of a real variable
+<cite>x</cite> and then plots the real part of the the two roots as red dots on the
+<cite>x</cite> axis.  These plots look fine if the roots are real, but are
+misleading if the roots are complex.</p>
+<p>Modify the function <cite>plotq</cite> so that it produces the same plot as
+currently if the roots are real, but if the roots are complex it instead
+gives a plot of the <cite>x-y</cite> plane that shows the location of the two
+complex roots as red dots (where <cite>x</cite> is the real part and <cite>y</cite> the
+imaginary part of the root`.  So for example, if the coefficients are
+specified as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">2.</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">3.</span>
+</pre></div>
+</div>
+<p>then the code should produce a plot that looks like this:</p>
+<a class="reference internal image-reference" href="_images/hw1a.png"><img alt="_images/hw1a.png" src="_images/hw1a.png" style="width: 10cm;" /></a>
+<p>Note that you should draw both the <cite>x</cite> and <cite>y</cite> axis and choose <cite>xlimits</cite>
+and <cite>ylimits</cite> so that the roots and the origin are in view.  You can
+use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">xlower</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">xupper</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">ylower</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">yupper</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>(Recall that complex roots always come in conjugate pairs if the
+coefficients <cite>a,b,c</cite> are real, and you can assume this is the case.)</p>
+<p><strong>Note:</strong>
+Setting the values of <cite>a,b,c</cite> in <cite>run_hw1.py</cite> appropriately and executing:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ python run_hw1.py
+</pre></div>
+</div>
+<p>should now produce the above plot and the output:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>  <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>  <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">The</span> <span class="n">roots</span> <span class="n">are</span><span class="p">:</span>
+   <span class="n">z0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="o">-</span><span class="mf">1.41421</span><span class="n">j</span>
+   <span class="n">z1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">1.41421</span><span class="n">j</span>
+ <span class="n">Created</span> <span class="n">roots_plot</span><span class="o">.</span><span class="n">png</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> To grade this part of the homework, we will run a modified version
+of this script that uses several different sets of coefficients <cite>a,b,c</cite>
+so you should test your code for various reasonable sets of coefficients
+to insure it is working properly.  (You can assume <cite>a,b,c</cite> will be real.)</p>
+<p>At the end of this part you should also commit the following
+files to your repository:</p>
+<ul class="simple">
+<li><cite>$MYHPSC/homework1/hw1.py</cite>        (your improved version)</li>
+<li><cite>$MYHPSC/homework1/run_hw1.py</cite>    (can be the original version)</li>
+</ul>
+</li>
+<li><p class="first">Make sure the copies you want graded have been committed, and then
+push them to bitbucket via:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ cd $MYHPSC  # or you can be in any subdirectory
+$ git push
+</pre></div>
+</div>
+<p>These files should then also be visible from your bitbucket webpage, by
+clicking on the &#8220;Source&#8221; tab, see <a class="reference internal" href="bitbucket.html#bitbucket"><span class="std std-ref">Bitbucket repositories: viewing changesets, issue tracking</span></a>.</p>
+</li>
+<li><p class="first">You created a private repository, so you will have to give us permission
+to view or clone it.  Do so by clicking on the Gear tab at the top of
+your Bitbucket page for this repository, then on &#8220;Access Management&#8221;,
+and then add the following three users with Read access:
+<em>rjleveque</em> and the TAs <em>smoe</em> and <em>mvelegar</em>.</p>
+</li>
+<li><p class="first">Submit the commit number that you want graded by following the link
+provided on the <a class="reference external" href="https://canvas.uw.edu/courses/893991/assignments/2486102">Canvas page for Homework 1</a>
+If you submit the wrong thing or make further changes to your work
+before the due date, you can simply resubmit new information at the same
+link.</p>
+</li>
+</ol>
+</div></blockquote>
+<p><strong>Note:</strong>
+You can commit to your repository and push changes to bitbucket as often as you
+want before the submission, and you are encouraged to get in the habit of
+commiting changes often as you develop code &#8211; that&#8217;s the whole point of using
+version control!</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

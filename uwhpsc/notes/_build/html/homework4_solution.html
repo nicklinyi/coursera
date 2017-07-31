@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Homework 4 [2014] Discussion of solution &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/homework4_solution.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="homework-4-2014-discussion-of-solution">
+<span id="homework4-solution"></span><h1>Homework 4 [2014] Discussion of solution<a class="headerlink" href="#homework-4-2014-discussion-of-solution" title="Permalink to this headline">¶</a></h1>
+<p>Sample solutions can be found in <cite>$UWHPSC/solutions/homework4</cite>.</p>
+<p><strong>Reminder to help debugging Fortran codes:</strong></p>
+<ul>
+<li><p class="first">Use the compiler flag <cite>-g</cite> so that you can run the executable
+with GDB (or LLDB on Mac
+Mavericks), which might help determine where the code dies if
+it does, and can help in examining variables as it runs by
+setting breakpoints.</p>
+</li>
+<li><p class="first">Additional compiler flags are very helpful, e.g. <cite>-fbounds-check</cite>
+to have it check
+array bounds, so that for example if <cite>x</cite> is dimensioned as
+<cite>x(0:10)</cite> and you try to access <cite>x(11)</cite> then it will give an
+error rather than taking whatever garbage is in the element of
+memory that this points to.</p>
+</li>
+<li><p class="first">See <a class="reference internal" href="fortran_debugging.html#fortran-debugging"><span class="std std-ref">Fortran debugging</span></a> and <a class="reference internal" href="gfortran_flags.html#gfortran-flags"><span class="std std-ref">Useful gfortran flags</span></a> for more tips.</p>
+</li>
+<li><p class="first">With the Makefiles we are using, you can set e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">FFLAGS</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span> <span class="o">-</span><span class="n">Wall</span> <span class="o">-</span><span class="n">fbounds</span><span class="o">-</span><span class="n">check</span> <span class="o">-</span><span class="n">ffpe</span><span class="o">-</span><span class="n">trap</span><span class="o">=</span><span class="n">zero</span><span class="p">,</span><span class="n">overflow</span><span class="p">,</span><span class="n">underflow</span><span class="p">,</span><span class="n">invalid</span>
+</pre></div>
+</div>
+<p>or even set these on the command line with something like:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test1 -f Makefile1 FFLAGS=&quot;-g -Wall -fbounds-check&quot;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Remember that to have these take effect you will have to remove
+all the old <cite>.o</cite> files
+first so that it recompiles the code rather than thinking they
+are up to date.  You can do <cite>rm *.o</cite> or, if the Makefile is set
+up with a <cite>clean</cite> target, something like:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make clean -f Makefile1
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>Some common errors that people made:</strong></p>
+<p><strong>Part 1</strong></p>
+<ul class="simple">
+<li>The most common error was blindly following the coarse grain
+example and dividing up <cite>n</cite> instead of <cite>n_samples</cite> between threads.</li>
+<li>Incorrect OpenMP reductions.</li>
+</ul>
+<p><strong>Part 2</strong></p>
+<ul class="simple">
+<li>A variety of problems coding <cite>main2f.90</cite>.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

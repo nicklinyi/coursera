@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lab 9: Tuesday April 29, 2014 &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Notes to accompany lab sessions" href="index.html" />
+    <link rel="next" title="Lab 10: Tuesday May 1, 2014" href="lab10.html" />
+    <link rel="prev" title="Lab 8: Thursday April 24, 2014" href="lab8.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="../_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="lab10.html" title="Lab 10: Tuesday May 1, 2014"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lab8.html" title="Lab 8: Thursday April 24, 2014"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Notes to accompany lab sessions</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Lab 9: Tuesday April 29, 2014</a><ul>
+<li><a class="reference internal" href="#programming-problem">Programming problem</a></li>
+<li><a class="reference internal" href="#test-it-out">Test it out</a></li>
+<li><a class="reference internal" href="#improvements">Improvements</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lab8.html"
+                        title="previous chapter">Lab 8: Thursday April 24, 2014</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lab10.html"
+                        title="next chapter">Lab 10: Tuesday May 1, 2014</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/labs/lab9.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lab-9-tuesday-april-29-2014">
+<span id="lab9"></span><h1>Lab 9: Tuesday April 29, 2014<a class="headerlink" href="#lab-9-tuesday-april-29-2014" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="programming-problem">
+<h2>Programming problem<a class="headerlink" href="#programming-problem" title="Permalink to this headline">¶</a></h2>
+<p>Work on this in groups!</p>
+<p>Write a Fortran program to compute the roots of a quadratic equation and
+determine the absolute and relative error in the roots computed.  The
+program should do the following:</p>
+<ul class="simple">
+<li>Prompt the user and then read in the desired roots <cite>x1true</cite> and <cite>x2true</cite>
+(See the example below).</li>
+<li>Determine the coefficients <cite>a, b, c</cite> so that the quadratic equation
+<span class="math">\(a x^2 + bx + c =0\)</span> has the desired roots (you can set <cite>a=1</cite>).</li>
+<li>Using <cite>a,b,c</cite>, compute the roots <cite>x1</cite> and <cite>x2</cite> by using the quadratic
+formula.</li>
+<li>Print out the &#8220;true&#8221; and computed values for each root along with the
+absolute and relative error in each.</li>
+</ul>
+<p>So you should be able to do something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran quadratic.f90
+$ ./a.out
+ input x1true, x2true:
+2.5, 3
+
+Coefficients:  a =     0.100000E+01  b =    -0.550000E+01  c = 0.750000E+01
+
+Root x1  computed:  0.250000000000000E+01  true:  0.250000000000000E+01
+         absolute error:     0.000000E+00  relative error:     0.000000E+00
+
+Root x2  computed:  0.300000000000000E+01  true:  0.300000000000000E+01
+         absolute error:     0.000000E+00  relative error:     0.000000E+00
+</pre></div>
+</div>
+<p>Don&#8217;t worry too much about the formatting but you might want to print out 15
+digits in the computed roots.</p>
+<p>You might want to assume the values are entered with <cite>x1true &lt;= x2true</cite> so
+you know which root from the quadratic equations goes with which original
+value. (And print out an informative error message otherwise.)</p>
+</div>
+<div class="section" id="test-it-out">
+<h2>Test it out<a class="headerlink" href="#test-it-out" title="Permalink to this headline">¶</a></h2>
+<p>Test a variety of values to see that it&#8217;s working.</p>
+<p>Once it&#8217;s working on reasonable values, try the following:</p>
+<ul class="simple">
+<li><cite>x1 = 1e-12,  x2 = 2</cite></li>
+<li><cite>x1 = -2, x2 = 1e-12</cite></li>
+</ul>
+<p>In each case you should find that one root is computed accurately
+but the other root has a large relative error (few digits of accuracy).</p>
+<p>Figure out why &#8220;catastrophic cancellation&#8221; is the problem.</p>
+</div>
+<div class="section" id="improvements">
+<h2>Improvements<a class="headerlink" href="#improvements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Improve the code by noticing that if one root is calculated accurately, the
+other root can be calculated from the fact that <cite>x1 * x2 = c</cite>.</li>
+<li>Remove the assumption that <cite>x1true &lt;= x2true</cite>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="lab10.html" title="Lab 10: Tuesday May 1, 2014"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lab8.html" title="Lab 8: Thursday April 24, 2014"
+             >previous</a> |</li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Notes to accompany lab sessions</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

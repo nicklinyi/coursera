@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fortran subroutines and functions &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Fortran examples: Taylor series" href="fortran_taylor.html" />
+    <link rel="prev" title="Useful gfortran flags" href="gfortran_flags.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fortran_taylor.html" title="Fortran examples: Taylor series"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gfortran_flags.html" title="Useful gfortran flags"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fortran subroutines and functions</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#modifying-arguments">Modifying arguments</a></li>
+<li><a class="reference internal" href="#the-use-of-intent">The use of <em>intent</em></a></li>
+<li><a class="reference internal" href="#subroutines">Subroutines</a></li>
+<li><a class="reference internal" href="#subroutine-in-a-module">Subroutine in a module</a></li>
+<li><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gfortran_flags.html"
+                        title="previous chapter">Useful gfortran flags</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fortran_taylor.html"
+                        title="next chapter">Fortran examples: Taylor series</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/fortran_sub.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fortran-subroutines-and-functions">
+<span id="fortran-sub"></span><h1>Fortran subroutines and functions<a class="headerlink" href="#fortran-subroutines-and-functions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>Here&#8217;s an example of the use of a function:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/fcn1.f90</span>
+
+<span class="k">program </span><span class="n">fcn1</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">y</span><span class="p">,</span><span class="n">z</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">external</span> <span class="kd">::</span> <span class="n">f</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="mf">2.</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;z = &quot;</span><span class="p">,</span><span class="n">z</span>
+<span class="k">end program </span><span class="n">fcn1</span>
+
+<span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="k">function </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="k">end function </span><span class="n">f</span>
+</pre></div>
+</td></tr></table></div>
+<p>It prints out:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">z</span> <span class="o">=</span>    <span class="mf">4.00000000000000</span>
+</pre></div>
+</div>
+<p>Comments:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A function returns a single value.  Since this function is named <cite>f</cite>,
+the value of <cite>f</cite> must be set in the function somewhere.  You cannot use
+<cite>f</cite> on the right hand side of any expression, e.g. you cannot set
+<cite>g = f</cite> in the function.</li>
+<li>f is declared <cite>external</cite> in the main program to let the compiler
+know it is a function defined elsewhere rather than a variable.</li>
+<li>The <cite>intent(in)</cite> statement tells the compiler that <cite>x</cite> is a variable
+passed into the function that will not be modified in the function.</li>
+<li>Here the program and function are in the same file.  Later we will see
+how to break things up so each function or subroutine is in a separate
+file.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="modifying-arguments">
+<h2>Modifying arguments<a class="headerlink" href="#modifying-arguments" title="Permalink to this headline">¶</a></h2>
+<p>The input argument(s) to a function might also be modified, though this is
+not so common as using a subroutine as described below.  But here&#8217;s an
+example:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/fcn2.f90</span>
+
+<span class="k">program </span><span class="n">fcn2</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">y</span><span class="p">,</span><span class="n">z</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">external</span> <span class="kd">::</span> <span class="n">f</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="mf">2.</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Before calling f: y = &quot;</span><span class="p">,</span><span class="n">y</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;After calling f:  y = &quot;</span><span class="p">,</span><span class="n">y</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;z = &quot;</span><span class="p">,</span><span class="n">z</span>
+<span class="k">end program </span><span class="n">fcn2</span>
+
+<span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="k">function </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mf">5.</span>
+<span class="k">end function </span><span class="n">f</span>
+</pre></div>
+</td></tr></table></div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">Before</span> <span class="n">calling</span> <span class="n">f</span><span class="p">:</span> <span class="n">y</span> <span class="o">=</span>    <span class="mf">2.00000000000000</span>
+<span class="n">After</span> <span class="n">calling</span> <span class="n">f</span><span class="p">:</span>  <span class="n">y</span> <span class="o">=</span>    <span class="mf">5.00000000000000</span>
+<span class="n">z</span> <span class="o">=</span>    <span class="mf">4.00000000000000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-use-of-intent">
+<h2>The use of <em>intent</em><a class="headerlink" href="#the-use-of-intent" title="Permalink to this headline">¶</a></h2>
+<p>You are not required to specify the intent of each argument, but there are
+several good reasons for doing so:</p>
+<blockquote>
+<div><ul class="simple">
+<li>It helps catch bugs.  If you specify <cite>intent(in)</cite> and then this variable
+is changed in the function or subroutine, the compiler will give an
+error.</li>
+<li>It can help the compiler produce machine code that runs faster.  For
+example, if it
+is known to the compiler that some variables will never change during
+execution, this fact can be used.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="subroutines">
+<h2>Subroutines<a class="headerlink" href="#subroutines" title="Permalink to this headline">¶</a></h2>
+<p>In Fortran, subroutines are generally used much more frequently than
+functions.  Functions are expected to produce a single output variable and
+examples like the one just given where an argument is modified are considered
+bad programming style.</p>
+<p>Subroutines are more flexible since they can have any number of inputs and
+outputs.  In particular they may have not output variable.  For example a
+subroutine might take an array as an argument and print the array to some
+file on disk but not return a value to the calling program.</p>
+<p>Here is a version of the same program  as <cite>fcn1</cite> above,
+that instead uses a subroutine:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/sub1.f90</span>
+
+<span class="k">program </span><span class="n">sub1</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">y</span><span class="p">,</span><span class="n">z</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="mf">2.</span>
+    <span class="k">call </span><span class="n">fsub</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;z = &quot;</span><span class="p">,</span><span class="n">z</span>
+<span class="k">end program </span><span class="n">sub1</span>
+
+<span class="k">subroutine </span><span class="n">fsub</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="k">end subroutine </span><span class="n">fsub</span>
+</pre></div>
+</td></tr></table></div>
+<p>Comments:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Now we tell the compiler that <cite>x</cite> is an input variable and <cite>y</cite> is an
+output variable for the subroutine.  The <cite>intent</cite> declarations are
+optional but sometimes help the compiler optimize code.</li>
+</ul>
+</div></blockquote>
+<p>Here is a version that works on an array <cite>x</cite> instead of a single value:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/sub2.f90</span>
+
+<span class="k">program </span><span class="n">sub2</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="kd">::</span> <span class="n">y</span><span class="p">,</span><span class="n">z</span>
+    <span class="kt">integer </span><span class="n">n</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="o">/</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">fsub</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;z = &quot;</span><span class="p">,</span><span class="n">z</span>
+<span class="k">end program </span><span class="n">sub2</span>
+
+<span class="k">subroutine </span><span class="n">fsub</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+  <span class="c">! compute f(x) = x**2 for all elements of the array x </span>
+  <span class="c">! of length n.</span>
+  <span class="k">implicit none</span>
+<span class="k">  </span><span class="kt">integer</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">n</span>
+  <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
+  <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="k">end subroutine </span><span class="n">fsub</span>
+</pre></div>
+</td></tr></table></div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="mf">4.00000000000000</span>        <span class="mf">9.00000000000000</span>        <span class="mf">16.0000000000000</span>
+</pre></div>
+</div>
+<p>Comments:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The length of the array is also passed into the subroutine.  You can
+avoid this in Fortran 90 (see the next example below), but it
+was unavoidable in Fortran 77 and subroutines working on arrays in
+Fortran are often written so that the dimensions are passed in as
+arguments.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="subroutine-in-a-module">
+<h2>Subroutine in a module<a class="headerlink" href="#subroutine-in-a-module" title="Permalink to this headline">¶</a></h2>
+<p>Here is a version that avoids passing the length of the array into the
+subroutine.  In order for this to work some additional <em>interface</em>
+information must be specified.  This is most easily done by including the
+subroutine in a <em>module</em>.</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/sub3.f90</span>
+
+<span class="k">module </span><span class="n">sub3module</span>
+
+<span class="k">contains </span>
+
+<span class="k">subroutine </span><span class="n">fsub</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+  <span class="c">! compute f(x) = x**2 for all elements of the array x. </span>
+  <span class="k">implicit none</span>
+<span class="k">  </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(:),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
+  <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="kd">::</span> <span class="n">f</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="k">end subroutine </span><span class="n">fsub</span>
+
+<span class="k">end module </span><span class="n">sub3module</span>
+
+<span class="c">!----------------------------------------------</span>
+
+<span class="k">program </span><span class="n">sub3</span>
+    <span class="k">use </span><span class="n">sub3module</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="kd">::</span> <span class="n">y</span><span class="p">,</span><span class="n">z</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="o">/</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">fsub</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;z = &quot;</span><span class="p">,</span><span class="n">z</span>
+<span class="k">end program </span><span class="n">sub3</span>
+</pre></div>
+</td></tr></table></div>
+<p>Comments:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">See the section <a class="reference internal" href="fortran_modules.html#fortran-modules"><span class="std std-ref">Fortran modules</span></a> for more information about modules.
+Note in particular that the module must be defined first and then used
+in the program via the <cite>use</cite> statement.</p>
+</li>
+<li><p class="first">The declaration of <cite>x</cite> in the subroutine uses <cite>dimension(:)</cite> to indicate
+that it is an array with a single index (having <cite>rank 1</cite>),
+without specifying how long the
+array is.  If <cite>x</cite> was a rank 2 array indexed by <cite>x(i,j)</cite>
+then the dimension statement would be <cite>dimension(:,:)</cite>.</p>
+</li>
+<li><p class="first">The declaration of <cite>f</cite> in the subroutine uses <cite>dimension(size(x))</cite> to
+indicate that it is an array with one index and the length of the array
+is the same as that of <cite>x</cite>.  In fact it would be sufficient to tell the
+compiler that it is an array of rank 1:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">real</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="n">dimension</span><span class="p">(:),</span> <span class="n">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="p">::</span> <span class="n">f</span>
+</pre></div>
+</div>
+<p>but indicating that it has the same size ax <cite>x</cite> is useful for someone
+trying to understand the code.</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="fortran.html#fortran"><span class="std std-ref">Fortran</span></a></li>
+<li><a class="reference internal" href="fortran_taylor.html#fortran-taylor"><span class="std std-ref">Fortran examples: Taylor series</span></a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fortran_taylor.html" title="Fortran examples: Taylor series"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gfortran_flags.html" title="Useful gfortran flags"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

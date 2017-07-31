@@ -1,0 +1,611 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Contents of class notes for AMath 483/583 &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="#" />
+    <link rel="next" title="2013 versions of some files" href="2013/index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="2013/index.html" title="2013 versions of some files"
+             accesskey="N">next</a> |</li>
+        <li><a href="#"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Contents of class notes for AMath 483/583</a><ul>
+<li><a class="reference internal" href="#versions-of-some-files">2013 Versions of some files</a></li>
+<li><a class="reference internal" href="#course-materials-2014-edition">Course materials &#8211; 2014 Edition</a></li>
+<li><a class="reference internal" href="#technical-topics">Technical Topics</a></li>
+<li><a class="reference internal" href="#python">Python</a></li>
+<li><a class="reference internal" href="#fortran">Fortran</a></li>
+<li><a class="reference internal" href="#parallel-computing">Parallel computing</a></li>
+<li><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+<li><a class="reference internal" href="#applications">Applications</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="2013/index.html"
+                        title="next chapter">2013 versions of some files</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="contents-of-class-notes-for-amath-483-583">
+<h1>Contents of class notes for AMath 483/583<a class="headerlink" href="#contents-of-class-notes-for-amath-483-583" title="Permalink to this headline">¶</a></h1>
+<p>See the <a class="reference external" href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html">Class Webpage</a>
+for information on instructor, TA, office hours, etc.</p>
+<p>Skip to... <span class="xref std std-ref">technical_topics</span> ... <span class="xref std std-ref">applications</span></p>
+<p><a class="reference internal" href="toc_condensed.html#toc-condensed"><span class="std std-ref">Condensed Table of Contents without subsections</span></a></p>
+<div class="section" id="versions-of-some-files">
+<h2>2013 Versions of some files<a class="headerlink" href="#versions-of-some-files" title="Permalink to this headline">¶</a></h2>
+<p>These pages may be referred to in Lecture Videos filmed in 2013,
+particularly the homeworks and project.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="2013/index.html">2013 versions of some files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2013/homeworks.html">2013 Homework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2013/vm.html">Virtual Machine for this class [2013 version]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2013/aws.html">Amazon Web Services EC2 AMI [2013 version]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2013/git.html">Git [2013 version]</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="course-materials-2014-edition">
+<span id="course-materials"></span><h2>Course materials &#8211; 2014 Edition<a class="headerlink" href="#course-materials-2014-edition" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About these notes &#8211; important disclaimers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="class_format.html">Class Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outline.html">Overview and syllabus</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="outline.html#some-topics">Some topics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="labs/index.html">Notes to accompany lab sessions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab1.html">Lab 1: Tuesday April 1, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab8.html">Lab 8: Thursday April 24, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab9.html">Lab 9: Tuesday April 29, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab10.html">Lab 10: Tuesday May 1, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab11.html">Lab 11: Tuesday May 6, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab12.html">Lab 12: Thursday May 8, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab13.html">Lab 13: Tuesday May 13, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab14.html">Lab 14: Thursday May 15, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab15.html">Lab 15: Tuesday May 20, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab16.html">Lab 16: Thursday May 22, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab17.html">Lab 17: Tuesday May 27, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab18.html">Lab 18: Thursday May 29, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab19.html">Lab 19: Tuesday June 3, 2014</a></li>
+<li class="toctree-l2"><a class="reference internal" href="labs/lab20.html">Lab 20: Thursday June 5, 2014</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="homeworks.html">Homework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="homeworks.html#homework-assignments">2014 Homework assignments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="computing_options.html">Computing Options [2014 version]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="computing_options.html#sagemathcloud">SageMathCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computing_options.html#virtual-machine">Virtual Machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computing_options.html#amazon-web-services">Amazon Web Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="software_installation.html">Downloading and installing software for this class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="software_installation.html#versions">Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software_installation.html#individual-packages">Individual packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software_installation.html#software-available-through-apt-get">Software available through <em>apt-get</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="software_installation.html#software-available-through-easy-install">Software available through <em>easy_install</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vm.html">Virtual Machine for this class [2014 Edition]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#system-requirements">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#setting-up-the-vm-in-virtualbox">Setting up the VM in VirtualBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#starting-the-vm">Starting the VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#running-programs">Running programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#fixing-networking-issues">Fixing networking issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#shutting-down">Shutting down</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#cutting-and-pasting">Cutting and pasting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#shared-folders">Shared Folders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#enabling-more-processors">Enabling more processors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#problems-enabling-multiple-processors">Problems enabling multiple processors...</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#changing-guest-resolution-vm-window-size">Changing guest resolution/VM window size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#setting-the-host-key">Setting the host key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#guest-additions">Guest Additions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#how-this-virtual-machine-was-made">How This Virtual Machine was made</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#about-the-vm">About the VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aws.html">Amazon Web Services EC2 AMI [2014 version]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aws.html#launching-an-instance-with-the-uwhpsc-ami">Launching an instance with the <em>uwhpsc</em> AMI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws.html#launch-instance-create-key-pair">Launch instance / create key pair</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws.html#logging-on-to-your-instance">Logging on to your instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws.html#transferring-files-to-from-your-instance">Transferring files to/from your instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws.html#stopping-your-instance">Stopping your instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws.html#creating-your-own-ami">Creating your own AMI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws.html#viewing-webpages-directly-from-your-instance">Viewing webpages directly from your instance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="software_carpentry.html">Software Carpentry</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="technical-topics">
+<span id="toc-technical-topics"></span><h2>Technical Topics<a class="headerlink" href="#technical-topics" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="shells.html">Shells</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="shells.html#unix-shells">Unix shells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shells.html#ipython-shell">IPython shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shells.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unix.html">Unix, Linux, and OS X</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#pwd-and-cd">pwd and cd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#ls">ls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#more-less-cat-head-tail">more, less, cat, head, tail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#removing-moving-copying-files">removing, moving, copying files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#background-and-foreground-jobs">background and foreground jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#nice-and-top">nice and top</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#killing-jobs">killing jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#sudo">sudo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#the-bash-shell">The bash shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#bashrc-file">.bashrc file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#environment-variables">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#path-and-other-search-paths">PATH and other search paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#which">which</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#setting-the-prompt">Setting the prompt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unix.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="top.html">Unix <code class="docutils literal"><span class="pre">top</span></code> command</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="top.html#running-top">Running <code class="docutils literal"><span class="pre">top</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="top.html#summary-area">Summary area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top.html#task-area">Task area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top.html#interactive-commands">Interactive commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="top.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ssh.html">Using ssh to connect to remote computers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ssh.html#x-window-forwarding">X-window forwarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssh.html#scp">scp</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="editors.html">Text editors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="editors.html#leafpad">Leafpad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editors.html#gedit">gedit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editors.html#nedit">NEdit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editors.html#xcode">XCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editors.html#textwrangler">TextWrangler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editors.html#vi-or-vim">vi or vim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="editors.html#emacs">emacs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reproducibility.html">Reproducibility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#scripting-vs-using-a-shell-or-gui">Scripting vs. using a shell or GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducibility.html#ipython-history-command">IPython history command</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="versioncontrol.html">Version Control Software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html#client-server-systems">Client-server systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html#distributed-systems">Distributed systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="git.html">Git</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="git.html#instructions-for-cloning-the-class-repository">Instructions for cloning the class repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html#updating-your-clone">Updating your clone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html#creating-your-own-bitbucket-repository">Creating your own Bitbucket repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bitbucket.html">Bitbucket repositories: viewing changesets, issue tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git_more.html">More about Git</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="git_more.html#using-git-to-stay-synced-up-on-multiple-computers">Using <em>git</em> to stay synced up on multiple computers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx.html">Sphinx documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sphinx.html#using-sphinx-for-your-own-project">Using Sphinx for your own project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx.html#using-sphinx-to-create-these-webpages">Using Sphinx to create these webpages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx.html#making-a-pdf-version">Making a pdf version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">Binary/metric prefixes for computer size, speed, etc.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#prefixes">Prefixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#units-of-memory-storage">Units of memory, storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#units-of-speed">Units of speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.html#flops">Flops</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="computer_arch.html">Computer Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="computer_arch.html#moore-s-law">Moore&#8217;s Law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computer_arch.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="memory.html">Storing information in binary</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#integers">Integers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#real-numbers">Real numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#text">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#colors">Colors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#hexidecimal-numbers">Hexidecimal numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#machine-instructions">Machine instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="punchcard.html">Punch cards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_and_fortran.html">Python and Fortran</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_and_fortran.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="python">
+<span id="toc-python"></span><h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python.html#interactive-python">Interactive Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#indentation">Indentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#wrapping-lines">Wrapping lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#comments">Comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#strings">Strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#docstrings">Docstrings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#running-python-scripts">Running Python scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#python-objects">Python objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#declaring-variables">Declaring variables?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#lists">Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#copying-objects">Copying objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#mutable-and-immutable-objects">Mutable and Immutable objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#tuples">Tuples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#iterators">Iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#range">range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#enumerate">enumerate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_scripts_modules.html">Python scripts and modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_scripts_modules.html#writing-scripts-for-ease-of-importing">Writing scripts for ease of importing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_scripts_modules.html#reloading-modules">Reloading modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_scripts_modules.html#command-line-arguments">Command line arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_scripts_modules.html#importing-modules">Importing modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_scripts_modules.html#the-python-path">The Python Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_scripts_modules.html#other-forms-of-import">Other forms of import</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_scripts_modules.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_functions.html">Python functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_functions.html#defining-functions-in-modules">Defining functions in modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_functions.html#lambda-functions">Lambda functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_functions.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_strings.html">Python strings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_strings.html#string-formatting">String formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_strings.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_python.html">Numerics in Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerical_python.html#vectors-and-matrices">Vectors and Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_python.html#component-wise-operations">Component-wise operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_python.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ipython_notebook.html">IPython_notebook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ipython_notebook.html#interactive-notebooks">Interactive notebooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sage.html">Sage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_plotting.html">Plotting with Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_plotting.html#matplotlib-and-pylab">matplotlib and pylab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_plotting.html#mayavi-and-mlab">Mayavi and mlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_plotting.html#visit">VisIt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_plotting.html#paraview">ParaView</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_debugging.html">Python debugging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_debugging.html#python-ides">Python IDEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_debugging.html#reloading-modules">Reloading modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_debugging.html#print-statements">Print statements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_debugging.html#pdb-debugger">pdb debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_debugging.html#debugging-after-an-exception-occurs">Debugging after an exception occurs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_debugging.html#using-pdb-from-ipython">Using pdb from IPython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_debugging.html#other-pdb-commands">Other pdb commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="animation.html">Animation in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animation.html#installing-jsanimation">Installing JSAnimation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="animation.html#alternative-to-installing">Alternative to installing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="animation.html#jsanimation-frametools">JSAnimation_frametools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="animation.html#matplotlib-issues">Matplotlib issues</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="fortran">
+<span id="toc-fortran"></span><h2>Fortran<a class="headerlink" href="#fortran" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fortran.html">Fortran</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#general-references">General References:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#history">History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#fortran-77">Fortran 77</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#fortran-90-95">Fortran 90/95</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#compilers">Compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#file-extensions">File extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#compiling-linking-and-running-a-fortran-code">Compiling, linking, and running a Fortran code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#sample-codes">Sample codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#intrinsic-functions">Intrinsic functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#default-8-byte-real-numbers">Default 8-byte real numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#fortran-arrays">Fortran Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#loops">Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#if-then-else">if-then-else</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#booleans">Booleans</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gfortran_flags.html">Useful gfortran flags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gfortran_flags.html#output-flags">Output flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gfortran_flags.html#warning-flags">Warning flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gfortran_flags.html#fortran-dialect-flags">Fortran dialect flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gfortran_flags.html#debugging-flags">Debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gfortran_flags.html#optimization-flags">Optimization flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gfortran_flags.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fortran_sub.html">Fortran subroutines and functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fortran_sub.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_sub.html#modifying-arguments">Modifying arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_sub.html#the-use-of-intent">The use of <em>intent</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_sub.html#subroutines">Subroutines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_sub.html#subroutine-in-a-module">Subroutine in a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_sub.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fortran_taylor.html">Fortran examples: Taylor series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fortran_arrays.html">Array storage in Fortran</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fortran_arrays.html#passing-rank-1-arrays-to-subroutines-fortran-77-style">Passing rank 1 arrays to subroutines, Fortran 77 style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_arrays.html#fortran-arrays-of-higher-rank">Fortran arrays of higher rank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_arrays.html#why-do-we-care-how-arrays-are-stored">Why do we care how arrays are stored?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fortran_modules.html">Fortran modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fortran_modules.html#some-reasons-to-use-modules">Some reasons to use modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_modules.html#compiling-modules">Compiling modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_modules.html#circles-module-example">Circles module example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_modules.html#module-variables">Module variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fortran_io.html">Fortran Input / Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fortran_io.html#formats-vs-unformatted">Formats vs. unformatted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_io.html#writing-to-a-file">Writing to a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_io.html#reading-input">Reading input</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fortran_debugging.html">Fortran debugging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fortran_debugging.html#print-statements">Print statements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_debugging.html#compiling-with-various-gfortran-flags">Compiling with various gfortran flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_debugging.html#the-gdb-debugger">The <cite>gdb</cite> debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fortran_debugging.html#totalview">Totalview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fortran_newton.html">Fortran example for Newton&#8217;s method</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="parallel-computing">
+<span id="toc-parallel"></span><h2>Parallel computing<a class="headerlink" href="#parallel-computing" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="openmp.html">OpenMP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="openmp.html#sample-codes">Sample codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openmp.html#other-directives">Other directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openmp.html#fine-grain-vs-coarse-grain-paralellism">Fine-grain vs. coarse-grain paralellism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openmp.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">MPI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mpi.html#mpi-implementations">MPI implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpi.html#mpi-on-the-class-vm">MPI on the class VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpi.html#test-code">Test code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpi.html#reduction-example">Reduction example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpi.html#send-receive-example">Send-Receive example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpi.html#master-worker-examples">Master-worker examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpi.html#sample-codes">Sample codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpi.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="miscellaneous">
+<span id="toc-misc"></span><h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="makefiles.html">Makefiles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="makefiles.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="special_functions.html">Special functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="special_functions.html#taylor-series-expansions">Taylor series expansions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="special_functions.html#newton-s-method-for-the-square-root">Newton&#8217;s method for the square root</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="timing.html">Timing code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="timing.html#unix-time-command">Unix time command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing.html#fortran-timing-utilities">Fortran timing utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timing.html#timing-openmp-code">Timing OpenMP code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linalg.html#the-blas">The BLAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linalg.html#lapack">LAPACK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linalg.html#direct-methods-for-sparse-systems">Direct methods for sparse systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linalg.html#other-references">Other references</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="random.html">Random number generators</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="applications">
+<span id="toc-apps"></span><h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="poisson.html">Numerical methods for the Poisson problem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="poisson.html#iterative-methods-for-the-poisson-problem">Iterative methods for the Poisson problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="poisson.html#monte-carlo-methods-for-the-steady-state-diffusion-equation">Monte Carlo methods for the steady state diffusion equation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jacobi1d_omp1.html">Jacobi iteration using OpenMP with <cite>parallel do</cite> constructs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jacobi1d_omp2.html">Jacobi iteration using OpenMP with coarse-grain <cite>parallel</cite> block</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jacobi1d_mpi.html">Jacobi iteration using MPI</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="references">
+<span id="toc-biblio"></span><h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliography and further reading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#books">Books</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#other-courses-with-useful-slides-or-webpages">Other courses with useful slides or webpages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#other-links">Other Links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#software">Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#virtual-machine-references">Virtual machine references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#sphinx-references">Sphinx references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#biblio-python">Python:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#numerical-python-references">Numerical Python references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#unix-bash-references">Unix, bash references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#version-control-systems-references">Version control systems references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#git-references">Git references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#mercurial-references">Mercurial references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#reproducibility-references">Reproducibility references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#fortran-references">Fortran references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#makefile-references">Makefile references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#computer-architecture-references">Computer architecture references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#floating-point-arithmetic">Floating point arithmetic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#languages-and-compilers">Languages and compilers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#openmp-references">OpenMP references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#mpi-references">MPI references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html#exa-scale-computing">Exa-scale computing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="software_carpentry.html">Software Carpentry</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="2013/index.html" title="2013 versions of some files"
+             >next</a> |</li>
+        <li><a href="#"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

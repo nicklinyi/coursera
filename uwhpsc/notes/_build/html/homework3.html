@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Homework 3 [2014] &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Homework 3 [2014]</a><ul>
+<li><a class="reference internal" href="#assignment">Assignment</a></li>
+<li><a class="reference internal" href="#to-submit">To submit</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/homework3.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="homework-3-2014">
+<span id="homework3"></span><h1>Homework 3 [2014]<a class="headerlink" href="#homework-3-2014" title="Permalink to this headline">¶</a></h1>
+<p>Due Thursday, May 8, 2014, by 11:00pm PDT.</p>
+<p>Recall from linear algebra that if <span class="math">\(\|x\|\)</span> is some vector norm then
+the corresponding matrix norm is defined by</p>
+<blockquote>
+<div><span class="math">\(\|A\| = \max_{x\neq 0} \frac{\|Ax\|}{\|x\|}\)</span></div></blockquote>
+<p>This means that <span class="math">\(\|Ax\| \leq \|A\|\|x\|\)</span> for all <span class="math">\(x\)</span>, and in fact
+the norm of <span class="math">\(A\)</span> is the smallest value <span class="math">\(c\geq 0\)</span> such that the
+inequality <span class="math">\(\|Ax\| \leq c\|x\|\)</span> holds for <em>all</em> vectors <span class="math">\(x\)</span> of the
+appropriate shape.</p>
+<p>Recall also that the 1-norm of a vector of length <span class="math">\(n\)</span> is defined by</p>
+<blockquote>
+<div><span class="math">\(\|x\|_1 = \sum_{i=1}^n |x_i|\)</span></div></blockquote>
+<p>It is fairly easy to show that there is a simple formula for the
+corresponding matrix 1-norm of an <span class="math">\(n \times n\)</span> matrix <span class="math">\(A\)</span>:</p>
+<blockquote>
+<div><span class="math">\(\|A\|_1 = \max_{j=1,2,\ldots,n} \sum_{i=1}^n |A_{ij}|\)</span></div></blockquote>
+<p>In other words, compute the 1-norm of each column vector and the 1-norm of
+the matrix is the maximum of these column sums.</p>
+<p>The goal of this homework is to:</p>
+<ul class="simple">
+<li>Compute the 1-norm by this formula and
+compare it to an approximation obtained by computing the maximum of
+<span class="math">\(\frac{\|Ax\|}{\|x\|}\)</span> over a large number of random vectors.</li>
+<li>Speed the code up using OpenMP, exploring two different ways to add
+parallelization to the approximation.</li>
+</ul>
+<p>The directory <cite>$UWHPSC/homeworks/homework3</cite> contains some code to get you
+started on this assignment:</p>
+<ul class="simple">
+<li><cite>main.f90</cite> is a main program that reads in some data values,
+creates a random matrix, computes the 1-norm by the formula, and then
+calls <cite>approx_norm1</cite> and prints out the approximation.</li>
+<li><cite>approx_norm.f90</cite> has a template for how this module should look, but does
+not contain the necessary code.</li>
+<li><cite>random_util.f90</cite> that has a function to seed the Fortran random number
+generator based on a single integer that you can set to some positive
+integer (so the results are repeatable if you run the code twice).
+If you set <cite>seed = 0</cite> then it will generate a &#8220;random&#8221; seed.
+See <a class="reference internal" href="random.html#random"><span class="std std-ref">Random number generators</span></a> for some references.</li>
+<li><cite>Makefile</cite> is set up so to create a file <cite>input_data.txt</cite> that is read in
+by the Fortran code, to illustrate one way of changing parameters easily
+at the command line.</li>
+</ul>
+<p>For example:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test
+</pre></div>
+</div>
+<p>will compile the code and run it with some default parameter values set in
+the Makefile.  But you can also do, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test n=200
+</pre></div>
+</div>
+<p>to try a <span class="math">\(200 \times 200\)</span> random matrix instead of the default
+<span class="math">\(50 \times 50\)</span>, or:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test n=200 seed=0
+</pre></div>
+</div>
+<p>to also change the seed for the random number generator.
+(Also note that <cite>seed=0</cite> indicates
+that it should give different random results every time you run this.)</p>
+<div class="section" id="assignment">
+<h2>Assignment<a class="headerlink" href="#assignment" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Write the Fortran code needed in <cite>approx_norm.f90</cite> so that
+the program gives sensible output, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test
+
+Wrote data to input_data.txt
+./test.exe
+ seed1 for random number generator:       12345
+Using matrix with n =    50   True 1-norm:          28.091553
+Based on   1000 samples, Approximate 1-norm:        24.998100
+</pre></div>
+</div>
+<p>Note that the approximation to the 1-norm should always be less than
+or equal to the true 1-norm, since in the program you are only computing
+the maximum over some finite number of random vectors rather than over all
+<span class="math">\(x\)</span>.  (And in general this does <strong>not</strong> give a very good
+approximation, even when the number of samples is very large!)</p>
+<p>To write this code, note that you want to loop over <cite>nsamples</cite> different
+random vectors <span class="math">\(x\)</span>, and for each vector compute
+<span class="math">\(\|Ax\|/\|x\|\)</span>.  Keep track of the maximum of these as you go along.
+Note that <cite>nsamples</cite> is also read in from <cite>input_data.txt</cite> and a
+default value is specified in the Makefile.</p>
+<p>You will need to determine the size of the matrix <cite>a</cite> passed into to the
+subroutine since that is not an explicit argument.  For this you can
+use:</p>
+<div class="highlight-default"><div class="highlight"><pre>n = size(a,1)   ! number of rows in a
+</pre></div>
+</div>
+</li>
+<li><p class="first">Change the <cite>Makefile</cite> so that it compiles with the <cite>-fopenmp</cite> flag and
+add OpenMP directives to the main program so that the loop on <cite>j</cite> for
+computing the true 1-norm is a parallel do loop.  Think about what variables
+need to be declared <cite>private</cite>.  Make sure the program still runs and
+gives consistent results whether you compile with OpenMP or not.</p>
+<p><strong>Note:</strong>  To recompile with or without OpenMP, you should first do:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make clean
+</pre></div>
+</div>
+<p>in the directory to make sure it recompiles all the <cite>*.o</cite> object files
+with the correct compiler flag.</p>
+</li>
+<li><p class="first">Add an input parameter <cite>nthreads</cite> that is read in from <cite>input_data.txt</cite>
+and used to set the number of threads to use in the main program.  Also
+add this to the Makefile with a default value 2 and print it out from the
+main program, so that for example:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test nthreads=4
+Wrote data to input_data.txt
+./test.exe
+ nthreads =            4
+ seed1 for random number generator:       12345
+Using matrix with n =    50   True 1-norm:          28.091553
+Based on   1000 samples, Approximate 1-norm:        24.998100
+</pre></div>
+</div>
+</li>
+<li><p class="first">Parallelize <cite>approx_norm1</cite> using OpenMP.
+Note that there is more than one way to do this.</p>
+<p>1. You could parallelize the outermost loop over random vectors
+(so different threads are working on different vectors <cite>x</cite>), or</p>
+<p>2. You could loop over the different <span class="math">\(x\)</span> vectors as in the
+serial code, but then parallelize the work that must be done in computing
+<span class="math">\(\|Ax\|/\|x\|\)</span> for each <cite>x</cite>.</p>
+<p>Implement both these approaches, and add a parameter <cite>method</cite> so that
+<cite>method=1</cite> means the first approach and <cite>method=2</cite> means the second
+approach.  Handle this parameter similar to the other input data, with
+a default value in the Makefile, and with <cite>main.f90</cite> reading it in from
+the file <cite>input_data.txt</cite>.</p>
+<p>Add <cite>method</cite> as a module variable to <cite>approx_norm.f90</cite> in order to pass
+the value from the main routine into the subroutine.  Do not change the
+calling sequence of the subroutine.</p>
+</li>
+<li><p class="first">(You don&#8217;t need to turn anything in for this part since timing parallel
+codes can be dicey on some machines.)</p>
+<p>Experiment with the two methods implemented above to see which approach
+seems to be better on large problems.   For example you might try:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ time make test n=50 nsamples=100000 nthreads=1 method=1
+</pre></div>
+</div>
+<p>and then see what happens as you increase the number of threads with this
+method, and then repeat with <cite>method=2</cite>.</p>
+<p>Note that this problem has small matrices and vectors but lots of samples.</p>
+<p>Also see what happens if the matrix is big but the number of samples is
+relatively small, e.g.</p>
+<div class="highlight-default"><div class="highlight"><pre>$ time make test n=5000 nsamples=100 nthreads=1 method=1
+</pre></div>
+</div>
+<p>Can you understand the behavior you see?
+If you get counter-intuitive results, try to understand why.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="to-submit">
+<h2>To submit<a class="headerlink" href="#to-submit" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">At the end, you should have committed the following
+files to your repository:</p>
+<ul class="simple">
+<li><cite>$MYHPSC/homework3/Makefile</cite></li>
+<li><cite>$MYHPSC/homework3/main.f90</cite></li>
+<li><cite>$MYHPSC/homework3/random_util.f90</cite>  (unchanged from original)</li>
+<li><cite>$MYHPSC/homework3/approx_norm.f90</cite></li>
+</ul>
+<p>Note that we should be able to run your code by giving commands like
+those given above.  But also if we write a new main program that calls
+your subroutine <cite>approx_norm1</cite>, that should also work.</p>
+<p>Make sure you push to bitbucket after committing.</p>
+</li>
+<li><p class="first">Submit the commit number that you want graded by following the link
+provided on the <a class="reference external" href="https://canvas.uw.edu/courses/893991/assignments/2504886">Canvas page for Homework 3</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plotting with Python &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Python debugging" href="python_debugging.html" />
+    <link rel="prev" title="Sage" href="sage.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="python_debugging.html" title="Python debugging"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sage.html" title="Sage"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plotting with Python</a><ul>
+<li><a class="reference internal" href="#matplotlib-and-pylab">matplotlib and pylab</a></li>
+<li><a class="reference internal" href="#mayavi-and-mlab">Mayavi and mlab</a></li>
+<li><a class="reference internal" href="#visit">VisIt</a></li>
+<li><a class="reference internal" href="#paraview">ParaView</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sage.html"
+                        title="previous chapter">Sage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="python_debugging.html"
+                        title="next chapter">Python debugging</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/python_plotting.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="plotting-with-python">
+<span id="python-plotting"></span><h1>Plotting with Python<a class="headerlink" href="#plotting-with-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="matplotlib-and-pylab">
+<span id="pylab"></span><h2>matplotlib and pylab<a class="headerlink" href="#matplotlib-and-pylab" title="Permalink to this headline">¶</a></h2>
+<p>There are nice tools for making plots of 1d and 2d data (curves, contour
+plots, etc.) in the module
+<a class="reference external" href="http://matplotlib.sourceforge.net/">matplotlib</a>.
+Many of these plot commands are very similar to those in Matlab.</p>
+<p>To see some of what&#8217;s possible (and learn how to do it), visit the
+<a class="reference external" href="http://matplotlib.sourceforge.net/gallery.html">matplotlib gallery</a>.
+Clicking on a figure displays the Python commands needed to create it.</p>
+<p>The best way to get matplotlib working interactively in a standard Python
+shell is to do:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ python
+&gt;&gt;&gt; import pylab
+&gt;&gt;&gt; pylab.interactive(True)
+</pre></div>
+</div>
+<p><em>pylab</em> includes not only <em>matplotlib</em> but also <em>numpy</em>.
+Then you should be able to do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">pylab</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;o-&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and see a plot of a parabola appear.  You should also be able to use the
+buttons at the bottom of the window, e.g click the
+magnifying glass and then use the mouse to select a rectangle in the plot to
+zoom in.</p>
+<p>Alternatively, you could do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">interactive</span><span class="p">(</span><span class="k">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With this approach you don&#8217;t need to start every pylab function name with
+pylab, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;o-&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In these notes we&#8217;ll generally use module names just so it&#8217;s clear where
+things come from.</p>
+<p>If you use the IPython shell, you can do:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ ipython --pylab
+
+In [1]: x = linspace(-1, 1, 20)
+In [2]: plot(x, x**2, &#39;o-&#39;)
+</pre></div>
+</div>
+<p>The &#8211;pylab flag causes everything to be imported from pylab and set up for
+interactive plotting.</p>
+</div>
+<div class="section" id="mayavi-and-mlab">
+<span id="mayavi"></span><h2>Mayavi and mlab<a class="headerlink" href="#mayavi-and-mlab" title="Permalink to this headline">¶</a></h2>
+<p>Mayavi is a Python plotting package designed primarily for 3d plots.  See:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://code.enthought.com/projects/mayavi/docs/development/html/mayavi/index.html">Documentation</a></li>
+<li><a class="reference external" href="http://code.enthought.com/projects/mayavi/docs/development/html/mayavi/auto/examples.html">Gallery</a></li>
+</ul>
+</div></blockquote>
+<p>See <a class="reference internal" href="software_installation.html#software-installation"><span class="std std-ref">Downloading and installing software for this class</span></a> for some ways to install Mayavi.</p>
+</div>
+<div class="section" id="visit">
+<span id="id1"></span><h2>VisIt<a class="headerlink" href="#visit" title="Permalink to this headline">¶</a></h2>
+<p>VisIt is an open source visualization package being developed at Lawrence Livermore
+National Laboratory.  It is designed for industrial-strength visualization problems
+and can deal with very large distributed data sets using MPI.</p>
+<p>There is a GUI interface and also a Python interface for scripting.</p>
+<p>See:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://wci.llnl.gov/codes/visit/doc.html">Documentation</a></li>
+<li><a class="reference external" href="https://wci.llnl.gov/codes/visit/gallery.html">Gallery</a></li>
+<li><a class="reference external" href="http://www.visitusers.org/index.php?title=Short_Tutorial">Tutorial</a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="paraview">
+<span id="id4"></span><h2>ParaView<a class="headerlink" href="#paraview" title="Permalink to this headline">¶</a></h2>
+<p>ParaView is another open source package developed originally for work at the
+National Labs.</p>
+<p>There is a GUI interface and also a Python interface for scripting.</p>
+<p>See:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.paraview.org/paraview/help/documentation.html">Documentation</a></li>
+<li><a class="reference external" href="http://www.paraview.org/paraview/project/imagegallery.php">Gallery</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="python_debugging.html" title="Python debugging"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sage.html" title="Sage"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

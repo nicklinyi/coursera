@@ -1,0 +1,1097 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fortran &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Useful gfortran flags" href="gfortran_flags.html" />
+    <link rel="prev" title="Animation in Python" href="animation.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gfortran_flags.html" title="Useful gfortran flags"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="animation.html" title="Animation in Python"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fortran</a><ul>
+<li><a class="reference internal" href="#general-references">General References:</a></li>
+<li><a class="reference internal" href="#history">History</a></li>
+<li><a class="reference internal" href="#fortran-77">Fortran 77</a></li>
+<li><a class="reference internal" href="#fortran-90-95">Fortran 90/95</a></li>
+<li><a class="reference internal" href="#compilers">Compilers</a></li>
+<li><a class="reference internal" href="#file-extensions">File extensions</a></li>
+<li><a class="reference internal" href="#compiling-linking-and-running-a-fortran-code">Compiling, linking, and running a Fortran code</a></li>
+<li><a class="reference internal" href="#sample-codes">Sample codes</a></li>
+<li><a class="reference internal" href="#intrinsic-functions">Intrinsic functions</a></li>
+<li><a class="reference internal" href="#default-8-byte-real-numbers">Default 8-byte real numbers</a></li>
+<li><a class="reference internal" href="#fortran-arrays">Fortran Arrays</a></li>
+<li><a class="reference internal" href="#loops">Loops</a></li>
+<li><a class="reference internal" href="#if-then-else">if-then-else</a></li>
+<li><a class="reference internal" href="#booleans">Booleans</a></li>
+<li><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="animation.html"
+                        title="previous chapter">Animation in Python</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gfortran_flags.html"
+                        title="next chapter">Useful gfortran flags</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/fortran.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fortran">
+<span id="id1"></span><h1>Fortran<a class="headerlink" href="#fortran" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="general-references">
+<h2>General References:<a class="headerlink" href="#general-references" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>See the <a class="reference internal" href="biblio.html#biblio-fortran"><span class="std std-ref">Fortran references</span></a> section of the bibliography for links.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="history">
+<h2>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h2>
+<p>FORTRAN stands for <em>FORmula TRANslator</em> and was the first major <em>high
+level language</em> to catch on.  The first compiler was written in
+1954-57.  Before this, programmers generally had to write programs in
+assembly language.</p>
+<p>Many version followed: Fortran II, III, IV. Fortran 66
+followed a set of standards formulated in 1966.</p>
+<p>See</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.ibiblio.org/pub/languages/fortran/ch1-1.html">http://www.ibiblio.org/pub/languages/fortran/ch1-1.html</a></li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Fortran">http://en.wikipedia.org/wiki/Fortran</a></li>
+</ul>
+</div></blockquote>
+<p>for brief histories.</p>
+</div>
+<div class="section" id="fortran-77">
+<h2>Fortran 77<a class="headerlink" href="#fortran-77" title="Permalink to this headline">¶</a></h2>
+<p>The standards established in 1977 lead to Fortran 77, or f77, and
+many codes are still in use that follow this standard.</p>
+<p>Fortran 77 does not have all the features of newer versions and many
+things are done quite differently.</p>
+<p>One feature of f77 is that lines of code have a very rigid structure.
+This was required in early versions of Fortran due to the fact that
+computer programs were written on <a class="reference internal" href="punchcard.html#punchcard"><span class="std std-ref">Punch cards</span></a>.  All statements
+must start in column 7 or beyond and no statement may extend beyond
+column 72. The first 6 columns are used for things like labels
+(numbers associated with particular statements).  In f77 any line
+that starts with a &#8216;c&#8217; in column 1 is a comment.</p>
+<p>We will not use f77 in this class but if you need to work with
+Fortran in the future you may need to learn more about it because of
+all the <em>legacy codes</em> that still use it.</p>
+</div>
+<div class="section" id="fortran-90-95">
+<h2>Fortran 90/95<a class="headerlink" href="#fortran-90-95" title="Permalink to this headline">¶</a></h2>
+<p>Dramatically new standards were introduced with Fortran 90, and these
+were improved in mostly minor ways in Fortran 95.  There are newer
+Fortran 2003 and 2008 standards but few compilers implement these fully yet.
+See <a class="reference external" href="http://gcc.gnu.org/wiki/GFortranStandards">Wikipedia page on Fortran standards</a>
+for more information.</p>
+<p>For this class we will use the Fortran 90/95 standards, which we will
+refer to as Fortran 90 for brevity.</p>
+</div>
+<div class="section" id="compilers">
+<span id="fortran-compilers"></span><h2>Compilers<a class="headerlink" href="#compilers" title="Permalink to this headline">¶</a></h2>
+<p>Unlike Python code, a Fortran program must pass through several
+stages before being executed.  There are several different compilers
+that can turn Fortran code into an <em>executable</em>, as described more
+below.</p>
+<p>In this class we will use <em>gfortran</em>, which is an open source
+compiler, part of the <a class="reference external" href="http://www.gnu.org/">GNU Project</a>.
+See <a class="reference external" href="http://gcc.gnu.org/fortran/">http://gcc.gnu.org/fortran/</a> for more about gfortran.</p>
+<p>There is an older compiler in this suite called <em>g77</em> which
+compiles Fortran 77 code, but <em>gfortran</em> can also be used for Fortran
+77 code and has replaced g77.</p>
+<p>There are several commercial compilers which are better in some ways,
+in particular they sometimes do better optimization and produce
+faster running executables.  They also may have better debugging
+tools built in.  Some popular ones are the Intel and Portland Group
+compilers.</p>
+</div>
+<div class="section" id="file-extensions">
+<h2>File extensions<a class="headerlink" href="#file-extensions" title="Permalink to this headline">¶</a></h2>
+<p>For the gfortran compiler, fixed format code should have the
+<em>.f</em> while free format code has the extension <em>.f90</em> or <em>.f95</em>.  We
+will use <em>.f90</em>.</p>
+</div>
+<div class="section" id="compiling-linking-and-running-a-fortran-code">
+<span id="fortran-compiling"></span><h2>Compiling, linking, and running a Fortran code<a class="headerlink" href="#compiling-linking-and-running-a-fortran-code" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we have a Fortran file named <cite>demo1.f90</cite>, for example the
+program below.  We can not run this directly the way we did a Python
+script.  Instead it must be converted into <em>object code</em>, a version
+of the code that is in a machine language specific to the type of
+computer.  This is done by the <em>compiler</em>.</p>
+<p>Then a <em>linker</em> must be used to convert the object code into an
+<em>executable</em> that can actually be executed.</p>
+<p>This is broken into two steps because often large programs are split
+into many different <em>.f90</em> files.  Each one can be compiled into a
+separate <em>object file</em>, which by default has the same name but with a
+<em>.o</em> extension (for example, from <cite>demo1.f90</cite> the compiler would
+produce <cite>demo1.o</cite>).  One may also want to call on <em>library routines</em> that
+have already been compiled and reside in some library.  The linker
+combines all of these into a single executable.</p>
+<p>For more details on the process, see for example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Compiler">http://en.wikipedia.org/wiki/Compiler</a></li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Linker_%28computing%29">http://en.wikipedia.org/wiki/Linker_%28computing%29</a></li>
+</ul>
+</div></blockquote>
+<p>For the simplest case of a self-contained program in one file, we can
+combine both stages in a single <cite>gfortran</cite> command, e.g.</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran demo1.f90
+</pre></div>
+</div>
+<p>By default this will produce an <em>executable</em> named <cite>a.out</cite> for
+obscure historical reasons (it stands for <em>assembler output</em>,
+see <a class="reference external" href="http://en.wikipedia.org/wiki/A.out">wikipedia</a>).</p>
+<p>To run the code you would then type:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ ./a.out
+</pre></div>
+</div>
+<p>Note we type <cite>./a.out</cite> to indicate that we are executing <cite>a.out</cite> from
+the current directory.  There is an environment variable <cite>PATH</cite> that
+contains your <em>search path</em>, the set of directories that are searched
+whenever you type a command name at the Unix prompt.  Often this is
+set so that the current directory is the first place searched, in
+which case you could just type <cite>a.out</cite> instead of <cite>./a.out</cite>.
+However, it is generally considered bad practice to include the
+current directory in your search path because bad things can happen
+if you accidentally execute a file.</p>
+<p>If you don&#8217;t like the name <cite>a.out</cite> you can specify an output name
+using the <cite>-o</cite> flag with the <cite>gfortran</cite> command.  For example,
+if you like the Windows convention of using the extension <cite>.exe</cite> for
+executable files:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran demo1.f90 -o demo1.exe
+$ ./demo1.exe
+</pre></div>
+</div>
+<p>will also run the code.</p>
+<p>Note that if you try one of the above commands, there will be no file
+<cite>demo1.o</cite> created.  By default <cite>gfortran</cite> removes this file once the
+executed is created.</p>
+<p>Later we will see that it is often useful to split up the compile and
+link steps, particularly if there are several files that need to be
+compiled and linked.  We can do this using the <cite>-c</cite> flag to compile
+without linking:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran -c demo1.f90              # produces demo1.o
+$ gfortran demo1.o -o demo1.exe      # produces demo1.exe
+</pre></div>
+</div>
+<p>There are many other compiler flags that can be used, see
+<a class="reference external" href="http://linux.die.net/man/1/gfortran">linux man page for gfortran</a> for a list.</p>
+</div>
+<div class="section" id="sample-codes">
+<span id="fortran-ex1"></span><h2>Sample codes<a class="headerlink" href="#sample-codes" title="Permalink to this headline">¶</a></h2>
+<p>The first example simply assigns some numbers to variables and then
+prints them out.   The comments below the code explain some features.</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/demo1.f90</span>
+
+<span class="k">program </span><span class="n">demo1</span>
+
+<span class="c">! Fortran 90 program illustrating data types.</span>
+
+<span class="k">implicit none</span>   <span class="c">! to give error if a variable not declared</span>
+<span class="kt">real</span> <span class="kd">::</span> <span class="n">x</span>
+<span class="kt">real</span> <span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+<span class="kt">integer</span> <span class="kd">::</span> <span class="n">m</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot; &quot;</span>
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;M = &quot;</span><span class="p">,</span><span class="n">M</span>   <span class="c">! note that M==m  (case insensitive)</span>
+
+
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot; &quot;</span>
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x is real (kind=4)&quot;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">1.e0</span> <span class="o">+</span> <span class="mf">1.23456789e-6</span>
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span><span class="p">,</span> <span class="n">x</span>
+
+
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot; &quot;</span>
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;y is real (kind=8)&quot;</span>
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;  but 1.e0 is real (kind=4):&quot;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">1.e0</span> <span class="o">+</span> <span class="mf">1.23456789e-6</span>
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;y = &quot;</span><span class="p">,</span> <span class="n">y</span>
+
+
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot; &quot;</span>
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;z is real (kind=8)&quot;</span>
+<span class="n">z</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">+</span> <span class="mf">1.23456789</span><span class="n">d</span><span class="o">-</span><span class="mi">6</span>
+<span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;z = &quot;</span><span class="p">,</span> <span class="n">z</span>
+
+<span class="k">end program </span><span class="n">demo1</span>
+</pre></div>
+</td></tr></table></div>
+<p><em>Comments:</em></p>
+<blockquote>
+<div><ul>
+<li><p class="first">Exclamation points are used for comments</p>
+</li>
+<li><p class="first">The <cite>implicit none</cite> statement in line 7 means that any variable
+to be used must be explicitly declared.  See
+<span class="xref std std-ref">fortran_implicit</span> for more about this.</p>
+</li>
+<li><p class="first">Lines 8-10 declare four variables <cite>x, y, z, n</cite>.   Note that <cite>x</cite> is declared to
+have type <cite>real</cite> which is a floating point number stored in 4
+bytes, also known as <em>single precision</em>.  This could have
+equivalently been written as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">real</span> <span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="p">::</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p><cite>y</cite> and <cite>z</cite> are floating point numbers stored in 8 bytes
+(corresponding to <em>double precision</em> in older versions of
+Fortran).  This is generally what you want to use.</p>
+</li>
+<li><p class="first">Fortran is not case-sensitive, so <cite>M</cite> and <cite>m</cite> refer to the same
+variable!!</p>
+</li>
+<li><p class="first"><cite>1.23456789e-10</cite> specifies a 4-byte real number.  The 8-byte
+equivalent is <cite>1.23456789d-10</cite>, with a <cite>d</cite> instead of <cite>e</cite>.
+This is apparent from the output below.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>Compiling and running this program produces:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran demo1.f90 -o demo1.exe
+$ ./demo1.exe
+
+ M =            3
+
+ x is real (kind=4)
+ x =    1.000001
+
+ y is real (kind=8)
+   but 1.e0 is real (kind=4):
+ y =    1.00000119209290
+
+ z is real (kind=8)
+ z =    1.00000123456789
+</pre></div>
+</div>
+<p>For most of what we&#8217;ll do in this class, we will use real numbers
+with <cite>(kind=8)</cite>.  Be careful to specify constants using the <cite>d</cite>
+rather than <cite>e</cite> notation if you need to use scientific notation.</p>
+<p>(But see <a class="reference internal" href="#fortran-default8"><span class="std std-ref">Default 8-byte real numbers</span></a> below for another approach.)</p>
+</div>
+<div class="section" id="intrinsic-functions">
+<span id="fortran-intrinsic"></span><h2>Intrinsic functions<a class="headerlink" href="#intrinsic-functions" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of built-in functions that you can use in Fortran,
+for example the trig functions:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/builtinfcns.f90</span>
+
+<span class="k">program </span><span class="n">builtinfcns</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span> <span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">pi</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+    <span class="c">! compute pi as arc-cosine of -1:</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="nb">acos</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="n">d0</span><span class="p">)</span>  <span class="c">! need -1.d0 for full precision!</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">cos</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nb">exp</span><span class="p">(</span><span class="nb">log</span><span class="p">(</span><span class="n">pi</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;pi = &quot;</span><span class="p">,</span> <span class="n">pi</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span><span class="p">,</span> <span class="n">x</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;y = &quot;</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="k">end program </span><span class="n">builtinfcns</span>
+</pre></div>
+</td></tr></table></div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran builtinfcns.f90
+$ ./a.out
+ pi =    3.14159265358979
+ x =   -1.00000000000000
+ y =    3.14159265358979
+</pre></div>
+</div>
+<p>See <a class="reference external" href="http://www.nsc.liu.se/~boein/f77to90/a5.html">http://www.nsc.liu.se/~boein/f77to90/a5.html</a> for a good list
+of other intrinsic functions.</p>
+</div>
+<div class="section" id="default-8-byte-real-numbers">
+<span id="fortran-default8"></span><h2>Default 8-byte real numbers<a class="headerlink" href="#default-8-byte-real-numbers" title="Permalink to this headline">¶</a></h2>
+<p>Note that you can declare variables to be real without appending <cite>(kind=8)</cite>
+if you compile programs with the gfortran flag <cite>-fdefault-real-8</cite>, e.g.
+if we modify the program above to:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/builtinfcns2.f90</span>
+
+<span class="k">program </span><span class="n">builtinfcns</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span> <span class="kd">::</span> <span class="n">pi</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>    <span class="c">! note kind is not specified</span>
+
+    <span class="c">! compute pi as arc-cosine of -1:</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="nb">acos</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">cos</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nb">exp</span><span class="p">(</span><span class="nb">log</span><span class="p">(</span><span class="n">pi</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;pi = &quot;</span><span class="p">,</span> <span class="n">pi</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span><span class="p">,</span> <span class="n">x</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;y = &quot;</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="k">end program </span><span class="n">builtinfcns</span>
+</pre></div>
+</td></tr></table></div>
+<p>Then:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran builtinfcns2.f90
+$ ./a.out
+ pi =    3.141593
+ x =   -1.000000
+ y =    3.141593
+</pre></div>
+</div>
+<p>gives single precision results, but we can obtain double precisions with:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran -fdefault-real-8 builtinfcns2.f90
+$ ./a.out
+ pi =    3.14159265358979
+ x =   -1.00000000000000
+ y =    3.14159265358979
+</pre></div>
+</div>
+<p>Note that if you plan to do this you might want to define a Unix alias, e.g.</p>
+<div class="highlight-default"><div class="highlight"><pre>$ alias gfort=&quot;gfortran -fdefault-real-8&quot;
+</pre></div>
+</div>
+<p>so you can just type:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfort builtinfcns2.f90
+$ ./a.out
+ pi =    3.14159265358979
+ x =   -1.00000000000000
+ y =    3.14159265358979
+</pre></div>
+</div>
+<p>Such an alias could be put in your <a class="reference internal" href="unix.html#bashrc"><span class="std std-ref">.bashrc file</span></a>.</p>
+<p>We&#8217;ll also see how to specify compiler flags easily in a <span class="xref std std-ref">makefile</span>.</p>
+</div>
+<div class="section" id="fortran-arrays">
+<span id="id2"></span><h2>Fortran Arrays<a class="headerlink" href="#fortran-arrays" title="Permalink to this headline">¶</a></h2>
+<p>Note that arrays are indexed starting at 1 by default, rather than 0 as in
+Python.  Also note that components of an array are accessed using
+parentheses, not square brackets!</p>
+<p>Arrays can be dimensioned and used as in the following example:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/array1</span>
+
+<span class="k">program </span><span class="n">array1</span>
+
+    <span class="c">! demonstrate declaring and using arrays</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">integer</span><span class="p">,</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span>
+    <span class="kt">real</span> <span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="kd">::</span> <span class="n">A</span> 
+    <span class="kt">real</span> <span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="kd">::</span> <span class="n">b</span> 
+    <span class="kt">real</span> <span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span> 
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span>
+
+    <span class="c">! initialize matrix A and vector x:</span>
+    <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span>
+        <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span>
+            <span class="n">A</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="n">j</span>
+            <span class="n">enddo</span>
+        <span class="n">x</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="n">enddo</span>
+
+    <span class="c">! multiply A*x to get b:</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span>
+        <span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span>
+            <span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">A</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+            <span class="n">enddo</span>
+        <span class="n">enddo</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;A = &quot;</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span>
+        <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">A</span><span class="p">(</span><span class="n">i</span><span class="p">,:)</span>   <span class="c">! i&#39;th row of A</span>
+        <span class="n">enddo</span>
+    <span class="k">print</span> <span class="s2">&quot;(2d16.6)&quot;</span><span class="p">,</span> <span class="p">((</span><span class="n">A</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;(d16.6)&quot;</span><span class="p">,</span> <span class="n">x</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;b = &quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;(d16.6)&quot;</span><span class="p">,</span> <span class="n">b</span>
+
+<span class="k">end program </span><span class="n">array1</span>
+</pre></div>
+</td></tr></table></div>
+<p>Compiling and running this code gives the output:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">A</span> <span class="o">=</span>
+  <span class="mf">2.00000000000000</span>        <span class="mf">3.00000000000000</span>
+  <span class="mf">3.00000000000000</span>        <span class="mf">4.00000000000000</span>
+  <span class="mf">4.00000000000000</span>        <span class="mf">5.00000000000000</span>
+<span class="n">x</span> <span class="o">=</span>
+  <span class="mf">1.00000000000000</span>        <span class="mf">1.00000000000000</span>
+<span class="n">b</span> <span class="o">=</span>
+  <span class="mf">5.00000000000000</span>        <span class="mf">7.00000000000000</span>        <span class="mf">9.00000000000000</span>
+</pre></div>
+</div>
+<p><em>Comments:</em></p>
+<blockquote>
+<div><ul class="simple">
+<li>In printing <cite>A</cite> we have used a <em>slice</em> operation: <cite>A(i,:)</cite>
+refers to the i&#8217;th row of <cite>A</cite>.  In Fortran 90 there are many other
+array operations that can be done more easily than we have done in
+the loops above.  We will investigate this further later.</li>
+<li>Here we set the values of <cite>m,n</cite> as integer parameters before
+declaring the arrays <cite>A,x,b</cite>.  Being parameters means we can not
+change their values later in the program.</li>
+<li>It is possible to declare arrays and determine their size later,
+using <cite>allocatable</cite> arrays, which we will also see later.</li>
+</ul>
+</div></blockquote>
+<p>There are many array operations you can do, for example:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/vectorops.f90</span>
+
+<span class="k">program </span><span class="n">vectorops</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="o">/</span><span class="mi">1</span><span class="mf">0.</span><span class="p">,</span><span class="mi">2</span><span class="mf">0.</span><span class="p">,</span><span class="mi">3</span><span class="mf">0.</span><span class="o">/</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="o">/</span><span class="mi">10</span><span class="mf">0.</span><span class="p">,</span><span class="mi">40</span><span class="mf">0.</span><span class="p">,</span><span class="mi">90</span><span class="mf">0.</span><span class="o">/</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">x</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x**2 + y = &quot;</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x*y = &quot;</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;sqrt(y) = &quot;</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;dot_product(x,y) = &quot;</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="nb">dot_product</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+
+<span class="k">end program </span><span class="n">vectorops</span>
+</pre></div>
+</td></tr></table></div>
+<p>produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span>
+  <span class="mf">10.0000000000000</span>        <span class="mf">20.0000000000000</span>        <span class="mf">30.0000000000000</span>
+<span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">=</span>
+  <span class="mf">200.000000000000</span>        <span class="mf">800.000000000000</span>        <span class="mf">1800.00000000000</span>
+<span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">=</span>
+  <span class="mf">1000.00000000000</span>        <span class="mf">8000.00000000000</span>        <span class="mf">27000.0000000000</span>
+<span class="n">sqrt</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span>
+  <span class="mf">10.0000000000000</span>        <span class="mf">20.0000000000000</span>        <span class="mf">30.0000000000000</span>
+<span class="n">dot_product</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span>
+  <span class="mf">36000.0000000000</span>
+</pre></div>
+</div>
+<p>Note that addition, multiplication, exponentiation, and intrinsic functions
+such as <cite>sqrt</cite> all apply component-wise.</p>
+<p>Multidimensional arrays can be manipulated in similar manner.
+The produce to two arrays when computed with <cite>*</cite> is always component-wise.
+For matrix multiplication, use <cite>matmul</cite>.   There is also a <cite>transpose</cite>
+function:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/arrayops.f90</span>
+
+<span class="k">program </span><span class="n">arrayops</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="kd">::</span> <span class="n">b</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="kd">::</span> <span class="n">c</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">dimension</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="kd">::</span> <span class="n">y</span>
+    <span class="kt">integer </span><span class="n">i</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">reshape</span><span class="p">((</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="o">/</span><span class="p">),</span> <span class="p">(</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="o">/</span><span class="p">))</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;a = &quot;</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span>
+        <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">a</span><span class="p">(</span><span class="n">i</span><span class="p">,:)</span>   <span class="c">! i&#39;th row</span>
+        <span class="n">enddo</span>
+
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">transpose</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;b = &quot;</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+        <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">b</span><span class="p">(</span><span class="n">i</span><span class="p">,:)</span>   <span class="c">! i&#39;th row</span>
+        <span class="n">enddo</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;c = &quot;</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span>
+        <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="n">i</span><span class="p">,:)</span>   <span class="c">! i&#39;th row</span>
+        <span class="n">enddo</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="o">/</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span><span class="p">,</span><span class="n">x</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;y = &quot;</span><span class="p">,</span><span class="n">y</span>
+
+<span class="k">end program </span><span class="n">arrayops</span>
+</pre></div>
+</td></tr></table></div>
+<p>produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span>
+  <span class="mf">1.00000000000000</span>        <span class="mf">4.00000000000000</span>
+  <span class="mf">2.00000000000000</span>        <span class="mf">5.00000000000000</span>
+  <span class="mf">3.00000000000000</span>        <span class="mf">6.00000000000000</span>
+
+<span class="n">b</span> <span class="o">=</span>
+  <span class="mf">1.00000000000000</span>        <span class="mf">2.00000000000000</span>        <span class="mf">3.00000000000000</span>
+  <span class="mf">4.00000000000000</span>        <span class="mf">5.00000000000000</span>        <span class="mf">6.00000000000000</span>
+
+<span class="n">c</span> <span class="o">=</span>
+  <span class="mf">17.0000000000000</span>        <span class="mf">22.0000000000000</span>        <span class="mf">27.0000000000000</span>
+  <span class="mf">22.0000000000000</span>        <span class="mf">29.0000000000000</span>        <span class="mf">36.0000000000000</span>
+  <span class="mf">27.0000000000000</span>        <span class="mf">36.0000000000000</span>        <span class="mf">45.0000000000000</span>
+
+<span class="n">x</span> <span class="o">=</span>    <span class="mf">5.00000000000000</span>        <span class="mf">6.00000000000000</span>
+<span class="n">y</span> <span class="o">=</span>    <span class="mf">29.0000000000000</span>        <span class="mf">40.0000000000000</span>        <span class="mf">51.0000000000000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loops">
+<span id="fortran-loops"></span><h2>Loops<a class="headerlink" href="#loops" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/loops1.f90</span>
+
+<span class="k">program </span><span class="n">loops1</span>
+
+   <span class="k">implicit none</span>
+<span class="k">   </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span>
+
+   <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span>           <span class="c">! prints 1,2,3</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">i</span>
+      <span class="n">enddo</span>
+
+   <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">2</span>        <span class="c">! prints 5,7,9,11</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">i</span>
+      <span class="n">enddo</span>
+
+   <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span>        <span class="c">! prints 6,5,4,3,2</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">i</span>
+      <span class="n">enddo</span>
+
+   <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+   <span class="k">do while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span>   <span class="c">! prints 0,1,2,3,4</span>
+      <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="n">i</span>
+      <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+      <span class="n">enddo</span>
+
+<span class="k">end program </span><span class="n">loops1</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <cite>while</cite> statement used in the last example is considered obsolete.  It
+is better to use a <cite>do</cite> loop with an <cite>exit</cite> statement if a condition is
+satisfied.  The last loop could be rewritten as:</p>
+<div class="highlight-default"><div class="highlight"><pre>i = 0
+do                 ! prints 0,1,2,3,4
+   if (i&gt;=5) exit
+   print *, i
+   i = i+1
+   enddo
+</pre></div>
+</div>
+<p>This form of the <cite>do</cite> is valid but is generally not a good idea.
+Like the while loop, this has the danger that a bug in the code may
+cause it to loop forever (e.g. if you typed <cite>i = i-1</cite> instead of <cite>i = i+1</cite>).</p>
+<p>A better approach for loops of this form is to limit the number of iterations
+to some maximum value (chosen to be ample for your application), and then
+print a warning message, or take more drastic action, if this is exceeded, e.g.:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/loops2.f90</span>
+
+<span class="k">program </span><span class="n">loops2</span>
+
+   <span class="k">implicit none</span>
+<span class="k">   </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">jmax</span>
+
+   <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+   <span class="n">jmax</span> <span class="o">=</span> <span class="mi">100</span>
+   <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">jmax</span>        <span class="c">! prints 0,1,2,3,4</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">5</span><span class="p">)</span> <span class="k">exit</span>
+<span class="k">      print</span> <span class="o">*</span><span class="p">,</span> <span class="n">i</span>
+      <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+      <span class="n">enddo</span>
+
+   <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">jmax</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">      print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Warning: jmax iterations reached.&quot;</span>
+      <span class="n">endif</span>
+
+<span class="k">end program </span><span class="n">loops2</span>
+</pre></div>
+</td></tr></table></div>
+<p>Note: <cite>j</cite> is incremented <em>before</em> comparing to <cite>jmax</cite>.</p>
+</div>
+<div class="section" id="if-then-else">
+<span id="fortran-if"></span><h2>if-then-else<a class="headerlink" href="#if-then-else" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/ifelse1.f90</span>
+
+<span class="k">program </span><span class="n">ifelse1</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">x</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;i is less than 2&quot;</span>
+    <span class="k">else</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;i is not less than 2&quot;</span>
+    <span class="n">endif</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">2</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;i is less or equal to 2&quot;</span>
+    <span class="k">else if</span> <span class="p">(</span><span class="n">i</span><span class="o">/=</span><span class="mi">5</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;i is greater than 2 but not equal to 5&quot;</span>
+    <span class="k">else </span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;i is equal to 5&quot;</span>
+    <span class="n">endif</span>
+
+<span class="k">end program </span><span class="n">ifelse1</span>
+</pre></div>
+</td></tr></table></div>
+<p>Comments:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <cite>else</cite> clause is optional</li>
+<li>You can have optional <cite>else if</cite> clauses</li>
+</ul>
+</div></blockquote>
+<p>There is also a one-line form of an <cite>if</cite> statement that was seen in a
+previous example on this page:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">5</span><span class="p">)</span> <span class="n">exit</span>
+</pre></div>
+</div>
+<p>This is equivalent to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">5</span><span class="p">)</span> <span class="n">then</span>
+    <span class="n">exit</span>
+    <span class="n">endif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="booleans">
+<h2>Booleans<a class="headerlink" href="#booleans" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Compare with <cite>&lt;, &gt;, &lt;=, &gt;=, ==, /=</cite>. You can also use the older Fortran 77
+style: <cite>.lt., .gt., .le., .ge., .eq., .neq.</cite>.</li>
+<li>Combine with <cite>.and.</cite> and <cite>.or.</cite></li>
+</ul>
+</div></blockquote>
+<p>For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="p">((</span><span class="n">x</span><span class="o">&gt;=</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">.</span><span class="ow">and</span><span class="o">.</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="mf">2.0</span><span class="p">))</span> <span class="o">.</span><span class="ow">or</span><span class="o">.</span> <span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A boolean variable is declared with type <cite>logical</cite> in Fortran, as for
+example in the following code:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/boolean1.f90</span>
+
+<span class="k">program </span><span class="n">boolean1</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">k</span>
+    <span class="kt">logical</span> <span class="kd">::</span> <span class="n">ever_zero</span>
+
+    <span class="n">ever_zero</span> <span class="o">=</span> <span class="p">.</span><span class="n">false</span><span class="p">.</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">ever_zero</span> <span class="o">=</span> <span class="p">(</span><span class="n">ever_zero</span> <span class="p">.</span><span class="nb">or</span><span class="p">.</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">enddo</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">ever_zero</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;3*i - 1 takes the value 0 for some i&quot;</span>
+    <span class="k">else</span>
+<span class="k">        print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;3*i - 1 is never 0 for i tested&quot;</span>
+    <span class="n">endif</span>
+
+<span class="k">end program </span><span class="n">boolean1</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="fortran_sub.html#fortran-sub"><span class="std std-ref">Fortran subroutines and functions</span></a></li>
+<li><a class="reference internal" href="fortran_taylor.html#fortran-taylor"><span class="std std-ref">Fortran examples: Taylor series</span></a></li>
+<li><a class="reference external" href="http://www.personal.psu.edu/hdk/fortran.html">Fortran Resources page</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gfortran_flags.html" title="Useful gfortran flags"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="animation.html" title="Animation in Python"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

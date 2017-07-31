@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2013 Homework 4 &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="../_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2013 Homework 4</a><ul>
+<li><a class="reference internal" href="#to-submit">To submit</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/2013/homework4.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="homework-4">
+<span id="homework4"></span><h1>2013 Homework 4<a class="headerlink" href="#homework-4" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is a 2013 homework assignment.</p>
+</div>
+<p>Due Wednesday, May 8, 2013, by 11:00pm PDT.</p>
+<p>The goals of this homework are to:</p>
+<ul class="simple">
+<li>Get more experience with Fortran code.</li>
+<li>Get some experience with OpenMP.</li>
+<li>Learn a bit about quadrature if you&#8217;re not familiar with it.</li>
+</ul>
+<ol class="arabic">
+<li><p class="first">The IPython notebook <cite>$UWHPSC/codes/homework4/quadrature.ipynb</cite>
+contains a brief discussion of numerical quadrature and the
+trapezoidal rule in particular.  It also contains some sample code
+for trying out the trapezoidal method on some test functions, printing
+tables of the error for different numbers of grid points, and plotting
+the errors on a log-log plot.</p>
+<p>This notebook is best viewed live so that you can experiment with
+changing things in order to explore these examples.  If you have a
+sufficiently recent version of the notebok installed (see
+<a class="reference internal" href="../ipython_notebook.html#ipython-notebook"><span class="std std-ref">IPython_notebook</span></a>) then you should be able to do:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ cd $UWHPSC/codes/homework4
+$ ipython notebook --pylab inline
+</pre></div>
+</div>
+<p>and then click on the <cite>quadrature</cite> notebook.</p>
+<p>You can also view a static version of the notebook, which is in
+<cite>$UWHPSC/codes/homework4/quadrature_notebook.pdf</cite>.</p>
+<p>There is also a Python script version of the code in the notebook at
+<cite>$UWHPSC/codes/homework4/quadrature.py</cite> if you find that easier to experiment
+with. (But see the comments at the top of that file.)</p>
+<p>Experiment with the notebook or the module to make sure you understand
+the material presented.  You do not need to submit anything for this
+part.</p>
+</li>
+<li><p class="first">Create a new subdirectory <cite>$MYHPSC/homework4</cite> for the code you write
+below.</p>
+<p>Develop a Fortran version of the Python code, with the following
+requirements:</p>
+<ul>
+<li><p class="first">The module quadrature.f90 should contain a function <cite>trapezoid</cite>
+that has the same input arguments and output as the Python function
+<cite>trapezoid</cite> from the notebook.  This function should return a
+double precision value, the estimate of the integral.</p>
+<p>This module should also contain a subroutine <cite>error_table</cite> that prints
+out a table of errors similar to the Python version.</p>
+<p>Note that an array <cite>nvals</cite> should be passed in and in the subroutine
+definition you won&#8217;t know how long this will be.  You can declare it as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">integer</span><span class="p">,</span> <span class="n">dimension</span><span class="p">(:),</span> <span class="n">intent</span><span class="p">(</span><span class="ow">in</span><span class="p">)</span> <span class="p">::</span> <span class="n">nvals</span>
+</pre></div>
+</div>
+<p>and then use <cite>size(nvals)</cite> when you need the length for the loop bounds.</p>
+<p>These print statements might be useful for formatting the table:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="nb">print</span> <span class="o">*</span><span class="p">,</span> <span class="s">&quot;    n         trapezoid            error       ratio&quot;</span>
+</pre></div>
+</div>
+<p>for the heading, and then in the loop:</p>
+<div class="highlight-default"><div class="highlight"><pre>       <span class="nb">print</span> <span class="mi">11</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">int_trap</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">ratio</span>
+<span class="mi">11</span>     <span class="nb">format</span><span class="p">(</span><span class="n">i8</span><span class="p">,</span> <span class="n">es22</span><span class="o">.</span><span class="mi">14</span><span class="p">,</span> <span class="n">es13</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="n">es13</span><span class="o">.</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>so the format looks similar to the Python example.</p>
+</li>
+<li><p class="first">You should be able to use the module together with the main program
+provided in <cite>$UWHPSC/codes/homework4/test1.f90</cite>, which will test it
+on the first example used in the notebook.</p>
+<p>Note that the function is defined in this same file following the
+<cite>contains</cite> statement.</p>
+</li>
+<li><p class="first">Your module <cite>quadrature.f90</cite> should also work if we test it
+out with a different main program / function for grading purposes, so please
+make sure the arguments of the function and subroutine in this module are as
+specified.</p>
+</li>
+<li><p class="first">You do not need to create a <cite>Makefile</cite>.  You are welcome to do so if
+you find it convenient, but it is enough if your program runs with
+the commands</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran quadrature.f90 test1.f90
+$ ./a.out
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">Write a second main program <cite>test2.f90</cite> (you can copy <cite>test1.f90</cite> and
+modify it) that tests your code on the function <cite>f2</cite> from the notebook
+example, the oscillatory function <span class="math">\(1. + x^3 + \sin(kx)\)</span> with <cite>k =
+1000.</cite>  and the set of values for <cite>n</cite> given in Python by the &#8220;list
+comprehension&#8221;</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">nvals</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">5</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p>In Fortran you can write a loop to fill <cite>nvals</cite>.</p>
+</li>
+<li><p class="first">Create a second version of the quadrature module named
+<cite>quadrature_omp.f90</cite> that uses OpenMP within <cite>trapezoid</cite> to convert the
+main loop that sums up the terms required by the trapezoid formula
+into a parallel do loop.</p>
+<p>Create a new version of <cite>test2.f90</cite> named <cite>test2_omp.f90</cite>
+that sets the number of threads to be used to 2.  It should
+run correctly and give the same results with 2 or more threads if you compile
+with:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran -fopenmp quadrature_omp.f90 test2_omp.f90
+</pre></div>
+</div>
+<p>as if you compile without the <cite>-fopenmp</cite> flag.</p>
+<p>Note that even if you are using a computer with only one processor, you
+can still specify 2 threads (or more) and the program should still run
+and give the same results.  (The threads will simply have to take turns
+running rather than running in parallel, but this is handled for you by OpenMP.)</p>
+<p>You might want to experiment with timing your code for different numbers
+of threads (perhaps for much larger values of <cite>n</cite>).  However, you will
+not be graded on speed.</p>
+<p>Note that you will have to &#8220;use omp_lib&#8221; both in the main program and in
+the trapezoid function.</p>
+<p><strong>Note:</strong> There is no additional 583 problem this week.</p>
+</li>
+</ol>
+<div class="section" id="to-submit">
+<h2>To submit<a class="headerlink" href="#to-submit" title="Permalink to this headline">¶</a></h2>
+<p>Your homework4 directory should contain:</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>quadrature.f90</cite> module</li>
+<li><cite>test1.f90</cite> main program as provided</li>
+<li><cite>test2.f90</cite> you created</li>
+<li><cite>quadrature_omp.f90</cite> module with OpenMP</li>
+<li><cite>test2_omp.f90</cite> main program with OpenMP</li>
+</ul>
+</div></blockquote>
+<p>As usual, commit your results, push to bitbucket, and see the Canvas
+course page for the link to submit the SHA-1 hash code.  These should be
+submitted by the due date/time to receive full credit.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

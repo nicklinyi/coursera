@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Homework 2 [2014] &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Homework 2 [2014]</a><ul>
+<li><a class="reference internal" href="#to-submit">To submit</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/homework2.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="homework-2-2014">
+<span id="homework2"></span><h1>Homework 2 [2014]<a class="headerlink" href="#homework-2-2014" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Assignment modified in Part 9.</p>
+</div>
+<p>Due Thursday, April 24, 2014, by 11:00pm PDT.
+See below for how to submit.</p>
+<p>The goals of this homework are to:</p>
+<ul class="simple">
+<li>Learn more about &#8220;best practices in scientific computing&#8221;.</li>
+<li>Get some more experience with Python and <em>numpy</em>.</li>
+<li>Get some experience with Fortran code and Makefiles.</li>
+</ul>
+<p>Before tackling this homework, you should read some of the class notes and
+links they point to.  In particular, the following sections are relevant:</p>
+<ul class="simple">
+<li><a class="reference internal" href="python.html#python"><span class="std std-ref">Python</span></a></li>
+<li><a class="reference internal" href="numerical_python.html#numerical-python"><span class="std std-ref">Numerics in Python</span></a></li>
+<li><a class="reference internal" href="special_functions.html#special-functions"><span class="std std-ref">Special functions</span></a></li>
+<li><a class="reference internal" href="fortran.html#fortran"><span class="std std-ref">Fortran</span></a></li>
+<li><a class="reference internal" href="makefiles.html#makefiles"><span class="std std-ref">Makefiles</span></a></li>
+</ul>
+<ol class="arabic">
+<li><p class="first"><strong>Reading assignment</strong></p>
+<p>Download and read the paper <a class="reference external" href="http://www.plosbiology.org/article/info%3Adoi%2F10.1371%2Fjournal.pbio.1001745">Best Practices for Scientific Computing</a> by
+G. Wilson, D. A. Aruliah, C. T. Brown, et. al.
+There is a link to download the pdf file on the page linked, and the
+article is open access so anyone should be able to download it.</p>
+<p>You should be pleased to find that you are now starting to follow many
+of these best practices, but there are many good tips in the paper that
+have not been covered in lectures.</p>
+<p>There will be a quiz on this paper to complete as part of the homework
+assignment.  This quiz can be found on the Canvas page
+<a class="reference external" href="https://canvas.uw.edu/courses/893991/quizzes/779589">Homework 2 quiz</a>.</p>
+</li>
+<li><p class="first"><strong>Survey assignment</strong></p>
+<p>Please take <a class="reference external" href="https://canvas.uw.edu/courses/893991/quizzes/779591/">this survey</a>
+(worth 5 points) to give us some feedback on how the class is going
+so far.</p>
+</li>
+<li><p class="first"><strong>Programming assignments</strong></p>
+<p>You should create a new subdirectory <cite>homework2</cite> (of the same private
+repository you have used for submitting previous  homeworks).
+Develop your code for the problems below in this directory
+and feel free to commit as
+often as you like, it will help you recover from blunders.</p>
+<p>Note that to grade this homework, we will try using the functions
+you write with different input values than the ones used in the examples
+below, so you might want to test your functions for other reasonable
+input values.</p>
+</li>
+<li><p class="first">Recall that computer hardware can only do basic arithmetic, so if you
+want to evaluate some special function such as square root or a
+trigonometric function, some algorithm must be implemented by someone to
+compute an approximation for arbitrary input values.  To approximate
+<span class="math">\(\sqrt{y}\)</span>, we saw that one approach is to use Newton&#8217;s method
+to approximate a zero of the function <span class="math">\(x^2 - y = 0\)</span>, for example.
+(See also <a class="reference internal" href="special_functions.html#special-functions"><span class="std std-ref">Special functions</span></a> for more about this.)</p>
+<p>Another approach is to use a Taylor series approximation, see e.g. the
+<a class="reference external" href="http://en.wikipedia.org/wiki/Taylor_series">Wikipedia Taylor series page</a>
+for a review.</p>
+<p>Recall that the Taylor series for the exponential function (expanded
+about <span class="math">\(x_0 = 0\)</span>) is given by</p>
+<blockquote>
+<div><p><span class="math">\(\exp(x) = \sum_{j=0}^\infty \frac{x^j}{j!}
+= 1 + x + \frac 1 2 x ^2 + \frac 1 6 x^3 + \cdots\)</span></p>
+</div></blockquote>
+<p>with the convention that <span class="math">\(x^0 = 0!  = 1\)</span>.</p>
+<p>Create a Python file <cite>taylor.py</cite> in the <cite>homework2</cite> directory of your
+repository and write a function <cite>exp1(x,n)</cite> in this file that
+returns an approximation to <span class="math">\(\exp(x)\)</span> based on the Taylor series
+of degree <cite>n</cite>.  (Note that this degree <cite>n</cite> polynomial is obtained by
+truncating the infinite series after <cite>n+1</cite> terms.)</p>
+<p>If you have done this properly, then
+if you start the Python or Ipython shell in the same directory,
+you should be able to do, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">taylor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">taylor</span><span class="o">.</span><span class="n">exp1</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">taylor</span><span class="o">.</span><span class="n">exp1</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">taylor</span><span class="o">.</span><span class="n">exp1</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">2.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">taylor</span><span class="o">.</span><span class="n">exp1</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">2.7182818284590455</span>
+</pre></div>
+</div>
+<p><strong>Hint:</strong> Note that term of degree <cite>j</cite> in the series can be computed
+from the previous term by multiplying by <cite>x</cite> and dividing by <cite>j</cite>. If you
+use this trick you won&#8217;t need the factorial function <cite>math.factorial</cite>.
+See <a class="reference internal" href="fortran_taylor.html#fortran-taylor"><span class="std std-ref">Fortran examples: Taylor series</span></a> and
+<cite>$UWHPSC/codes/fortran/taylor.f90</cite> for an example of this same
+idea used in a Fortran version.</p>
+</li>
+<li><p class="first">Add some debugging statements to your function, with an optional argument
+<cite>debug</cite> with the default value <cite>False</cite> (so the examples above still give
+the same output) but so that setting <cite>debug=True</cite> causes output similar to
+this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">taylor</span><span class="o">.</span><span class="n">exp1</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">debug</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+<span class="go">j = 1, term = 1.000000000000000e+00</span>
+<span class="go">  partial_sum updated from 1.000000000000000e+00 to 2.000000000000000e+00</span>
+<span class="go">j = 2, term = 5.000000000000000e-01</span>
+<span class="go">  partial_sum updated from 2.000000000000000e+00 to 2.500000000000000e+00</span>
+<span class="go">j = 3, term = 1.666666666666667e-01</span>
+<span class="go">  partial_sum updated from 2.500000000000000e+00 to 2.666666666666667e+00</span>
+<span class="go">j = 4, term = 4.166666666666666e-02</span>
+<span class="go">  partial_sum updated from 2.666666666666667e+00 to 2.708333333333333e+00</span>
+<span class="go">j = 5, term = 8.333333333333333e-03</span>
+<span class="go">  partial_sum updated from 2.708333333333333e+00 to 2.716666666666666e+00</span>
+<span class="go">2.7166666666666663</span>
+</pre></div>
+</div>
+<p>You probably won&#8217;t need these statements for this function,  but similar
+statements might be useful in the next part.</p>
+</li>
+<li><p class="first">Create a Python function <cite>sin1(x,n)</cite>  (in the same file
+<cite>taylor.py</cite> as the function <cite>exp</cite>) that approximates the sine
+function at a point <cite>x</cite> by evaluating the Taylor series approximation of
+degree <cite>n</cite>.  Use the Taylor series expansion about <span class="math">\(x_0=0\)</span>,
+also known as the Maclaurin series:</p>
+<blockquote>
+<div><p><span class="math">\(\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!}
++ \cdots\)</span></p>
+</div></blockquote>
+<p>Note that the degree 5 and 6 approximations only have three nonzero terms,
+the degree 7 and 8 approximations have four nonzero terms, etc.</p>
+<p>You should get results like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">taylor</span><span class="o">.</span><span class="n">sin1</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.5707963267948966</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">taylor</span><span class="o">.</span><span class="n">sin1</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">0.9248322292886504</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">taylor</span><span class="o">.</span><span class="n">sin1</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.9248322292886504</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">taylor</span><span class="o">.</span><span class="n">sin1</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">1.0045248555348174</span>
+</pre></div>
+</div>
+<p>Add a debug option as in <cite>exp1</cite>.</p>
+<p><strong>Hint:</strong>  You might find it convenient to have a variable <cite>term</cite> that
+is updated as for the exponential function but then is multiplied by
+<cite>s</cite> before adding in to the partial sum, where <cite>s</cite> takes the appropriate
+value <span class="math">\(+1,~-1,\)</span> or 0 depending on <cite>j</cite>.</p>
+</li>
+<li><p class="first">See what happens if you call your function <cite>exp1</cite> or <cite>sin1</cite> with
+negative values of <cite>n</cite>, or with non-integer real numbers.  Add
+some input-checking to each function so that a non-negative integer
+value of <cite>n</cite> is required.  If an invalid value is detected, print an
+error message and return the special value <cite>numpy.nan</cite> (&#8220;not a number&#8221;,
+similar to the Matlab <cite>NaN</cite>).  For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">taylor</span><span class="o">.</span><span class="n">exp1</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">*** Invalid input -- n must be non-negative integer</span>
+<span class="go">nan</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The code <cite>$UWHPSC/codes/fortran/taylor.f90</cite> contains a main program and
+subroutine for approximating exp(x) by a Taylor series.  Split this code
+up into two separate files <cite>taylor_main.f90</cite> and <cite>exptaylor.f90</cite> and add
+a Makefile based on <cite>$UWHPSC/codes/fortran/multifile1/Makefile5</cite>
+so that you can do:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make exp_output.txt
+</pre></div>
+</div>
+<p>to create a file <cite>exp_output.txt</cite> containing:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span>    <span class="mf">1.0000000000000000</span>
+<span class="n">n</span> <span class="o">=</span>           <span class="mi">20</span>
+<span class="n">exp_true</span>  <span class="o">=</span>    <span class="mf">2.7182818284590451</span>
+<span class="n">exptaylor</span> <span class="o">=</span>    <span class="mf">2.7182818284590455</span>
+<span class="n">error</span>     <span class="o">=</span>   <span class="mf">4.44089209850062616E-016</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> Also modify the main program so it prints the value of <cite>n</cite>
+as shown above.</p>
+</li>
+<li><p class="first"><strong>Only 583 students need to do this part</strong></p>
+<p>(483 students are encouraged to do these parts too,
+but they will not count towards the score &#8211; the parts will be weighted
+differently for 583 students.
+Note that undergrads who registered for 583A will be treated as 483
+students.)</p>
+<p>Add another file <cite>sinetaylor.f90</cite> that computes the approximation to the
+sine function, as you did in the Python version.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Assignment modified here:</p>
+</div>
+<p>Also create a new main program <cite>taylor_main2.f90</cite>
+that calls this subroutine.  Add these to the <em>same</em> Makefile so that</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make sine_output.txt
+</pre></div>
+</div>
+<p>gives something sensible and <cite>make exp_output.txt</cite> still gives the
+previous results.</p>
+</li>
+<li><p class="first"><strong>Only 583 students need to do this part</strong></p>
+<p>The <a class="reference external" href="http://en.wikipedia.org/wiki/Taylor_series">Wikipedia Taylor series page</a>
+shows a nice plot of Taylor series
+approximations to the sine function for different orders.  The gnuplot
+commands that created this plot can be found at
+<a class="reference external" href="http://en.wikipedia.org/wiki/File:Sintay_SVG.svg">http://en.wikipedia.org/wiki/File:Sintay_SVG.svg</a>.</p>
+<p>Write a script <cite>plot_taylor.py</cite> to produce a <em>similar</em> plot that shows
+the sine function and approximations for <cite>n = 1,3,5,7</cite> over the same range
+of <cite>x</cite> values.  You don&#8217;t need to try to match the colors or add the
+grid lines.</p>
+</li>
+</ol>
+<div class="section" id="to-submit">
+<h2>To submit<a class="headerlink" href="#to-submit" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">At the end, you should have committed the following
+files to your repository:</p>
+<ul class="simple">
+<li><cite>$MYHPSC/homework2/taylor.py</cite></li>
+<li><cite>$MYHPSC/homework2/taylor_main.f90</cite></li>
+<li><cite>$MYHPSC/homework2/exptaylor.f90</cite></li>
+<li><cite>$MYHPSC/homework2/Makefile</cite></li>
+</ul>
+<p>583 students should also have the files</p>
+<ul>
+<li><p class="first"><cite>$MYHPSC/homework2/taylor_main2.f90</cite></p>
+</li>
+<li><p class="first"><cite>$MYHPSC/homework2/sinetaylor.f90</cite></p>
+</li>
+<li><p class="first"><cite>$MYHPSC/homework2/plot_taylor.py</cite></p>
+<p>You do not need to submit the png file of the figure this creates.</p>
+</li>
+</ul>
+<p>Make sure you push to bitbucket after committing.</p>
+</li>
+<li><p class="first">Submit the commit number that you want graded by following the link
+provided on the <a class="reference external" href="https://canvas.uw.edu/courses/893991/wiki/homework-2">Canvas page for Homework 2</a>.
+If you submit the wrong thing or make further changes to your work
+before the due date, you can simply resubmit new information at the same
+link.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

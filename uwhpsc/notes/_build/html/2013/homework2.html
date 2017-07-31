@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2013 Homework 2 &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="../_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/2013/homework2.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="homework-2">
+<span id="homework2"></span><h1>2013 Homework 2<a class="headerlink" href="#homework-2" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is a 2013 homework assignment.</p>
+</div>
+<p>Due Wednesday, April 17, 2013, by 11:00pm PDT.</p>
+<p>The goals of this homework are to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Get some experience with Python and <em>numpy</em>.</li>
+<li>Get experience writing a Python function and unit test.</li>
+</ul>
+</div></blockquote>
+<p>Before tackling this homework, you should read some of the class notes and
+links they point to.  In particular, the following sections are relevant:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../python.html#python"><span class="std std-ref">Python</span></a></li>
+<li><a class="reference internal" href="../numerical_python.html#numerical-python"><span class="std std-ref">Numerics in Python</span></a></li>
+<li><a class="reference internal" href="../nose.html#nose"><span class="std std-ref">nose &#8211; Python unit testing framework</span></a></li>
+</ul>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first"><strong>Polynomial interpolation.</strong>
+Suppose we want to determine the quadratic polynomial
+<span class="math">\(p(x) = c_0 + c_1x + c_2x^2\)</span>
+that passes through three given data points <span class="math">\((x_i,y_i)\)</span> for
+<span class="math">\(i=1,~2,~3.\)</span></p>
+<p>Requiring that <span class="math">\(p(x_i) = y_i\)</span> for these three values gives a
+linear system of 3 equations in 3 unknowns (the coefficients <span class="math">\(c_i\)</span>).</p>
+<p>For example, if the data points are <span class="math">\((-1,1),~(0,-1),~(2,7)\)</span> then
+the system of equations is</p>
+<div class="math">
+\[\begin{split}c_0 - c_1 + c_2 &amp;= 1 \\
+c_0 + 0 c_1 + 0 c_2 &amp;= -1 \\
+c_0 + 2 c_1 + 4 c_2 &amp;= 7\end{split}\]</div>
+<p>This has the form <span class="math">\(Ac = y\)</span> where <span class="math">\(y\)</span> is the vector of data,
+<span class="math">\(c\)</span> is the vector of coefficients we seek, and <span class="math">\(A\)</span> is the
+<span class="math">\(3\times 3\)</span> matrix</p>
+<div class="math">
+\[\begin{split}A = \left[\begin{array}{rrr}1&amp;-1&amp;1\\ 1&amp;0&amp;0\\ 1&amp;2&amp;4 \end{array}\right].\end{split}\]</div>
+<p>To solve this system we can use the <em>solve</em> function from the
+<em>numpy.linalg</em> module, as illustrated in the Python script found in
+<cite>$UWHPSC/codes/homework2/demo1.py</cite>.  The solution is <span class="math">\(c =
+[-1,0,2]\)</span> corresponding to the polynomial <span class="math">\(p(x) = 2x^2 - 1\)</span>, as is
+easily verified.</p>
+<p>This code also plots this polynomial along with the three data points that
+it interpolates.</p>
+<p><strong>Produce a script</strong> <cite>hw2a.py</cite> that solves the same problem but for the data
+points <span class="math">\((-1,0),~(1,4),~(2,3)\)</span>.  You can start with the <cite>demo1.py</cite>
+script and modify it appropriately.</p>
+<p>The sript should print out the results in exactly the same form as from
+<cite>demo1.py</cite> and should also produce a similar plot.  The script should
+save this plot as a png file <cite>hw2a.png</cite>.</p>
+<p>Add <cite>hw2a.py</cite> to your repository, but not the output or png file.</p>
+</li>
+<li><p class="first">Make this script more general by turning it into a module.
+You can start with <cite>$UWHPSC/codes/homework2/demo2.py</cite>.  Copy this
+to <cite>hw2b.py</cite> in your own repository and then fill in the missing code.
+The resulting module will contain a function that can be used as
+follows, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hw2b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xi</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yi</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">7.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">hw2b</span><span class="o">.</span><span class="n">quad_interp</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This should compute the expected coefficient vector <span class="math">\(c\)</span>.
+The above test is also performed if you do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hw2b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hw2b</span><span class="o">.</span><span class="n">test_quad1</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Or if you install <em>nose</em>, you can run this test from Unix via:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ nosetests -v hw2b.py
+</pre></div>
+</div>
+<p>This sample module also has a &#8220;main program&#8221; that is executed only
+if you run the python code as a script, e.g. by:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ python hw2b.py
+</pre></div>
+</div>
+<p>or with the &#8220;run&#8221; command in IPython.  Many Python modules will have a
+section like this at the end.</p>
+<p>To set up the linear system, you will need to define the <span class="math">\(3 \times
+3\)</span> matrix <span class="math">\(A\)</span>  in terms of the given <cite>xi</cite> points.  You can use the
+approach used in <cite>demo1.py</cite> to specify the 9 elements of the <cite>np.array</cite>,
+but a better approach that generalizes more easily to the problems below
+is to set:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">xi</span><span class="p">,</span> <span class="n">xi</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+<p>The <cite>np.vstack</cite> function takes as its argument a list of numpy arrays
+and stacks them vertically into a matrix.  The first element of this
+list is <cite>np.ones(3)</cite>, which is <cite>array([1,1,1])</cite> (all ones, of length 3).
+So <cite>np.vstack([np.ones(3), xi, xi**2])</cite> is an array whose first row is
+all ones, the second row contains the values from <cite>xi</cite> and the third row
+contains the squares of these values.  The <cite>.T</cite> at the end takes
+the transpose and turns this into the matrix</p>
+<div class="math">
+\[\begin{split}A = \left[\begin{array}{rrr}1&amp;x_1&amp;x_1^2\\ 1&amp;x_2&amp;x_2^2\\ 1&amp;x_3&amp;x_3^2\end{array}\right].\end{split}\]</div>
+<p>Convince yourself that this is the correct matrix for the interpolation
+problem, and experiment in IPython with the functions <cite>np.ones</cite> and
+<cite>np.vstack</cite> if you are unsure what they do.</p>
+<p>Note:  Unlike Matlab, there is no distinction between a row vector and a
+column vector for a 1-dimensional numpy array.</p>
+</li>
+<li><p class="first">Add a new function <cite>plot_quad</cite> to your module <cite>hw2b.py</cite> that takes
+two numpy arrays <cite>xi</cite> and <cite>yi</cite> of length 3, calls <cite>quad_interp</cite> to
+compute <cite>c</cite>, and then plots both the interpolating polynomial and the
+data points, and saves the resulting figure as <cite>quadratic.png</cite>.</p>
+<p>Note that you will have to decide what range of <span class="math">\(x\)</span> values to use
+for evaluating the interpolating polynomial.  Since we want the
+polynomial to cover the range of the data points, use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="n">xi</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>  <span class="n">xi</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Test your code by trying various choices of <cite>xi</cite> and <cite>yi</cite> to convince
+yourself that it is working.   Add at least one more unit test function
+<cite>test_quad2</cite> to the module that corresponds to a different test.
+This homework will be graded by testing your function on other inputs,
+so please make sure it works well.</p>
+</li>
+<li><p class="first">To think about: What happens if <cite>xi = array([1., 1., 2.])</cite> is specified
+as one of the input parameters?  Why does the code raise an exception in
+this case?  You do not need to turn anything in or modify the code to
+deal with such cases, but you should understand why this input is bad
+and what other inputs would be similarly bad.</p>
+</li>
+<li><p class="first">Add two new functions <cite>cubic_interp</cite> and <cite>plot_cubic</cite> that solve the
+interpolation problem and plot the results if the inputs <cite>xi</cite> and <cite>yi</cite>
+are of length 4 and we determine the cubic polynomial
+<span class="math">\(p(x) = c_0 + c_1x + c_2x^2 + c_3x^3\)</span>
+that interpolates these 4 points.  This requires solving a linear system
+of 4 equations for the 4 unknown coefficients.</p>
+<p>It should produce a png file <cite>cubic.png</cite>.</p>
+<p>Add at least one unit test <cite>test_cubic1</cite> to test this code.</p>
+</li>
+<li><p class="first"><strong>(Required only for 583 students)</strong></p>
+<p>Add two new functions <cite>poly_interp</cite> and <cite>plot_poly</cite> to the same module
+<cite>hw2b.py</cite> that generalize the above functions to accept arrays <cite>xi</cite> and
+<cite>yi</cite> of any length <cite>n</cite>  (You should check that <cite>len(xi) == len(yi)</cite>).
+Assuming the <cite>xi</cite> values are distinct, this data will define a unique
+polynomial of degree <cite>n-1</cite> and the coefficients can be determined by
+solving an <cite>n times n</cite> linear system.</p>
+<p>Note: High-order polynomial interpolation has various numerical
+difficulties associated with it that we will not explore in this class.
+Also this approach of setting up and solving an <span class="math">\(n \times n\)</span> linear
+system is not the best way to compute the interpolating polynomial.  But
+the point here is to work on Python coding.</p>
+<p>Note: To plot the polynomial you will have to evaluate it at many
+points.  For a polynomial of higher degree this is best done using
+&#8220;Horner&#8217;s rule&#8221;:  If the coefficients are in <cite>c</cite> with <cite>len(c) == n</cite>
+and <cite>x</cite> is the array of points to evaluate it at, then use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">y</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Try <cite>range?</cite> in IPython to learn what that does and figure out why this
+loop works!</p>
+<p>Test your program with various inputs and write at least two unit
+tests <cite>test_poly1</cite> in which <span class="math">\(n=4\)</span> and <cite>test_poly2</cite> in which
+<span class="math">\(n=5\)</span>.</p>
+<p><strong>Note:</strong> The numpy functions <cite>polyfit</cite> and <cite>polyval</cite> do something similar to what&#8217;s
+required here, and might be useful for comparison purposes.  But note the coefficients
+in the polynomial are returned in a different order!  <cite>polyfit</cite> also does least squares
+fitting if the degree specified is less than <cite>n-1</cite>.</p>
+</li>
+<li><p class="first">Add and commit all required codes to your bitbucket repository.</p>
+<p><strong>Note:</strong> At the end you should have the following files committed
+to your repository:</p>
+<blockquote>
+<div><ul class="simple">
+<li>$MYHPSC/homework2/hw2a.py</li>
+<li>$MYHPSC/homework2/hw2b.py</li>
+</ul>
+</div></blockquote>
+<p>Make sure the copies you want graded have been committed, and then
+push them to bitbucket via:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ git push
+</pre></div>
+</div>
+<p>These files should then also be visible from your bitbucket webpage, by
+clicking on the &#8220;Source&#8221; tab, see <a class="reference internal" href="../bitbucket.html#bitbucket"><span class="std std-ref">Bitbucket repositories: viewing changesets, issue tracking</span></a>.</p>
+</li>
+<li><p class="first">Finally, you will also have to submit the SHA-1 hash of the
+commit that you want graded.
+If you are registered in the class, you should be able access the
+<a class="reference external" href="https://canvas.uw.edu/courses/812916">Canvas course webpage</a>.
+Go to that page and follow instructions under Homework 2
+to send us this information.</p>
+</li>
+</ol>
+</div></blockquote>
+<p>If you discover you made a mistake in what you turned in you may resubmit
+this survey with a different SHA-1 hash code.  Full credit will be received
+only if you make your final submission before the due date/time.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

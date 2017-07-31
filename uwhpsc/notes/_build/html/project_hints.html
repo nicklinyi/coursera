@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Project Hints &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/project_hints.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="project-hints">
+<span id="id1"></span><h1>Project Hints<a class="headerlink" href="#project-hints" title="Permalink to this headline">¶</a></h1>
+<p>Some hints on problems encountered in the <a class="reference internal" href="project.html#project"><span class="std std-ref">Final Project [2014]</span></a>:</p>
+<ul>
+<li><p class="first">See <span class="xref std std-ref">homework3_solution</span> and <a class="reference internal" href="homework4_solution.html#homework4-solution"><span class="std std-ref">Homework 4 [2014] Discussion of solution</span></a> for some
+pointers based on common errors on these homeworks.</p>
+</li>
+<li><p class="first">The notebook <cite>$UWHPSC/labs/lab17/Tridiagonal.ipynb</cite> has a discussion of
+tridiagonal matrices in Python, and <cite>$UWHPSC/labs/lab17/tridiag.f90</cite> contains a
+solution to the lab problem of solving a tridiagonal system in Fortran.
+See <a class="reference internal" href="labs/lab17.html#lab17"><span class="std std-ref">Lab 17: Tuesday May 27, 2014</span></a> for more links.</p>
+</li>
+<li><p class="first">You may have to install JSAnimation on your SMC project, see
+<a class="reference internal" href="animation.html#animation"><span class="std std-ref">Animation in Python</span></a>.  Note that this also gives hints on using it without
+&#8220;installing&#8221;.</p>
+</li>
+<li><p class="first">For hints on viewing an html file created on SMC, see
+<a class="reference internal" href="smc.html#smc-view-html"><span class="std std-ref">Viewing an html file</span></a>.</p>
+</li>
+<li><p class="first">The LAPACK routine <cite>DGTSV</cite> takes three vectors as input, <cite>DL, D, DU</cite>.
+If the matrix is symmetric then <cite>DL</cite> and <cite>DU</cite> will be filled with the same
+values when calling the routine, but it is <strong>not</strong> ok to just fill one array
+and pass it in as both <cite>DL</cite> and <cite>DU</cite>.  These storage locations are used in
+doing Gaussian elimination (with pivoting in the general) and if you read the
+documentation you will find that on return they are filled with different
+things.  If you pass in the same array location twice, it will not work.</p>
+<p>Note that this is a Fortran 77 style routine and does not use dynamic memory
+allocation, so the only arrays it has available to use for the elimination
+process is what gets passed in.</p>
+</li>
+<li><p class="first">Also note that since  <cite>DL, D, DU</cite> are changed by a call to <cite>DGTSV</cite> (or <cite>DPTSV</cite>
+if you choose to use that), they no longer describe the matrix in a form that
+can be used in a second call to the routine.  So if you call this routine
+multiple times in your program, make sure it is using the matrix you think it is.</p>
+</li>
+<li><p class="first">The Makefiles provided in <cite>$UWHPSC/labs/lab20</cite> have a phony target <cite>clobber</cite> in
+addition to <cite>clean</cite>.  Doing  <cite>make clobber</cite>
+does the same as <cite>make clean</cite>  but also removes the <cite>.txt</cite> and <cite>.html</cite> files
+and the <cite>_plots</cite> directory with all the <cite>png</cite> files.  This is a common
+convention in Makefiles, that <cite>make clean</cite> removes things like object and
+executable files generated when compiling the program but <cite>make clobber</cite> also
+removes data or figures produced by running the code.</p>
+</li>
+<li><p class="first">Remember that it&#8217;s always a good idea to do <cite>make clean -f Makefile_name</cite>
+before other make commands if you are switching from one Makefile to
+another, since it might not check dependencies properly if the Makefile
+itself changes.</p>
+</li>
+<li><p class="first">In the Python notebook for the implicit heat equation solver,
+sparse matrix notation is used to define the sparse identity matrix
+and the matrices <span class="math">\(A = I - \frac{\Delta t}{2} D_2\)</span> and
+<span class="math">\(B = I + \frac{\Delta t}{2} D_2\)</span> then <cite>rhs = B*u[1:-1]</cite> uses
+the fact that if <cite>B</cite> is a sparse matrix then this does the matrix-vector
+product efficiently.  In Fortran there&#8217;s no easy way to do all this with
+sparse matrices, and the intention was to instead just fill things with
+loops.  In particular, the arrays that are passed in to the tridiagonal
+solver are for the 3 diagonals and you will want to figure out what the
+correct values to put in these are from the finite difference equations,</p>
+<p><span class="math">\(U_i^{N+1} = U_i^N +  \frac{\Delta t}{2\Delta x^2} [(U_{i-1}^N -
+2U_i^N + U_{i+1}^N) + (U_{i-1}^{N+1} - 2U_i^{N+1} + U_{i+1}^{N+1})].\)</span></p>
+<p>Recall that <span class="math">\(U_j^N\)</span> is known for all values of <span class="math">\(j\)</span>,
+so all these terms go on the Right Hand Side, while the <span class="math">\(U_j^{N+1}\)</span>
+terms all go on the left hand side and define the tridiagonal linear system
+to be solved.</p>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">There was a missing factor of 2 in the denominator of the
+fraction above, which has now been fixed. The same error appeared in
+the notebook <cite>$UWHPSC/homeworks/project/Heat_Equation.ipynb</cite>,
+and has been fixed there and in the version visible at
+<a class="reference external" href="http://nbviewer.ipython.org/url/faculty.washington.edu/rjl/notebooks/Heat_Equation.ipynb">http://nbviewer.ipython.org/url/faculty.washington.edu/rjl/notebooks/Heat_Equation.ipynb</a>.</p>
+</div>
+<ul>
+<li><p class="first">If the discussion above still isn&#8217;t clear, here&#8217;s how the Python code</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">D2</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">spdiags</span><span class="p">([</span><span class="n">d1</span><span class="p">,</span><span class="n">d0</span><span class="p">,</span><span class="n">d1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="nb">format</span><span class="o">=</span><span class="s">&#39;csc&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">(</span><span class="n">I</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">D2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">nstep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+    <span class="n">rhs</span> <span class="o">=</span> <span class="n">B</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">rhs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>could be rewritten in Python to be more like what&#8217;s needed in Fortran:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">A</span> <span class="o">=</span> <span class="o">....</span> <span class="c"># as before</span>
+<span class="n">dtdx2</span> <span class="o">=</span> <span class="n">dt</span><span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
+<span class="k">for</span> <span class="n">nstep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+    <span class="n">rhs</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">rhs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">dtdx2</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">dtdx2</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">dtdx2</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">rhs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Don&#8217;t forget to use constants like <cite>2.d0</cite> in  Fortran rather than just <cite>2</cite>
+in order to insure that double precision is used.</p>
+</li>
+<li><p class="first">In Part 2, to generate and print the solution at each time step that
+go into the file <cite>frames.txt</cite>, note that you can call
+<cite>solve_heat_explicit</cite> or <cite>solve_heat_implicit</cite> repeatedly to take a single
+time step each time, with the input being <span class="math">\(U^N\)</span> and the output being
+<span class="math">\(U^{N+1}\)</span>.  Make sure the input parameters you pass into the
+function are all the appropriate things for taking a single step from
+time <span class="math">\(t_N\)</span> to time <span class="math">\(t_{N+1}\)</span> and that the <cite>u</cite> array that is
+returned from the routine in one step is the input for the next step.</p>
+</li>
+<li><p class="first">Some people using their own computers are having problems getting
+JSAnimation to work because it requires a recent version of <cite>matplotlib</cite>.
+(In particular, older Ubuntu versions may not have a recent version.)
+If you&#8217;re having problems with <cite>matplotlib</cite> in this context, you might
+want to try using the <a class="reference external" href="https://store.continuum.io/cshop/anaconda">Anaconda Python distribution</a>, or switch to <a class="reference internal" href="smc.html#smc"><span class="std std-ref">Using SageMathCloud</span></a>.</p>
+</li>
+<li><p class="first">Some people are encountering issues with the 4 <em>omp parallel sections</em> all
+being executed by the same thread,  or by fewer than 4 threads,
+even when 4 threads are forked.
+From the documentation, it is not clear that all implementations of
+sections will work the same way, and it is possible that if Thread 0, say,
+finishes its section before other threads have started then it might be
+be assigned the next section as well.  So if you print out the results
+of <cite>omp_get_num_threads</cite> in the <cite>parallel sections</cite> and this is 4, do not
+worry too much if it seems that the work is not spread properly between
+the threads.</p>
+</li>
+<li><p class="first">Update on the last point:  You might also have all 4 threads printing the
+same <cite>thread_num</cite> if you forget to declare this to be a private variable
+in the <cite>omp parallel sections</cite> directive &#8212; the value a thread sets might
+be overwritten by a different thread before it gets to printing it.</p>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

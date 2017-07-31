@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Numerical methods for the Poisson problem &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Jacobi iteration using OpenMP with parallel do constructs" href="jacobi1d_omp1.html" />
+    <link rel="prev" title="Random number generators" href="random.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="jacobi1d_omp1.html" title="Jacobi iteration using OpenMP with parallel do constructs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="random.html" title="Random number generators"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Numerical methods for the Poisson problem</a><ul>
+<li><a class="reference internal" href="#iterative-methods-for-the-poisson-problem">Iterative methods for the Poisson problem</a></li>
+<li><a class="reference internal" href="#monte-carlo-methods-for-the-steady-state-diffusion-equation">Monte Carlo methods for the steady state diffusion equation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="random.html"
+                        title="previous chapter">Random number generators</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jacobi1d_omp1.html"
+                        title="next chapter">Jacobi iteration using OpenMP with <cite>parallel do</cite> constructs</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/poisson.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="numerical-methods-for-the-poisson-problem">
+<span id="poisson"></span><h1>Numerical methods for the Poisson problem<a class="headerlink" href="#numerical-methods-for-the-poisson-problem" title="Permalink to this headline">¶</a></h1>
+<p>The steady state diffusion equation gives rise to a <em>Poisson problem</em></p>
+<p><span class="math">\(u_{xx} + u_{yy} = -f(x,y)\)</span></p>
+<p>where <span class="math">\(f(x,y)\)</span> is the source term.  In the simplest case
+<span class="math">\(f(x,y) = 0\)</span> this reduces to <em>Laplace&#8217;s equation</em>.
+This must be augmented with boundary conditions around the edge of some
+two-dimensional region.  <em>Dirichlet boundary conditions</em> consist of
+specifying the solution <span class="math">\(u(x,y)\)</span> at all points around the boundary.
+<em>Neumann boundary conditions</em> consist of specifying the normal derivative
+(i.e. the direction derivative of the solution in the direction orthogonal
+to the boundary) and are used in physical situations where the if the flux of
+heat or the diffused quantity is known along the boundary rather than the
+value of the solution itself (for example an <em>insulated boundary</em> has no
+flux and the normal derivative is zero).  We will only study Dirichlet
+problems, where <span class="math">\(u\)</span> itself is known at boundary points.  We will also
+concentrate on problems in a rectangular domain <span class="math">\(a_x &lt; x &lt; b_x\)</span> and
+<span class="math">\(a_y &lt; y &lt; b_y\)</span>, in which case it is natural to discretize
+on a <em>Cartesian grid</em> aligned with the axes.</p>
+<p>The Poisson problem can be discretized on a two-dimensional Cartesian grid
+with equal grid
+spacing <span class="math">\(h\)</span> in the <span class="math">\(x\)</span> and <span class="math">\(y\)</span> directions as</p>
+<p><span class="math">\(U_{i-1,j} + U_{i+1,j} + U_{i,j-1} + U_{i,j+1} - 4u_{ij} = -h^2
+f(x_i,y_j)\)</span>.</p>
+<p>This gives a coupled system of equations with <span class="math">\(n_x n_y\)</span> unknowns,
+where it is assumed that <span class="math">\(h(n_x+1) = b_x - a_x\)</span> and
+<span class="math">\(h(n_y+1) = b_y - a_y\)</span>.  The linear system has a very sparse
+coefficient matrix since each of the <span class="math">\(n_x n_y\)</span> rows has at most 5
+nonzero entries.</p>
+<p>If the boundary data varies smoothly around the boundary then it can be
+shown that solving this linear system gives an approximate solution
+of the partial differential equation that is <span class="math">\({\cal O}(h^2)\)</span> accurate
+at each point.  There are many books that contain much
+more about the development and analysis of such finite difference methods.</p>
+<div class="section" id="iterative-methods-for-the-poisson-problem">
+<span id="poisson-iter"></span><h2>Iterative methods for the Poisson problem<a class="headerlink" href="#iterative-methods-for-the-poisson-problem" title="Permalink to this headline">¶</a></h2>
+<p>Simple iterative methods such as Jacobi, Gauss-Siedel, and Successive
+Over-Relaxation (SOR) are discussed in the lectures and used as examples for
+implementations in OpenMP and MPI.  For three implementation of Jacobi in
+one space dimension, see</p>
+<ul class="simple">
+<li><a class="reference internal" href="jacobi1d_omp1.html#jacobi1d-omp1"><span class="std std-ref">Jacobi iteration using OpenMP with parallel do constructs</span></a></li>
+<li><a class="reference internal" href="jacobi1d_omp2.html#jacobi1d-omp2"><span class="std std-ref">Jacobi iteration using OpenMP with coarse-grain parallel block</span></a></li>
+<li><a class="reference internal" href="jacobi1d_mpi.html#jacobi1d-mpi"><span class="std std-ref">Jacobi iteration using MPI</span></a></li>
+</ul>
+<p>A sample implementation of Jacobi in two space dimensions can be found
+in <cite>$UWHPSC/lectures/lecture1</cite>.</p>
+</div>
+<div class="section" id="monte-carlo-methods-for-the-steady-state-diffusion-equation">
+<span id="poisson-mc"></span><h2>Monte Carlo methods for the steady state diffusion equation<a class="headerlink" href="#monte-carlo-methods-for-the-steady-state-diffusion-equation" title="Permalink to this headline">¶</a></h2>
+<p>Solving the linear system described above would give an approximate solution
+to the Poisson problem at each point on the grid.  Suppose we only want to
+approximate the solution at a single point <span class="math">\((x_0,y_0)\)</span> for some reason.
+Is there a way
+to estimate this without solving the system for all values <span class="math">\(U_{ij}\)</span>?
+Not easily from the linear system, but there are other approaches that might
+be used.</p>
+<p>We will consider a Monte Carlo approach in which a large number of
+<em>random walks</em> starting from the point of interest are used to estimate the
+solution.  See <a class="reference internal" href="random.html#random"><span class="std std-ref">Random number generators</span></a> for a discussion of random number generators
+and Monte Carlo methods more generally.</p>
+<p>We will assume there is no source term, <span class="math">\(f(x,y)=0\)</span> so that we are
+solving Laplace&#8217;s equation.  The random walk solution is more complicated if
+there is a source term.</p>
+<p>A random walk starting at some point <span class="math">\((x_0,y_0)\)</span> wanders randomly in
+the domain until it hits the boundary at some point.  We do this many times
+over and keep track of the boundary value given for <span class="math">\(u(x,y)\)</span> at the
+point where each walk hits the boundary.  It can be shown that if we
+do this for
+a large number of walks and average the results, this converges to the
+desired solution value <span class="math">\(u(x_0,y_0)\)</span>.  Note that we expect more walks
+to hit the boundary at parts of the boundary near <span class="math">\((x_0,y_0)\)</span> than
+at points further away, so the boundary conditions at such points will have
+more influence on the solution.  This is intuitively what we expect for a
+steady state solution of a diffusion or heat conduction problem.</p>
+<p>To implement this numerically we will consider the simplification
+of a <em>lattice random walk</em>, in which we put down a grid on the domain as in
+the finite difference discretization and allow the random walk to only go in
+one of 4 directions in each time step, from a point on the grid to one of
+its four neighbors.  For isotropic diffusion as we are considering,
+we can define a random walk by choosing 1 of the four
+neighbors with equal probability in each step.</p>
+<p>The code <cite>$UWHPSC/codes/project/laplace_mc.py</cite> illustrates this.
+Run this code with
+<cite>plot_walk = True</cite> to see plots of a few random walks on a coarse grid, or with
+<cite>plot_walk = False</cite> to report the solution after many random walks on a finer
+grid.</p>
+<p>With this lattice random walk we do not expect the approximate solution to
+converge to the true solution of the PDE, as the number of trials increases.
+Instead we expect it to converge to the solution of the linear system
+determined by the finite difference method described above.
+In other words if we choose <span class="math">\((x_0,y_0) = (x_i, y_j)\)</span> for some grid
+point <span class="math">\((i,j)\)</span> then we expect the Monte Carlo solution to converge to
+<span class="math">\(U_{ij}\)</span> rather than to <span class="math">\(u(x_i,y_j)\)</span>.</p>
+<p><strong>Why does this work?</strong>  Here&#8217;s one way to think about it.  Suppose doing this
+random walk starting at <span class="math">\((x_i,y_j)\)</span> converges to some value <span class="math">\(E_{ij}\)</span>,
+the expected value of <span class="math">\(u\)</span> at the boundary hit when starting a random walk at this
+point.  If <span class="math">\((x_i,y_j)\)</span> is one of the boundary points then
+<span class="math">\(E_{ij} = U_{ij}\)</span> since we immediately hit the boundary with zero
+steps, so every random walk starting at this point returns <span class="math">\(u\)</span> at this
+point.  On the other hand, if <span class="math">\((x_i,y_j)\)</span> is an interior point, then
+after a single step of the random walk we will be at one of the four
+neighbors.  Continuing our original random walk from this point is
+equivalent to starting a new random walk at this point.  So for example
+any random walk that first takes a step to the right from <span class="math">\((x_i,y_j)\)</span>
+to <span class="math">\((x_{i+1},y_j)\)</span> has the same expected boundary value as obtained
+from all random walks starting at <span class="math">\((x_{i+1},y_j)\)</span>, i.e. the value
+<span class="math">\(E_{i+1,j}\)</span>.  But only 1/4 of the random walks starting at
+<span class="math">\((x_i,y_j)\)</span> go first to the right.  So the expected value over all
+walks starting at <span class="math">\((x_i,y_j)\)</span> is expected to be the average of the
+expected value when starting at any of the 4 neighbors.  In other words,</p>
+<p><span class="math">\(E_{ij} = \frac 1 4 (E_{i-1,j} + E_{i+1,j} + E_{i,j-1} + E_{i,j+1})\)</span></p>
+<p>But this means <span class="math">\(E_{ij}\)</span> satisfies the same linear system of equations
+as <span class="math">\(U_{ij}\)</span> (and also the same boundary conditions),
+and hence must be the same.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="jacobi1d_omp1.html" title="Jacobi iteration using OpenMP with parallel do constructs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="random.html" title="Random number generators"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

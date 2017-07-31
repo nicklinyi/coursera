@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lab 12: Thursday May 8, 2014 &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Notes to accompany lab sessions" href="index.html" />
+    <link rel="next" title="Lab 13: Tuesday May 13, 2014" href="lab13.html" />
+    <link rel="prev" title="Lab 11: Tuesday May 6, 2014" href="lab11.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="../_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="lab13.html" title="Lab 13: Tuesday May 13, 2014"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lab11.html" title="Lab 11: Tuesday May 6, 2014"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Notes to accompany lab sessions</a> &raquo;</li> 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Lab 12: Thursday May 8, 2014</a><ul>
+<li><a class="reference internal" href="#programming-problem">Programming problem</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lab11.html"
+                        title="previous chapter">Lab 11: Tuesday May 6, 2014</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lab13.html"
+                        title="next chapter">Lab 13: Tuesday May 13, 2014</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/labs/lab12.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lab-12-thursday-may-8-2014">
+<span id="lab12"></span><h1>Lab 12: Thursday May 8, 2014<a class="headerlink" href="#lab-12-thursday-may-8-2014" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="programming-problem">
+<h2>Programming problem<a class="headerlink" href="#programming-problem" title="Permalink to this headline">¶</a></h2>
+<p>Work on this in groups!</p>
+<ol class="arabic">
+<li><p class="first">In Lab 11 you worked on a program to compute the mean of n random
+numbers.  A sample solution can be found at <cite>$UWHPSC/labs/lab11/mean.f90</cite>.</p>
+<p>Write a Fortran program that runs over different values of <cite>n</cite>,
+and for each <cite>n</cite> generates a vector <cite>x</cite> containing <cite>n</cite> random numbers
+and then computes the mean of these.  Also compute the fraction of the
+numbers that lie in the first quartile (the fraction of <cite>x(i)</cite> values
+that are between 0 and 0.25) and the fraction that lie in the fourth
+quartile (between 0.75 and 1.0).  Since the <cite>random_number</cite> routine
+returns numbers uniformly distributed between 0 and 1, we expect  each of
+these fractions to be about 0.25.</p>
+<p>Use OpenMP to make the loop on <cite>i</cite> from 1 to <cite>n</cite> into a parallel do loop.</p>
+<p>Running this code should give something like this if you take as the <cite>n</cite>
+values <span class="math">\(n = 10^k\)</span> for <span class="math">\(k=2,3,\ldots,8\)</span>:</p>
+<div class="highlight-default"><div class="highlight"><pre> <span class="n">Number</span> <span class="n">of</span> <span class="n">threads</span><span class="p">:</span>            <span class="mi">2</span>
+ <span class="nb">input</span> <span class="n">seed</span>
+<span class="mi">12345</span>
+ <span class="n">seed1</span> <span class="k">for</span> <span class="n">random</span> <span class="n">number</span> <span class="n">generator</span><span class="p">:</span>       <span class="mi">12345</span>
+
+       <span class="n">n</span>          <span class="n">mean</span>        <span class="n">quartile</span> <span class="mi">1</span>    <span class="n">quartile</span> <span class="mi">4</span>
+       <span class="mi">100</span>     <span class="mf">0.51902466</span>     <span class="mf">0.22000000</span>     <span class="mf">0.24000000</span>
+      <span class="mi">1000</span>     <span class="mf">0.47476778</span>     <span class="mf">0.27800000</span>     <span class="mf">0.22500000</span>
+     <span class="mi">10000</span>     <span class="mf">0.49606601</span>     <span class="mf">0.25670000</span>     <span class="mf">0.25190000</span>
+    <span class="mi">100000</span>     <span class="mf">0.50121669</span>     <span class="mf">0.24815000</span>     <span class="mf">0.25130000</span>
+   <span class="mi">1000000</span>     <span class="mf">0.50001034</span>     <span class="mf">0.24986300</span>     <span class="mf">0.24979800</span>
+  <span class="mi">10000000</span>     <span class="mf">0.49998532</span>     <span class="mf">0.24994350</span>     <span class="mf">0.24992770</span>
+ <span class="mi">100000000</span>     <span class="mf">0.49995944</span>     <span class="mf">0.25003764</span>     <span class="mf">0.24995608</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you haven&#8217;t already, study the code in
+<cite>$UWHPSC/codes/openmp/pisum2.f90</cite>
+and make sure you understand how this coarse grain parallelism works.
+Discuss with your neighbors.</p>
+</li>
+<li><p class="first">If you have time, try to follow this model to make your code that
+computes the mean and quartiles work in a similar manner, where you
+break up the different values of <cite>n</cite> to be tested between different
+threads, e.g. in the above example one thread would take the
+first three values of <cite>n</cite> and the second thread would take the final
+two values of <cite>n</cite>.</p>
+</li>
+<li><p class="first">Discuss with your neighbors whether this is a sensible way to try
+to use two threads on this problem.</p>
+</li>
+<li><p class="first">There is a quiz for this lab.</p>
+</li>
+<li><p class="first">Sample solutions can now be found in <cite>$UWHPSC/labs/lab12</cite>.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="lab13.html" title="Lab 13: Tuesday May 13, 2014"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lab11.html" title="Lab 11: Tuesday May 6, 2014"
+             >previous</a> |</li>
+        <li><a href="../index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="../biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="../search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Notes to accompany lab sessions</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Useful gfortran flags &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Fortran subroutines and functions" href="fortran_sub.html" />
+    <link rel="prev" title="Fortran" href="fortran.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fortran_sub.html" title="Fortran subroutines and functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fortran.html" title="Fortran"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Useful gfortran flags</a><ul>
+<li><a class="reference internal" href="#output-flags">Output flags</a></li>
+<li><a class="reference internal" href="#warning-flags">Warning flags</a></li>
+<li><a class="reference internal" href="#fortran-dialect-flags">Fortran dialect flags</a></li>
+<li><a class="reference internal" href="#debugging-flags">Debugging flags</a></li>
+<li><a class="reference internal" href="#optimization-flags">Optimization flags</a></li>
+<li><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fortran.html"
+                        title="previous chapter">Fortran</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fortran_sub.html"
+                        title="next chapter">Fortran subroutines and functions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gfortran_flags.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="useful-gfortran-flags">
+<span id="gfortran-flags"></span><h1>Useful gfortran flags<a class="headerlink" href="#useful-gfortran-flags" title="Permalink to this headline">¶</a></h1>
+<p>gfortran has many different command line options (also known as
+<em>flags</em>) that control what the compiler does and how it does it.  To
+use these flags, simply include them on the command line when you run
+gfortran, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran -Wall -Wextra -c mysubroutine.f90 -o mysubroutine.o
+</pre></div>
+</div>
+<p>If you find you use certain flags often, you can add them to an alias
+in your <code class="docutils literal"><span class="pre">.bashrc</span></code> file, such as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">alias</span> <span class="n">gf</span><span class="o">=</span><span class="s">&quot;gfortran -Wall -Wextra -Wconversion -pedantic&quot;</span>
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="http://linux.die.net/man/1/gfortran">gfortran man page</a>
+for more information.
+Note a &#8220;man page&#8221; is the Unix help manual documentation that is available
+for many Unix commands by typing, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ man gfortran
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Different fortran compilers use different names for similar flags!</p>
+</div>
+<div class="section" id="output-flags">
+<h2>Output flags<a class="headerlink" href="#output-flags" title="Permalink to this headline">¶</a></h2>
+<p>These flags control what kind of output gfortran generates, and where
+that output goes.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">-c</span></code>: Compile to an object file, rather than producing a
+standalone program.  This flag is useful if your program source
+code is split into multiple files.  The object files produced by
+this command can later be linked together into a complete program.</li>
+<li><code class="docutils literal"><span class="pre">-o</span> <span class="pre">FILENAME</span></code>: Specifies the name of the output file.  Without
+this flag, the default output file is <code class="docutils literal"><span class="pre">a.out</span></code> if compiling a
+complete program, or <code class="docutils literal"><span class="pre">SOURCEFILE.o</span></code> if compiling to an object
+file, where <code class="docutils literal"><span class="pre">SOURCEFILE.f90</span></code> is the name of the Fortran source
+file being compiled.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="warning-flags">
+<h2>Warning flags<a class="headerlink" href="#warning-flags" title="Permalink to this headline">¶</a></h2>
+<p>Warning flags tell gfortran to warn you about legal but potentially
+questionable sections of code.  These sections of code may be correct,
+but warnings will often identify bugs before you even run your
+program.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">-Wall</span></code>: Short for &#8220;warn about all,&#8221; this flag tells gfortran to
+generate warnings about many common sources of bugs, such as having
+a subroutine or function with the same name as a built-in one, or
+passing the same variable as an <code class="docutils literal"><span class="pre">intent(in)</span></code> and an
+<code class="docutils literal"><span class="pre">intent(out)</span></code> argument of the same subroutine.
+In spite of its name, this does not turn all possible <cite>-W</cite> options on.</li>
+<li><code class="docutils literal"><span class="pre">-Wextra</span></code>: In conjunction with <code class="docutils literal"><span class="pre">-Wall</span></code>, gives warnings about
+even more potential problems.  In particular, <code class="docutils literal"><span class="pre">-Wextra</span></code> warns
+about subroutine arguments that are never used, which is almost
+always a bug.</li>
+<li><code class="docutils literal"><span class="pre">-Wconversion</span></code>: Warns about implicit conversion. For example, if
+you want a double precision variable <code class="docutils literal"><span class="pre">sqrt2</span></code> to hold an accurate
+value for the square root of 2, you might write by accident <code class="docutils literal"><span class="pre">sqrt2</span>
+<span class="pre">=</span> <span class="pre">sqrt(2.)</span></code>.  Since <code class="docutils literal"><span class="pre">2.</span></code> is a single-precision value, the
+single-precision <code class="docutils literal"><span class="pre">sqrt</span></code> function will be used, and the value of
+<code class="docutils literal"><span class="pre">sqrt2</span></code> will not be as accurate as it could be.  <code class="docutils literal"><span class="pre">-Wconversion</span></code>
+will generate a warning here, because the single-precision result
+of <code class="docutils literal"><span class="pre">sqrt</span></code> is implicitly converted into a double-precision value.</li>
+<li><code class="docutils literal"><span class="pre">-pedantic</span></code>: Generate warnings about language features that are
+supported by gfortran but are not part of the official Fortran 95
+standard.  Useful if you want be sure your code will work with any
+Fortran 95 compiler.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="fortran-dialect-flags">
+<h2>Fortran dialect flags<a class="headerlink" href="#fortran-dialect-flags" title="Permalink to this headline">¶</a></h2>
+<p>Fortran dialect flags control how gfortran interprets your program,
+and whether various language extensions such as OpenMP are enabled.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">-fopenmp</span></code>: Tells gfortran to compile using OpenMP.  Without this
+flag, OpenMP directives in your code will be ignored.</li>
+<li><code class="docutils literal"><span class="pre">-std=f95</span></code>: Enforces strict compliance with the Fortran 95
+standard.  This is like <code class="docutils literal"><span class="pre">-pedantic</span></code>, except it generates errors
+instead of warnings.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="debugging-flags">
+<h2>Debugging flags<a class="headerlink" href="#debugging-flags" title="Permalink to this headline">¶</a></h2>
+<p>Debugging flags tell the compiler to include information inside the
+compiled program that is useful in debugging, or alter the behavior of
+the program to help find bugs.</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">-g</span></code>: Generates extra debugging information usable by GDB.
+<code class="docutils literal"><span class="pre">-g3</span></code> includes even more debugging information.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">-fbacktrace</span></code>: Specifies that if the program crashes, a backtrace
+should be produced if possible, showing what functions or
+subroutines were being called at the time of the error.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">-fbounds-check</span></code>: Add a check that the array index is within the
+bounds of the array every time an array element is accessed.  This
+substantially slows down a program using it, but is a very useful
+way to find bugs related to arrays; without this flag, an illegal
+array access will produce either a subtle error that might not
+become apparent until much later in the program, or will cause an
+immediate segmentation fault with very little information about
+cause of the error.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">-ffpe-trap=zero,overflow,underflow</span></code> tells Fortran to <em>trap</em> the listed
+floating point errors (fpe).  Having <cite>zero</cite> on the list means that
+if you divide by zero the code will die rather than setting the result to
+<cite>+INFINITY</cite> and continuing.  Similarly, if <cite>overflow</cite> is on the list it
+will halt if you try to store a number larger than can be stored for the
+type of real number you are using because the exponent is too large.</p>
+<p>Trapping <cite>underflow</cite> will halt if you compute a number that is too small
+because the exponent is a very large negative number.  For 8-byte
+floating point numbers, this happens if the number is smaller than
+approximate <cite>1E-324</cite>.   If you don&#8217;t trap underflows, such numbers will
+just be set to 0, which is generally the correct thing to do.  But
+computing such small numbers may indicate a bug of some sort in the
+program, so you might want to trap them.</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="optimization-flags">
+<h2>Optimization flags<a class="headerlink" href="#optimization-flags" title="Permalink to this headline">¶</a></h2>
+<p>Optimization options control how the compiler optimizes your code.
+Optimization usually makes a program faster, but this is not always
+true.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">-O</span></code> <em>level</em>: Use optimizations up to and including the specified
+level.  Higher levels usually produce faster code but take longer
+to compile.  Levels range from <code class="docutils literal"><span class="pre">-O0</span></code> (no optimization, the
+default) to <code class="docutils literal"><span class="pre">-O3</span></code> (the most optimization available).</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<p>This list is by no means exhaustive.  A more complete list of
+gfortran-specific specific flags is at
+<a class="reference external" href="http://gcc.gnu.org/onlinedocs/gfortran/Invoking-GNU-Fortran.html">http://gcc.gnu.org/onlinedocs/gfortran/Invoking-GNU-Fortran.html</a>
+or on the <a class="reference external" href="http://linux.die.net/man/1/gfortran">gfortran man page</a>.</p>
+<p>gfortran is part of the GCC family of compilers; more general
+information on GCC command line options is available at
+<a class="reference external" href="http://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html">http://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html</a>, although
+some of this information is specific to compiling C programs rather
+than Fortran.</p>
+<p>See also <a class="reference external" href="http://linux.die.net/man/1/gfortran">http://linux.die.net/man/1/gfortran</a>.</p>
+<p>A list of debug flags can also be found at
+<a class="reference external" href="http://www.fortran-2000.com/ArnaudRecipes/CompilerTricks.html#CompTable_fortran">http://www.fortran-2000.com/ArnaudRecipes/CompilerTricks.html#CompTable_fortran</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fortran_sub.html" title="Fortran subroutines and functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fortran.html" title="Fortran"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

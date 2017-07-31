@@ -1,0 +1,511 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fortran modules &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" />
+    <link rel="next" title="Fortran Input / Output" href="fortran_io.html" />
+    <link rel="prev" title="Array storage in Fortran" href="fortran_arrays.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fortran_io.html" title="Fortran Input / Output"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fortran_arrays.html" title="Array storage in Fortran"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fortran modules</a><ul>
+<li><a class="reference internal" href="#some-reasons-to-use-modules">Some reasons to use modules</a></li>
+<li><a class="reference internal" href="#compiling-modules">Compiling modules</a></li>
+<li><a class="reference internal" href="#circles-module-example">Circles module example</a></li>
+<li><a class="reference internal" href="#module-variables">Module variables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fortran_arrays.html"
+                        title="previous chapter">Array storage in Fortran</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fortran_io.html"
+                        title="next chapter">Fortran Input / Output</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/fortran_modules.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fortran-modules">
+<span id="id1"></span><h1>Fortran modules<a class="headerlink" href="#fortran-modules" title="Permalink to this headline">¶</a></h1>
+<p>The general structure of a Fortran module:</p>
+<div class="highlight-default"><div class="highlight"><pre>module &lt;MODULE-NAME&gt;
+    ! Declare variables
+contains
+    ! Define subroutines or functions
+end module &lt;MODULE-NAME&gt;
+</pre></div>
+</div>
+<p>A program or subroutine can <em>use</em> this module:</p>
+<div class="highlight-default"><div class="highlight"><pre>program &lt;NAME&gt;
+    use &lt;MODULE-NAME&gt;
+    ! Declare variables
+    ! Executable statements
+end program &lt;NAME&gt;
+</pre></div>
+</div>
+<p>The line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">use</span> <span class="o">&lt;</span><span class="n">MODULE</span><span class="o">-</span><span class="n">NAME</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>can be replaced by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">use</span> <span class="o">&lt;</span><span class="n">MODULE</span><span class="o">-</span><span class="n">NAME</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">LIST</span> <span class="n">OF</span> <span class="n">SYMBOLS</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>to specify that only certain variables/subroutines/functions from the module
+should be used.  Doing it this way also makes it clear exactly what symbols
+are coming from which module in the case where you <em>use</em> several modules.</p>
+<p>A very simple module is:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/multifile2/sub1m.f90</span>
+
+<span class="k">module </span><span class="n">sub1m</span>
+
+<span class="k">contains</span>
+
+<span class="k">subroutine </span><span class="n">sub1</span><span class="p">()</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;In sub1&quot;</span>
+<span class="k">end subroutine </span><span class="n">sub1</span>
+
+<span class="k">end module </span><span class="n">sub1m</span>
+</pre></div>
+</td></tr></table></div>
+<p>and a program that uses this:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/multifile2/main.f90</span>
+
+<span class="k">program </span><span class="n">demo</span>
+    <span class="k">use </span><span class="n">sub1m</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">sub1</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;In main program&quot;</span>
+    <span class="k">call </span><span class="n">sub1</span><span class="p">()</span>
+<span class="k">end program </span><span class="n">demo</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="some-reasons-to-use-modules">
+<h2>Some reasons to use modules<a class="headerlink" href="#some-reasons-to-use-modules" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p class="first">Can define global variables in modules to be used in several different
+routines.</p>
+<p>In Fortran 77 this had to be done with common blocks — much less elegant.</p>
+</li>
+<li><p class="first">Subroutine/function interface information is generated to aid in checking
+that proper arguments are passed.</p>
+<p>It’s often best to put all subroutines and functions in modules for this
+reason.</p>
+</li>
+<li><p class="first">Can define new data types to be used in several routines.</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="compiling-modules">
+<h2>Compiling modules<a class="headerlink" href="#compiling-modules" title="Permalink to this headline">¶</a></h2>
+<p>Modules must be compiled <em>before</em> any program units that <em>use</em> the module.
+When a module is compiled, a <cite>.o</cite> file is created, but also a <cite>.mod</cite> file is
+created that must be present in order to compile a unit that <em>uses</em> the
+module.</p>
+</div>
+<div class="section" id="circles-module-example">
+<h2>Circles module example<a class="headerlink" href="#circles-module-example" title="Permalink to this headline">¶</a></h2>
+<p>Here is an example of a module that defines one parameter <cite>pi</cite> and
+two functions:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/circles/circle_mod.f90</span>
+
+<span class="k">module </span><span class="n">circle_mod</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">pi</span> <span class="o">=</span> <span class="mf">3.141592653589793</span><span class="n">d0</span>
+
+<span class="k">contains</span>
+
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="k">function </span><span class="n">area</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">r</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">end function </span><span class="n">area</span>
+
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="k">function </span><span class="n">circumference</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">r</span>
+        <span class="n">circumference</span> <span class="o">=</span> <span class="mf">2.</span><span class="n">d0</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span>
+    <span class="k">end function </span><span class="n">circumference</span>
+
+<span class="k">end module </span><span class="n">circle_mod</span>
+</pre></div>
+</td></tr></table></div>
+<p>This might be used as follows:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/circles/main.f90</span>
+
+<span class="k">program </span><span class="n">main</span>
+
+    <span class="k">use </span><span class="n">circle_mod</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">pi</span><span class="p">,</span> <span class="n">area</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span>
+
+    <span class="c">! print parameter pi defined in module:</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s1">&#39;pi = &#39;</span><span class="p">,</span> <span class="n">pi</span>
+
+    <span class="c">! test the area function from module:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">area</span><span class="p">(</span><span class="mf">2.</span><span class="n">d0</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s1">&#39;area for a circle of radius 2: &#39;</span><span class="p">,</span> <span class="n">a</span>
+
+<span class="k">end program </span><span class="n">main</span>
+</pre></div>
+</td></tr></table></div>
+<p>This gives the following output:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">pi</span> <span class="o">=</span>    <span class="mf">3.14159265358979</span>
+<span class="n">area</span> <span class="k">for</span> <span class="n">a</span> <span class="n">circle</span> <span class="n">of</span> <span class="n">radius</span> <span class="mi">2</span><span class="p">:</span>    <span class="mf">12.5663706143592</span>
+</pre></div>
+</div>
+<p>Note: that a parameter can be defined with a specific value that will then be
+available to all program units using the module.</p>
+</div>
+<div class="section" id="module-variables">
+<span id="id2"></span><h2>Module variables<a class="headerlink" href="#module-variables" title="Permalink to this headline">¶</a></h2>
+<p>It is also possible to declare <em>variables</em> that can be shared between all
+program units using the module.  This is a way to define &#8220;global variables&#8221;
+that might be set in one program unit and used in another, without the need
+to pass the variable as a subroutine or function argument.
+Module variables can be defined in a module and the Fortran statement</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">save</span>
+</pre></div>
+</div>
+<p>is used to indicate that variables defined in the module should have values
+saved between one use of the module to another.  You should generally
+specify this if you use any module variables.</p>
+<p>Here is another version of the circles code that stores <em>pi</em> as a module
+variable rather than a parameter:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/circles/circle_mod.f90</span>
+<span class="c">! Version where pi is a module variable.</span>
+
+<span class="k">module </span><span class="n">circle_mod</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">pi</span> 
+    <span class="k">save  </span>
+
+<span class="k">contains</span>
+
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="k">function </span><span class="n">area</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">r</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">end function </span><span class="n">area</span>
+
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="k">function </span><span class="n">circumference</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">r</span>
+        <span class="n">circumference</span> <span class="o">=</span> <span class="mf">2.</span><span class="n">d0</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span>
+    <span class="k">end function </span><span class="n">circumference</span>
+
+<span class="k">end module </span><span class="n">circle_mod</span>
+</pre></div>
+</td></tr></table></div>
+<p>In this case we also need to initialize the variable <em>pi</em> by means of a
+subroutine such as:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/circles/initialize.f90</span>
+
+<span class="k">subroutine </span><span class="n">initialize</span><span class="p">()</span>
+
+    <span class="c">! Set the value of pi used elsewhere.</span>
+    <span class="k">use </span><span class="n">circle_mod</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">pi</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="nb">acos</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="n">d0</span><span class="p">)</span>
+
+<span class="k">end subroutine </span><span class="n">initialize</span>
+</pre></div>
+</td></tr></table></div>
+<p>These might be used as follows in a main program:</p>
+<div class="highlight-fortran"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/fortran/circles/main.f90</span>
+
+<span class="k">program </span><span class="n">main</span>
+
+    <span class="k">use </span><span class="n">circle_mod</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">pi</span><span class="p">,</span> <span class="n">area</span>
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span>
+
+    <span class="k">call </span><span class="n">initialize</span><span class="p">()</span>   <span class="c">! sets pi</span>
+
+    <span class="c">! print module variable pi:</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s1">&#39;pi = &#39;</span><span class="p">,</span> <span class="n">pi</span>
+
+    <span class="c">! test the area function from module:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">area</span><span class="p">(</span><span class="mf">2.</span><span class="n">d0</span><span class="p">)</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s1">&#39;area for a circle of radius 2: &#39;</span><span class="p">,</span> <span class="n">a</span>
+
+<span class="k">end program </span><span class="n">main</span>
+</pre></div>
+</td></tr></table></div>
+<p>This example can be compiled and executed by going into the directory
+<cite>$UWHPSC/fortran/circles2/</cite> and typing:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ gfortran circle_mod.f90 initialize.f90 main.f90 -o main.exe
+$ ./main.exe
+</pre></div>
+</div>
+<p>Or by using the Makefile in this directory:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make main.exe
+$ ./main.exe
+</pre></div>
+</div>
+<p>Here is the Makefile:</p>
+<div class="highlight-make"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># $UWHPSC/codes/fortran/circles2/Makefile</span>
+
+<span class="nv">OBJECTS</span> <span class="o">=</span> circle_mod.o <span class="se">\</span>
+          main.o <span class="se">\</span>
+          initialize.o
+
+<span class="nv">MODULES</span> <span class="o">=</span> circle_mod.mod
+
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span>
+
+<span class="nf">output.txt</span><span class="o">:</span> <span class="n">main</span>.<span class="n">exe</span>
+	./main.exe &gt; output.txt
+
+<span class="nf">main.exe</span><span class="o">:</span> <span class="k">$(</span><span class="nv">MODULES</span><span class="k">)</span> <span class="k">$(</span><span class="nv">OBJECTS</span><span class="k">)</span>
+	gfortran <span class="k">$(</span>OBJECTS<span class="k">)</span> -o main.exe
+
+<span class="nf">%.o</span><span class="o">:</span> %.<span class="n">f</span>90
+	gfortran -c <span class="nv">$&lt;</span>
+
+<span class="nf">%.mod</span><span class="o">:</span> %.<span class="n">f</span>90
+	gfortran -c <span class="nv">$&lt;</span>
+
+<span class="nf">clean</span><span class="o">:</span>
+	rm -f <span class="k">$(</span>OBJECTS<span class="k">)</span> <span class="k">$(</span>MODULES<span class="k">)</span> main.exe
+</pre></div>
+</td></tr></table></div>
+<p>For more about Makefiles, see <a class="reference internal" href="makefiles.html#makefiles"><span class="std std-ref">Makefiles</span></a> and <a class="reference internal" href="biblio.html#biblio-make"><span class="std std-ref">Makefile references</span></a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fortran_io.html" title="Fortran Input / Output"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fortran_arrays.html" title="Array storage in Fortran"
+             >previous</a> |</li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

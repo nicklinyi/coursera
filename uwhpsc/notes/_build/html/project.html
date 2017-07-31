@@ -1,0 +1,441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Final Project [2014] &mdash; AMath 483/583, Spring 2013 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="top" title="AMath 483/583, Spring 2013 1.0 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+
+<div style="background-color: #F0D576; text-align: left; padding: 10px 10px 15px 15px">
+<table>
+<tr>
+<td>
+<a href="http://www.amath.washington.edu/"><img src="_static/uwamath.gif" border="0" alt="UW AMath"/></a>
+</td>
+<td>
+<font size=5> High Performance Scientific Computing</font>
+<br>&nbsp;<br>
+<font size=5> AMath 483/583 Class Notes</font>
+<br>&nbsp;<br>
+<font size=5> Spring Quarter, 2013 </font>
+</td>
+</tr>
+</table>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Final Project [2014]</a><ul>
+<li><a class="reference internal" href="#to-submit">To submit</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/project.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="final-project-2014">
+<span id="project"></span><h1>Final Project [2014]<a class="headerlink" href="#final-project-2014" title="Permalink to this headline">¶</a></h1>
+<p>Due Wednesday, June 11, 2014, by 11:00pm PDT.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">A survey link has been added at the end of this page.</p>
+</div>
+<p><strong>Some resources and hints:</strong>  See <a class="reference internal" href="project_hints.html#project-hints"><span class="std std-ref">Project Hints</span></a>.</p>
+<p><strong>Part 1</strong></p>
+<p>The notebook <cite>$UWHPSC/project/BVP.ipynb</cite> illustrates
+the solution of the two-point boundary value problem <span class="math">\(u''(x)
+= -f(x)\)</span> by setting up and solving a tridiagonal system.
+This was discussed in <a class="reference internal" href="labs/lab18.html#lab18"><span class="std std-ref">Lab 18: Thursday May 29, 2014</span></a>.
+(<a class="reference external" href="http://nbviewer.ipython.org/url/faculty.washington.edu/rjl/notebooks/BVP.ipynb">nbviewer</a>, <a class="reference external" href="https://canvas.uw.edu/courses/893991/wiki/lab-18">video</a>)</p>
+<p>The goal of Part 1 is to create a Fortran 90 module that contains
+subroutines <cite>solve_bvp_direct</cite> and <cite>solve_bvp_split</cite> that mimic
+the Python codes, and then add OpenMP to the latter in order to
+solve the four boundary value problems simultaneously with 4 threads.</p>
+<p>You do <strong>not</strong> need to convert the recursive code to Fortran, although
+if you want more of a challenge you might try to do this with OpenMP.</p>
+<p>The directory <cite>$UWHPSC/project/part1</cite> contains the following files:</p>
+<ul class="simple">
+<li><cite>main1.f90</cite> a driver program for the first part below.</li>
+<li><cite>problem.f90</cite>, a module containing the problem description (right hand
+side function <cite>f</cite> and true solution function <cite>u_true</cite>).</li>
+<li><cite>bvp_solvers.f90</cite>, the template for a module that should be filled in
+properly with three subroutines following the directions below.</li>
+<li><cite>Makefile1</cite> for the first part below.</li>
+</ul>
+<p>Note that the problem specified in <cite>problem.f90</cite> is the same one used in the
+IPython notebook and in Lecture 23.  You might want to test your routines
+with a different problem, e.g. choose a different true solution and
+differentiate twice to get the corresponding right hand side (and remember
+to change the boundary conditions specified in the main program to be
+suitable).  We might do the same to test your routines.</p>
+<ol class="arabic">
+<li><p class="first">Finish writing the subroutine <cite>solve_BVP_direct</cite>  in the module
+<cite>bvp_solvers.f90</cite>.  This routine should set up a
+tridiagonal system and solve it using the LAPACK subroutine <cite>DGTSV</cite>.
+As input it takes a 1-dimensional array <cite>x</cite>, and two real numbers
+<cite>u_left</cite> and <cite>u_right</cite> and the output should be an array <cite>u</cite> containing
+the approximate solution at the points specified in <cite>x</cite>.  It can be assumed
+that the points in <cite>x</cite> are equally spaced.</p>
+<p><strong>Notes:</strong></p>
+<ul class="simple">
+<li>For consistency with the Python code, the arrays <cite>x</cite> and <cite>u</cite>
+have been declared to start with index 0 rather than 1.  Note how this
+is indicated in the declaration of these arrays in the subroutine
+<cite>solve_bvp_direct</cite>.</li>
+<li>Instead of <a class="reference external" href="http://www.netlib.no/netlib/lapack/double/dgtsv.f">DGTSV</a>,
+you could use
+<a class="reference external" href="http://www.netlib.no/netlib/lapack/double/dptsv.f">DPTSV</a>,
+which solves a tridiagonal
+<a class="reference external" href="http://en.wikipedia.org/wiki/Positive-definite_matrix">symmetric positive definite</a>
+system.  The matrix <cite>A</cite> for this boundary
+value problem is symmetric but is negative definite rather than
+positive definite, so if you want to do this you would have to negate
+the system and solve <span class="math">\(-u''(x) = f(x)\)</span>.
+The <cite>DPTSV</cite> routine is slightly more efficient, but it&#8217;s fine to
+use <cite>DGTSV</cite>.</li>
+</ul>
+<p><strong>NOTE: The output below was created using `DPTSV` and if you use
+`DGTSV` slightly different results are obtained.</strong></p>
+<p>Add a print statement to your subroutine so that running the code
+produces output like this:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test -f Makefile1
+Wrote data to input_data.txt
+./test.exe
+ n =           20
+Solving tridiagonal system with n =     20
+ error_max =   3.99812551471256938E-003
+
+
+$ make test -f Makefile1 n=10000
+Wrote data to input_data.txt
+./test.exe
+ n =        10000
+Solving tridiagonal system with n =  10000
+ error_max =   1.69490235180091986E-008
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add another subroutine <cite>solve_bvp_split</cite> to the <cite>bvp_solvers</cite> module
+that has the same calling sequence and produces the same result, but
+that splits the interval roughly in half and makes four calls to
+<cite>solve_bvp_direct</cite>, following the same idea as in the IPython notebook.</p>
+<p>Provide a second main program <cite>main2.f90</cite> and makefile <cite>Makefile2</cite> to
+test this routine.</p>
+<p>Add print statements to the subroutine so that it gives results similar
+to:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test -f Makefile2
+Wrote data to input_data.txt
+./test.exe
+ n =           20
+Solving tridiagonal system with n =     10
+Solving tridiagonal system with n =      9
+Solving tridiagonal system with n =     10
+Solving tridiagonal system with n =      9
+Computed G0 =   0.1186D+02  G1 =   0.1167D+02  z =  -0.6111D+02
+ error_max =   3.99812551484757250E-003
+
+
+$ make test -f Makefile2 n=10000
+Wrote data to input_data.txt
+./test.exe
+ n =        10000
+Solving tridiagonal system with n =   5000
+Solving tridiagonal system with n =   4999
+Solving tridiagonal system with n =   5000
+Solving tridiagonal system with n =   4999
+Computed G0 =   0.2442D-01  G1 =   0.2402D-01  z =  -0.6004D+02
+ error_max =   1.73004366388340713E-008
+</pre></div>
+</div>
+<p>Printing out <cite>G0, G1</cite>, and <cite>z</cite> might be useful for debugging to compare
+with what the Python code produces.</p>
+<p><strong>NOTE:</strong> The split version gets slightly different results from the direct
+version, particularly for <cite>n = 10000</cite>.   This tridiagonal matrix has a
+condition number that grows like <span class="math">\({\cal O}(n^2)\)</span>, and so for <cite>n =
+1e5</cite>, perturbations in the way you do the linear algebra can make
+be expected to make relative errors on the order of <cite>1e10</cite> times the
+machine roundoff, which is comparable to the error in the BVP solution that
+is being computed. (This also suggests that making <cite>n</cite> even larger may
+not give you a better approximation of the true solution, when computing
+in finite precision arithmetic.)</p>
+</li>
+<li><p class="first">Add another subroutine <cite>solve_bvp_split_omp</cite> to the <cite>bvp_solvers</cite> module
+that has the same calling sequence and produces the same result, but
+that uses OpenMP in such a way that four different threads make the four
+calls to <cite>solve_bvp_direct</cite>.</p>
+<p>Do this by using <a class="reference external" href="https://computing.llnl.gov/tutorials/openMP/#SECTIONS">omp parallel sections</a>, see for example
+<cite>$UWHPSC/codes/openmp/demo2.f90</cite> or
+<cite>$UWHPSC/codes/adaptive_quadrature/openmp2/adapquad_mod.f90</cite>.</p>
+<p>This will take a bit of thought about what variables should be private
+to each thread and perhaps some rearrangement of the code to make
+sure each thread is solving the desired problem and all four results can
+be combined as needed.  To help debug, you might want to print out
+various things from the serial version of the code and compare to the
+parallel version, and try running with small values of <cite>n</cite>.</p>
+<p>You can call <cite>omp_set_num_threads(4)</cite> in the subroutine and do not
+need to test with a different number of threads.</p>
+<p><strong>Note:</strong> This is not a great problem for OpenMP since solving a
+tridiagonal system is so quick, and the overhead of forking threads
+will probably make the OpenMP version run slower than the serial version
+unless <cite>n</cite> were very large, but the point is to understand and debug the
+code.</p>
+<p>Provide a new main program <cite>main3.f90</cite> and <cite>Makefile3</cite> that compiles
+with OpenMP and links with OpenMP and the LAPACK libraries, e.g. set:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">LFLAGS</span> <span class="o">=</span> <span class="o">-</span><span class="n">lblas</span> <span class="o">-</span><span class="n">llapack</span> <span class="o">-</span><span class="n">fopenmp</span>
+<span class="n">FFLAGS</span> <span class="o">=</span> <span class="o">-</span><span class="n">fopenmp</span>
+</pre></div>
+</div>
+<p>Add print statements to your subroutine so that it gives output such as:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test -f Makefile3
+test.exe
+Wrote data to input_data.txt
+./test.exe
+ n =           20
+ nthreads =            4
+Thread   0 taking from   0.000 to   0.524 with u_mid =   0.000
+Solving tridiagonal system with n =     10
+Thread   1 taking from   0.524 to   1.000 with u_mid =   0.000
+Solving tridiagonal system with n =      9
+Thread   2 taking from   0.000 to   0.524 with u_mid =   1.000
+Solving tridiagonal system with n =     10
+Thread   3 taking from   0.524 to   1.000 with u_mid =   1.000
+Solving tridiagonal system with n =      9
+Computed G0 =   0.1186D+02  G1 =   0.1167D+02  z =  -0.6111D+02
+ error_max =   3.99812551484757250E-003
+
+$ make test -f Makefile3 n=10000
+Wrote data to input_data.txt
+./test.exe
+ n =        10000
+ nthreads =            4
+Thread   1 taking from   0.000 to   0.500 with u_mid =   0.000
+Solving tridiagonal system with n =   5000
+Thread   0 taking from   0.500 to   1.000 with u_mid =   0.000
+Solving tridiagonal system with n =   4999
+Thread   2 taking from   0.000 to   0.500 with u_mid =   1.000
+Solving tridiagonal system with n =   5000
+Thread   3 taking from   0.500 to   1.000 with u_mid =   1.000
+Solving tridiagonal system with n =   4999
+Computed G0 =   0.2442D-01  G1 =   0.2402D-01  z =  -0.6004D+02
+ error_max =   1.73004366388340713E-008
+</pre></div>
+</div>
+</li>
+</ol>
+<p><strong>Part 2</strong></p>
+<p>In <a class="reference internal" href="labs/lab19.html#lab19"><span class="std std-ref">Lab 19: Tuesday June 3, 2014</span></a> the heat equation will be discussed along with an IPython
+notebook illustrating how solutions behave and two numerical methods for
+approximating the solution.</p>
+<p>For simplicity, we are only considering a special case of the
+one-dimensional heat equation <span class="math">\(u_t(x,t) = u_{xx}(x,t)\)</span> in
+which the problem is solved on the interval <span class="math">\(0 &lt; x &lt; \pi\)</span>,
+the boundary conditions are <span class="math">\(u(0,t) = u(\pi,t) = 0\)</span> for all
+<span class="math">\(t\)</span>, and the initial data is a sine wave of the form <cite>u_0(x)
+= sin(kx)</cite> for some integer <cite>k</cite>.  You might want to experiment
+with initial data that is a linear combination of different &#8220;Fourier
+modes&#8221;, as illustrated in the notebook.</p>
+<p>The directory <cite>$UWHPSC/homeworks/project/part2</cite> contains some files that
+implement the explicit method discussed in class.  You can do, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test -f Makefile1
+</pre></div>
+</div>
+<p>and you can vary <cite>n, k, tfinal,</cite> and <cite>nsteps</cite> by specifying at the command
+line, e.g.</p>
+<div class="highlight-default"><div class="highlight"><pre>$ make test -f Makefile1 n=100 k=5 nsteps=500
+</pre></div>
+</div>
+<p>The main program prints out the max-norm error at the final time and also
+produces a file <cite>solution.txt</cite> that contains the approximate and true solution at
+the final time.</p>
+<ol class="arabic">
+<li><p class="first">Add a second subroutine to the file <cite>heat_solvers.f90</cite> that implements the
+implicit Crank-Nicolson method that will be discussed in <a class="reference internal" href="labs/lab19.html#lab19"><span class="std std-ref">Lab 19: Tuesday June 3, 2014</span></a>.
+Name this subroutine <cite>solve_heat_implicit</cite> and it should have the same calling
+sequence as the <cite>solve_heat_explicit</cite>.</p>
+<p>Add a parameter <cite>method</cite> to <cite>main1.f90</cite> so that if <cite>method==1</cite> then the
+explicit method is used and if <cite>method==2</cite> then the implicit method is used.
+Add this also to <cite>Makefile1</cite> so that a value is written to <cite>input_data.txt</cite>
+and then read by the main program, similar to the other parameters.
+(You can give it the default value 1).
+Note that the two methods do not give the same approximate solution (or
+error), but test that both give results that agree with the IPython notebook.</p>
+<p>To implement this method, you will have to solve a tridiagonal system of
+equations every time step.  You can use the LAPACK routine <cite>dgtsv</cite> (or <cite>dptsv</cite>
+if you prefer).  Note that either of these routines overwrites the input
+arrays that describe the matrix with the LU factorization, so be careful if
+you are using this in a loop where you have more than one system to solve!</p>
+</li>
+<li><p class="first">Create a new main program <cite>main2.f90</cite> based on your modified <cite>main1.f90</cite> that
+outputs the solution at every time step to a file <cite>frames.txt</cite>.  Use the same
+format as currently used to write to <cite>solution.txt</cite>, but add to the file every
+time step, and also write the initial data before starting to solve the
+problem.  So after running the code the file <cite>frames.txt</cite> should have
+<cite>(nsteps+1)*(n+2)</cite> lines (since each <cite>u</cite> solution vector has <cite>n+2</cite> elements).</p>
+<p>Do not modify the subroutines in <cite>heat_solvers.f90</cite> to do this.  Instead,
+have a loop in the main program that calls <cite>solve_heat_explicit</cite> or
+<cite>solve_heat_implicit</cite> repeatedly, <cite>nsteps</cite> times, taking a single time step
+with each call and then writing the solution before the next call.</p>
+</li>
+<li><p class="first">Write a Python script <cite>animate.py</cite>
+that reads <cite>n</cite> and <cite>nsteps</cite> from <cite>input_data.txt</cite> and
+reads all the solutions from <cite>frames.txt</cite> and produces an animation in a file
+<cite>heat.html</cite>.  Use <cite>JSAnimation</cite> and the <cite>JSAnimation_frametools.py</cite> module
+from <a class="reference internal" href="labs/lab15.html#lab15"><span class="std std-ref">Lab 15: Tuesday May 20, 2014</span></a>.</p>
+<p>In <a class="reference internal" href="labs/lab20.html#lab20"><span class="std std-ref">Lab 20: Thursday June 5, 2014</span></a> we will look at an example of doing this for a different
+problem, so if you&#8217;re not sure how to do it, take a look at that Lab.</p>
+<p>Create a <cite>Makefile2</cite> with a phony target <cite>movie</cite> so that you can do, for example,</p>
+<blockquote>
+<div><p>$ make movie -f Makefile2  k=4 n=50 nsteps=40 method=1</p>
+<p>$ make movie -f Makefile2  k=4 n=50 nsteps=40 method=2</p>
+</div></blockquote>
+<p>and create the animations shown at</p>
+<ul class="simple">
+<li><a class="reference external" href="http://faculty.washington.edu/rjl/heat_explicit.html">http://faculty.washington.edu/rjl/heat_explicit.html</a></li>
+<li><a class="reference external" href="http://faculty.washington.edu/rjl/heat_implicit.html">http://faculty.washington.edu/rjl/heat_implicit.html</a></li>
+</ul>
+<p>illustrating that the implicit method is more stable.</p>
+</li>
+</ol>
+<div class="section" id="to-submit">
+<h2>To submit<a class="headerlink" href="#to-submit" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">At the end, you should have committed the following
+files to your repository:</p>
+<p><strong>Part 1</strong></p>
+<ul class="simple">
+<li><cite>$MYHPSC/project/part1/Makefile1</cite>  (unchanged from original)</li>
+<li><cite>$MYHPSC/project/part1/main1.f90</cite>  (unchanged from original)</li>
+<li><cite>$MYHPSC/project/part1/problem.f90</cite>  (unchanged from original)</li>
+<li><cite>$MYHPSC/project/part1/bvp_solvers.f90</cite> (with 3 subroutines)</li>
+<li><cite>$MYHPSC/project/part1/Makefile2</cite></li>
+<li><cite>$MYHPSC/project/part1/main2.f90</cite></li>
+<li><cite>$MYHPSC/project/part1/Makefile3</cite></li>
+<li><cite>$MYHPSC/project/part1/main3.f90</cite></li>
+</ul>
+<p><strong>Part 2</strong></p>
+<ul class="simple">
+<li><cite>$MYHPSC/project/part2/problem.f90</cite>  (unchanged from original)</li>
+<li><cite>$MYHPSC/project/part2/Makefile1</cite></li>
+<li><cite>$MYHPSC/project/part2/main1.f90</cite></li>
+<li><cite>$MYHPSC/project/part2/heat_solvers.f90</cite></li>
+<li><cite>$MYHPSC/project/part2/Makefile2</cite></li>
+<li><cite>$MYHPSC/project/part2/main2.f90</cite></li>
+<li><cite>$MYHPSC/project/part2/animate.py</cite>  (Script to create the animation)</li>
+<li><cite>$MYHPSC/project/part2/JSAnimation_frametools.py</cite>  (optional, unchanged from
+original)</li>
+</ul>
+</li>
+<li><p class="first"><strong>Please be sure you have the specified directory and file names.</strong>
+It is hard to grade otherwise, and points will be deducted.</p>
+</li>
+<li><p class="first">Make sure you push to bitbucket after committing.</p>
+</li>
+<li><p class="first">Submit the commit number that you want graded by following the link
+provided on the <a class="reference external" href="https://canvas.uw.edu/courses/893991/assignments/2520179">Canvas page for the project</a>.</p>
+</li>
+<li><p class="first">Also take this <a class="reference external" href="https://canvas.uw.edu/courses/893991/quizzes/782895">survey</a>
+worth 10 points.</p>
+<p>Before doing this survey, please first do the course evaluation. This
+is being done on-line this year at the link
+<a class="reference external" href="https://uw.iasystem.org/survey/128096">https://uw.iasystem.org/survey/128096</a>.
+Anonymous results will be available to the instructor and TAs well after
+the quarter has ended.</p>
+</li>
+<li><p class="first">On-campus students:
+UW Libraries and UW Information Technology want to know what students
+think about the Active Learning Classrooms in Odegaard Library. Your
+feedback will shape recommendations for new classrooms. Take their brief
+survey here: <a class="reference external" href="https://catalyst.uw.edu/webq/survey/fournier/239147">https://catalyst.uw.edu/webq/survey/fournier/239147</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html"><font color="#39275b">Contents</font></a>|&nbsp;</li>
+        <li><a href="biblio.html"><font color="#39275b">Bibliography</font></a>|&nbsp;</li>
+        <li><a href="search.html"><font color="#39275b">Search</font></a>|&nbsp;</li>
+        <li><a href="http://faculty.washington.edu/rjl/classes/am583s2014/index.html"><font color="#39275b">Class Webpage</font></a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, Randall J. LeVeque, CC BY.
+      Last updated on May 19, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>
